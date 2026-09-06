@@ -36,7 +36,7 @@ exports.getOne = async (req, res, next) => {
 
 exports.create = async (req, res, next) => {
     try {
-        const { first_name, last_name, dob, nationality, position, height_cm, preferred_foot, market_value_m, jersey_number, team_id } = req.body;
+        const { first_name, last_name, dob, nationality, position, height_cm, preferred_foot, market_value_m, jersey_number, team_id, club } = req.body;
         if (!first_name || !last_name || !dob || !nationality || !position || !height_cm || !jersey_number || !team_id)
             return res.status(400).json({ success: false, message: 'Required fields missing' });
 
@@ -44,6 +44,7 @@ exports.create = async (req, res, next) => {
         const height = parseInt(height_cm, 10);
         const marketVal = (market_value_m !== undefined && market_value_m !== '') ? parseFloat(market_value_m) : 0;
         const teamId = parseInt(team_id, 10);
+        const playerClub = (club !== undefined && club !== null && String(club).trim() !== '') ? String(club).trim() : null;
 
         if (isNaN(jerseyNum) || jerseyNum < 1 || jerseyNum > 99)
             return res.status(400).json({ success: false, message: 'Jersey number must be between 1 and 99' });
@@ -53,16 +54,16 @@ exports.create = async (req, res, next) => {
             return res.status(400).json({ success: false, message: 'Market value cannot be negative' });
 
         const [result] = await db.query(
-            'INSERT INTO player (first_name, last_name, dob, nationality, position, height_cm, preferred_foot, market_value_m, jersey_number, team_id) VALUES (?,?,?,?,?,?,?,?,?,?)',
-            [first_name.trim(), last_name.trim(), dob, nationality.trim(), position.trim(), height, preferred_foot || 'Right', marketVal, jerseyNum, teamId]
+            'INSERT INTO player (first_name, last_name, dob, nationality, position, height_cm, preferred_foot, market_value_m, jersey_number, team_id, club) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+            [first_name.trim(), last_name.trim(), dob, nationality.trim(), position.trim(), height, preferred_foot || 'Right', marketVal, jerseyNum, teamId, playerClub]
         );
-        res.status(201).json({ success: true, data: { player_id: result.insertId, ...req.body } });
+        res.status(201).json({ success: true, data: { player_id: result.insertId, ...req.body, club: playerClub } });
     } catch (err) { next(err); }
 };
 
 exports.update = async (req, res, next) => {
     try {
-        const { first_name, last_name, dob, nationality, position, height_cm, preferred_foot, market_value_m, jersey_number, team_id } = req.body;
+        const { first_name, last_name, dob, nationality, position, height_cm, preferred_foot, market_value_m, jersey_number, team_id, club } = req.body;
         if (!first_name || !last_name || !dob || !nationality || !position || !height_cm || !jersey_number || !team_id)
             return res.status(400).json({ success: false, message: 'Required fields missing' });
 
@@ -70,6 +71,7 @@ exports.update = async (req, res, next) => {
         const height = parseInt(height_cm, 10);
         const marketVal = (market_value_m !== undefined && market_value_m !== '') ? parseFloat(market_value_m) : 0;
         const teamId = parseInt(team_id, 10);
+        const playerClub = (club !== undefined && club !== null && String(club).trim() !== '') ? String(club).trim() : null;
 
         if (isNaN(jerseyNum) || jerseyNum < 1 || jerseyNum > 99)
             return res.status(400).json({ success: false, message: 'Jersey number must be between 1 and 99' });
@@ -79,8 +81,8 @@ exports.update = async (req, res, next) => {
             return res.status(400).json({ success: false, message: 'Market value cannot be negative' });
 
         const [result] = await db.query(
-            'UPDATE player SET first_name=?, last_name=?, dob=?, nationality=?, position=?, height_cm=?, preferred_foot=?, market_value_m=?, jersey_number=?, team_id=? WHERE player_id=?',
-            [first_name.trim(), last_name.trim(), dob, nationality.trim(), position.trim(), height, preferred_foot || 'Right', marketVal, jerseyNum, teamId, req.params.id]
+            'UPDATE player SET first_name=?, last_name=?, dob=?, nationality=?, position=?, height_cm=?, preferred_foot=?, market_value_m=?, jersey_number=?, team_id=?, club=? WHERE player_id=?',
+            [first_name.trim(), last_name.trim(), dob, nationality.trim(), position.trim(), height, preferred_foot || 'Right', marketVal, jerseyNum, teamId, playerClub, req.params.id]
         );
         if (!result.affectedRows) return res.status(404).json({ success: false, message: 'Player not found' });
         res.json({ success: true, message: 'Player updated successfully' });

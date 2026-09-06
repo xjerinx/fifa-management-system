@@ -15,6 +15,7 @@ const emptyForm = {
   market_value_m: "",
   jersey_number: "",
   team_id: "",
+  club: "",
 };
 
 const positions = ["Forward", "Midfielder", "Defender", "Goalkeeper"];
@@ -316,6 +317,7 @@ export default function Players() {
       market_value_m: item.market_value_m || "",
       jersey_number: item.jersey_number || "",
       team_id: item.team_id || "",
+      club: item.club || "",
     });
     setEditingId(item.player_id);
     setError("");
@@ -426,6 +428,7 @@ export default function Players() {
         !q ||
         fullName.includes(q) ||
         item.nationality?.toLowerCase().includes(q) ||
+        item.club?.toLowerCase().includes(q) ||
         item.position?.toLowerCase().includes(q) ||
         item.team_name?.toLowerCase().includes(q) ||
         numStr === q;
@@ -827,8 +830,9 @@ export default function Players() {
               item.nationality?.slice(0, 3).toUpperCase() ||
               "FIFA";
             const club =
-              scouting.club ||
-              (item.team_name ? item.team_name.toUpperCase() : "FREE AGENT");
+              item.club
+                ? item.club.toUpperCase()
+                : (scouting.club || (item.team_name ? item.team_name.toUpperCase() : ""));
             const jersey = item.jersey_number ? `#${item.jersey_number}` : "—";
             const posCode =
               scouting.posCode ||
@@ -878,7 +882,7 @@ export default function Players() {
                     </span>
 
                     <span className="text-[9.5px] font-mono font-bold tracking-wider uppercase text-white/90 truncate max-w-[150px]">
-                      {countryCode} // {club}
+                      {club ? `${countryCode} // ${club}` : countryCode}
                     </span>
 
                     <span className="text-sm font-black font-mono tracking-tight text-white">
@@ -891,7 +895,7 @@ export default function Players() {
                     {/* Foot / Sub-bar & OVR Rating */}
                     <div className="flex items-center justify-between pb-1 text-[10px]">
                       <span className="text-slate-400 font-medium">
-                        {countryCode} • {item.preferred_foot || "Right"} Foot
+                        {countryCode}{item.club ? ` • ${item.club}` : ""} • {item.preferred_foot || "Right"} Foot
                       </span>
 
                       <div className="flex items-baseline gap-1">
@@ -1028,7 +1032,7 @@ export default function Players() {
                         <PositionBadge position={item.position} />
                       </td>
                       <td className="py-3 px-4 text-slate-300">
-                        {scouting.club || item.team_name || "Free Agent"}
+                        {item.club || scouting.club || item.team_name || "Free Agent"}
                       </td>
                       <td className="py-3 px-4 text-slate-300">
                         {item.nationality}
@@ -1274,7 +1278,7 @@ export default function Players() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
             <div>
               <label className="block text-xs font-medium text-slate-300 mb-1.5">
                 Market Value (€ Millions)
@@ -1287,6 +1291,19 @@ export default function Players() {
                 onChange={(e) => setForm({ ...form, market_value_m: e.target.value })}
                 placeholder="e.g. 180"
                 className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white font-mono placeholder:text-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-medium text-slate-300 mb-1.5">
+                Club <span className="text-slate-500 font-normal">(Optional)</span>
+              </label>
+              <input
+                type="text"
+                value={form.club}
+                onChange={(e) => setForm({ ...form, club: e.target.value })}
+                placeholder="e.g. Real Madrid"
+                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
               />
             </div>
 
