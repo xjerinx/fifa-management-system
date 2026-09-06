@@ -4,7 +4,7 @@ exports.getAll = async (req, res, next) => {
     try {
         const [rows] = await db.query(`
             SELECT t.*, a.name AS association_name,
-                CONCAT(c.first_name, ' ', c.last_name) AS coach_name,
+                CONCAT(MAX(c.first_name), ' ', MAX(c.last_name)) AS coach_name,
                 COUNT(p.player_id) AS player_count
             FROM team t
             LEFT JOIN association a ON a.association_id = t.association_id
