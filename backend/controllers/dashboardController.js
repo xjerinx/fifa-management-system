@@ -104,7 +104,7 @@ exports.getPlayersByPosition = async (req, res, next) => {
 exports.getTeamsByAssociation = async (req, res, next) => {
     try {
         const [rows] = await db.query(`
-            SELECT a.name AS association_name, COUNT(t.team_id) AS team_count
+            SELECT MAX(a.name) AS association_name, COUNT(t.team_id) AS team_count
             FROM association a
             LEFT JOIN team t ON t.association_id = a.association_id
             GROUP BY a.association_id

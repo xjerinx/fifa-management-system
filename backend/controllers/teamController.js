@@ -3,7 +3,7 @@ const db = require('../config/db');
 exports.getAll = async (req, res, next) => {
     try {
         const [rows] = await db.query(`
-            SELECT t.*, a.name AS association_name,
+            SELECT t.*, MAX(a.name) AS association_name,
                 CONCAT(MAX(c.first_name), ' ', MAX(c.last_name)) AS coach_name,
                 COUNT(p.player_id) AS player_count
             FROM team t
