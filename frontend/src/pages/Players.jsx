@@ -179,6 +179,117 @@ const findCanonicalClub = (name) => {
   return aliases[upper] || null;
 };
 
+// Known authentic clubs for real-world recognizable athletes
+const KNOWN_REAL_CLUBS = {
+  "jude bellingham": "Real Madrid",
+  "kylian mbappé": "Real Madrid",
+  "kylian mbappe": "Real Madrid",
+  "lamine yamal": "FC Barcelona",
+  "vinícius júnior": "Real Madrid",
+  "vinicius junior": "Real Madrid",
+  "vinicius jr": "Real Madrid",
+  "rodri": "Manchester City",
+  "rodri hernandez": "Manchester City",
+  "phil foden": "Manchester City",
+  "harry kane": "Bayern Munich",
+  "lautaro martínez": "Inter Milan",
+  "lautaro martinez": "Inter Milan",
+  "declan rice": "Arsenal",
+  "pedri": "FC Barcelona",
+  "pedri gonzález": "FC Barcelona",
+  "pedri gonzalez": "FC Barcelona",
+  "julián álvarez": "Atlético Madrid",
+  "julian alvarez": "Atlético Madrid",
+  "lionel messi": "Inter Miami",
+  "alisson becker": "Liverpool",
+  "marquinhos": "Paris Saint-Germain",
+  "danilo": "Juventus",
+  "casemiro": "Manchester United",
+  "lucas paquetá": "West Ham United",
+  "lucas paqueta": "West Ham United",
+  "rodrygo": "Real Madrid",
+  "gabriel martinelli": "Arsenal",
+  "emiliano martínez": "Aston Villa",
+  "emiliano martinez": "Aston Villa",
+  "nicolás otamendi": "Benfica",
+  "nicolas otamendi": "Benfica",
+  "rodrigo de paul": "Atlético Madrid",
+  "enzo fernández": "Chelsea",
+  "enzo fernandez": "Chelsea",
+  "mike maignan": "AC Milan",
+  "dayot upamecano": "Bayern Munich",
+  "théo hernández": "AC Milan",
+  "theo hernandez": "AC Milan",
+  "aurélien tchouaméni": "Real Madrid",
+  "aurelien tchouameni": "Real Madrid",
+  "antoine griezmann": "Atlético Madrid",
+  "ousmane dembélé": "Paris Saint-Germain",
+  "ousmane dembele": "Paris Saint-Germain",
+  "jordan pickford": "Everton",
+  "john stones": "Manchester City",
+  "luke shaw": "Manchester United",
+  "unai simón": "Athletic Bilbao",
+  "unai simon": "Athletic Bilbao",
+  "dani carvajal": "Real Madrid",
+  "alejandro grimaldo": "Bayer Leverkusen",
+  "álvaro morata": "AC Milan",
+  "alvaro morata": "AC Milan",
+  "manuel neuer": "Bayern Munich",
+  "joshua kimmich": "Bayern Munich",
+  "antonio rüdiger": "Real Madrid",
+  "antonio rudiger": "Real Madrid",
+  "toni kroos": "Real Madrid",
+  "ilkay gündogan": "Manchester City",
+  "ilkay gundogan": "Manchester City",
+  "kai havertz": "Arsenal",
+  "leroy sané": "Bayern Munich",
+  "leroy sane": "Bayern Munich",
+  "gianluigi donnarumma": "Paris Saint-Germain",
+  "alessandro bastoni": "Inter Milan",
+  "federico dimarco": "Inter Milan",
+  "nicolo barella": "Inter Milan",
+  "lorenzo pellegrini": "AS Roma",
+  "giacomo raspadori": "Napoli",
+  "gianluca scamacca": "Atalanta",
+};
+
+// Resolves a player's authentic club from DB or known real-world roster; returns null for fictional players
+const getPlayerClub = (item) => {
+  if (item?.club && item.club.trim()) {
+    return item.club.trim();
+  }
+  const firstName = (item?.first_name || "").toLowerCase().trim();
+  const lastName = (item?.last_name || "").toLowerCase().trim();
+  const fullName = `${firstName} ${lastName}`.trim();
+
+  if (KNOWN_REAL_CLUBS[fullName]) return KNOWN_REAL_CLUBS[fullName];
+  if (KNOWN_REAL_CLUBS[firstName]) return KNOWN_REAL_CLUBS[firstName];
+
+  // Specific check for Pedri (e.g. "Pedri Hi" or "Pedri")
+  if (fullName.includes("pedri") || firstName === "pedri") return "FC Barcelona";
+  if (fullName.includes("rodri") || firstName === "rodri") return "Manchester City";
+  if (fullName.includes("bellingham")) return "Real Madrid";
+  if (fullName.includes("mbappé") || fullName.includes("mbappe")) return "Real Madrid";
+  if (fullName.includes("yamal")) return "FC Barcelona";
+  if (fullName.includes("vinícius") || fullName.includes("vinicius")) return "Real Madrid";
+  if (fullName.includes("foden")) return "Manchester City";
+  if (fullName.includes("kane")) return "Bayern Munich";
+  if (fullName.includes("lautaro")) return "Inter Milan";
+  if (fullName.includes("rice")) return "Arsenal";
+  if (fullName.includes("álvarez") || fullName.includes("alvarez")) return "Atlético Madrid";
+  if (fullName.includes("messi")) return "Inter Miami";
+
+  // Check other known players
+  for (const [key, club] of Object.entries(KNOWN_REAL_CLUBS)) {
+    if (fullName.includes(key) || (key.length > 5 && fullName.includes(key.split(" ")[0]))) {
+      return club;
+    }
+  }
+
+  // Fictional / placeholder player (e.g. "Elliot Anderson", "Doawhduaw", etc.) -> null
+  return null;
+};
+
 // Rich scouting metadata matching the reference image layout
 const SCOUTING_DATA = {
   "Kylian Mbappé": {
@@ -441,7 +552,7 @@ export default function Players() {
   };
 
   const openEdit = (item) => {
-    const rawClub = item.club || "";
+    const rawClub = item.club || getPlayerClub(item) || "";
     const canonical = findCanonicalClub(rawClub);
     let initialClub = rawClub;
     let customMode = false;
@@ -580,11 +691,12 @@ export default function Players() {
       const fullName = `${item.first_name} ${item.last_name}`.toLowerCase();
       const numStr = item.jersey_number ? String(item.jersey_number) : "";
 
+      const playerClub = getPlayerClub(item) || item.club || "";
       const matchesSearch =
         !q ||
         fullName.includes(q) ||
         item.nationality?.toLowerCase().includes(q) ||
-        item.club?.toLowerCase().includes(q) ||
+        playerClub.toLowerCase().includes(q) ||
         item.position?.toLowerCase().includes(q) ||
         item.team_name?.toLowerCase().includes(q) ||
         numStr === q;
@@ -985,8 +1097,7 @@ export default function Players() {
               NATION_CODES[item.nationality] ||
               item.nationality?.slice(0, 3).toUpperCase() ||
               "FIFA";
-            const playerClub =
-              item.club && item.club.trim() ? item.club.trim() : null;
+            const playerClub = getPlayerClub(item);
             const jersey = item.jersey_number ? `#${item.jersey_number}` : "—";
             const posCode =
               scouting.posCode ||
@@ -1186,7 +1297,7 @@ export default function Players() {
                         <PositionBadge position={item.position} />
                       </td>
                       <td className="py-3 px-4 text-slate-300">
-                        {item.club || scouting.club || item.team_name || "Free Agent"}
+                        {getPlayerClub(item) || item.club || item.team_name || "Free Agent"}
                       </td>
                       <td className="py-3 px-4 text-slate-300">
                         {item.nationality}
