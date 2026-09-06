@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Chivo:wght@600;700;800&amp;family=Hanken+Grotesk:wght@400;500;600&amp;family=JetBrains+Mono:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: 'class', theme: { extend: { colors: { 'error': '#ffb4ab', 'on-tertiary-fixed-variant': '#653e00', 'surface': '#0f131c', 'on-surface': '#dfe2ee', 'inverse-surface': '#dfe2ee', 'tertiary': '#ffb95f', 'surface-variant': '#31353e', 'on-error': '#690005', 'on-secondary-container': '#00374d', 'surface-bright': '#353942', 'on-tertiary-container': '#523200', 'tertiary-fixed': '#ffddb8', 'outline': '#86948a', 'tertiary-fixed-dim': '#ffb95f', 'secondary': '#7bd0ff', 'on-tertiary': '#472a00', 'secondary-container': '#00a6e0', 'outline-variant': '#3c4a42', 'on-primary-fixed': '#002113', 'surface-container-lowest': '#0a0e16', 'error-container': '#93000a', 'on-primary-container': '#00422b', 'on-secondary': '#00354a', 'primary-fixed-dim': '#4edea3', 'secondary-fixed': '#c4e7ff', 'on-secondary-fixed': '#001e2c', 'surface-container-low': '#181c24', 'surface-container-high': '#262a33', 'on-primary': '#003824', 'on-secondary-fixed-variant': '#004c69', 'on-surface-variant': '#bbcabf', 'tertiary-container': '#e29100', 'inverse-on-surface': '#2c3039', 'surface-container-highest': '#31353e', 'surface-container': '#1c2028', 'background': '#0f131c', 'primary-fixed': '#6ffbbe', 'primary-container': '#10b981', 'on-primary-fixed-variant': '#005236', 'on-background': '#dfe2ee', 'on-tertiary-fixed': '#2a1700', 'surface-tint': '#4edea3', 'surface-dim': '#0f131c', 'inverse-primary': '#006c49', 'on-error-container': '#ffdad6', 'primary': '#4edea3', 'secondary-fixed-dim': '#7bd0ff' }, borderRadius: { 'DEFAULT': '0.125rem', 'lg': '0.25rem', 'xl': '0.5rem', 'full': '0.75rem' }, spacing: { 'margin-mobile': '1rem', 'space-3xs': '0.125rem', 'space-3xl': '4rem', 'margin-desktop': '1.5rem', 'space-2xs': '0.25rem', 'space-xs': '0.5rem', 'space-sm': '0.75rem', 'space-xl': '2rem', 'space-2xl': '3rem', 'gutter-mobile': '0.75rem', 'space-lg': '1.5rem', 'space-md': '1rem', 'gutter-desktop': '1rem' }, fontFamily: { 'label-data': ['JetBrains Mono'], 'body-lg': ['Hanken Grotesk'], 'label-caps': ['Chivo'], 'headline-xl-mobile': ['Chivo'], 'metric-mono-lg': ['JetBrains Mono'], 'headline-2xl-mobile': ['Chivo'], 'headline-lg': ['Chivo'], 'headline-2xl': ['Chivo'], 'body-md': ['Hanken Grotesk'], 'headline-xl': ['Chivo'], 'metric-mono-md': ['JetBrains Mono'], 'body-sm': ['Hanken Grotesk'], 'headline-md': ['Chivo'] }, fontSize: { 'label-data': ['11px', { lineHeight: '14px', letterSpacing: '0.02em', fontWeight: '500' }], 'body-lg': ['16px', { lineHeight: '24px', letterSpacing: '0em', fontWeight: '400' }], 'label-caps': ['11px', { lineHeight: '14px', letterSpacing: '0.08em', fontWeight: '700' }], 'headline-xl-mobile': ['26px', { lineHeight: '32px', letterSpacing: '-0.015em', fontWeight: '700' }], 'metric-mono-lg': ['28px', { lineHeight: '32px', letterSpacing: '-0.02em', fontWeight: '700' }], 'headline-2xl-mobile': ['32px', { lineHeight: '38px', letterSpacing: '-0.02em', fontWeight: '800' }], 'headline-lg': ['24px', { lineHeight: '30px', letterSpacing: '-0.02em', fontWeight: '700' }], 'headline-2xl': ['48px', { lineHeight: '52px', letterSpacing: '-0.03em', fontWeight: '800' }], 'body-md': ['14px', { lineHeight: '20px', letterSpacing: '0em', fontWeight: '400' }], 'headline-xl': ['36px', { lineHeight: '42px', letterSpacing: '-0.025em', fontWeight: '700' }], 'metric-mono-md': ['15px', { lineHeight: '20px', letterSpacing: '-0.01em', fontWeight: '600' }], 'body-sm': ['12px', { lineHeight: '18px', letterSpacing: '0.01em', fontWeight: '400' }], 'headline-md': ['18px', { lineHeight: '24px', letterSpacing: '-0.01em', fontWeight: '600' }] } } } };</script></head><body class="bg-background font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-lowest z-50 flex flex-col justify-between py-space-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col gap-space-md"><div class="px-space-md flex items-center justify-between"><div class="flex items-center gap-space-xs"><img alt="FIFA Ops Crest" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3F8YxVS6wkUPJmomiMS9t9i3TWnIhjgzEMMX0KW4F2kNiNWUP4CZs_xrZvzwBbfjrbNpNbohS1pFth6bOiuhxlZsqf1L526RW3AUrpMpo7LXNbtoPhXtLBJsVPU1G-aPZHn7Lx-o6-sWidzf_IXlgyVzkhdupqMKlDfkEeA4l5nXxaxZgS42X7tXB05zZ2hBEdUPVip0X8rnS05GG_xLRnrOq_NjAXKMVZMMXIjBiAHVBv89y0TtQ"/><div class="flex flex-col"><span class="font-headline-md text-headline-md uppercase tracking-tight text-on-surface">FIFA OPS</span><span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Operations Hub</span></div></div><button aria-label="Collapse Sidebar" class="p-space-2xs text-on-surface-variant hover:text-on-surface transition-colors rounded"><span class="material-symbols-outlined text-[18px]">menu_open</span></button></div><div class="px-space-md"><div class="flex items-center justify-between bg-surface-container px-space-sm py-space-xs rounded border border-outline-variant"><div class="flex items-center gap-space-2xs"><span class="material-symbols-outlined text-secondary text-[16px]">event_note</span><span class="font-label-caps text-label-caps text-on-surface tracking-wider">SEASON 2026/27</span></div><span class="material-symbols-outlined text-on-surface-variant text-[16px]">unfold_more</span></div></div><nav class="flex-1 flex flex-col gap-space-sm px-space-xs overflow-y-auto" data-active-classes="bg-primary-container text-on-primary-container font-bold rounded"><div class="flex flex-col gap-space-3xs"><span class="px-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Overview</span><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[18px]">grid_view</span><span class="font-body-md text-body-md">Dashboard</span></a></div><div class="flex flex-col gap-space-3xs"><span class="px-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Governance</span><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="associations" href="#"><span class="material-symbols-outlined text-[18px]">flag</span><span class="font-body-md text-body-md">Associations</span></a><a aria-current="page" class="flex items-center gap-space-xs px-space-xs py-space-2xs transition-colors bg-primary-container text-on-primary-container font-bold rounded" data-path="teams" href="#"><span class="material-symbols-outlined text-[18px]">shield</span><span class="font-body-md text-body-md">Teams</span></a><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="players" href="#"><span class="material-symbols-outlined text-[18px]">sports_soccer</span><span class="font-body-md text-body-md">Players</span></a><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="coaches" href="#"><span class="material-symbols-outlined text-[18px]">high_res</span><span class="font-body-md text-body-md">Coaches</span></a><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="referees" href="#"><span class="material-symbols-outlined text-[18px]">sports</span><span class="font-body-md text-body-md">Referees</span></a></div><div class="flex flex-col gap-space-3xs"><span class="px-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Venues &amp; Assets</span><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="stadiums" href="#"><span class="material-symbols-outlined text-[18px]">stadium</span><span class="font-body-md text-body-md">Stadiums</span></a></div><div class="flex flex-col gap-space-3xs"><span class="px-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Competitions</span><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="tournaments" href="#"><span class="material-symbols-outlined text-[18px]">emoji_events</span><span class="font-body-md text-body-md">Tournaments</span></a><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="fixtures-matches" href="#"><span class="material-symbols-outlined text-[18px]">calendar_month</span><span class="font-body-md text-body-md">Fixtures &amp; Matches</span></a><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="match-events-timeline" href="#"><span class="material-symbols-outlined text-[18px]">timeline</span><span class="font-body-md text-body-md">Match Events Timeline</span></a></div><div class="flex flex-col gap-space-3xs"><span class="px-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Commercial</span><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="partners-sponsors" href="#"><span class="material-symbols-outlined text-[18px]">handshake</span><span class="font-body-md text-body-md">Global Partners &amp; Sponsors</span></a></div></nav></div><div class="px-space-md pt-space-xs flex flex-col gap-space-xs"><div class="p-space-xs bg-surface-container-low rounded flex items-center justify-between"><div class="flex items-center gap-space-xs"><span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span><span class="font-label-caps text-label-caps text-on-surface-variant uppercase">TMS Synced</span></div><span class="font-label-data text-label-data text-primary">99.98%</span></div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/80 backdrop-blur-xl z-40 flex items-center justify-between px-gutter-desktop shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center gap-space-md"><img alt="FIFA Ops Crest" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3F8YxVS6wkUPJmomiMS9t9i3TWnIhjgzEMMX0KW4F2kNiNWUP4CZs_xrZvzwBbfjrbNpNbohS1pFth6bOiuhxlZsqf1L526RW3AUrpMpo7LXNbtoPhXtLBJsVPU1G-aPZHn7Lx-o6-sWidzf_IXlgyVzkhdupqMKlDfkEeA4l5nXxaxZgS42X7tXB05zZ2hBEdUPVip0X8rnS05GG_xLRnrOq_NjAXKMVZMMXIjBiAHVBv89y0TtQ"/><div class="flex items-center gap-space-xs bg-surface-container px-space-sm py-space-2xs rounded border border-outline-variant w-80"><span class="material-symbols-outlined text-on-surface-variant text-[18px]">search</span><input class="bg-transparent text-on-surface placeholder:text-on-surface-variant font-body-sm text-body-sm focus:outline-none w-full" placeholder="Search entities, rules, matches..." readonly="" type="text"/><kbd class="font-label-data text-label-data bg-surface-container-highest text-on-surface px-space-2xs py-space-3xs rounded border border-outline-variant">Ctrl+K</kbd></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs px-space-sm py-space-2xs bg-surface-container-low rounded border border-outline-variant"><span class="w-2 h-2 rounded-full bg-primary animate-ping"></span><span class="font-label-caps text-label-caps text-primary tracking-wider uppercase">Live Feed 2026/27 Active</span></div><button aria-label="Notifications" class="relative p-space-2xs text-on-surface-variant hover:text-on-surface transition-colors rounded"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full"></span></button><div class="flex items-center gap-space-xs pl-space-xs border-l border-outline-variant"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="hidden md:flex flex-col text-left"><span class="font-label-caps text-label-caps text-on-surface uppercase">C. Del Piero</span><span class="font-label-data text-label-data text-on-surface-variant">Lead Commissioner</span></div></div></div></header><main class="w-full px-gutter-desktop pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full pb-space-2xl gap-space-lg">
+<!-- Top Command Action Bar -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md pt-space-xs">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-caps text-label-caps text-primary tracking-widest uppercase">Federation Console // Registry</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>
+<span class="font-label-data text-label-data text-on-surface-variant">SYNC: ACTIVE (TMS 2026.4)</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface uppercase tracking-tight">National Teams Directory</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">12 registered senior national teams competing in FIFA and continental championships</p>
+</div>
+<div class="flex items-center gap-space-xs flex-wrap">
+<button class="flex items-center gap-space-xs bg-surface-container hover:bg-surface-container-high px-space-md py-space-xs rounded text-on-surface transition-all">
+<span class="material-symbols-outlined text-[18px] text-secondary">file_download</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Export Squad Rosters</span>
+</button>
+<button class="flex items-center gap-space-xs bg-surface-container hover:bg-surface-container-high px-space-md py-space-xs rounded text-on-surface transition-all">
+<span class="material-symbols-outlined text-[18px] text-tertiary">sort</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Ranking Filter</span>
+</button>
+<button class="flex items-center gap-space-xs bg-primary-container hover:bg-primary text-on-primary-container px-space-md py-space-xs rounded font-label-caps text-label-caps uppercase tracking-wider shadow-sm transition-all">
+<span class="material-symbols-outlined text-[18px] font-bold">add</span>
+<span>Register Team</span>
+</button>
+</div>
+</div>
+<!-- Operational Telemetry / Stats Strip -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-space-xs">
+<div class="bg-surface-container-low p-space-md rounded flex flex-col justify-between relative overflow-hidden group">
+<div class="absolute -right-4 -bottom-4 w-16 h-16 rounded-full bg-primary/5 blur-xl group-hover:bg-primary/10 transition-colors"></div>
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant tracking-wider">Active Teams</span>
+<span class="material-symbols-outlined text-[18px] text-primary">flag</span>
+</div>
+<div class="flex items-baseline gap-space-xs mt-space-xs">
+<span class="font-metric-mono-lg text-metric-mono-lg text-on-surface">12</span>
+<span class="font-label-data text-label-data text-primary">100% AUDITED</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Senior tier national delegations</span>
+</div>
+<div class="bg-surface-container-low p-space-md rounded flex flex-col justify-between relative overflow-hidden group">
+<div class="absolute -right-4 -bottom-4 w-16 h-16 rounded-full bg-secondary/5 blur-xl group-hover:bg-secondary/10 transition-colors"></div>
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant tracking-wider">Registered Players</span>
+<span class="material-symbols-outlined text-[18px] text-secondary">sports_soccer</span>
+</div>
+<div class="flex items-baseline gap-space-xs mt-space-xs">
+<span class="font-metric-mono-lg text-metric-mono-lg text-on-surface">50</span>
+<span class="font-label-data text-label-data text-secondary">CAP: 26 / TEAM</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Squad sheets validated in FIFA TMS</span>
+</div>
+<div class="bg-surface-container-low p-space-md rounded flex flex-col justify-between relative overflow-hidden group">
+<div class="absolute -right-4 -bottom-4 w-16 h-16 rounded-full bg-tertiary/5 blur-xl group-hover:bg-tertiary/10 transition-colors"></div>
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant tracking-wider">Head Coaches</span>
+<span class="material-symbols-outlined text-[18px] text-tertiary">high_res</span>
+</div>
+<div class="flex items-baseline gap-space-xs mt-space-xs">
+<span class="font-metric-mono-lg text-metric-mono-lg text-on-surface">12</span>
+<span class="font-label-data text-label-data text-tertiary">PRO LICENSED</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">UEFA / CONMEBOL Pro credentials</span>
+</div>
+<div class="bg-surface-container-low p-space-md rounded flex flex-col justify-between relative overflow-hidden group">
+<div class="absolute -right-4 -bottom-4 w-16 h-16 rounded-full bg-tertiary-container/10 blur-xl group-hover:bg-tertiary-container/20 transition-colors"></div>
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant tracking-wider">Holders</span>
+<span class="material-symbols-outlined text-[18px] text-tertiary-fixed">emoji_events</span>
+</div>
+<div class="flex items-baseline gap-space-xs mt-space-xs">
+<span class="font-metric-mono-lg text-metric-mono-lg text-tertiary-fixed">2</span>
+<span class="font-label-data text-label-data text-on-surface">MAJOR TITLES</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">ARG (World Cup) • ESP (Euro)</span>
+</div>
+</div>
+<!-- Tactical Filters & Search Bar -->
+<div class="bg-surface-container-low p-space-sm rounded flex flex-col lg:flex-row gap-space-sm items-stretch lg:items-center justify-between">
+<div class="flex-1 flex items-center gap-space-xs bg-surface-container px-space-sm py-space-2xs rounded w-full lg:max-w-md">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">search</span>
+<input class="bg-transparent text-on-surface placeholder:text-on-surface-variant font-body-sm text-body-sm focus:outline-none w-full" id="teamSearchInput" placeholder="Filter by country, federation, nickname, coach..." type="text"/>
+<span class="font-label-data text-label-data text-on-surface-variant bg-surface-container-highest px-space-2xs py-space-3xs rounded">ESC</span>
+</div>
+<div class="flex items-center gap-space-xs overflow-x-auto pb-1 lg:pb-0">
+<div class="flex items-center bg-surface-container p-space-3xs rounded">
+<button class="filter-confed-btn px-space-sm py-space-2xs rounded bg-surface-container-highest font-label-caps text-label-caps text-primary uppercase" data-confed="ALL">ALL</button>
+<button class="filter-confed-btn px-space-sm py-space-2xs rounded text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps uppercase transition-colors" data-confed="UEFA">UEFA</button>
+<button class="filter-confed-btn px-space-sm py-space-2xs rounded text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps uppercase transition-colors" data-confed="CONMEBOL">CONMEBOL</button>
+<button class="filter-confed-btn px-space-sm py-space-2xs rounded text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps uppercase transition-colors" data-confed="AFC">AFC</button>
+<button class="filter-confed-btn px-space-sm py-space-2xs rounded text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps uppercase transition-colors" data-confed="CAF">CAF</button>
+</div>
+<div class="h-6 w-[1px] bg-surface-container-highest mx-space-2xs hidden sm:block"></div>
+<div class="flex items-center bg-surface-container p-space-3xs rounded">
+<button class="filter-status-btn px-space-sm py-space-2xs rounded bg-surface-container-highest font-label-caps text-label-caps text-secondary uppercase" data-status="ALL">ALL TIERS</button>
+<button class="filter-status-btn px-space-sm py-space-2xs rounded text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps uppercase transition-colors" data-status="ELITE">ELITE</button>
+<button class="filter-status-btn px-space-sm py-space-2xs rounded text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps uppercase transition-colors" data-status="CONTENDER">CONTENDER</button>
+</div>
+<div class="flex items-center gap-space-2xs bg-surface-container px-space-sm py-space-2xs rounded">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">arrow_downward</span>
+<span class="font-label-caps text-label-caps text-on-surface uppercase">FIFA RANK</span>
+</div>
+</div>
+</div>
+<!-- Squad Card Grid (4 cols x 3 rows) -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-space-md" id="teamsGrid">
+<!-- Card 1: Brazil -->
+<div class="team-card bg-surface-container-low hover:bg-surface-container rounded p-space-md flex flex-col justify-between gap-space-md transition-all relative overflow-hidden group shadow-sm" data-confed="CONMEBOL" data-name="brazil selecao dorival junior" data-status="ELITE">
+<div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-tertiary via-primary to-primary-container"></div>
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded bg-surface-container-highest flex items-center justify-center font-metric-mono-md text-metric-mono-md text-tertiary-fixed font-bold tracking-wider">
+              BR
+            </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-2xs">
+<span class="font-headline-md text-headline-md text-on-surface font-bold uppercase">Brazil</span>
+<span class="px-space-2xs py-[1px] bg-tertiary/15 text-tertiary font-label-data text-[9px] rounded font-bold uppercase">ELITE</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant italic">“Seleção”</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">#1</span>
+<span class="font-label-data text-[9px] text-on-surface-variant uppercase">FIFA Rank</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">public</span>
+<span class="font-label-data text-label-data uppercase">Confederação Sul-Americana (CONMEBOL)</span>
+</div>
+<!-- Tactical Mini Stats / Sparkline Indicator -->
+<div class="bg-surface-container-lowest p-space-xs rounded flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">Head Coach</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Dorival Júnior</span>
+</div>
+<div class="flex items-center gap-space-2xs bg-surface-container px-space-xs py-space-3xs rounded">
+<span class="material-symbols-outlined text-[14px] text-primary">groups</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary">8</span>
+<span class="font-label-data text-[10px] text-on-surface-variant">PL</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs border-t-0">
+<span class="font-label-data text-label-data text-primary-fixed-dim">ELO: 2184 • 5 Stars</span>
+<button class="flex items-center gap-space-3xs text-secondary hover:text-primary transition-colors font-label-caps text-label-caps uppercase tracking-wider" onclick="openSquadDrawer('Brazil', 'BR', 'Dorival Júnior', 'CONMEBOL', '#1', '8 Players', 'ELITE')">
+<span>Squad &amp; Tactics</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Card 2: Argentina (World Champions) -->
+<div class="team-card bg-surface-container-low hover:bg-surface-container rounded p-space-md flex flex-col justify-between gap-space-md transition-all relative overflow-hidden group shadow-sm" data-confed="CONMEBOL" data-name="argentina albiceleste lionel scaloni" data-status="ELITE">
+<div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-secondary via-secondary-fixed to-surface-tint"></div>
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded bg-secondary/15 flex items-center justify-center font-metric-mono-md text-metric-mono-md text-secondary font-bold tracking-wider">
+              AR
+            </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-2xs">
+<span class="font-headline-md text-headline-md text-on-surface font-bold uppercase">Argentina</span>
+<span class="px-space-2xs py-[1px] bg-tertiary-container/30 text-tertiary-fixed font-label-data text-[9px] rounded font-bold uppercase flex items-center gap-1">
+<span class="material-symbols-outlined text-[10px]">emoji_events</span> WORLD CHAMP
+                </span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant italic">“Albiceleste”</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-metric-mono-md text-metric-mono-md text-secondary font-bold">#2</span>
+<span class="font-label-data text-[9px] text-on-surface-variant uppercase">FIFA Rank</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">public</span>
+<span class="font-label-data text-label-data uppercase">Confederação Sul-Americana (CONMEBOL)</span>
+</div>
+<div class="bg-surface-container-lowest p-space-xs rounded flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">Head Coach</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Lionel Scaloni</span>
+</div>
+<div class="flex items-center gap-space-2xs bg-surface-container px-space-xs py-space-3xs rounded">
+<span class="material-symbols-outlined text-[14px] text-secondary">groups</span>
+<span class="font-metric-mono-md text-metric-mono-md text-secondary">7</span>
+<span class="font-label-data text-[10px] text-on-surface-variant">PL</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-label-data text-label-data text-secondary">ELO: 2162 • 3 Stars</span>
+<button class="flex items-center gap-space-3xs text-secondary hover:text-primary transition-colors font-label-caps text-label-caps uppercase tracking-wider" onclick="openSquadDrawer('Argentina', 'AR', 'Lionel Scaloni', 'CONMEBOL', '#2', '7 Players', 'WORLD CHAMPION')">
+<span>Squad &amp; Tactics</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Card 3: France -->
+<div class="team-card bg-surface-container-low hover:bg-surface-container rounded p-space-md flex flex-col justify-between gap-space-md transition-all relative overflow-hidden group shadow-sm" data-confed="UEFA" data-name="france les bleus didier deschamps" data-status="ELITE">
+<div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-secondary-container to-secondary"></div>
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded bg-surface-container-highest flex items-center justify-center font-metric-mono-md text-metric-mono-md text-secondary-fixed font-bold tracking-wider">
+              FR
+            </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-2xs">
+<span class="font-headline-md text-headline-md text-on-surface font-bold uppercase">France</span>
+<span class="px-space-2xs py-[1px] bg-secondary/15 text-secondary font-label-data text-[9px] rounded font-bold uppercase">ELITE</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant italic">“Les Bleus”</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-metric-mono-md text-metric-mono-md text-on-surface font-bold">#3</span>
+<span class="font-label-data text-[9px] text-on-surface-variant uppercase">FIFA Rank</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">public</span>
+<span class="font-label-data text-label-data uppercase">Union of European Football (UEFA)</span>
+</div>
+<div class="bg-surface-container-lowest p-space-xs rounded flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">Head Coach</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Didier Deschamps</span>
+</div>
+<div class="flex items-center gap-space-2xs bg-surface-container px-space-xs py-space-3xs rounded">
+<span class="material-symbols-outlined text-[14px] text-secondary">groups</span>
+<span class="font-metric-mono-md text-metric-mono-md text-on-surface">7</span>
+<span class="font-label-data text-[10px] text-on-surface-variant">PL</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-label-data text-label-data text-on-surface-variant">ELO: 2110 • 2 Stars</span>
+<button class="flex items-center gap-space-3xs text-secondary hover:text-primary transition-colors font-label-caps text-label-caps uppercase tracking-wider" onclick="openSquadDrawer('France', 'FR', 'Didier Deschamps', 'UEFA', '#3', '7 Players', 'ELITE')">
+<span>Squad &amp; Tactics</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Card 4: England -->
+<div class="team-card bg-surface-container-low hover:bg-surface-container rounded p-space-md flex flex-col justify-between gap-space-md transition-all relative overflow-hidden group shadow-sm" data-confed="UEFA" data-name="england three lions thomas tuchel gareth southgate" data-status="ELITE">
+<div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-error to-surface-bright"></div>
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded bg-surface-container-highest flex items-center justify-center font-metric-mono-md text-metric-mono-md text-on-surface font-bold tracking-wider">
+              EN
+            </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-2xs">
+<span class="font-headline-md text-headline-md text-on-surface font-bold uppercase">England</span>
+<span class="px-space-2xs py-[1px] bg-secondary/15 text-secondary font-label-data text-[9px] rounded font-bold uppercase">ELITE</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant italic">“Three Lions”</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-metric-mono-md text-metric-mono-md text-on-surface font-bold">#4</span>
+<span class="font-label-data text-[9px] text-on-surface-variant uppercase">FIFA Rank</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">public</span>
+<span class="font-label-data text-label-data uppercase">Union of European Football (UEFA)</span>
+</div>
+<div class="bg-surface-container-lowest p-space-xs rounded flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">Head Coach</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Thomas Tuchel</span>
+</div>
+<div class="flex items-center gap-space-2xs bg-surface-container px-space-xs py-space-3xs rounded">
+<span class="material-symbols-outlined text-[14px] text-secondary">groups</span>
+<span class="font-metric-mono-md text-metric-mono-md text-on-surface">7</span>
+<span class="font-label-data text-[10px] text-on-surface-variant">PL</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-label-data text-label-data text-on-surface-variant">ELO: 2068 • 1 Star</span>
+<button class="flex items-center gap-space-3xs text-secondary hover:text-primary transition-colors font-label-caps text-label-caps uppercase tracking-wider" onclick="openSquadDrawer('England', 'EN', 'Thomas Tuchel', 'UEFA', '#4', '7 Players', 'ELITE')">
+<span>Squad &amp; Tactics</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Card 5: Spain (European Champions) -->
+<div class="team-card bg-surface-container-low hover:bg-surface-container rounded p-space-md flex flex-col justify-between gap-space-md transition-all relative overflow-hidden group shadow-sm" data-confed="UEFA" data-name="spain la roja luis de la fuente" data-status="ELITE">
+<div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-error via-tertiary to-error"></div>
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded bg-error-container/40 flex items-center justify-center font-metric-mono-md text-metric-mono-md text-error font-bold tracking-wider">
+              SP
+            </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-2xs">
+<span class="font-headline-md text-headline-md text-on-surface font-bold uppercase">Spain</span>
+<span class="px-space-2xs py-[1px] bg-tertiary/20 text-tertiary font-label-data text-[9px] rounded font-bold uppercase flex items-center gap-1">
+<span class="material-symbols-outlined text-[10px]">shield</span> EURO CHAMP
+                </span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant italic">“La Roja”</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-metric-mono-md text-metric-mono-md text-tertiary font-bold">#5</span>
+<span class="font-label-data text-[9px] text-on-surface-variant uppercase">FIFA Rank</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">public</span>
+<span class="font-label-data text-label-data uppercase">Union of European Football (UEFA)</span>
+</div>
+<div class="bg-surface-container-lowest p-space-xs rounded flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">Head Coach</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Luis de la Fuente</span>
+</div>
+<div class="flex items-center gap-space-2xs bg-surface-container px-space-xs py-space-3xs rounded">
+<span class="material-symbols-outlined text-[14px] text-tertiary">groups</span>
+<span class="font-metric-mono-md text-metric-mono-md text-tertiary">7</span>
+<span class="font-label-data text-[10px] text-on-surface-variant">PL</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-label-data text-label-data text-tertiary">ELO: 2145 • 4 Euro Titles</span>
+<button class="flex items-center gap-space-3xs text-secondary hover:text-primary transition-colors font-label-caps text-label-caps uppercase tracking-wider" onclick="openSquadDrawer('Spain', 'SP', 'Luis de la Fuente', 'UEFA', '#5', '7 Players', 'EURO CHAMPION')">
+<span>Squad &amp; Tactics</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Card 6: Germany -->
+<div class="team-card bg-surface-container-low hover:bg-surface-container rounded p-space-md flex flex-col justify-between gap-space-md transition-all relative overflow-hidden group shadow-sm" data-confed="UEFA" data-name="germany die mannschaft julian nagelsmann" data-status="ELITE">
+<div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-on-surface-variant to-tertiary"></div>
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded bg-surface-container-highest flex items-center justify-center font-metric-mono-md text-metric-mono-md text-on-surface font-bold tracking-wider">
+              GE
+            </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-2xs">
+<span class="font-headline-md text-headline-md text-on-surface font-bold uppercase">Germany</span>
+<span class="px-space-2xs py-[1px] bg-secondary/15 text-secondary font-label-data text-[9px] rounded font-bold uppercase">ELITE</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant italic">“Die Mannschaft”</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-metric-mono-md text-metric-mono-md text-on-surface font-bold">#6</span>
+<span class="font-label-data text-[9px] text-on-surface-variant uppercase">FIFA Rank</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">public</span>
+<span class="font-label-data text-label-data uppercase">Union of European Football (UEFA)</span>
+</div>
+<div class="bg-surface-container-lowest p-space-xs rounded flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">Head Coach</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Julian Nagelsmann</span>
+</div>
+<div class="flex items-center gap-space-2xs bg-surface-container px-space-xs py-space-3xs rounded">
+<span class="material-symbols-outlined text-[14px] text-secondary">groups</span>
+<span class="font-metric-mono-md text-metric-mono-md text-on-surface">7</span>
+<span class="font-label-data text-[10px] text-on-surface-variant">PL</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-label-data text-label-data text-on-surface-variant">ELO: 2018 • 4 Stars</span>
+<button class="flex items-center gap-space-3xs text-secondary hover:text-primary transition-colors font-label-caps text-label-caps uppercase tracking-wider" onclick="openSquadDrawer('Germany', 'GE', 'Julian Nagelsmann', 'UEFA', '#6', '7 Players', 'ELITE')">
+<span>Squad &amp; Tactics</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Card 7: Italy -->
+<div class="team-card bg-surface-container-low hover:bg-surface-container rounded p-space-md flex flex-col justify-between gap-space-md transition-all relative overflow-hidden group shadow-sm" data-confed="UEFA" data-name="italy azzurri luciano spalletti" data-status="ELITE">
+<div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-secondary to-primary-container"></div>
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded bg-surface-container-highest flex items-center justify-center font-metric-mono-md text-metric-mono-md text-secondary font-bold tracking-wider">
+              IT
+            </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-2xs">
+<span class="font-headline-md text-headline-md text-on-surface font-bold uppercase">Italy</span>
+<span class="px-space-2xs py-[1px] bg-secondary/15 text-secondary font-label-data text-[9px] rounded font-bold uppercase">ELITE</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant italic">“Azzurri”</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-metric-mono-md text-metric-mono-md text-on-surface font-bold">#7</span>
+<span class="font-label-data text-[9px] text-on-surface-variant uppercase">FIFA Rank</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">public</span>
+<span class="font-label-data text-label-data uppercase">Union of European Football (UEFA)</span>
+</div>
+<div class="bg-surface-container-lowest p-space-xs rounded flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">Head Coach</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Luciano Spalletti</span>
+</div>
+<div class="flex items-center gap-space-2xs bg-surface-container px-space-xs py-space-3xs rounded">
+<span class="material-symbols-outlined text-[14px] text-secondary">groups</span>
+<span class="font-metric-mono-md text-metric-mono-md text-on-surface">7</span>
+<span class="font-label-data text-[10px] text-on-surface-variant">PL</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-label-data text-label-data text-on-surface-variant">ELO: 1985 • 4 Stars</span>
+<button class="flex items-center gap-space-3xs text-secondary hover:text-primary transition-colors font-label-caps text-label-caps uppercase tracking-wider" onclick="openSquadDrawer('Italy', 'IT', 'Luciano Spalletti', 'UEFA', '#7', '7 Players', 'ELITE')">
+<span>Squad &amp; Tactics</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Card 8: Netherlands -->
+<div class="team-card bg-surface-container-low hover:bg-surface-container rounded p-space-md flex flex-col justify-between gap-space-md transition-all relative overflow-hidden group shadow-sm" data-confed="UEFA" data-name="netherlands oranje ronald koeman" data-status="ELITE">
+<div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-tertiary-container to-tertiary"></div>
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded bg-tertiary-container/20 flex items-center justify-center font-metric-mono-md text-metric-mono-md text-tertiary font-bold tracking-wider">
+              NE
+            </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-2xs">
+<span class="font-headline-md text-headline-md text-on-surface font-bold uppercase">Netherlands</span>
+<span class="px-space-2xs py-[1px] bg-secondary/15 text-secondary font-label-data text-[9px] rounded font-bold uppercase">ELITE</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant italic">“Oranje”</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-metric-mono-md text-metric-mono-md text-on-surface font-bold">#8</span>
+<span class="font-label-data text-[9px] text-on-surface-variant uppercase">FIFA Rank</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">public</span>
+<span class="font-label-data text-label-data uppercase">Union of European Football (UEFA)</span>
+</div>
+<div class="bg-surface-container-lowest p-space-xs rounded flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">Head Coach</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Ronald Koeman</span>
+</div>
+<div class="flex items-center gap-space-2xs bg-surface-container px-space-xs py-space-3xs rounded">
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant">groups</span>
+<span class="font-metric-mono-md text-metric-mono-md text-on-surface-variant">0</span>
+<span class="font-label-data text-[10px] text-on-surface-variant">PL</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-label-data text-label-data text-on-surface-variant">Roster Unsubmitted</span>
+<button class="flex items-center gap-space-3xs text-secondary hover:text-primary transition-colors font-label-caps text-label-caps uppercase tracking-wider" onclick="openSquadDrawer('Netherlands', 'NE', 'Ronald Koeman', 'UEFA', '#8', '0 Players', 'ELITE')">
+<span>Squad &amp; Tactics</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Card 9: Portugal -->
+<div class="team-card bg-surface-container-low hover:bg-surface-container rounded p-space-md flex flex-col justify-between gap-space-md transition-all relative overflow-hidden group shadow-sm" data-confed="UEFA" data-name="portugal navegadores roberto martinez" data-status="ELITE">
+<div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-error to-primary"></div>
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded bg-surface-container-highest flex items-center justify-center font-metric-mono-md text-metric-mono-md text-on-surface font-bold tracking-wider">
+              PO
+            </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-2xs">
+<span class="font-headline-md text-headline-md text-on-surface font-bold uppercase">Portugal</span>
+<span class="px-space-2xs py-[1px] bg-secondary/15 text-secondary font-label-data text-[9px] rounded font-bold uppercase">ELITE</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant italic">“Navegadores”</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-metric-mono-md text-metric-mono-md text-on-surface font-bold">#9</span>
+<span class="font-label-data text-[9px] text-on-surface-variant uppercase">FIFA Rank</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">public</span>
+<span class="font-label-data text-label-data uppercase">Union of European Football (UEFA)</span>
+</div>
+<div class="bg-surface-container-lowest p-space-xs rounded flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">Head Coach</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Roberto Martínez</span>
+</div>
+<div class="flex items-center gap-space-2xs bg-surface-container px-space-xs py-space-3xs rounded">
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant">groups</span>
+<span class="font-metric-mono-md text-metric-mono-md text-on-surface-variant">0</span>
+<span class="font-label-data text-[10px] text-on-surface-variant">PL</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-label-data text-label-data text-on-surface-variant">Roster Unsubmitted</span>
+<button class="flex items-center gap-space-3xs text-secondary hover:text-primary transition-colors font-label-caps text-label-caps uppercase tracking-wider" onclick="openSquadDrawer('Portugal', 'PO', 'Roberto Martínez', 'UEFA', '#9', '0 Players', 'ELITE')">
+<span>Squad &amp; Tactics</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Card 10: Uruguay -->
+<div class="team-card bg-surface-container-low hover:bg-surface-container rounded p-space-md flex flex-col justify-between gap-space-md transition-all relative overflow-hidden group shadow-sm" data-confed="CONMEBOL" data-name="uruguay la celeste marcelo bielsa" data-status="ELITE">
+<div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-secondary via-surface-variant to-secondary-fixed"></div>
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded bg-secondary/15 flex items-center justify-center font-metric-mono-md text-metric-mono-md text-secondary font-bold tracking-wider">
+              UR
+            </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-2xs">
+<span class="font-headline-md text-headline-md text-on-surface font-bold uppercase">Uruguay</span>
+<span class="px-space-2xs py-[1px] bg-secondary/15 text-secondary font-label-data text-[9px] rounded font-bold uppercase">ELITE</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant italic">“La Celeste”</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-metric-mono-md text-metric-mono-md text-on-surface font-bold">#10</span>
+<span class="font-label-data text-[9px] text-on-surface-variant uppercase">FIFA Rank</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">public</span>
+<span class="font-label-data text-label-data uppercase">Confederação Sul-Americana (CONMEBOL)</span>
+</div>
+<div class="bg-surface-container-lowest p-space-xs rounded flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">Head Coach</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Marcelo Bielsa</span>
+</div>
+<div class="flex items-center gap-space-2xs bg-surface-container px-space-xs py-space-3xs rounded">
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant">groups</span>
+<span class="font-metric-mono-md text-metric-mono-md text-on-surface-variant">0</span>
+<span class="font-label-data text-[10px] text-on-surface-variant">PL</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-label-data text-label-data text-on-surface-variant">Roster Unsubmitted</span>
+<button class="flex items-center gap-space-3xs text-secondary hover:text-primary transition-colors font-label-caps text-label-caps uppercase tracking-wider" onclick="openSquadDrawer('Uruguay', 'UR', 'Marcelo Bielsa', 'CONMEBOL', '#10', '0 Players', 'ELITE')">
+<span>Squad &amp; Tactics</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Card 11: Japan -->
+<div class="team-card bg-surface-container-low hover:bg-surface-container rounded p-space-md flex flex-col justify-between gap-space-md transition-all relative overflow-hidden group shadow-sm" data-confed="AFC" data-name="japan samurai blue hajime moriyasu" data-status="CONTENDER">
+<div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-secondary-container via-surface-tint to-primary"></div>
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded bg-surface-container-highest flex items-center justify-center font-metric-mono-md text-metric-mono-md text-secondary-fixed font-bold tracking-wider">
+              JA
+            </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-2xs">
+<span class="font-headline-md text-headline-md text-on-surface font-bold uppercase">Japan</span>
+<span class="px-space-2xs py-[1px] bg-outline-variant text-on-surface-variant font-label-data text-[9px] rounded font-bold uppercase">CONTENDER</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant italic">“Samurai Blue”</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-metric-mono-md text-metric-mono-md text-on-surface font-bold">#11</span>
+<span class="font-label-data text-[9px] text-on-surface-variant uppercase">FIFA Rank</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">public</span>
+<span class="font-label-data text-label-data uppercase">Asian Football Confederation (AFC)</span>
+</div>
+<div class="bg-surface-container-lowest p-space-xs rounded flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">Head Coach</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Hajime Moriyasu</span>
+</div>
+<div class="flex items-center gap-space-2xs bg-surface-container px-space-xs py-space-3xs rounded">
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant">groups</span>
+<span class="font-metric-mono-md text-metric-mono-md text-on-surface-variant">0</span>
+<span class="font-label-data text-[10px] text-on-surface-variant">PL</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-label-data text-label-data text-on-surface-variant">Roster Pending Confirmation</span>
+<button class="flex items-center gap-space-3xs text-secondary hover:text-primary transition-colors font-label-caps text-label-caps uppercase tracking-wider" onclick="openSquadDrawer('Japan', 'JA', 'Hajime Moriyasu', 'AFC', '#11', '0 Players', 'CONTENDER')">
+<span>Squad &amp; Tactics</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Card 12: Senegal -->
+<div class="team-card bg-surface-container-low hover:bg-surface-container rounded p-space-md flex flex-col justify-between gap-space-md transition-all relative overflow-hidden group shadow-sm" data-confed="CAF" data-name="senegal lions of teranga aliou cisse" data-status="CONTENDER">
+<div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-tertiary to-error"></div>
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded bg-primary/10 flex items-center justify-center font-metric-mono-md text-metric-mono-md text-primary font-bold tracking-wider">
+              SE
+            </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-2xs">
+<span class="font-headline-md text-headline-md text-on-surface font-bold uppercase">Senegal</span>
+<span class="px-space-2xs py-[1px] bg-outline-variant text-on-surface-variant font-label-data text-[9px] rounded font-bold uppercase">CONTENDER</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant italic">“Lions of Teranga”</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-metric-mono-md text-metric-mono-md text-on-surface font-bold">#12</span>
+<span class="font-label-data text-[9px] text-on-surface-variant uppercase">FIFA Rank</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">public</span>
+<span class="font-label-data text-label-data uppercase">Confederation of African Football (CAF)</span>
+</div>
+<div class="bg-surface-container-lowest p-space-xs rounded flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">Head Coach</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Aliou Cissé</span>
+</div>
+<div class="flex items-center gap-space-2xs bg-surface-container px-space-xs py-space-3xs rounded">
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant">groups</span>
+<span class="font-metric-mono-md text-metric-mono-md text-on-surface-variant">0</span>
+<span class="font-label-data text-[10px] text-on-surface-variant">PL</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-label-data text-label-data text-on-surface-variant">Roster Pending Confirmation</span>
+<button class="flex items-center gap-space-3xs text-secondary hover:text-primary transition-colors font-label-caps text-label-caps uppercase tracking-wider" onclick="openSquadDrawer('Senegal', 'SE', 'Aliou Cissé', 'CAF', '#12', '0 Players', 'CONTENDER')">
+<span>Squad &amp; Tactics</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Tactical Squad Drawer / Detailed Modal Backing (Hidden by default, triggered on click) -->
+<div class="fixed inset-0 bg-surface-container-lowest/80 backdrop-blur-sm z-50 hidden transition-opacity flex justify-end" id="squadDrawerBackdrop">
+<div class="w-full max-w-2xl bg-surface-container-low h-full flex flex-col justify-between p-space-lg shadow-2xl overflow-y-auto translate-x-full transition-transform duration-300" id="squadDrawerContent">
+<div class="flex flex-col gap-space-lg">
+<!-- Header -->
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-md">
+<div class="w-14 h-14 rounded bg-surface-container-highest flex items-center justify-center font-headline-lg text-headline-lg font-bold text-primary" id="drawerBadge">
+              BR
+            </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<h2 class="font-headline-lg text-headline-lg uppercase font-bold text-on-surface" id="drawerTitle">Brazil</h2>
+<span class="px-space-xs py-space-3xs bg-primary/20 text-primary font-label-data text-[10px] rounded uppercase font-bold" id="drawerStatusTag">ELITE</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant" id="drawerConfed">CONMEBOL • FIFA Rank #1</span>
+</div>
+</div>
+<button class="p-space-2xs text-on-surface-variant hover:text-on-surface rounded bg-surface-container" onclick="closeSquadDrawer()">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Tactical Overview Bar -->
+<div class="grid grid-cols-3 gap-space-xs">
+<div class="bg-surface-container p-space-xs rounded flex flex-col">
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">Tactical Setup</span>
+<span class="font-metric-mono-md text-metric-mono-md text-on-surface">4 - 3 - 3 ATK</span>
+</div>
+<div class="bg-surface-container p-space-xs rounded flex flex-col">
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">Head Coach</span>
+<span class="font-body-sm text-body-sm text-on-surface font-semibold truncate" id="drawerCoach">Dorival Júnior</span>
+</div>
+<div class="bg-surface-container p-space-xs rounded flex flex-col">
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">FIFA Status</span>
+<span class="font-label-data text-label-data text-primary">CERTIFIED TMS</span>
+</div>
+</div>
+<!-- Tactical Pitch Simulation Graphic -->
+<div class="bg-surface-container-lowest p-space-md rounded flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant tracking-wider">Formation &amp; Pressing Topology</span>
+<span class="font-label-data text-label-data text-secondary">POSSESSION: 61.4%</span>
+</div>
+<!-- Pitch SVG Visualization -->
+<div class="w-full h-44 bg-surface-container rounded relative overflow-hidden flex items-center justify-center">
+<svg class="w-full h-full opacity-20" fill="none" viewbox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+<rect class="text-outline" height="180" stroke="currentColor" stroke-width="2" width="380" x="10" y="10"></rect>
+<line class="text-outline" stroke="currentColor" stroke-width="2" x1="200" x2="200" y1="10" y2="190"></line>
+<circle class="text-outline" cx="200" cy="100" r="35" stroke="currentColor" stroke-width="2"></circle>
+<rect class="text-outline" height="90" stroke="currentColor" stroke-width="1.5" width="55" x="10" y="55"></rect>
+<rect class="text-outline" height="90" stroke="currentColor" stroke-width="1.5" width="55" x="335" y="55"></rect>
+</svg>
+<!-- Player Markers Overlay -->
+<div class="absolute inset-0 flex items-center justify-around px-8">
+<div class="flex flex-col items-center">
+<span class="w-6 h-6 rounded-full bg-tertiary/30 text-tertiary flex items-center justify-center font-metric-mono-md text-[10px] font-bold">1</span>
+<span class="font-label-data text-[9px] text-on-surface-variant">GK</span>
+</div>
+<div class="flex flex-col justify-between h-28">
+<span class="w-6 h-6 rounded-full bg-secondary/30 text-secondary flex items-center justify-center font-metric-mono-md text-[10px] font-bold">2</span>
+<span class="w-6 h-6 rounded-full bg-secondary/30 text-secondary flex items-center justify-center font-metric-mono-md text-[10px] font-bold">4</span>
+<span class="w-6 h-6 rounded-full bg-secondary/30 text-secondary flex items-center justify-center font-metric-mono-md text-[10px] font-bold">3</span>
+<span class="w-6 h-6 rounded-full bg-secondary/30 text-secondary flex items-center justify-center font-metric-mono-md text-[10px] font-bold">6</span>
+</div>
+<div class="flex flex-col justify-around h-24">
+<span class="w-6 h-6 rounded-full bg-primary/30 text-primary flex items-center justify-center font-metric-mono-md text-[10px] font-bold">5</span>
+<span class="w-6 h-6 rounded-full bg-primary/30 text-primary flex items-center justify-center font-metric-mono-md text-[10px] font-bold">8</span>
+<span class="w-6 h-6 rounded-full bg-primary/30 text-primary flex items-center justify-center font-metric-mono-md text-[10px] font-bold">10</span>
+</div>
+<div class="flex flex-col justify-between h-28">
+<span class="w-6 h-6 rounded-full bg-error/30 text-error flex items-center justify-center font-metric-mono-md text-[10px] font-bold">7</span>
+<span class="w-6 h-6 rounded-full bg-error/30 text-error flex items-center justify-center font-metric-mono-md text-[10px] font-bold">9</span>
+<span class="w-6 h-6 rounded-full bg-error/30 text-error flex items-center justify-center font-metric-mono-md text-[10px] font-bold">11</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Sample Roster List -->
+<div class="flex flex-col gap-space-2xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant tracking-wider">Registered Roster Sheet (Sample)</span>
+<span class="font-label-data text-label-data text-primary" id="drawerRosterCount">8 PLAYERS</span>
+</div>
+<div class="bg-surface-container rounded overflow-hidden">
+<div class="grid grid-cols-12 bg-surface-container-highest px-space-sm py-space-xs font-label-caps text-[10px] text-on-surface-variant uppercase">
+<span class="col-span-1">No</span>
+<span class="col-span-6">Player Name</span>
+<span class="col-span-2 text-center">POS</span>
+<span class="col-span-3 text-right">Club</span>
+</div>
+<div class="divide-y-0 text-body-sm font-body-sm">
+<div class="grid grid-cols-12 px-space-sm py-space-xs items-center hover:bg-surface-container-high transition-colors">
+<span class="col-span-1 font-metric-mono-md text-on-surface">1</span>
+<span class="col-span-6 text-on-surface font-medium">Alisson Becker</span>
+<div class="col-span-2 flex justify-center"><span class="px-space-2xs py-[1px] bg-tertiary/15 text-tertiary font-label-data text-[10px] rounded">GK</span></div>
+<span class="col-span-3 text-right font-label-data text-on-surface-variant truncate">Liverpool</span>
+</div>
+<div class="grid grid-cols-12 px-space-sm py-space-xs items-center hover:bg-surface-container-high transition-colors bg-surface-container/60">
+<span class="col-span-1 font-metric-mono-md text-on-surface">4</span>
+<span class="col-span-6 text-on-surface font-medium">Marquinhos</span>
+<div class="col-span-2 flex justify-center"><span class="px-space-2xs py-[1px] bg-secondary/15 text-secondary font-label-data text-[10px] rounded">DF</span></div>
+<span class="col-span-3 text-right font-label-data text-on-surface-variant truncate">Paris SG</span>
+</div>
+<div class="grid grid-cols-12 px-space-sm py-space-xs items-center hover:bg-surface-container-high transition-colors">
+<span class="col-span-1 font-metric-mono-md text-on-surface">5</span>
+<span class="col-span-6 text-on-surface font-medium">Casemiro</span>
+<div class="col-span-2 flex justify-center"><span class="px-space-2xs py-[1px] bg-primary/15 text-primary font-label-data text-[10px] rounded">MF</span></div>
+<span class="col-span-3 text-right font-label-data text-on-surface-variant truncate">Manchester Utd</span>
+</div>
+<div class="grid grid-cols-12 px-space-sm py-space-xs items-center hover:bg-surface-container-high transition-colors bg-surface-container/60">
+<span class="col-span-1 font-metric-mono-md text-on-surface">7</span>
+<span class="col-span-6 text-on-surface font-medium">Vinicius Junior</span>
+<div class="col-span-2 flex justify-center"><span class="px-space-2xs py-[1px] bg-error/15 text-error font-label-data text-[10px] rounded">FW</span></div>
+<span class="col-span-3 text-right font-label-data text-on-surface-variant truncate">Real Madrid</span>
+</div>
+<div class="grid grid-cols-12 px-space-sm py-space-xs items-center hover:bg-surface-container-high transition-colors">
+<span class="col-span-1 font-metric-mono-md text-on-surface">10</span>
+<span class="col-span-6 text-on-surface font-medium">Rodrygo Silva</span>
+<div class="col-span-2 flex justify-center"><span class="px-space-2xs py-[1px] bg-error/15 text-error font-label-data text-[10px] rounded">FW</span></div>
+<span class="col-span-3 text-right font-label-data text-on-surface-variant truncate">Real Madrid</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Drawer Bottom CTAs -->
+<div class="pt-space-md flex items-center justify-between border-t-0">
+<button class="px-space-md py-space-xs rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-caps text-label-caps uppercase" onclick="closeSquadDrawer()">
+          Dismiss
+        </button>
+<button class="px-space-md py-space-xs rounded bg-primary-container hover:bg-primary text-on-primary-container font-label-caps text-label-caps uppercase font-bold flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+<span>Edit Roster Sheet</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Tactical Filters logic
+  const searchInput = document.getElementById('teamSearchInput');
+  const confedBtns = document.querySelectorAll('.filter-confed-btn');
+  const statusBtns = document.querySelectorAll('.filter-status-btn');
+  const teamCards = document.querySelectorAll('.team-card');
+
+  let activeConfed = 'ALL';
+  let activeStatus = 'ALL';
+
+  function applyFilters() {
+    const term = searchInput.value.toLowerCase().trim();
+    teamCards.forEach(card => {
+      const cardConfed = card.getAttribute('data-confed');
+      const cardStatus = card.getAttribute('data-status');
+      const cardText = card.getAttribute('data-name') || '';
+
+      const matchConfed = (activeConfed === 'ALL' || cardConfed === activeConfed);
+      const matchStatus = (activeStatus === 'ALL' || cardStatus === activeStatus);
+      const matchText = (!term || cardText.includes(term));
+
+      if (matchConfed && matchStatus && matchText) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+  }
+
+  searchInput.addEventListener('input', applyFilters);
+
+  confedBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      confedBtns.forEach(b => {
+        b.classList.remove('bg-surface-container-highest', 'text-primary');
+        b.classList.add('text-on-surface-variant');
+      });
+      btn.classList.add('bg-surface-container-highest', 'text-primary');
+      btn.classList.remove('text-on-surface-variant');
+      activeConfed = btn.getAttribute('data-confed');
+      applyFilters();
+    });
+  });
+
+  statusBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      statusBtns.forEach(b => {
+        b.classList.remove('bg-surface-container-highest', 'text-secondary');
+        b.classList.add('text-on-surface-variant');
+      });
+      btn.classList.add('bg-surface-container-highest', 'text-secondary');
+      btn.classList.remove('text-on-surface-variant');
+      activeStatus = btn.getAttribute('data-status');
+      applyFilters();
+    });
+  });
+
+  // Squad Drawer Interactive Trigger
+  function openSquadDrawer(teamName, code, coach, confed, rank, players, status) {
+    const backdrop = document.getElementById('squadDrawerBackdrop');
+    const drawer = document.getElementById('squadDrawerContent');
+    
+    document.getElementById('drawerTitle').innerText = teamName;
+    document.getElementById('drawerBadge').innerText = code;
+    document.getElementById('drawerCoach').innerText = coach;
+    document.getElementById('drawerConfed').innerText = confed + ' • FIFA Rank ' + rank;
+    document.getElementById('drawerStatusTag').innerText = status;
+    document.getElementById('drawerRosterCount').innerText = players.toUpperCase();
+
+    backdrop.classList.remove('hidden');
+    setTimeout(() => {
+      drawer.classList.remove('translate-x-full');
+    }, 10);
+  }
+
+  function closeSquadDrawer() {
+    const backdrop = document.getElementById('squadDrawerBackdrop');
+    const drawer = document.getElementById('squadDrawerContent');
+    drawer.classList.add('translate-x-full');
+    setTimeout(() => {
+      backdrop.classList.add('hidden');
+    }, 250);
+  }
+</script></main></div></body></html>

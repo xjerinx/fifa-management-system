@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Chivo:wght@600;700;800&amp;family=Hanken+Grotesk:wght@400;500;600&amp;family=JetBrains+Mono:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: 'class', theme: { extend: { colors: { 'error': '#ffb4ab', 'on-tertiary-fixed-variant': '#653e00', 'surface': '#0f131c', 'on-surface': '#dfe2ee', 'inverse-surface': '#dfe2ee', 'tertiary': '#ffb95f', 'surface-variant': '#31353e', 'on-error': '#690005', 'on-secondary-container': '#00374d', 'surface-bright': '#353942', 'on-tertiary-container': '#523200', 'tertiary-fixed': '#ffddb8', 'outline': '#86948a', 'tertiary-fixed-dim': '#ffb95f', 'secondary': '#7bd0ff', 'on-tertiary': '#472a00', 'secondary-container': '#00a6e0', 'outline-variant': '#3c4a42', 'on-primary-fixed': '#002113', 'surface-container-lowest': '#0a0e16', 'error-container': '#93000a', 'on-primary-container': '#00422b', 'on-secondary': '#00354a', 'primary-fixed-dim': '#4edea3', 'secondary-fixed': '#c4e7ff', 'on-secondary-fixed': '#001e2c', 'surface-container-low': '#181c24', 'surface-container-high': '#262a33', 'on-primary': '#003824', 'on-secondary-fixed-variant': '#004c69', 'on-surface-variant': '#bbcabf', 'tertiary-container': '#e29100', 'inverse-on-surface': '#2c3039', 'surface-container-highest': '#31353e', 'surface-container': '#1c2028', 'background': '#0f131c', 'primary-fixed': '#6ffbbe', 'primary-container': '#10b981', 'on-primary-fixed-variant': '#005236', 'on-background': '#dfe2ee', 'on-tertiary-fixed': '#2a1700', 'surface-tint': '#4edea3', 'surface-dim': '#0f131c', 'inverse-primary': '#006c49', 'on-error-container': '#ffdad6', 'primary': '#4edea3', 'secondary-fixed-dim': '#7bd0ff' }, borderRadius: { 'DEFAULT': '0.125rem', 'lg': '0.25rem', 'xl': '0.5rem', 'full': '0.75rem' }, spacing: { 'margin-mobile': '1rem', 'space-3xs': '0.125rem', 'space-3xl': '4rem', 'margin-desktop': '1.5rem', 'space-2xs': '0.25rem', 'space-xs': '0.5rem', 'space-sm': '0.75rem', 'space-xl': '2rem', 'space-2xl': '3rem', 'gutter-mobile': '0.75rem', 'space-lg': '1.5rem', 'space-md': '1rem', 'gutter-desktop': '1rem' }, fontFamily: { 'label-data': ['JetBrains Mono'], 'body-lg': ['Hanken Grotesk'], 'label-caps': ['Chivo'], 'headline-xl-mobile': ['Chivo'], 'metric-mono-lg': ['JetBrains Mono'], 'headline-2xl-mobile': ['Chivo'], 'headline-lg': ['Chivo'], 'headline-2xl': ['Chivo'], 'body-md': ['Hanken Grotesk'], 'headline-xl': ['Chivo'], 'metric-mono-md': ['JetBrains Mono'], 'body-sm': ['Hanken Grotesk'], 'headline-md': ['Chivo'] }, fontSize: { 'label-data': ['11px', { lineHeight: '14px', letterSpacing: '0.02em', fontWeight: '500' }], 'body-lg': ['16px', { lineHeight: '24px', letterSpacing: '0em', fontWeight: '400' }], 'label-caps': ['11px', { lineHeight: '14px', letterSpacing: '0.08em', fontWeight: '700' }], 'headline-xl-mobile': ['26px', { lineHeight: '32px', letterSpacing: '-0.015em', fontWeight: '700' }], 'metric-mono-lg': ['28px', { lineHeight: '32px', letterSpacing: '-0.02em', fontWeight: '700' }], 'headline-2xl-mobile': ['32px', { lineHeight: '38px', letterSpacing: '-0.02em', fontWeight: '800' }], 'headline-lg': ['24px', { lineHeight: '30px', letterSpacing: '-0.02em', fontWeight: '700' }], 'headline-2xl': ['48px', { lineHeight: '52px', letterSpacing: '-0.03em', fontWeight: '800' }], 'body-md': ['14px', { lineHeight: '20px', letterSpacing: '0em', fontWeight: '400' }], 'headline-xl': ['36px', { lineHeight: '42px', letterSpacing: '-0.025em', fontWeight: '700' }], 'metric-mono-md': ['15px', { lineHeight: '20px', letterSpacing: '-0.01em', fontWeight: '600' }], 'body-sm': ['12px', { lineHeight: '18px', letterSpacing: '0.01em', fontWeight: '400' }], 'headline-md': ['18px', { lineHeight: '24px', letterSpacing: '-0.01em', fontWeight: '600' }] } } } };</script></head><body class="bg-background font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-lowest z-50 flex flex-col justify-between py-space-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col gap-space-md"><div class="px-space-md flex items-center justify-between"><div class="flex items-center gap-space-xs"><img alt="FIFA Ops Crest" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3F8YxVS6wkUPJmomiMS9t9i3TWnIhjgzEMMX0KW4F2kNiNWUP4CZs_xrZvzwBbfjrbNpNbohS1pFth6bOiuhxlZsqf1L526RW3AUrpMpo7LXNbtoPhXtLBJsVPU1G-aPZHn7Lx-o6-sWidzf_IXlgyVzkhdupqMKlDfkEeA4l5nXxaxZgS42X7tXB05zZ2hBEdUPVip0X8rnS05GG_xLRnrOq_NjAXKMVZMMXIjBiAHVBv89y0TtQ"/><div class="flex flex-col"><span class="font-headline-md text-headline-md uppercase tracking-tight text-on-surface">FIFA OPS</span><span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Operations Hub</span></div></div><button aria-label="Collapse Sidebar" class="p-space-2xs text-on-surface-variant hover:text-on-surface transition-colors rounded"><span class="material-symbols-outlined text-[18px]">menu_open</span></button></div><div class="px-space-md"><div class="flex items-center justify-between bg-surface-container px-space-sm py-space-xs rounded border border-outline-variant"><div class="flex items-center gap-space-2xs"><span class="material-symbols-outlined text-secondary text-[16px]">event_note</span><span class="font-label-caps text-label-caps text-on-surface tracking-wider">SEASON 2026/27</span></div><span class="material-symbols-outlined text-on-surface-variant text-[16px]">unfold_more</span></div></div><nav class="flex-1 flex flex-col gap-space-sm px-space-xs overflow-y-auto" data-active-classes="bg-primary-container text-on-primary-container font-bold rounded"><div class="flex flex-col gap-space-3xs"><span class="px-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Overview</span><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[18px]">grid_view</span><span class="font-body-md text-body-md">Dashboard</span></a></div><div class="flex flex-col gap-space-3xs"><span class="px-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Governance</span><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="associations" href="#"><span class="material-symbols-outlined text-[18px]">flag</span><span class="font-body-md text-body-md">Associations</span></a><a aria-current="page" class="flex items-center gap-space-xs px-space-xs py-space-2xs transition-colors bg-primary-container text-on-primary-container font-bold rounded" data-path="teams" href="#"><span class="material-symbols-outlined text-[18px]">shield</span><span class="font-body-md text-body-md">Teams</span></a><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="players" href="#"><span class="material-symbols-outlined text-[18px]">sports_soccer</span><span class="font-body-md text-body-md">Players</span></a><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="coaches" href="#"><span class="material-symbols-outlined text-[18px]">high_res</span><span class="font-body-md text-body-md">Coaches</span></a><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="referees" href="#"><span class="material-symbols-outlined text-[18px]">sports</span><span class="font-body-md text-body-md">Referees</span></a></div><div class="flex flex-col gap-space-3xs"><span class="px-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Venues &amp; Assets</span><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="stadiums" href="#"><span class="material-symbols-outlined text-[18px]">stadium</span><span class="font-body-md text-body-md">Stadiums</span></a></div><div class="flex flex-col gap-space-3xs"><span class="px-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Competitions</span><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="tournaments" href="#"><span class="material-symbols-outlined text-[18px]">emoji_events</span><span class="font-body-md text-body-md">Tournaments</span></a><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="fixtures-matches" href="#"><span class="material-symbols-outlined text-[18px]">calendar_month</span><span class="font-body-md text-body-md">Fixtures &amp; Matches</span></a><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="match-events-timeline" href="#"><span class="material-symbols-outlined text-[18px]">timeline</span><span class="font-body-md text-body-md">Match Events Timeline</span></a></div><div class="flex flex-col gap-space-3xs"><span class="px-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Commercial</span><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="partners-sponsors" href="#"><span class="material-symbols-outlined text-[18px]">handshake</span><span class="font-body-md text-body-md">Global Partners &amp; Sponsors</span></a></div></nav></div><div class="px-space-md pt-space-xs flex flex-col gap-space-xs"><div class="p-space-xs bg-surface-container-low rounded flex items-center justify-between"><div class="flex items-center gap-space-xs"><span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span><span class="font-label-caps text-label-caps text-on-surface-variant uppercase">TMS Synced</span></div><span class="font-label-data text-label-data text-primary">99.98%</span></div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/80 backdrop-blur-xl z-40 flex items-center justify-between px-gutter-desktop shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center gap-space-md"><img alt="FIFA Ops Crest" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3F8YxVS6wkUPJmomiMS9t9i3TWnIhjgzEMMX0KW4F2kNiNWUP4CZs_xrZvzwBbfjrbNpNbohS1pFth6bOiuhxlZsqf1L526RW3AUrpMpo7LXNbtoPhXtLBJsVPU1G-aPZHn7Lx-o6-sWidzf_IXlgyVzkhdupqMKlDfkEeA4l5nXxaxZgS42X7tXB05zZ2hBEdUPVip0X8rnS05GG_xLRnrOq_NjAXKMVZMMXIjBiAHVBv89y0TtQ"/><div class="flex items-center gap-space-xs bg-surface-container px-space-sm py-space-2xs rounded border border-outline-variant w-80"><span class="material-symbols-outlined text-on-surface-variant text-[18px]">search</span><input class="bg-transparent text-on-surface placeholder:text-on-surface-variant font-body-sm text-body-sm focus:outline-none w-full" placeholder="Search entities, rules, matches..." readonly="" type="text"/><kbd class="font-label-data text-label-data bg-surface-container-highest text-on-surface px-space-2xs py-space-3xs rounded border border-outline-variant">Ctrl+K</kbd></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs px-space-sm py-space-2xs bg-surface-container-low rounded border border-outline-variant"><span class="w-2 h-2 rounded-full bg-primary animate-ping"></span><span class="font-label-caps text-label-caps text-primary tracking-wider uppercase">Live Feed 2026/27 Active</span></div><button aria-label="Notifications" class="relative p-space-2xs text-on-surface-variant hover:text-on-surface transition-colors rounded"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full"></span></button><div class="flex items-center gap-space-xs pl-space-xs border-l border-outline-variant"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="hidden md:flex flex-col text-left"><span class="font-label-caps text-label-caps text-on-surface uppercase">C. Del Piero</span><span class="font-label-data text-label-data text-on-surface-variant">Lead Commissioner</span></div></div></div></header><main class="w-full px-gutter-desktop pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full pb-space-2xl">
+<!-- Top Telemetry & Header Section -->
+<div class="flex flex-col gap-space-sm mb-space-lg">
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-2xs text-secondary mb-space-3xs">
+<span class="material-symbols-outlined text-[15px]">high_res</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Technical Staff Directory // Licensing Hub • FIFA Pro Accredited</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight uppercase">Head Coaches &amp; Tactical Directors</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-space-3xs">
+          12 accredited head coaches leading registered national team delegations for the 2026/27 international cycle.
+        </p>
+</div>
+<div class="flex items-center gap-space-xs flex-wrap">
+<button class="flex items-center gap-space-2xs px-space-sm py-space-xs bg-surface-container hover:bg-surface-container-high text-on-surface font-label-caps text-label-caps uppercase rounded transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-secondary">file_download</span>
+          Export Credentials
+        </button>
+<button class="flex items-center gap-space-2xs px-space-sm py-space-xs bg-surface-container hover:bg-surface-container-high text-on-surface font-label-caps text-label-caps uppercase rounded transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-primary">filter_list</span>
+          Accreditation Filter
+        </button>
+<button class="flex items-center gap-space-2xs px-space-md py-space-xs bg-primary-container hover:bg-primary text-on-primary font-label-caps text-label-caps uppercase rounded transition-colors shadow-md">
+<span class="material-symbols-outlined text-[16px]">add_circle</span>
+          + Register Head Coach
+        </button>
+</div>
+</div>
+<!-- Live Command KPI Strip -->
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-space-xs mt-space-xs">
+<div class="bg-surface-container p-space-sm rounded flex flex-col justify-between shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Total Coaches</span>
+<span class="material-symbols-outlined text-[16px] text-primary">shield_person</span>
+</div>
+<div class="mt-space-2xs">
+<span class="font-metric-mono-lg text-metric-mono-lg text-on-surface">12</span>
+<div class="flex items-center gap-space-3xs mt-space-3xs text-primary font-label-data text-label-data">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+            100% Pro Licensed
+          </div>
+</div>
+</div>
+<div class="bg-surface-container p-space-sm rounded flex flex-col justify-between shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">UEFA Pro</span>
+<span class="font-label-data text-label-data px-space-2xs bg-surface-container-highest text-secondary rounded">UEFA</span>
+</div>
+<div class="mt-space-2xs">
+<span class="font-metric-mono-lg text-metric-mono-lg text-secondary">8</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant block mt-space-3xs">Verified council</span>
+</div>
+</div>
+<div class="bg-surface-container p-space-sm rounded flex flex-col justify-between shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">CONMEBOL Pro</span>
+<span class="font-label-data text-label-data px-space-2xs bg-surface-container-highest text-tertiary rounded">CSB</span>
+</div>
+<div class="mt-space-2xs">
+<span class="font-metric-mono-lg text-metric-mono-lg text-tertiary">3</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant block mt-space-3xs">Licencia Elite</span>
+</div>
+</div>
+<div class="bg-surface-container p-space-sm rounded flex flex-col justify-between shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">AFC / CAF Pro</span>
+<span class="font-label-data text-label-data px-space-2xs bg-surface-container-highest text-on-surface-variant rounded">AFC/CAF</span>
+</div>
+<div class="mt-space-2xs">
+<span class="font-metric-mono-lg text-metric-mono-lg text-on-surface">1</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant block mt-space-3xs">AFC Elite Diploma</span>
+</div>
+</div>
+<div class="bg-surface-container p-space-sm rounded flex flex-col justify-between shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Mean Tenure</span>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">hourglass_bottom</span>
+</div>
+<div class="mt-space-2xs">
+<div class="flex items-baseline gap-space-3xs">
+<span class="font-metric-mono-lg text-metric-mono-lg text-on-surface">3.4</span>
+<span class="font-label-data text-label-data text-on-surface-variant">YRS</span>
+</div>
+<span class="font-body-sm text-body-sm text-primary block mt-space-3xs truncate">Max: Deschamps (12y)</span>
+</div>
+</div>
+<div class="bg-surface-container p-space-sm rounded flex flex-col justify-between shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Avg Win Rate</span>
+<span class="material-symbols-outlined text-[16px] text-primary">trending_up</span>
+</div>
+<div class="mt-space-2xs">
+<div class="flex items-baseline gap-space-3xs">
+<span class="font-metric-mono-lg text-metric-mono-lg text-primary">68.4%</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant block mt-space-3xs truncate">Competitive fixtures</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Search Filter & Command Control Bar -->
+<div class="bg-surface-container-low p-space-sm rounded flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-space-sm mb-space-md shadow-sm">
+<div class="flex items-center gap-space-xs flex-1 max-w-xl bg-surface-container px-space-sm py-space-2xs rounded">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">search</span>
+<input class="bg-transparent font-body-sm text-body-sm text-on-surface placeholder:text-on-surface-variant focus:outline-none w-full" id="coachSearchInput" placeholder="Search coach by name, nationality, license ID, or squad..." type="text"/>
+<span class="font-label-data text-label-data text-on-surface-variant bg-surface-container-highest px-space-2xs py-space-3xs rounded">ESC to clear</span>
+</div>
+<div class="flex flex-wrap items-center gap-space-xs justify-between lg:justify-end">
+<!-- Confederation Filter Pills -->
+<div class="flex items-center bg-surface-container rounded p-space-3xs text-label-caps font-label-caps">
+<button class="px-space-xs py-space-3xs bg-primary-container text-on-primary-container font-bold rounded shadow-sm">ALL (12)</button>
+<button class="px-space-xs py-space-3xs text-on-surface-variant hover:text-on-surface transition-colors">ACTIVE</button>
+<button class="px-space-xs py-space-3xs text-on-surface-variant hover:text-on-surface transition-colors">UEFA</button>
+<button class="px-space-xs py-space-3xs text-on-surface-variant hover:text-on-surface transition-colors">CONMEBOL</button>
+<button class="px-space-xs py-space-3xs text-on-surface-variant hover:text-on-surface transition-colors">AFC</button>
+</div>
+<div class="flex items-center gap-space-2xs">
+<div class="flex items-center gap-space-2xs bg-surface-container px-space-sm py-space-2xs rounded text-on-surface font-body-sm text-body-sm cursor-pointer hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">sort</span>
+<span>Sort: Win Rate %</span>
+<span class="material-symbols-outlined text-[14px]">expand_more</span>
+</div>
+<div class="flex items-center bg-surface-container rounded p-space-3xs">
+<button class="p-space-2xs bg-surface-container-highest text-primary rounded" title="Grid Layout">
+<span class="material-symbols-outlined text-[16px]">grid_view</span>
+</button>
+<button class="p-space-2xs text-on-surface-variant hover:text-on-surface rounded transition-colors" title="Table Layout">
+<span class="material-symbols-outlined text-[16px]">view_list</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- 12 Coach Tactical Cards Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-space-sm" id="coachGrid">
+<!-- Card 1: Luis de la Fuente -->
+<div class="group bg-surface-container hover:bg-surface-container-high transition-all duration-200 rounded p-space-md flex flex-col justify-between shadow-sm relative overflow-hidden">
+<div class="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full blur-xl pointer-events-none"></div>
+<div>
+<div class="flex items-start justify-between gap-space-xs mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container font-headline-md text-headline-md flex items-center justify-center font-bold shadow-sm">
+              L
+            </div>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-on-surface tracking-tight group-hover:text-primary transition-colors">Luis de la Fuente</span>
+<div class="flex items-center gap-space-2xs text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[14px] text-secondary">flag</span>
+<span>Spain</span>
+<span class="font-label-data text-label-data text-primary px-space-2xs bg-surface-container-lowest rounded">ESP</span>
+</div>
+</div>
+</div>
+<span class="px-space-xs py-space-3xs bg-primary-container/20 text-primary font-label-data text-label-data rounded flex items-center gap-space-3xs">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+            ACTIVE
+          </span>
+</div>
+<!-- License & Tactical System -->
+<div class="grid grid-cols-2 gap-space-xs bg-surface-container-lowest p-space-xs rounded mb-space-sm font-label-data text-label-data">
+<div>
+<span class="text-on-surface-variant uppercase text-[9px] block">License</span>
+<span class="text-secondary font-bold">RFEF-005 (UEFA Pro)</span>
+</div>
+<div>
+<span class="text-on-surface-variant uppercase text-[9px] block">Appointed</span>
+<span class="text-on-surface">01/01/2023</span>
+</div>
+<div class="col-span-2 pt-space-3xs">
+<span class="text-on-surface-variant uppercase text-[9px] block">Tactical System</span>
+<span class="text-on-surface font-body-sm text-body-sm">4-3-3 Possession / High Press</span>
+</div>
+</div>
+<!-- Trophies & Win Rate -->
+<div class="flex flex-col gap-space-2xs mb-space-sm">
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-on-surface-variant flex items-center gap-space-3xs">
+<span class="material-symbols-outlined text-tertiary text-[14px]">emoji_events</span>
+              Euro 2024 • Nations Lg.
+            </span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">78% WR</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 78%"></div>
+</div>
+</div>
+</div>
+<!-- Action Footer -->
+<div class="pt-space-xs flex items-center justify-between gap-space-xs">
+<button class="flex items-center gap-space-3xs text-secondary hover:text-secondary-fixed-dim font-label-caps text-label-caps uppercase transition-colors">
+<span class="material-symbols-outlined text-[14px]">sports_soccer</span>
+          View Squad (26)
+        </button>
+<span class="font-label-data text-label-data text-on-surface-variant">Contract '26</span>
+</div>
+</div>
+<!-- Card 2: Marcelo Bielsa -->
+<div class="group bg-surface-container hover:bg-surface-container-high transition-all duration-200 rounded p-space-md flex flex-col justify-between shadow-sm relative overflow-hidden">
+<div>
+<div class="flex items-start justify-between gap-space-xs mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest text-tertiary font-headline-md text-headline-md flex items-center justify-center font-bold shadow-sm">
+              MB
+            </div>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-on-surface tracking-tight group-hover:text-tertiary transition-colors">Marcelo Bielsa</span>
+<div class="flex items-center gap-space-2xs text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[14px] text-secondary">flag</span>
+<span>Uruguay (AUF)</span>
+<span class="font-label-data text-label-data text-secondary px-space-2xs bg-surface-container-lowest rounded">URU</span>
+</div>
+</div>
+</div>
+<span class="px-space-xs py-space-3xs bg-primary-container/20 text-primary font-label-data text-label-data rounded flex items-center gap-space-3xs">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+            ACTIVE
+          </span>
+</div>
+<div class="grid grid-cols-2 gap-space-xs bg-surface-container-lowest p-space-xs rounded mb-space-sm font-label-data text-label-data">
+<div>
+<span class="text-on-surface-variant uppercase text-[9px] block">License</span>
+<span class="text-tertiary font-bold">AUF-010 (CONMEBOL)</span>
+</div>
+<div>
+<span class="text-on-surface-variant uppercase text-[9px] block">Appointed</span>
+<span class="text-on-surface">15/03/2023</span>
+</div>
+<div class="col-span-2 pt-space-3xs">
+<span class="text-on-surface-variant uppercase text-[9px] block">Tactical System</span>
+<span class="text-on-surface font-body-sm text-body-sm">4-2-3-1 Intense Press / Man-Mark</span>
+</div>
+</div>
+<div class="flex flex-col gap-space-2xs mb-space-sm">
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-on-surface-variant flex items-center gap-space-3xs">
+<span class="material-symbols-outlined text-tertiary text-[14px]">emoji_events</span>
+              Copa América 3rd
+            </span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">65% WR</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 65%"></div>
+</div>
+</div>
+</div>
+<div class="pt-space-xs flex items-center justify-between gap-space-xs">
+<button class="flex items-center gap-space-3xs text-secondary hover:text-secondary-fixed-dim font-label-caps text-label-caps uppercase transition-colors">
+<span class="material-symbols-outlined text-[14px]">sports_soccer</span>
+          View Squad (24)
+        </button>
+<span class="font-label-data text-label-data text-on-surface-variant">Contract '26</span>
+</div>
+</div>
+<!-- Card 3: Aliou Cissé -->
+<div class="group bg-surface-container hover:bg-surface-container-high transition-all duration-200 rounded p-space-md flex flex-col justify-between shadow-sm relative overflow-hidden">
+<div>
+<div class="flex items-start justify-between gap-space-xs mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest text-primary font-headline-md text-headline-md flex items-center justify-center font-bold shadow-sm">
+              AC
+            </div>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-on-surface tracking-tight group-hover:text-primary transition-colors">Aliou Cissé</span>
+<div class="flex items-center gap-space-2xs text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[14px] text-secondary">flag</span>
+<span>Senegal (FSF)</span>
+<span class="font-label-data text-label-data text-primary px-space-2xs bg-surface-container-lowest rounded">SEN</span>
+</div>
+</div>
+</div>
+<span class="px-space-xs py-space-3xs bg-primary-container/20 text-primary font-label-data text-label-data rounded flex items-center gap-space-3xs">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+            ACTIVE
+          </span>
+</div>
+<div class="grid grid-cols-2 gap-space-xs bg-surface-container-lowest p-space-xs rounded mb-space-sm font-label-data text-label-data">
+<div>
+<span class="text-on-surface-variant uppercase text-[9px] block">License</span>
+<span class="text-secondary font-bold">FSF-012 (CAF Pro)</span>
+</div>
+<div>
+<span class="text-on-surface-variant uppercase text-[9px] block">Appointed</span>
+<span class="text-on-surface">05/03/2015</span>
+</div>
+<div class="col-span-2 pt-space-3xs">
+<span class="text-on-surface-variant uppercase text-[9px] block">Tactical System</span>
+<span class="text-on-surface font-body-sm text-body-sm">4-3-3 Compact Counter Transition</span>
+</div>
+</div>
+<div class="flex flex-col gap-space-2xs mb-space-sm">
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-on-surface-variant flex items-center gap-space-3xs">
+<span class="material-symbols-outlined text-tertiary text-[14px]">emoji_events</span>
+              AFCON Champions
+            </span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">64% WR</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 64%"></div>
+</div>
+</div>
+</div>
+<div class="pt-space-xs flex items-center justify-between gap-space-xs">
+<button class="flex items-center gap-space-3xs text-secondary hover:text-secondary-fixed-dim font-label-caps text-label-caps uppercase transition-colors">
+<span class="material-symbols-outlined text-[14px]">sports_soccer</span>
+          View Squad (23)
+        </button>
+<span class="font-label-data text-label-data text-on-surface-variant">Contract '25</span>
+</div>
+</div>
+<!-- Card 4: Didier Deschamps -->
+<div class="group bg-surface-container hover:bg-surface-container-high transition-all duration-200 rounded p-space-md flex flex-col justify-between shadow-sm relative overflow-hidden">
+<div>
+<div class="flex items-start justify-between gap-space-xs mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container font-headline-md text-headline-md flex items-center justify-center font-bold shadow-sm">
+              DD
+            </div>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-on-surface tracking-tight group-hover:text-secondary transition-colors">Didier Deschamps</span>
+<div class="flex items-center gap-space-2xs text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[14px] text-secondary">flag</span>
+<span>France (FFF)</span>
+<span class="font-label-data text-label-data text-secondary px-space-2xs bg-surface-container-lowest rounded">FRA</span>
+</div>
+</div>
+</div>
+<span class="px-space-xs py-space-3xs bg-primary-container/20 text-primary font-label-data text-label-data rounded flex items-center gap-space-3xs">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+            ACTIVE
+          </span>
+</div>
+<div class="grid grid-cols-2 gap-space-xs bg-surface-container-lowest p-space-xs rounded mb-space-sm font-label-data text-label-data">
+<div>
+<span class="text-on-surface-variant uppercase text-[9px] block">License</span>
+<span class="text-secondary font-bold">FFF-003 (UEFA Master)</span>
+</div>
+<div>
+<span class="text-on-surface-variant uppercase text-[9px] block">Appointed</span>
+<span class="text-on-surface">08/07/2012</span>
+</div>
+<div class="col-span-2 pt-space-3xs">
+<span class="text-on-surface-variant uppercase text-[9px] block">Tactical System</span>
+<span class="text-on-surface font-body-sm text-body-sm">4-2-3-1 Hybrid Direct</span>
+</div>
+</div>
+<div class="flex flex-col gap-space-2xs mb-space-sm">
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-on-surface-variant flex items-center gap-space-3xs">
+<span class="material-symbols-outlined text-tertiary text-[14px]">emoji_events</span>
+              FIFA World Cup '18
+            </span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">69% WR</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 69%"></div>
+</div>
+</div>
+</div>
+<div class="pt-space-xs flex items-center justify-between gap-space-xs">
+<button class="flex items-center gap-space-3xs text-secondary hover:text-secondary-fixed-dim font-label-caps text-label-caps uppercase transition-colors">
+<span class="material-symbols-outlined text-[14px]">sports_soccer</span>
+          View Squad (26)
+        </button>
+<span class="font-label-data text-label-data text-on-surface-variant">Contract '26</span>
+</div>
+</div>
+<!-- Card 5: Dorival Júnior -->
+<div class="group bg-surface-container hover:bg-surface-container-high transition-all duration-200 rounded p-space-md flex flex-col justify-between shadow-sm relative overflow-hidden">
+<div>
+<div class="flex items-start justify-between gap-space-xs mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest text-tertiary font-headline-md text-headline-md flex items-center justify-center font-bold shadow-sm">
+              DJ
+            </div>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-on-surface tracking-tight group-hover:text-tertiary transition-colors">Dorival Júnior</span>
+<div class="flex items-center gap-space-2xs text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[14px] text-secondary">flag</span>
+<span>Brazil (CBF)</span>
+<span class="font-label-data text-label-data text-tertiary px-space-2xs bg-surface-container-lowest rounded">BRA</span>
+</div>
+</div>
+</div>
+<span class="px-space-xs py-space-3xs bg-primary-container/20 text-primary font-label-data text-label-data rounded flex items-center gap-space-3xs">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+            ACTIVE
+          </span>
+</div>
+<div class="grid grid-cols-2 gap-space-xs bg-surface-container-lowest p-space-xs rounded mb-space-sm font-label-data text-label-data">
+<div>
+<span class="text-on-surface-variant uppercase text-[9px] block">License</span>
+<span class="text-tertiary font-bold">CBF-001 (Academy Pro)</span>
+</div>
+<div>
+<span class="text-on-surface-variant uppercase text-[9px] block">Appointed</span>
+<span class="text-on-surface">08/01/2024</span>
+</div>
+<div class="col-span-2 pt-space-3xs">
+<span class="text-on-surface-variant uppercase text-[9px] block">Tactical System</span>
+<span class="text-on-surface font-body-sm text-body-sm">4-3-3 Fluid Samba Dynamism</span>
+</div>
+</div>
+<div class="flex flex-col gap-space-2xs mb-space-sm">
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-on-surface-variant flex items-center gap-space-3xs">
+<span class="material-symbols-outlined text-tertiary text-[14px]">sports_score</span>
+              Copa Libertadores x2
+            </span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">60% WR</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 60%"></div>
+</div>
+</div>
+</div>
+<div class="pt-space-xs flex items-center justify-between gap-space-xs">
+<button class="flex items-center gap-space-3xs text-secondary hover:text-secondary-fixed-dim font-label-caps text-label-caps uppercase transition-colors">
+<span class="material-symbols-outlined text-[14px]">sports_soccer</span>
+          View Squad (25)
+        </button>
+<span class="font-label-data text-label-data text-on-surface-variant">Contract '26</span>
+</div>
+</div>
+<!-- Card 6: Ronald Koeman -->
+<div class="group bg-surface-container hover:bg-surface-container-high transition-all duration-200 rounded p-space-md flex flex-col justify-between shadow-sm relative overflow-hidden">
+<div>
+<div class="flex items-start justify-between gap-space-xs mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<div class="w-10 h-10 rounded-full bg-tertiary-container text-on-tertiary font-headline-md text-headline-md flex items-center justify-center font-bold shadow-sm">
+              RK
+            </div>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-on-surface tracking-tight group-hover:text-tertiary transition-colors">Ronald Koeman</span>
+<div class="flex items-center gap-space-2xs text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[14px] text-secondary">flag</span>
+<span>Netherlands (KNVB)</span>
+<span class="font-label-data text-label-data text-tertiary px-space-2xs bg-surface-container-lowest rounded">NED</span>
+</div>
+</div>
+</div>
+<span class="px-space-xs py-space-3xs bg-primary-container/20 text-primary font-label-data text-label-data rounded flex items-center gap-space-3xs">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+            ACTIVE
+          </span>
+</div>
+<div class="grid grid-cols-2 gap-space-xs bg-surface-container-lowest p-space-xs rounded mb-space-sm font-label-data text-label-data">
+<div>
+<span class="text-on-surface-variant uppercase text-[9px] block">License</span>
+<span class="text-secondary font-bold">KNVB-008 (UEFA Pro)</span>
+</div>
+<div>
+<span class="text-on-surface-variant uppercase text-[9px] block">Appointed</span>
+<span class="text-on-surface">01/07/2023</span>
+</div>
+<div class="col-span-2 pt-space-3xs">
+<span class="text-on-surface-variant uppercase text-[9px] block">Tactical System</span>
+<span class="text-on-surface font-body-sm text-body-sm">3-4-2-1 Wing-Back Overload</span>
+</div>
+</div>
+<div class="flex flex-col gap-space-2xs mb-space-sm">
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-on-surface-variant flex items-center gap-space-3xs">
+<span class="material-symbols-outlined text-tertiary text-[14px]">emoji_events</span>
+              Euro 2024 Semi-Final
+            </span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">62% WR</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 62%"></div>
+</div>
+</div>
+</div>
+<div class="pt-space-xs flex items-center justify-between gap-space-xs">
+<button class="flex items-center gap-space-3xs text-secondary hover:text-secondary-fixed-dim font-label-caps text-label-caps uppercase transition-colors">
+<span class="material-symbols-outlined text-[14px]">sports_soccer</span>
+          View Squad (25)
+        </button>
+<span class="font-label-data text-label-data text-on-surface-variant">Contract '26</span>
+</div>
+</div>
+<!-- Card 7: Roberto Martínez -->
+<div class="group bg-surface-container hover:bg-surface-container-high transition-all duration-200 rounded p-space-md flex flex-col justify-between shadow-sm relative overflow-hidden">
+<div>
+<div class="flex items-start justify-between gap-space-xs mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest text-secondary font-headline-md text-headline-md flex items-center justify-center font-bold shadow-sm">
+              RM
+            </div>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-on-surface tracking-tight group-hover:text-secondary transition-colors">Roberto Martínez</span>
+<div class="flex items-center gap-space-2xs text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[14px] text-secondary">flag</span>
+<span>Portugal (FPF)</span>
+<span class="font-label-data text-label-data text-secondary px-space-2xs bg-surface-container-lowest rounded">POR</span>
+</div>
+</div>
+</div>
+<span class="px-space-xs py-space-3xs bg-primary-container/20 text-primary font-label-data text-label-data rounded flex items-center gap-space-3xs">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+            ACTIVE
+          </span>
+</div>
+<div class="grid grid-cols-2 gap-space-xs bg-surface-container-lowest p-space-xs rounded mb-space-sm font-label-data text-label-data">
+<div>
+<span class="text-on-surface-variant uppercase text-[9px] block">License</span>
+<span class="text-secondary font-bold">FPF-009 (UEFA Pro)</span>
+</div>
+<div>
+<span class="text-on-surface-variant uppercase text-[9px] block">Appointed</span>
+<span class="text-on-surface">09/01/2023</span>
+</div>
+<div class="col-span-2 pt-space-3xs">
+<span class="text-on-surface-variant uppercase text-[9px] block">Tactical System</span>
+<span class="text-on-surface font-body-sm text-body-sm">4-3-3 / 3-4-3 Positional</span>
+</div>
+</div>
+<div class="flex flex-col gap-space-2xs mb-space-sm">
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-on-surface-variant flex items-center gap-space-3xs">
+<span class="material-symbols-outlined text-tertiary text-[14px]">emoji_events</span>
+              Euro Qualifiers (10-0-0)
+            </span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">74% WR</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 74%"></div>
+</div>
+</div>
+</div>
+<div class="pt-space-xs flex items-center justify-between gap-space-xs">
+<button class="flex items-center gap-space-3xs text-secondary hover:text-secondary-fixed-dim font-label-caps text-label-caps uppercase transition-colors">
+<span class="material-symbols-outlined text-[14px]">sports_soccer</span>
+          View Squad (26)
+        </button>
+<span class="font-label-data text-label-data text-on-surface-variant">Contract '26</span>
+</div>
+</div>
+<!-- Card 8: Hajime Moriyasu -->
+<div class="group bg-surface-container hover:bg-surface-container-high transition-all duration-200 rounded p-space-md flex flex-col justify-between shadow-sm relative overflow-hidden">
+<div>
+<div class="flex items-start justify-between gap-space-xs mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest text-secondary font-headline-md text-headline-md flex items-center justify-center font-bold shadow-sm">
+              HM
+            </div>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-on-surface tracking-tight group-hover:text-secondary transition-colors">Hajime Moriyasu</span>
+<div class="flex items-center gap-space-2xs text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[14px] text-secondary">flag</span>
+<span>Japan (JFA)</span>
+<span class="font-label-data text-label-data text-secondary px-space-2xs bg-surface-container-lowest rounded">JPN</span>
+</div>
+</div>
+</div>
+<span class="px-space-xs py-space-3xs bg-primary-container/20 text-primary font-label-data text-label-data rounded flex items-center gap-space-3xs">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+            ACTIVE
+          </span>
+</div>
+<div class="grid grid-cols-2 gap-space-xs bg-surface-container-lowest p-space-xs rounded mb-space-sm font-label-data text-label-data">
+<div>
+<span class="text-on-surface-variant uppercase text-[9px] block">License</span>
+<span class="text-secondary font-bold">JFA-011 (AFC Elite)</span>
+</div>
+<div>
+<span class="text-on-surface-variant uppercase text-[9px] block">Appointed</span>
+<span class="text-on-surface">26/07/2018</span>
+</div>
+<div class="col-span-2 pt-space-3xs">
+<span class="text-on-surface-variant uppercase text-[9px] block">Tactical System</span>
+<span class="text-on-surface font-body-sm text-body-sm">4-2-3-1 Rapid Transition</span>
+</div>
+</div>
+<div class="flex flex-col gap-space-2xs mb-space-sm">
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-on-surface-variant flex items-center gap-space-3xs">
+<span class="material-symbols-outlined text-tertiary text-[14px]">emoji_events</span>
+              Asian Cup Finalist
+            </span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">68% WR</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 68%"></div>
+</div>
+</div>
+</div>
+<div class="pt-space-xs flex items-center justify-between gap-space-xs">
+<button class="flex items-center gap-space-3xs text-secondary hover:text-secondary-fixed-dim font-label-caps text-label-caps uppercase transition-colors">
+<span class="material-symbols-outlined text-[14px]">sports_soccer</span>
+          View Squad (26)
+        </button>
+<span class="font-label-data text-label-data text-on-surface-variant">Contract '26</span>
+</div>
+</div>
+<!-- Card 9: Julian Nagelsmann -->
+<div class="group bg-surface-container hover:bg-surface-container-high transition-all duration-200 rounded p-space-md flex flex-col justify-between shadow-sm relative overflow-hidden">
+<div>
+<div class="flex items-start justify-between gap-space-xs mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest text-primary font-headline-md text-headline-md flex items-center justify-center font-bold shadow-sm">
+              JN
+            </div>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-on-surface tracking-tight group-hover:text-primary transition-colors">Julian Nagelsmann</span>
+<div class="flex items-center gap-space-2xs text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[14px] text-secondary">flag</span>
+<span>Germany (DFB)</span>
+<span class="font-label-data text-label-data text-on-surface px-space-2xs bg-surface-container-lowest rounded">GER</span>
+</div>
+</div>
+</div>
+<span class="px-space-xs py-space-3xs bg-primary-container/20 text-primary font-label-data text-label-data rounded flex items-center gap-space-3xs">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+            ACTIVE
+          </span>
+</div>
+<div class="grid grid-cols-2 gap-space-xs bg-surface-container-lowest p-space-xs rounded mb-space-sm font-label-data text-label-data">
+<div>
+<span class="text-on-surface-variant uppercase text-[9px] block">License</span>
+<span class="text-secondary font-bold">DFB-006 (H-W Akad.)</span>
+</div>
+<div>
+<span class="text-on-surface-variant uppercase text-[9px] block">Appointed</span>
+<span class="text-on-surface">22/09/2023</span>
+</div>
+<div class="col-span-2 pt-space-3xs">
+<span class="text-on-surface-variant uppercase text-[9px] block">Tactical System</span>
+<span class="text-on-surface font-body-sm text-body-sm">4-2-2-2 Gegenpress / Vert</span>
+</div>
+</div>
+<div class="flex flex-col gap-space-2xs mb-space-sm">
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-on-surface-variant flex items-center gap-space-3xs">
+<span class="material-symbols-outlined text-tertiary text-[14px]">emoji_events</span>
+              Euro 2024 QF
+            </span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">64% WR</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 64%"></div>
+</div>
+</div>
+</div>
+<div class="pt-space-xs flex items-center justify-between gap-space-xs">
+<button class="flex items-center gap-space-3xs text-secondary hover:text-secondary-fixed-dim font-label-caps text-label-caps uppercase transition-colors">
+<span class="material-symbols-outlined text-[14px]">sports_soccer</span>
+          View Squad (26)
+        </button>
+<span class="font-label-data text-label-data text-on-surface-variant">Contract '26</span>
+</div>
+</div>
+<!-- Card 10: Lionel Scaloni -->
+<div class="group bg-surface-container hover:bg-surface-container-high transition-all duration-200 rounded p-space-md flex flex-col justify-between shadow-sm relative overflow-hidden">
+<div class="absolute top-0 right-0 w-24 h-24 bg-tertiary/10 rounded-full blur-xl pointer-events-none"></div>
+<div>
+<div class="flex items-start justify-between gap-space-xs mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container font-headline-md text-headline-md flex items-center justify-center font-bold shadow-sm">
+              LS
+            </div>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-on-surface tracking-tight group-hover:text-secondary transition-colors">Lionel Scaloni</span>
+<div class="flex items-center gap-space-2xs text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[14px] text-secondary">flag</span>
+<span>Argentina (AFA)</span>
+<span class="font-label-data text-label-data text-secondary px-space-2xs bg-surface-container-lowest rounded">ARG</span>
+</div>
+</div>
+</div>
+<span class="px-space-xs py-space-3xs bg-primary-container/20 text-primary font-label-data text-label-data rounded flex items-center gap-space-3xs">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+            ACTIVE
+          </span>
+</div>
+<div class="grid grid-cols-2 gap-space-xs bg-surface-container-lowest p-space-xs rounded mb-space-sm font-label-data text-label-data">
+<div>
+<span class="text-on-surface-variant uppercase text-[9px] block">License</span>
+<span class="text-tertiary font-bold">AFA-002 (CONMEBOL Pro)</span>
+</div>
+<div>
+<span class="text-on-surface-variant uppercase text-[9px] block">Appointed</span>
+<span class="text-on-surface">14/11/2018</span>
+</div>
+<div class="col-span-2 pt-space-3xs">
+<span class="text-on-surface-variant uppercase text-[9px] block">Tactical System</span>
+<span class="text-on-surface font-body-sm text-body-sm">4-3-3 / 4-4-2 Fluid Adaptive</span>
+</div>
+</div>
+<div class="flex flex-col gap-space-2xs mb-space-sm">
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-on-surface-variant flex items-center gap-space-3xs">
+<span class="material-symbols-outlined text-tertiary text-[14px]">emoji_events</span>
+              World Cup '22 • Copa x2
+            </span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">72% WR</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 72%"></div>
+</div>
+</div>
+</div>
+<div class="pt-space-xs flex items-center justify-between gap-space-xs">
+<button class="flex items-center gap-space-3xs text-secondary hover:text-secondary-fixed-dim font-label-caps text-label-caps uppercase transition-colors">
+<span class="material-symbols-outlined text-[14px]">sports_soccer</span>
+          View Squad (26)
+        </button>
+<span class="font-label-data text-label-data text-on-surface-variant">Contract '26</span>
+</div>
+</div>
+<!-- Card 11: Gareth Southgate -->
+<div class="group bg-surface-container/60 hover:bg-surface-container transition-all duration-200 rounded p-space-md flex flex-col justify-between shadow-sm relative overflow-hidden opacity-90">
+<div>
+<div class="flex items-start justify-between gap-space-xs mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant font-headline-md text-headline-md flex items-center justify-center font-bold shadow-sm">
+              GS
+            </div>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-on-surface tracking-tight group-hover:text-secondary transition-colors">Gareth Southgate</span>
+<div class="flex items-center gap-space-2xs text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant">flag</span>
+<span>England (FA)</span>
+<span class="font-label-data text-label-data text-on-surface-variant px-space-2xs bg-surface-container-lowest rounded">ENG</span>
+</div>
+</div>
+</div>
+<span class="px-space-xs py-space-3xs bg-surface-container-highest text-on-surface-variant font-label-data text-label-data rounded">
+            INACTIVE
+          </span>
+</div>
+<div class="grid grid-cols-2 gap-space-xs bg-surface-container-lowest/70 p-space-xs rounded mb-space-sm font-label-data text-label-data">
+<div>
+<span class="text-on-surface-variant uppercase text-[9px] block">License</span>
+<span class="text-on-surface-variant font-bold">FA-004 (UEFA Pro)</span>
+</div>
+<div>
+<span class="text-on-surface-variant uppercase text-[9px] block">Tenure</span>
+<span class="text-on-surface">2016 – 2024</span>
+</div>
+<div class="col-span-2 pt-space-3xs">
+<span class="text-on-surface-variant uppercase text-[9px] block">Tactical System</span>
+<span class="text-on-surface font-body-sm text-body-sm">4-2-3-1 Solid Mid-Block</span>
+</div>
+</div>
+<div class="flex flex-col gap-space-2xs mb-space-sm">
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-on-surface-variant flex items-center gap-space-3xs">
+<span class="material-symbols-outlined text-on-surface-variant text-[14px]">emoji_events</span>
+              2x Euro Finalist
+            </span>
+<span class="font-metric-mono-md text-metric-mono-md text-on-surface-variant font-bold">61% WR</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-on-surface-variant/40 h-full rounded-full" style="width: 61%"></div>
+</div>
+</div>
+</div>
+<div class="pt-space-xs flex items-center justify-between gap-space-xs">
+<button class="flex items-center gap-space-3xs text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps uppercase transition-colors">
+<span class="material-symbols-outlined text-[14px]">history</span>
+          Tenure Archive
+        </button>
+<span class="font-label-data text-label-data text-on-surface-variant">Concluded</span>
+</div>
+</div>
+<!-- Card 12: Luciano Spalletti -->
+<div class="group bg-surface-container hover:bg-surface-container-high transition-all duration-200 rounded p-space-md flex flex-col justify-between shadow-sm relative overflow-hidden">
+<div>
+<div class="flex items-start justify-between gap-space-xs mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest text-secondary font-headline-md text-headline-md flex items-center justify-center font-bold shadow-sm">
+              LS
+            </div>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-on-surface tracking-tight group-hover:text-secondary transition-colors">Luciano Spalletti</span>
+<div class="flex items-center gap-space-2xs text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[14px] text-secondary">flag</span>
+<span>Italy (FIGC)</span>
+<span class="font-label-data text-label-data text-secondary px-space-2xs bg-surface-container-lowest rounded">ITA</span>
+</div>
+</div>
+</div>
+<span class="px-space-xs py-space-3xs bg-primary-container/20 text-primary font-label-data text-label-data rounded flex items-center gap-space-3xs">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+            ACTIVE
+          </span>
+</div>
+<div class="grid grid-cols-2 gap-space-xs bg-surface-container-lowest p-space-xs rounded mb-space-sm font-label-data text-label-data">
+<div>
+<span class="text-on-surface-variant uppercase text-[9px] block">License</span>
+<span class="text-secondary font-bold">FIGC-007 (Coverciano)</span>
+</div>
+<div>
+<span class="text-on-surface-variant uppercase text-[9px] block">Appointed</span>
+<span class="text-on-surface">04/08/2023</span>
+</div>
+<div class="col-span-2 pt-space-3xs">
+<span class="text-on-surface-variant uppercase text-[9px] block">Tactical System</span>
+<span class="text-on-surface font-body-sm text-body-sm">3-4-2-1 Vertical Build-Up</span>
+</div>
+</div>
+<div class="flex flex-col gap-space-2xs mb-space-sm">
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-on-surface-variant flex items-center gap-space-3xs">
+<span class="material-symbols-outlined text-tertiary text-[14px]">emoji_events</span>
+              Serie A Scudetto Winner
+            </span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">58% WR</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 58%"></div>
+</div>
+</div>
+</div>
+<div class="pt-space-xs flex items-center justify-between gap-space-xs">
+<button class="flex items-center gap-space-3xs text-secondary hover:text-secondary-fixed-dim font-label-caps text-label-caps uppercase transition-colors">
+<span class="material-symbols-outlined text-[14px]">sports_soccer</span>
+          View Squad (26)
+        </button>
+<span class="font-label-data text-label-data text-on-surface-variant">Contract '26</span>
+</div>
+</div>
+</div>
+<!-- Technical Bench Intelligence & Licensing Notice -->
+<div class="mt-space-lg bg-surface-container-low p-space-md rounded flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md shadow-sm">
+<div class="flex items-start gap-space-sm">
+<div class="p-space-xs bg-surface-container rounded text-primary">
+<span class="material-symbols-outlined text-[24px]">verified</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-on-surface">FIFA Coaching Convention 2026 Regulatory Compliance</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-3xs max-w-3xl">
+          All twelve designated Head Coaches hold verified Pro-diploma accreditations cross-validated via the FIFA Technical Monitoring System (TMS). Technical area accreditations for the upcoming match fixtures window remain active through 2026/27 competition phases.
+        </p>
+</div>
+</div>
+<div class="flex items-center gap-space-xs shrink-0 w-full md:w-auto justify-end">
+<span class="font-label-data text-label-data text-on-surface-variant">Last Audit: 12m ago</span>
+<button class="px-space-sm py-space-2xs bg-surface-container hover:bg-surface-container-high text-secondary font-label-caps text-label-caps uppercase rounded transition-colors shadow-sm">
+        Audit Log
+      </button>
+</div>
+</div>
+</div>
+<script>
+  (function() {
+    // Synchronize active sidebar indicator for Coaches view
+    const coachNavLinks = document.querySelectorAll('aside a[data-path="coaches"]');
+    coachNavLinks.forEach(link => {
+      link.classList.remove('text-on-surface-variant', 'hover:bg-surface-container');
+      link.classList.add('bg-primary-container', 'text-on-primary-container', 'font-bold', 'rounded');
+      const icon = link.querySelector('.material-symbols-outlined');
+      if (icon) icon.classList.add('text-on-primary-container');
+    });
+
+    // Real-time client-side coach filtering
+    const searchInput = document.getElementById('coachSearchInput');
+    const cards = document.querySelectorAll('#coachGrid > div');
+
+    if (searchInput) {
+      searchInput.addEventListener('input', function(e) {
+        const query = e.target.value.toLowerCase().trim();
+        cards.forEach(card => {
+          const text = card.textContent.toLowerCase();
+          if (text.includes(query)) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+
+      searchInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          searchInput.value = '';
+          cards.forEach(card => card.style.display = '');
+        }
+      });
+    }
+  })();
+</script></main></div></body></html>

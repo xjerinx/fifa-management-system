@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Chivo:wght@600;700;800&amp;family=Hanken+Grotesk:wght@400;500;600&amp;family=JetBrains+Mono:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: 'class', theme: { extend: { colors: { 'error': '#ffb4ab', 'on-tertiary-fixed-variant': '#653e00', 'surface': '#0f131c', 'on-surface': '#dfe2ee', 'inverse-surface': '#dfe2ee', 'tertiary': '#ffb95f', 'surface-variant': '#31353e', 'on-error': '#690005', 'on-secondary-container': '#00374d', 'surface-bright': '#353942', 'on-tertiary-container': '#523200', 'tertiary-fixed': '#ffddb8', 'outline': '#86948a', 'tertiary-fixed-dim': '#ffb95f', 'secondary': '#7bd0ff', 'on-tertiary': '#472a00', 'secondary-container': '#00a6e0', 'outline-variant': '#3c4a42', 'on-primary-fixed': '#002113', 'surface-container-lowest': '#0a0e16', 'error-container': '#93000a', 'on-primary-container': '#00422b', 'on-secondary': '#00354a', 'primary-fixed-dim': '#4edea3', 'secondary-fixed': '#c4e7ff', 'on-secondary-fixed': '#001e2c', 'surface-container-low': '#181c24', 'surface-container-high': '#262a33', 'on-primary': '#003824', 'on-secondary-fixed-variant': '#004c69', 'on-surface-variant': '#bbcabf', 'tertiary-container': '#e29100', 'inverse-on-surface': '#2c3039', 'surface-container-highest': '#31353e', 'surface-container': '#1c2028', 'background': '#0f131c', 'primary-fixed': '#6ffbbe', 'primary-container': '#10b981', 'on-primary-fixed-variant': '#005236', 'on-background': '#dfe2ee', 'on-tertiary-fixed': '#2a1700', 'surface-tint': '#4edea3', 'surface-dim': '#0f131c', 'inverse-primary': '#006c49', 'on-error-container': '#ffdad6', 'primary': '#4edea3', 'secondary-fixed-dim': '#7bd0ff' }, borderRadius: { 'DEFAULT': '0.125rem', 'lg': '0.25rem', 'xl': '0.5rem', 'full': '0.75rem' }, spacing: { 'margin-mobile': '1rem', 'space-3xs': '0.125rem', 'space-3xl': '4rem', 'margin-desktop': '1.5rem', 'space-2xs': '0.25rem', 'space-xs': '0.5rem', 'space-sm': '0.75rem', 'space-xl': '2rem', 'space-2xl': '3rem', 'gutter-mobile': '0.75rem', 'space-lg': '1.5rem', 'space-md': '1rem', 'gutter-desktop': '1rem' }, fontFamily: { 'label-data': ['JetBrains Mono'], 'body-lg': ['Hanken Grotesk'], 'label-caps': ['Chivo'], 'headline-xl-mobile': ['Chivo'], 'metric-mono-lg': ['JetBrains Mono'], 'headline-2xl-mobile': ['Chivo'], 'headline-lg': ['Chivo'], 'headline-2xl': ['Chivo'], 'body-md': ['Hanken Grotesk'], 'headline-xl': ['Chivo'], 'metric-mono-md': ['JetBrains Mono'], 'body-sm': ['Hanken Grotesk'], 'headline-md': ['Chivo'] }, fontSize: { 'label-data': ['11px', { lineHeight: '14px', letterSpacing: '0.02em', fontWeight: '500' }], 'body-lg': ['16px', { lineHeight: '24px', letterSpacing: '0em', fontWeight: '400' }], 'label-caps': ['11px', { lineHeight: '14px', letterSpacing: '0.08em', fontWeight: '700' }], 'headline-xl-mobile': ['26px', { lineHeight: '32px', letterSpacing: '-0.015em', fontWeight: '700' }], 'metric-mono-lg': ['28px', { lineHeight: '32px', letterSpacing: '-0.02em', fontWeight: '700' }], 'headline-2xl-mobile': ['32px', { lineHeight: '38px', letterSpacing: '-0.02em', fontWeight: '800' }], 'headline-lg': ['24px', { lineHeight: '30px', letterSpacing: '-0.02em', fontWeight: '700' }], 'headline-2xl': ['48px', { lineHeight: '52px', letterSpacing: '-0.03em', fontWeight: '800' }], 'body-md': ['14px', { lineHeight: '20px', letterSpacing: '0em', fontWeight: '400' }], 'headline-xl': ['36px', { lineHeight: '42px', letterSpacing: '-0.025em', fontWeight: '700' }], 'metric-mono-md': ['15px', { lineHeight: '20px', letterSpacing: '-0.01em', fontWeight: '600' }], 'body-sm': ['12px', { lineHeight: '18px', letterSpacing: '0.01em', fontWeight: '400' }], 'headline-md': ['18px', { lineHeight: '24px', letterSpacing: '-0.01em', fontWeight: '600' }] } } } };</script></head><body class="bg-background font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-lowest z-50 flex flex-col justify-between py-space-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col gap-space-md"><div class="px-space-md flex items-center justify-between"><div class="flex items-center gap-space-xs"><img alt="FIFA Ops Crest" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3F8YxVS6wkUPJmomiMS9t9i3TWnIhjgzEMMX0KW4F2kNiNWUP4CZs_xrZvzwBbfjrbNpNbohS1pFth6bOiuhxlZsqf1L526RW3AUrpMpo7LXNbtoPhXtLBJsVPU1G-aPZHn7Lx-o6-sWidzf_IXlgyVzkhdupqMKlDfkEeA4l5nXxaxZgS42X7tXB05zZ2hBEdUPVip0X8rnS05GG_xLRnrOq_NjAXKMVZMMXIjBiAHVBv89y0TtQ"/><div class="flex flex-col"><span class="font-headline-md text-headline-md uppercase tracking-tight text-on-surface">FIFA OPS</span><span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Operations Hub</span></div></div><button aria-label="Collapse Sidebar" class="p-space-2xs text-on-surface-variant hover:text-on-surface transition-colors rounded"><span class="material-symbols-outlined text-[18px]">menu_open</span></button></div><div class="px-space-md"><div class="flex items-center justify-between bg-surface-container px-space-sm py-space-xs rounded border border-outline-variant"><div class="flex items-center gap-space-2xs"><span class="material-symbols-outlined text-secondary text-[16px]">event_note</span><span class="font-label-caps text-label-caps text-on-surface tracking-wider">SEASON 2026/27</span></div><span class="material-symbols-outlined text-on-surface-variant text-[16px]">unfold_more</span></div></div><nav class="flex-1 flex flex-col gap-space-sm px-space-xs overflow-y-auto" data-active-classes="bg-primary-container text-on-primary-container font-bold rounded"><div class="flex flex-col gap-space-3xs"><span class="px-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Overview</span><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[18px]">grid_view</span><span class="font-body-md text-body-md">Dashboard</span></a></div><div class="flex flex-col gap-space-3xs"><span class="px-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Governance</span><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="associations" href="#"><span class="material-symbols-outlined text-[18px]">flag</span><span class="font-body-md text-body-md">Associations</span></a><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="teams" href="#"><span class="material-symbols-outlined text-[18px]">shield</span><span class="font-body-md text-body-md">Teams</span></a><a aria-current="page" class="flex items-center gap-space-xs px-space-xs py-space-2xs transition-colors bg-primary-container text-on-primary-container font-bold rounded" data-path="players" href="#"><span class="material-symbols-outlined text-[18px]">sports_soccer</span><span class="font-body-md text-body-md">Players</span></a><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="coaches" href="#"><span class="material-symbols-outlined text-[18px]">high_res</span><span class="font-body-md text-body-md">Coaches</span></a><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="referees" href="#"><span class="material-symbols-outlined text-[18px]">sports</span><span class="font-body-md text-body-md">Referees</span></a></div><div class="flex flex-col gap-space-3xs"><span class="px-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Venues &amp; Assets</span><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="stadiums" href="#"><span class="material-symbols-outlined text-[18px]">stadium</span><span class="font-body-md text-body-md">Stadiums</span></a></div><div class="flex flex-col gap-space-3xs"><span class="px-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Competitions</span><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="tournaments" href="#"><span class="material-symbols-outlined text-[18px]">emoji_events</span><span class="font-body-md text-body-md">Tournaments</span></a><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="fixtures-matches" href="#"><span class="material-symbols-outlined text-[18px]">calendar_month</span><span class="font-body-md text-body-md">Fixtures &amp; Matches</span></a><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="match-events-timeline" href="#"><span class="material-symbols-outlined text-[18px]">timeline</span><span class="font-body-md text-body-md">Match Events Timeline</span></a></div><div class="flex flex-col gap-space-3xs"><span class="px-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Commercial</span><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="partners-sponsors" href="#"><span class="material-symbols-outlined text-[18px]">handshake</span><span class="font-body-md text-body-md">Global Partners &amp; Sponsors</span></a></div></nav></div><div class="px-space-md pt-space-xs flex flex-col gap-space-xs"><div class="p-space-xs bg-surface-container-low rounded flex items-center justify-between"><div class="flex items-center gap-space-xs"><span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span><span class="font-label-caps text-label-caps text-on-surface-variant uppercase">TMS Synced</span></div><span class="font-label-data text-label-data text-primary">99.98%</span></div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/80 backdrop-blur-xl z-40 flex items-center justify-between px-gutter-desktop shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center gap-space-md"><img alt="FIFA Ops Crest" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3F8YxVS6wkUPJmomiMS9t9i3TWnIhjgzEMMX0KW4F2kNiNWUP4CZs_xrZvzwBbfjrbNpNbohS1pFth6bOiuhxlZsqf1L526RW3AUrpMpo7LXNbtoPhXtLBJsVPU1G-aPZHn7Lx-o6-sWidzf_IXlgyVzkhdupqMKlDfkEeA4l5nXxaxZgS42X7tXB05zZ2hBEdUPVip0X8rnS05GG_xLRnrOq_NjAXKMVZMMXIjBiAHVBv89y0TtQ"/><div class="flex items-center gap-space-xs bg-surface-container px-space-sm py-space-2xs rounded border border-outline-variant w-80"><span class="material-symbols-outlined text-on-surface-variant text-[18px]">search</span><input class="bg-transparent text-on-surface placeholder:text-on-surface-variant font-body-sm text-body-sm focus:outline-none w-full" placeholder="Search entities, rules, matches..." readonly="" type="text"/><kbd class="font-label-data text-label-data bg-surface-container-highest text-on-surface px-space-2xs py-space-3xs rounded border border-outline-variant">Ctrl+K</kbd></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs px-space-sm py-space-2xs bg-surface-container-low rounded border border-outline-variant"><span class="w-2 h-2 rounded-full bg-primary animate-ping"></span><span class="font-label-caps text-label-caps text-primary tracking-wider uppercase">Live Feed 2026/27 Active</span></div><button aria-label="Notifications" class="relative p-space-2xs text-on-surface-variant hover:text-on-surface transition-colors rounded"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full"></span></button><div class="flex items-center gap-space-xs pl-space-xs border-l border-outline-variant"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="hidden md:flex flex-col text-left"><span class="font-label-caps text-label-caps text-on-surface uppercase">C. Del Piero</span><span class="font-label-data text-label-data text-on-surface-variant">Lead Commissioner</span></div></div></div></header><main class="w-full px-gutter-desktop pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full pb-space-2xl space-y-space-lg">
+<!-- Top Telemetry & Global Hub Header -->
+<div class="flex flex-col xl:flex-row xl:items-end justify-between gap-space-md pt-space-xs">
+<div class="space-y-space-2xs">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-caps text-label-caps text-primary uppercase tracking-widest px-space-xs py-space-3xs bg-surface-container-high rounded">FIFA TMS ACTIVE ROSTER</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-data text-label-data text-on-surface-variant">NODE: ZURICH-DB4</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface uppercase tracking-tight font-extrabold">
+        Registered Players &amp; Scouting Hub
+      </h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-3xl">
+        50 professional athletes registered across international federations with complete contract, biometric tracking, and real-time market valuations.
+      </p>
+</div>
+<!-- Hub Controls / Actions -->
+<div class="flex flex-wrap items-center gap-space-xs">
+<button class="px-space-sm py-space-xs bg-surface-container-high text-on-surface hover:text-secondary transition-colors font-label-caps text-label-caps uppercase rounded flex items-center gap-space-2xs shadow-sm">
+<span class="material-symbols-outlined text-[16px]">upload_file</span>
+<span>Batch Import CSV</span>
+</button>
+<button class="px-space-sm py-space-xs bg-surface-container-high text-on-surface hover:text-secondary transition-colors font-label-caps text-label-caps uppercase rounded flex items-center gap-space-2xs shadow-sm">
+<span class="material-symbols-outlined text-[16px]">file_download</span>
+<span>Export Scouting Sheet</span>
+</button>
+<button class="px-space-md py-space-xs bg-primary-container text-on-primary-container hover:bg-primary font-headline-md text-label-caps uppercase rounded flex items-center gap-space-2xs shadow-md transition-all">
+<span class="material-symbols-outlined text-[18px]">person_add</span>
+<span>+ Add Player</span>
+</button>
+</div>
+</div>
+<!-- Summary Metric Strip -->
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-space-sm">
+<div class="bg-surface-container-low p-space-md rounded flex flex-col justify-between shadow-sm relative overflow-hidden">
+<div class="absolute -right-4 -bottom-4 opacity-5 pointer-events-none">
+<span class="material-symbols-outlined text-[90px] text-on-surface">groups</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Total Athletes</span>
+<span class="material-symbols-outlined text-[16px] text-primary">verified</span>
+</div>
+<div class="mt-space-sm flex items-baseline gap-space-xs">
+<span class="font-metric-mono-lg text-metric-mono-lg text-on-surface">50</span>
+<span class="font-label-data text-label-data text-primary">100% Eligible</span>
+</div>
+<div class="w-full bg-surface-container h-1 mt-space-xs rounded-full overflow-hidden">
+<div class="bg-primary h-full w-full"></div>
+</div>
+</div>
+<div class="bg-surface-container-low p-space-md rounded flex flex-col justify-between shadow-sm relative overflow-hidden">
+<div class="absolute -right-4 -bottom-4 opacity-5 pointer-events-none">
+<span class="material-symbols-outlined text-[90px] text-on-surface">payments</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Total Valuation</span>
+<span class="material-symbols-outlined text-[16px] text-secondary">trending_up</span>
+</div>
+<div class="mt-space-sm flex items-baseline gap-space-xs">
+<span class="font-metric-mono-lg text-metric-mono-lg text-secondary">€3.45B</span>
+<span class="font-label-data text-label-data text-on-surface-variant">USD $3.78B</span>
+</div>
+<div class="w-full bg-surface-container h-1 mt-space-xs rounded-full overflow-hidden">
+<div class="bg-secondary h-full w-4/5"></div>
+</div>
+</div>
+<div class="bg-surface-container-low p-space-md rounded flex flex-col justify-between shadow-sm relative overflow-hidden">
+<div class="absolute -right-4 -bottom-4 opacity-5 pointer-events-none">
+<span class="material-symbols-outlined text-[90px] text-on-surface">analytics</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Avg Market Value</span>
+<span class="material-symbols-outlined text-[16px] text-tertiary">query_stats</span>
+</div>
+<div class="mt-space-sm flex items-baseline gap-space-xs">
+<span class="font-metric-mono-lg text-metric-mono-lg text-tertiary">€69.0M</span>
+<span class="font-label-data text-label-data text-tertiary">+8.4% YoY</span>
+</div>
+<div class="w-full bg-surface-container h-1 mt-space-xs rounded-full overflow-hidden">
+<div class="bg-tertiary h-full w-3/5"></div>
+</div>
+</div>
+<div class="bg-surface-container-low p-space-md rounded flex flex-col justify-between shadow-sm relative overflow-hidden">
+<div class="absolute -right-4 -bottom-4 opacity-5 pointer-events-none">
+<span class="material-symbols-outlined text-[90px] text-on-surface">hourglass_top</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Mean Squad Age</span>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">speed</span>
+</div>
+<div class="mt-space-sm flex items-baseline gap-space-xs">
+<span class="font-metric-mono-lg text-metric-mono-lg text-on-surface">26.2</span>
+<span class="font-label-data text-label-data text-on-surface-variant">Prime Window</span>
+</div>
+<div class="w-full bg-surface-container h-1 mt-space-xs rounded-full overflow-hidden">
+<div class="bg-on-surface-variant h-full w-2/3"></div>
+</div>
+</div>
+</div>
+<!-- Filter & Control Suite -->
+<div class="bg-surface-container-low p-space-sm rounded shadow-sm flex flex-col xl:flex-row gap-space-sm items-stretch xl:items-center justify-between">
+<!-- Search Input -->
+<div class="flex items-center gap-space-xs bg-surface-container px-space-sm py-space-xs rounded w-full xl:w-96">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">search</span>
+<input class="bg-transparent text-on-surface placeholder:text-on-surface-variant font-body-sm text-body-sm focus:outline-none w-full" id="playerSearch" placeholder="Search by athlete, club, number, or nation..." type="text"/>
+<span class="font-label-data text-label-data text-on-surface-variant">ESC</span>
+</div>
+<!-- Filters & Selectors -->
+<div class="flex flex-wrap items-center gap-space-xs">
+<!-- Position Pills -->
+<div class="flex items-center bg-surface-container p-space-3xs rounded text-label-caps font-label-caps">
+<button class="px-space-xs py-space-3xs rounded bg-surface-container-highest text-primary font-bold">ALL</button>
+<button class="px-space-xs py-space-3xs rounded text-on-surface-variant hover:text-error transition-colors flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>FW
+        </button>
+<button class="px-space-xs py-space-3xs rounded text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>MF
+        </button>
+<button class="px-space-xs py-space-3xs rounded text-on-surface-variant hover:text-secondary transition-colors flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>DF
+        </button>
+<button class="px-space-xs py-space-3xs rounded text-on-surface-variant hover:text-tertiary transition-colors flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>GK
+        </button>
+</div>
+<!-- Federation / Nation Selector -->
+<div class="relative">
+<select class="bg-surface-container text-on-surface font-body-sm text-body-sm py-space-xs px-space-sm rounded appearance-none cursor-pointer pr-8 focus:outline-none focus:ring-1 focus:ring-secondary">
+<option>All National Teams</option>
+<option>France (FFF)</option>
+<option>England (FA)</option>
+<option>Brazil (CBF)</option>
+<option>Spain (RFEF)</option>
+<option>Argentina (AFA)</option>
+<option>Germany (DFB)</option>
+<option>Italy (FIGC)</option>
+</select>
+<span class="material-symbols-outlined text-on-surface-variant text-[16px] absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none">expand_more</span>
+</div>
+<!-- Market Value Sort Selector -->
+<div class="relative">
+<select class="bg-surface-container text-on-surface font-body-sm text-body-sm py-space-xs px-space-sm rounded appearance-none cursor-pointer pr-8 focus:outline-none focus:ring-1 focus:ring-secondary">
+<option>Sort: Market Value (High to Low)</option>
+<option>Sort: Market Value (Low to High)</option>
+<option>Sort: Overall Rating</option>
+<option>Sort: Squad Number</option>
+<option>Sort: Age (Youngest First)</option>
+</select>
+<span class="material-symbols-outlined text-on-surface-variant text-[16px] absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none">swap_vert</span>
+</div>
+<!-- Compact / Expanded Switcher -->
+<div class="flex items-center bg-surface-container p-space-3xs rounded text-on-surface-variant">
+<button class="p-space-3xs bg-surface-container-highest text-on-surface rounded" title="Card Matrix"><span class="material-symbols-outlined text-[16px]">grid_view</span></button>
+<button class="p-space-3xs hover:text-on-surface rounded" title="Scouting Table"><span class="material-symbols-outlined text-[16px]">view_list</span></button>
+</div>
+</div>
+</div>
+<!-- Scouting Roster Card Matrix (16 Elite Athletes Grid) -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-space-md">
+<!-- Card 1: Kylian Mbappé (FW - Crimson Red Accent) -->
+<div class="group bg-surface-container-low rounded shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden relative">
+<!-- Position Tone Header Strip -->
+<div class="bg-error-container/80 text-on-error-container px-space-md py-space-xs flex items-center justify-between relative overflow-hidden">
+<div class="flex items-center gap-space-xs z-10">
+<span class="font-label-caps text-label-caps bg-black/40 text-error px-space-2xs py-space-3xs rounded uppercase tracking-wider">FW • ST</span>
+<span class="font-label-data text-label-data text-white/90">FRA // REAL MADRID</span>
+</div>
+<span class="font-metric-mono-lg text-metric-mono-lg text-white font-extrabold z-10">#10</span>
+<span class="absolute -right-2 -bottom-4 font-headline-2xl text-[80px] font-black text-black/15 select-none pointer-events-none">10</span>
+</div>
+<div class="p-space-md flex-1 flex flex-col justify-between gap-space-md">
+<!-- Player Bio & Rating -->
+<div class="flex items-start justify-between">
+<div class="space-y-space-3xs">
+<div class="flex items-center gap-space-2xs">
+<span class="font-label-data text-label-data text-on-surface-variant">FRA</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="font-label-data text-label-data text-on-surface-variant">Right Foot</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface uppercase font-bold tracking-tight group-hover:text-primary transition-colors">
+              Kylian Mbappé
+            </h3>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Forward • Contract to 2029</span>
+</div>
+<div class="flex flex-col items-center bg-surface-container px-space-xs py-space-2xs rounded">
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">OVR</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">94</span>
+</div>
+</div>
+<!-- Radar & Valuation Strip -->
+<div class="bg-surface-container p-space-xs rounded space-y-space-2xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Market Valuation</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">€180.00M</span>
+</div>
+<div class="grid grid-cols-3 gap-space-2xs pt-space-3xs font-label-data text-label-data text-on-surface-variant text-center">
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">PAC</span> 97</div>
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">SHO</span> 90</div>
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">DRI</span> 92</div>
+</div>
+</div>
+<!-- Card Footprint Actions -->
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-label-data text-label-data text-primary flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span> Active Squad
+          </span>
+<div class="flex gap-space-2xs">
+<button class="px-space-xs py-space-3xs bg-surface-container-high text-on-surface hover:text-secondary rounded text-label-caps font-label-caps uppercase transition-colors" title="Profile Details">Profile</button>
+<button class="px-space-xs py-space-3xs bg-surface-container-high text-on-surface hover:text-primary rounded text-label-caps font-label-caps uppercase transition-colors" title="Match Telemetry">Stats</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 2: Jude Bellingham (MF - Pitch Emerald Accent) -->
+<div class="group bg-surface-container-low rounded shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden relative">
+<div class="bg-primary-container text-on-primary-container px-space-md py-space-xs flex items-center justify-between relative overflow-hidden">
+<div class="flex items-center gap-space-xs z-10">
+<span class="font-label-caps text-label-caps bg-black/40 text-primary-fixed px-space-2xs py-space-3xs rounded uppercase tracking-wider">MF • CAM</span>
+<span class="font-label-data text-label-data text-on-primary-container">ENG // REAL MADRID</span>
+</div>
+<span class="font-metric-mono-lg text-metric-mono-lg text-on-primary-container font-extrabold z-10">#22</span>
+<span class="absolute -right-2 -bottom-4 font-headline-2xl text-[80px] font-black text-black/15 select-none pointer-events-none">22</span>
+</div>
+<div class="p-space-md flex-1 flex flex-col justify-between gap-space-md">
+<div class="flex items-start justify-between">
+<div class="space-y-space-3xs">
+<div class="flex items-center gap-space-2xs">
+<span class="font-label-data text-label-data text-on-surface-variant">ENG</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="font-label-data text-label-data text-on-surface-variant">Right Foot</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface uppercase font-bold tracking-tight group-hover:text-primary transition-colors">
+              Jude Bellingham
+            </h3>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Midfielder • Contract to 2029</span>
+</div>
+<div class="flex flex-col items-center bg-surface-container px-space-xs py-space-2xs rounded">
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">OVR</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">93</span>
+</div>
+</div>
+<div class="bg-surface-container p-space-xs rounded space-y-space-2xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Market Valuation</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">€180.00M</span>
+</div>
+<div class="grid grid-cols-3 gap-space-2xs pt-space-3xs font-label-data text-label-data text-on-surface-variant text-center">
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">PHY</span> 88</div>
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">PAS</span> 87</div>
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">DRI</span> 90</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-label-data text-label-data text-primary flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span> Golden Boy Alum
+          </span>
+<div class="flex gap-space-2xs">
+<button class="px-space-xs py-space-3xs bg-surface-container-high text-on-surface hover:text-secondary rounded text-label-caps font-label-caps uppercase transition-colors">Profile</button>
+<button class="px-space-xs py-space-3xs bg-surface-container-high text-on-surface hover:text-primary rounded text-label-caps font-label-caps uppercase transition-colors">Stats</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 3: Vinícius Júnior (FW - Crimson Red Accent) -->
+<div class="group bg-surface-container-low rounded shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden relative">
+<div class="bg-error-container/80 text-on-error-container px-space-md py-space-xs flex items-center justify-between relative overflow-hidden">
+<div class="flex items-center gap-space-xs z-10">
+<span class="font-label-caps text-label-caps bg-black/40 text-error px-space-2xs py-space-3xs rounded uppercase tracking-wider">FW • LW</span>
+<span class="font-label-data text-label-data text-white/90">BRA // REAL MADRID</span>
+</div>
+<span class="font-metric-mono-lg text-metric-mono-lg text-white font-extrabold z-10">#7</span>
+<span class="absolute -right-2 -bottom-4 font-headline-2xl text-[80px] font-black text-black/15 select-none pointer-events-none">07</span>
+</div>
+<div class="p-space-md flex-1 flex flex-col justify-between gap-space-md">
+<div class="flex items-start justify-between">
+<div class="space-y-space-3xs">
+<div class="flex items-center gap-space-2xs">
+<span class="font-label-data text-label-data text-on-surface-variant">BRA</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="font-label-data text-label-data text-on-surface-variant">Right Foot</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface uppercase font-bold tracking-tight group-hover:text-primary transition-colors">
+              Vinícius Júnior
+            </h3>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Winger • Contract to 2027</span>
+</div>
+<div class="flex flex-col items-center bg-surface-container px-space-xs py-space-2xs rounded">
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">OVR</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">92</span>
+</div>
+</div>
+<div class="bg-surface-container p-space-xs rounded space-y-space-2xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Market Valuation</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">€150.00M</span>
+</div>
+<div class="grid grid-cols-3 gap-space-2xs pt-space-3xs font-label-data text-label-data text-on-surface-variant text-center">
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">PAC</span> 96</div>
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">DRI</span> 93</div>
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">SHO</span> 85</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-label-data text-label-data text-secondary flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> UCL Finalist
+          </span>
+<div class="flex gap-space-2xs">
+<button class="px-space-xs py-space-3xs bg-surface-container-high text-on-surface hover:text-secondary rounded text-label-caps font-label-caps uppercase transition-colors">Profile</button>
+<button class="px-space-xs py-space-3xs bg-surface-container-high text-on-surface hover:text-primary rounded text-label-caps font-label-caps uppercase transition-colors">Stats</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 4: Lamine Yamal (FW - Crimson Red Accent) -->
+<div class="group bg-surface-container-low rounded shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden relative">
+<div class="bg-error-container/80 text-on-error-container px-space-md py-space-xs flex items-center justify-between relative overflow-hidden">
+<div class="flex items-center gap-space-xs z-10">
+<span class="font-label-caps text-label-caps bg-black/40 text-error px-space-2xs py-space-3xs rounded uppercase tracking-wider">FW • RW</span>
+<span class="font-label-data text-label-data text-white/90">ESP // FC BARCELONA</span>
+</div>
+<span class="font-metric-mono-lg text-metric-mono-lg text-white font-extrabold z-10">#19</span>
+<span class="absolute -right-2 -bottom-4 font-headline-2xl text-[80px] font-black text-black/15 select-none pointer-events-none">19</span>
+</div>
+<div class="p-space-md flex-1 flex flex-col justify-between gap-space-md">
+<div class="flex items-start justify-between">
+<div class="space-y-space-3xs">
+<div class="flex items-center gap-space-2xs">
+<span class="font-label-data text-label-data text-on-surface-variant">ESP</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="font-label-data text-label-data text-tertiary">Left Foot</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface uppercase font-bold tracking-tight group-hover:text-primary transition-colors">
+              Lamine Yamal
+            </h3>
+<span class="font-body-sm text-body-sm text-tertiary">Youngest Euro MVP • 17 Yrs</span>
+</div>
+<div class="flex flex-col items-center bg-surface-container px-space-xs py-space-2xs rounded">
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">OVR</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">91</span>
+</div>
+</div>
+<div class="bg-surface-container p-space-xs rounded space-y-space-2xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Market Valuation</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">€150.00M</span>
+</div>
+<div class="grid grid-cols-3 gap-space-2xs pt-space-3xs font-label-data text-label-data text-on-surface-variant text-center">
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">PAC</span> 93</div>
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">DRI</span> 91</div>
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">PAS</span> 86</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-label-data text-label-data text-tertiary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">star</span> Kopa Trophy
+          </span>
+<div class="flex gap-space-2xs">
+<button class="px-space-xs py-space-3xs bg-surface-container-high text-on-surface hover:text-secondary rounded text-label-caps font-label-caps uppercase transition-colors">Profile</button>
+<button class="px-space-xs py-space-3xs bg-surface-container-high text-on-surface hover:text-primary rounded text-label-caps font-label-caps uppercase transition-colors">Stats</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 5: Rodri (MF - Pitch Emerald Accent) -->
+<div class="group bg-surface-container-low rounded shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden relative">
+<div class="bg-primary-container text-on-primary-container px-space-md py-space-xs flex items-center justify-between relative overflow-hidden">
+<div class="flex items-center gap-space-xs z-10">
+<span class="font-label-caps text-label-caps bg-black/40 text-primary-fixed px-space-2xs py-space-3xs rounded uppercase tracking-wider">MF • CDM</span>
+<span class="font-label-data text-label-data text-on-primary-container">ESP // MAN CITY</span>
+</div>
+<span class="font-metric-mono-lg text-metric-mono-lg text-on-primary-container font-extrabold z-10">#16</span>
+<span class="absolute -right-2 -bottom-4 font-headline-2xl text-[80px] font-black text-black/15 select-none pointer-events-none">16</span>
+</div>
+<div class="p-space-md flex-1 flex flex-col justify-between gap-space-md">
+<div class="flex items-start justify-between">
+<div class="space-y-space-3xs">
+<div class="flex items-center gap-space-2xs">
+<span class="font-label-data text-label-data text-on-surface-variant">ESP</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="font-label-data text-label-data text-on-surface-variant">Right Foot</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface uppercase font-bold tracking-tight group-hover:text-primary transition-colors">
+              Rodri Hernandez
+            </h3>
+<span class="font-body-sm text-body-sm text-tertiary">Ballon d'Or Winner 2024</span>
+</div>
+<div class="flex flex-col items-center bg-surface-container px-space-xs py-space-2xs rounded">
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">OVR</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">92</span>
+</div>
+</div>
+<div class="bg-surface-container p-space-xs rounded space-y-space-2xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Market Valuation</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">€120.00M</span>
+</div>
+<div class="grid grid-cols-3 gap-space-2xs pt-space-3xs font-label-data text-label-data text-on-surface-variant text-center">
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">DEF</span> 90</div>
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">PHY</span> 89</div>
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">PAS</span> 91</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-label-data text-label-data text-tertiary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">military_tech</span> World Best MF
+          </span>
+<div class="flex gap-space-2xs">
+<button class="px-space-xs py-space-3xs bg-surface-container-high text-on-surface hover:text-secondary rounded text-label-caps font-label-caps uppercase transition-colors">Profile</button>
+<button class="px-space-xs py-space-3xs bg-surface-container-high text-on-surface hover:text-primary rounded text-label-caps font-label-caps uppercase transition-colors">Stats</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 6: Lautaro Martínez (FW - Crimson Red Accent) -->
+<div class="group bg-surface-container-low rounded shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden relative">
+<div class="bg-error-container/80 text-on-error-container px-space-md py-space-xs flex items-center justify-between relative overflow-hidden">
+<div class="flex items-center gap-space-xs z-10">
+<span class="font-label-caps text-label-caps bg-black/40 text-error px-space-2xs py-space-3xs rounded uppercase tracking-wider">FW • ST</span>
+<span class="font-label-data text-label-data text-white/90">ARG // INTER MILAN</span>
+</div>
+<span class="font-metric-mono-lg text-metric-mono-lg text-white font-extrabold z-10">#22</span>
+<span class="absolute -right-2 -bottom-4 font-headline-2xl text-[80px] font-black text-black/15 select-none pointer-events-none">22</span>
+</div>
+<div class="p-space-md flex-1 flex flex-col justify-between gap-space-md">
+<div class="flex items-start justify-between">
+<div class="space-y-space-3xs">
+<div class="flex items-center gap-space-2xs">
+<span class="font-label-data text-label-data text-on-surface-variant">ARG</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="font-label-data text-label-data text-on-surface-variant">Right Foot</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface uppercase font-bold tracking-tight group-hover:text-primary transition-colors">
+              Lautaro Martínez
+            </h3>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Captain • Capocannoniere</span>
+</div>
+<div class="flex flex-col items-center bg-surface-container px-space-xs py-space-2xs rounded">
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">OVR</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">89</span>
+</div>
+</div>
+<div class="bg-surface-container p-space-xs rounded space-y-space-2xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Market Valuation</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">€110.00M</span>
+</div>
+<div class="grid grid-cols-3 gap-space-2xs pt-space-3xs font-label-data text-label-data text-on-surface-variant text-center">
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">SHO</span> 89</div>
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">PHY</span> 86</div>
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">DRI</span> 85</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-label-data text-label-data text-on-surface-variant flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Copa America MVP
+          </span>
+<div class="flex gap-space-2xs">
+<button class="px-space-xs py-space-3xs bg-surface-container-high text-on-surface hover:text-secondary rounded text-label-caps font-label-caps uppercase transition-colors">Profile</button>
+<button class="px-space-xs py-space-3xs bg-surface-container-high text-on-surface hover:text-primary rounded text-label-caps font-label-caps uppercase transition-colors">Stats</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 7: Phil Foden (FW - Crimson Red Accent) -->
+<div class="group bg-surface-container-low rounded shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden relative">
+<div class="bg-error-container/80 text-on-error-container px-space-md py-space-xs flex items-center justify-between relative overflow-hidden">
+<div class="flex items-center gap-space-xs z-10">
+<span class="font-label-caps text-label-caps bg-black/40 text-error px-space-2xs py-space-3xs rounded uppercase tracking-wider">FW • RW/CAM</span>
+<span class="font-label-data text-label-data text-white/90">ENG // MAN CITY</span>
+</div>
+<span class="font-metric-mono-lg text-metric-mono-lg text-white font-extrabold z-10">#47</span>
+<span class="absolute -right-2 -bottom-4 font-headline-2xl text-[80px] font-black text-black/15 select-none pointer-events-none">47</span>
+</div>
+<div class="p-space-md flex-1 flex flex-col justify-between gap-space-md">
+<div class="flex items-start justify-between">
+<div class="space-y-space-3xs">
+<div class="flex items-center gap-space-2xs">
+<span class="font-label-data text-label-data text-on-surface-variant">ENG</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="font-label-data text-label-data text-tertiary">Left Foot</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface uppercase font-bold tracking-tight group-hover:text-primary transition-colors">
+              Phil Foden
+            </h3>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Playmaker • PL Player of Season</span>
+</div>
+<div class="flex flex-col items-center bg-surface-container px-space-xs py-space-2xs rounded">
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">OVR</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">90</span>
+</div>
+</div>
+<div class="bg-surface-container p-space-xs rounded space-y-space-2xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Market Valuation</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">€110.00M</span>
+</div>
+<div class="grid grid-cols-3 gap-space-2xs pt-space-3xs font-label-data text-label-data text-on-surface-variant text-center">
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">DRI</span> 91</div>
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">SHO</span> 88</div>
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">PAS</span> 87</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-label-data text-label-data text-primary flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span> Active Squad
+          </span>
+<div class="flex gap-space-2xs">
+<button class="px-space-xs py-space-3xs bg-surface-container-high text-on-surface hover:text-secondary rounded text-label-caps font-label-caps uppercase transition-colors">Profile</button>
+<button class="px-space-xs py-space-3xs bg-surface-container-high text-on-surface hover:text-primary rounded text-label-caps font-label-caps uppercase transition-colors">Stats</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 8: Pedri (MF - Pitch Emerald Accent) -->
+<div class="group bg-surface-container-low rounded shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden relative">
+<div class="bg-primary-container text-on-primary-container px-space-md py-space-xs flex items-center justify-between relative overflow-hidden">
+<div class="flex items-center gap-space-xs z-10">
+<span class="font-label-caps text-label-caps bg-black/40 text-primary-fixed px-space-2xs py-space-3xs rounded uppercase tracking-wider">MF • CM</span>
+<span class="font-label-data text-label-data text-on-primary-container">ESP // FC BARCELONA</span>
+</div>
+<span class="font-metric-mono-lg text-metric-mono-lg text-on-primary-container font-extrabold z-10">#26</span>
+<span class="absolute -right-2 -bottom-4 font-headline-2xl text-[80px] font-black text-black/15 select-none pointer-events-none">26</span>
+</div>
+<div class="p-space-md flex-1 flex flex-col justify-between gap-space-md">
+<div class="flex items-start justify-between">
+<div class="space-y-space-3xs">
+<div class="flex items-center gap-space-2xs">
+<span class="font-label-data text-label-data text-on-surface-variant">ESP</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="font-label-data text-label-data text-on-surface-variant">Right Foot</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface uppercase font-bold tracking-tight group-hover:text-primary transition-colors">
+              Pedri González
+            </h3>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Midfielder • Contract to 2030</span>
+</div>
+<div class="flex flex-col items-center bg-surface-container px-space-xs py-space-2xs rounded">
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">OVR</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">89</span>
+</div>
+</div>
+<div class="bg-surface-container p-space-xs rounded space-y-space-2xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Market Valuation</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">€110.00M</span>
+</div>
+<div class="grid grid-cols-3 gap-space-2xs pt-space-3xs font-label-data text-label-data text-on-surface-variant text-center">
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">PAS</span> 91</div>
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">DRI</span> 90</div>
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">VIS</span> 93</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-label-data text-label-data text-on-surface-variant flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Euro Champion
+          </span>
+<div class="flex gap-space-2xs">
+<button class="px-space-xs py-space-3xs bg-surface-container-high text-on-surface hover:text-secondary rounded text-label-caps font-label-caps uppercase transition-colors">Profile</button>
+<button class="px-space-xs py-space-3xs bg-surface-container-high text-on-surface hover:text-primary rounded text-label-caps font-label-caps uppercase transition-colors">Stats</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 9: Declan Rice (MF - Pitch Emerald Accent) -->
+<div class="group bg-surface-container-low rounded shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden relative">
+<div class="bg-primary-container text-on-primary-container px-space-md py-space-xs flex items-center justify-between relative overflow-hidden">
+<div class="flex items-center gap-space-xs z-10">
+<span class="font-label-caps text-label-caps bg-black/40 text-primary-fixed px-space-2xs py-space-3xs rounded uppercase tracking-wider">MF • CDM</span>
+<span class="font-label-data text-label-data text-on-primary-container">ENG // ARSENAL</span>
+</div>
+<span class="font-metric-mono-lg text-metric-mono-lg text-on-primary-container font-extrabold z-10">#4</span>
+<span class="absolute -right-2 -bottom-4 font-headline-2xl text-[80px] font-black text-black/15 select-none pointer-events-none">04</span>
+</div>
+<div class="p-space-md flex-1 flex flex-col justify-between gap-space-md">
+<div class="flex items-start justify-between">
+<div class="space-y-space-3xs">
+<div class="flex items-center gap-space-2xs">
+<span class="font-label-data text-label-data text-on-surface-variant">ENG</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="font-label-data text-label-data text-on-surface-variant">Right Foot</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface uppercase font-bold tracking-tight group-hover:text-primary transition-colors">
+              Declan Rice
+            </h3>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Midfielder • Contract to 2028</span>
+</div>
+<div class="flex flex-col items-center bg-surface-container px-space-xs py-space-2xs rounded">
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">OVR</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">88</span>
+</div>
+</div>
+<div class="bg-surface-container p-space-xs rounded space-y-space-2xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Market Valuation</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">€100.00M</span>
+</div>
+<div class="grid grid-cols-3 gap-space-2xs pt-space-3xs font-label-data text-label-data text-on-surface-variant text-center">
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">DEF</span> 88</div>
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">PHY</span> 87</div>
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">PAS</span> 83</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-label-data text-label-data text-primary flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span> Active Squad
+          </span>
+<div class="flex gap-space-2xs">
+<button class="px-space-xs py-space-3xs bg-surface-container-high text-on-surface hover:text-secondary rounded text-label-caps font-label-caps uppercase transition-colors">Profile</button>
+<button class="px-space-xs py-space-3xs bg-surface-container-high text-on-surface hover:text-primary rounded text-label-caps font-label-caps uppercase transition-colors">Stats</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 10: Harry Kane (FW - Crimson Red Accent) -->
+<div class="group bg-surface-container-low rounded shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden relative">
+<div class="bg-error-container/80 text-on-error-container px-space-md py-space-xs flex items-center justify-between relative overflow-hidden">
+<div class="flex items-center gap-space-xs z-10">
+<span class="font-label-caps text-label-caps bg-black/40 text-error px-space-2xs py-space-3xs rounded uppercase tracking-wider">FW • ST</span>
+<span class="font-label-data text-label-data text-white/90">ENG // BAYERN MUNICH</span>
+</div>
+<span class="font-metric-mono-lg text-metric-mono-lg text-white font-extrabold z-10">#9</span>
+<span class="absolute -right-2 -bottom-4 font-headline-2xl text-[80px] font-black text-black/15 select-none pointer-events-none">09</span>
+</div>
+<div class="p-space-md flex-1 flex flex-col justify-between gap-space-md">
+<div class="flex items-start justify-between">
+<div class="space-y-space-3xs">
+<div class="flex items-center gap-space-2xs">
+<span class="font-label-data text-label-data text-on-surface-variant">ENG</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="font-label-data text-label-data text-on-surface-variant">Right Foot</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface uppercase font-bold tracking-tight group-hover:text-primary transition-colors">
+              Harry Kane
+            </h3>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Striker • European Golden Shoe</span>
+</div>
+<div class="flex flex-col items-center bg-surface-container px-space-xs py-space-2xs rounded">
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">OVR</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">90</span>
+</div>
+</div>
+<div class="bg-surface-container p-space-xs rounded space-y-space-2xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Market Valuation</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">€100.00M</span>
+</div>
+<div class="grid grid-cols-3 gap-space-2xs pt-space-3xs font-label-data text-label-data text-on-surface-variant text-center">
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">SHO</span> 93</div>
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">PAS</span> 84</div>
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">PHY</span> 83</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-label-data text-label-data text-on-surface-variant flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Top Scorer
+          </span>
+<div class="flex gap-space-2xs">
+<button class="px-space-xs py-space-3xs bg-surface-container-high text-on-surface hover:text-secondary rounded text-label-caps font-label-caps uppercase transition-colors">Profile</button>
+<button class="px-space-xs py-space-3xs bg-surface-container-high text-on-surface hover:text-primary rounded text-label-caps font-label-caps uppercase transition-colors">Stats</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 11: Julián Álvarez (FW - Crimson Red Accent) -->
+<div class="group bg-surface-container-low rounded shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden relative">
+<div class="bg-error-container/80 text-on-error-container px-space-md py-space-xs flex items-center justify-between relative overflow-hidden">
+<div class="flex items-center gap-space-xs z-10">
+<span class="font-label-caps text-label-caps bg-black/40 text-error px-space-2xs py-space-3xs rounded uppercase tracking-wider">FW • CF</span>
+<span class="font-label-data text-label-data text-white/90">ARG // ATLÉTICO MADRID</span>
+</div>
+<span class="font-metric-mono-lg text-metric-mono-lg text-white font-extrabold z-10">#9</span>
+<span class="absolute -right-2 -bottom-4 font-headline-2xl text-[80px] font-black text-black/15 select-none pointer-events-none">09</span>
+</div>
+<div class="p-space-md flex-1 flex flex-col justify-between gap-space-md">
+<div class="flex items-start justify-between">
+<div class="space-y-space-3xs">
+<div class="flex items-center gap-space-2xs">
+<span class="font-label-data text-label-data text-on-surface-variant">ARG</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="font-label-data text-label-data text-on-surface-variant">Right Foot</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface uppercase font-bold tracking-tight group-hover:text-primary transition-colors">
+              Julián Álvarez
+            </h3>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Striker • World Cup Champion</span>
+</div>
+<div class="flex flex-col items-center bg-surface-container px-space-xs py-space-2xs rounded">
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">OVR</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">87</span>
+</div>
+</div>
+<div class="bg-surface-container p-space-xs rounded space-y-space-2xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Market Valuation</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">€90.00M</span>
+</div>
+<div class="grid grid-cols-3 gap-space-2xs pt-space-3xs font-label-data text-label-data text-on-surface-variant text-center">
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">PAC</span> 87</div>
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">SHO</span> 86</div>
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">WRK</span> 94</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-label-data text-label-data text-on-surface-variant flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Active Transfer
+          </span>
+<div class="flex gap-space-2xs">
+<button class="px-space-xs py-space-3xs bg-surface-container-high text-on-surface hover:text-secondary rounded text-label-caps font-label-caps uppercase transition-colors">Profile</button>
+<button class="px-space-xs py-space-3xs bg-surface-container-high text-on-surface hover:text-primary rounded text-label-caps font-label-caps uppercase transition-colors">Stats</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 12: Théo Hernández (DF - Electric Blue Accent) -->
+<div class="group bg-surface-container-low rounded shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden relative">
+<div class="bg-secondary-container text-on-secondary-container px-space-md py-space-xs flex items-center justify-between relative overflow-hidden">
+<div class="flex items-center gap-space-xs z-10">
+<span class="font-label-caps text-label-caps bg-black/40 text-secondary px-space-2xs py-space-3xs rounded uppercase tracking-wider">DF • LB</span>
+<span class="font-label-data text-label-data text-white font-medium">FRA // AC MILAN</span>
+</div>
+<span class="font-metric-mono-lg text-metric-mono-lg text-white font-extrabold z-10">#22</span>
+<span class="absolute -right-2 -bottom-4 font-headline-2xl text-[80px] font-black text-black/15 select-none pointer-events-none">22</span>
+</div>
+<div class="p-space-md flex-1 flex flex-col justify-between gap-space-md">
+<div class="flex items-start justify-between">
+<div class="space-y-space-3xs">
+<div class="flex items-center gap-space-2xs">
+<span class="font-label-data text-label-data text-on-surface-variant">FRA</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="font-label-data text-label-data text-tertiary">Left Foot</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface uppercase font-bold tracking-tight group-hover:text-primary transition-colors">
+              Théo Hernández
+            </h3>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Fullback • Sprint 35.7 km/h</span>
+</div>
+<div class="flex flex-col items-center bg-surface-container px-space-xs py-space-2xs rounded">
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">OVR</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">87</span>
+</div>
+</div>
+<div class="bg-surface-container p-space-xs rounded space-y-space-2xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Market Valuation</span>
+<span class="font-metric-mono-md text-metric-mono-md text-secondary font-bold">€60.00M</span>
+</div>
+<div class="grid grid-cols-3 gap-space-2xs pt-space-3xs font-label-data text-label-data text-on-surface-variant text-center">
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">PAC</span> 94</div>
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">DEF</span> 80</div>
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">PHY</span> 88</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-label-data text-label-data text-secondary flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Defensive Pillar
+          </span>
+<div class="flex gap-space-2xs">
+<button class="px-space-xs py-space-3xs bg-surface-container-high text-on-surface hover:text-secondary rounded text-label-caps font-label-caps uppercase transition-colors">Profile</button>
+<button class="px-space-xs py-space-3xs bg-surface-container-high text-on-surface hover:text-primary rounded text-label-caps font-label-caps uppercase transition-colors">Stats</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 13: Rodrygo Goes (FW - Crimson Red Accent) -->
+<div class="group bg-surface-container-low rounded shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden relative">
+<div class="bg-error-container/80 text-on-error-container px-space-md py-space-xs flex items-center justify-between relative overflow-hidden">
+<div class="flex items-center gap-space-xs z-10">
+<span class="font-label-caps text-label-caps bg-black/40 text-error px-space-2xs py-space-3xs rounded uppercase tracking-wider">FW • RW/LW</span>
+<span class="font-label-data text-label-data text-white/90">BRA // REAL MADRID</span>
+</div>
+<span class="font-metric-mono-lg text-metric-mono-lg text-white font-extrabold z-10">#11</span>
+<span class="absolute -right-2 -bottom-4 font-headline-2xl text-[80px] font-black text-black/15 select-none pointer-events-none">11</span>
+</div>
+<div class="p-space-md flex-1 flex flex-col justify-between gap-space-md">
+<div class="flex items-start justify-between">
+<div class="space-y-space-3xs">
+<div class="flex items-center gap-space-2xs">
+<span class="font-label-data text-label-data text-on-surface-variant">BRA</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="font-label-data text-label-data text-on-surface-variant">Right Foot</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface uppercase font-bold tracking-tight group-hover:text-primary transition-colors">
+              Rodrygo Silva
+            </h3>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Winger • Contract to 2028</span>
+</div>
+<div class="flex flex-col items-center bg-surface-container px-space-xs py-space-2xs rounded">
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">OVR</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">87</span>
+</div>
+</div>
+<div class="bg-surface-container p-space-xs rounded space-y-space-2xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Market Valuation</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">€80.00M</span>
+</div>
+<div class="grid grid-cols-3 gap-space-2xs pt-space-3xs font-label-data text-label-data text-on-surface-variant text-center">
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">PAC</span> 89</div>
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">DRI</span> 88</div>
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">SHO</span> 82</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-label-data text-label-data text-on-surface-variant flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Active Squad
+          </span>
+<div class="flex gap-space-2xs">
+<button class="px-space-xs py-space-3xs bg-surface-container-high text-on-surface hover:text-secondary rounded text-label-caps font-label-caps uppercase transition-colors">Profile</button>
+<button class="px-space-xs py-space-3xs bg-surface-container-high text-on-surface hover:text-primary rounded text-label-caps font-label-caps uppercase transition-colors">Stats</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 14: Enzo Fernández (MF - Pitch Emerald Accent) -->
+<div class="group bg-surface-container-low rounded shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden relative">
+<div class="bg-primary-container text-on-primary-container px-space-md py-space-xs flex items-center justify-between relative overflow-hidden">
+<div class="flex items-center gap-space-xs z-10">
+<span class="font-label-caps text-label-caps bg-black/40 text-primary-fixed px-space-2xs py-space-3xs rounded uppercase tracking-wider">MF • CM</span>
+<span class="font-label-data text-label-data text-on-primary-container">ARG // CHELSEA</span>
+</div>
+<span class="font-metric-mono-lg text-metric-mono-lg text-on-primary-container font-extrabold z-10">#8</span>
+<span class="absolute -right-2 -bottom-4 font-headline-2xl text-[80px] font-black text-black/15 select-none pointer-events-none">08</span>
+</div>
+<div class="p-space-md flex-1 flex flex-col justify-between gap-space-md">
+<div class="flex items-start justify-between">
+<div class="space-y-space-3xs">
+<div class="flex items-center gap-space-2xs">
+<span class="font-label-data text-label-data text-on-surface-variant">ARG</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="font-label-data text-label-data text-on-surface-variant">Right Foot</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface uppercase font-bold tracking-tight group-hover:text-primary transition-colors">
+              Enzo Fernández
+            </h3>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Deep-Lying Midfielder • Contract to 2031</span>
+</div>
+<div class="flex flex-col items-center bg-surface-container px-space-xs py-space-2xs rounded">
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">OVR</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">84</span>
+</div>
+</div>
+<div class="bg-surface-container p-space-xs rounded space-y-space-2xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Market Valuation</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">€80.00M</span>
+</div>
+<div class="grid grid-cols-3 gap-space-2xs pt-space-3xs font-label-data text-label-data text-on-surface-variant text-center">
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">PAS</span> 87</div>
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">DRI</span> 82</div>
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">DEF</span> 79</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-label-data text-label-data text-on-surface-variant flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> World Cup Best Young Player
+          </span>
+<div class="flex gap-space-2xs">
+<button class="px-space-xs py-space-3xs bg-surface-container-high text-on-surface hover:text-secondary rounded text-label-caps font-label-caps uppercase transition-colors">Profile</button>
+<button class="px-space-xs py-space-3xs bg-surface-container-high text-on-surface hover:text-primary rounded text-label-caps font-label-caps uppercase transition-colors">Stats</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 15: Aurélien Tchouaméni (MF - Pitch Emerald Accent) -->
+<div class="group bg-surface-container-low rounded shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden relative">
+<div class="bg-primary-container text-on-primary-container px-space-md py-space-xs flex items-center justify-between relative overflow-hidden">
+<div class="flex items-center gap-space-xs z-10">
+<span class="font-label-caps text-label-caps bg-black/40 text-primary-fixed px-space-2xs py-space-3xs rounded uppercase tracking-wider">MF • CDM</span>
+<span class="font-label-data text-label-data text-on-primary-container">FRA // REAL MADRID</span>
+</div>
+<span class="font-metric-mono-lg text-metric-mono-lg text-on-primary-container font-extrabold z-10">#8</span>
+<span class="absolute -right-2 -bottom-4 font-headline-2xl text-[80px] font-black text-black/15 select-none pointer-events-none">08</span>
+</div>
+<div class="p-space-md flex-1 flex flex-col justify-between gap-space-md">
+<div class="flex items-start justify-between">
+<div class="space-y-space-3xs">
+<div class="flex items-center gap-space-2xs">
+<span class="font-label-data text-label-data text-on-surface-variant">FRA</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="font-label-data text-label-data text-on-surface-variant">Right Foot</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface uppercase font-bold tracking-tight group-hover:text-primary transition-colors">
+              Aurélien Tchouaméni
+            </h3>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Anchor • Interceptions 2.4/90</span>
+</div>
+<div class="flex flex-col items-center bg-surface-container px-space-xs py-space-2xs rounded">
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">OVR</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">86</span>
+</div>
+</div>
+<div class="bg-surface-container p-space-xs rounded space-y-space-2xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Market Valuation</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">€80.00M</span>
+</div>
+<div class="grid grid-cols-3 gap-space-2xs pt-space-3xs font-label-data text-label-data text-on-surface-variant text-center">
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">DEF</span> 86</div>
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">PHY</span> 87</div>
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">PAS</span> 81</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-label-data text-label-data text-primary flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Contract Secured
+          </span>
+<div class="flex gap-space-2xs">
+<button class="px-space-xs py-space-3xs bg-surface-container-high text-on-surface hover:text-secondary rounded text-label-caps font-label-caps uppercase transition-colors">Profile</button>
+<button class="px-space-xs py-space-3xs bg-surface-container-high text-on-surface hover:text-primary rounded text-label-caps font-label-caps uppercase transition-colors">Stats</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 16: Nicolo Barella (MF - Pitch Emerald Accent) -->
+<div class="group bg-surface-container-low rounded shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden relative">
+<div class="bg-primary-container text-on-primary-container px-space-md py-space-xs flex items-center justify-between relative overflow-hidden">
+<div class="flex items-center gap-space-xs z-10">
+<span class="font-label-caps text-label-caps bg-black/40 text-primary-fixed px-space-2xs py-space-3xs rounded uppercase tracking-wider">MF • CM</span>
+<span class="font-label-data text-label-data text-on-primary-container">ITA // INTER MILAN</span>
+</div>
+<span class="font-metric-mono-lg text-metric-mono-lg text-on-primary-container font-extrabold z-10">#18</span>
+<span class="absolute -right-2 -bottom-4 font-headline-2xl text-[80px] font-black text-black/15 select-none pointer-events-none">18</span>
+</div>
+<div class="p-space-md flex-1 flex flex-col justify-between gap-space-md">
+<div class="flex items-start justify-between">
+<div class="space-y-space-3xs">
+<div class="flex items-center gap-space-2xs">
+<span class="font-label-data text-label-data text-on-surface-variant">ITA</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="font-label-data text-label-data text-on-surface-variant">Right Foot</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface uppercase font-bold tracking-tight group-hover:text-primary transition-colors">
+              Nicolò Barella
+            </h3>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Box-to-Box • Serie A Midfielder of the Year</span>
+</div>
+<div class="flex flex-col items-center bg-surface-container px-space-xs py-space-2xs rounded">
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">OVR</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">87</span>
+</div>
+</div>
+<div class="bg-surface-container p-space-xs rounded space-y-space-2xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Market Valuation</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">€70.00M</span>
+</div>
+<div class="grid grid-cols-3 gap-space-2xs pt-space-3xs font-label-data text-label-data text-on-surface-variant text-center">
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">STA</span> 93</div>
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">DRI</span> 86</div>
+<div class="bg-surface-container-high py-space-3xs rounded"><span class="text-on-surface font-semibold">DEF</span> 81</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-label-data text-label-data text-primary flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Vice Captain
+          </span>
+<div class="flex gap-space-2xs">
+<button class="px-space-xs py-space-3xs bg-surface-container-high text-on-surface hover:text-secondary rounded text-label-caps font-label-caps uppercase transition-colors">Profile</button>
+<button class="px-space-xs py-space-3xs bg-surface-container-high text-on-surface hover:text-primary rounded text-label-caps font-label-caps uppercase transition-colors">Stats</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination & Telemetry Bottom Bar -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-space-md p-space-md bg-surface-container-low rounded shadow-sm">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-data text-label-data text-on-surface-variant">Showing</span>
+<span class="font-metric-mono-md text-metric-mono-md text-on-surface">1 - 16</span>
+<span class="font-label-data text-label-data text-on-surface-variant">of 50 Registered Athletes</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-sm py-space-xs bg-surface-container-high text-on-surface-variant hover:text-on-surface disabled:opacity-40 rounded flex items-center gap-1 font-label-caps text-label-caps uppercase" disabled="">
+<span class="material-symbols-outlined text-[16px]">chevron_left</span> Previous
+      </button>
+<div class="flex items-center gap-space-3xs">
+<button class="w-8 h-8 rounded bg-primary-container text-on-primary-container font-label-caps text-label-caps">1</button>
+<button class="w-8 h-8 rounded bg-surface-container-high text-on-surface hover:bg-surface-container-highest font-label-caps text-label-caps">2</button>
+<button class="w-8 h-8 rounded bg-surface-container-high text-on-surface hover:bg-surface-container-highest font-label-caps text-label-caps">3</button>
+<button class="w-8 h-8 rounded bg-surface-container-high text-on-surface hover:bg-surface-container-highest font-label-caps text-label-caps">4</button>
+</div>
+<button class="px-space-sm py-space-xs bg-surface-container-high text-on-surface hover:text-primary rounded flex items-center gap-1 font-label-caps text-label-caps uppercase">
+        Next <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<script>
+  // Simple client-side search simulation for the scouting registry
+  const searchInput = document.getElementById('playerSearch');
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase().trim();
+      const cards = document.querySelectorAll('.grid > .group');
+      cards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+        if (text.includes(query)) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  }
+</script></main></div></body></html>

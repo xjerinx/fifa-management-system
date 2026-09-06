@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Chivo:wght@600;700;800&amp;family=Hanken+Grotesk:wght@400;500;600&amp;family=JetBrains+Mono:wght@500;600;700&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <style>
+    @layer base {
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        overscroll-behavior: none;
+      }
+
+      main> :first-child {
+        margin-top: 0 !important;
+      }
+
+      main> :last-child {
+        margin-bottom: 0 !important;
+      }
+    }
+
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script
+    id="tailwind-config">tailwind.config = { darkMode: 'class', theme: { extend: { colors: { 'error': '#ffb4ab', 'on-tertiary-fixed-variant': '#653e00', 'surface': '#0f131c', 'on-surface': '#dfe2ee', 'inverse-surface': '#dfe2ee', 'tertiary': '#ffb95f', 'surface-variant': '#31353e', 'on-error': '#690005', 'on-secondary-container': '#00374d', 'surface-bright': '#353942', 'on-tertiary-container': '#523200', 'tertiary-fixed': '#ffddb8', 'outline': '#86948a', 'tertiary-fixed-dim': '#ffb95f', 'secondary': '#7bd0ff', 'on-tertiary': '#472a00', 'secondary-container': '#00a6e0', 'outline-variant': '#3c4a42', 'on-primary-fixed': '#002113', 'surface-container-lowest': '#0a0e16', 'error-container': '#93000a', 'on-primary-container': '#00422b', 'on-secondary': '#00354a', 'primary-fixed-dim': '#4edea3', 'secondary-fixed': '#c4e7ff', 'on-secondary-fixed': '#001e2c', 'surface-container-low': '#181c24', 'surface-container-high': '#262a33', 'on-primary': '#003824', 'on-secondary-fixed-variant': '#004c69', 'on-surface-variant': '#bbcabf', 'tertiary-container': '#e29100', 'inverse-on-surface': '#2c3039', 'surface-container-highest': '#31353e', 'surface-container': '#1c2028', 'background': '#0f131c', 'primary-fixed': '#6ffbbe', 'primary-container': '#10b981', 'on-primary-fixed-variant': '#005236', 'on-background': '#dfe2ee', 'on-tertiary-fixed': '#2a1700', 'surface-tint': '#4edea3', 'surface-dim': '#0f131c', 'inverse-primary': '#006c49', 'on-error-container': '#ffdad6', 'primary': '#4edea3', 'secondary-fixed-dim': '#7bd0ff' }, borderRadius: { 'DEFAULT': '0.125rem', 'lg': '0.25rem', 'xl': '0.5rem', 'full': '0.75rem' }, spacing: { 'margin-mobile': '1rem', 'space-3xs': '0.125rem', 'space-3xl': '4rem', 'margin-desktop': '1.5rem', 'space-2xs': '0.25rem', 'space-xs': '0.5rem', 'space-sm': '0.75rem', 'space-xl': '2rem', 'space-2xl': '3rem', 'gutter-mobile': '0.75rem', 'space-lg': '1.5rem', 'space-md': '1rem', 'gutter-desktop': '1rem' }, fontFamily: { 'label-data': ['JetBrains Mono'], 'body-lg': ['Hanken Grotesk'], 'label-caps': ['Chivo'], 'headline-xl-mobile': ['Chivo'], 'metric-mono-lg': ['JetBrains Mono'], 'headline-2xl-mobile': ['Chivo'], 'headline-lg': ['Chivo'], 'headline-2xl': ['Chivo'], 'body-md': ['Hanken Grotesk'], 'headline-xl': ['Chivo'], 'metric-mono-md': ['JetBrains Mono'], 'body-sm': ['Hanken Grotesk'], 'headline-md': ['Chivo'] }, fontSize: { 'label-data': ['11px', { lineHeight: '14px', letterSpacing: '0.02em', fontWeight: '500' }], 'body-lg': ['16px', { lineHeight: '24px', letterSpacing: '0em', fontWeight: '400' }], 'label-caps': ['11px', { lineHeight: '14px', letterSpacing: '0.08em', fontWeight: '700' }], 'headline-xl-mobile': ['26px', { lineHeight: '32px', letterSpacing: '-0.015em', fontWeight: '700' }], 'metric-mono-lg': ['28px', { lineHeight: '32px', letterSpacing: '-0.02em', fontWeight: '700' }], 'headline-2xl-mobile': ['32px', { lineHeight: '38px', letterSpacing: '-0.02em', fontWeight: '800' }], 'headline-lg': ['24px', { lineHeight: '30px', letterSpacing: '-0.02em', fontWeight: '700' }], 'headline-2xl': ['48px', { lineHeight: '52px', letterSpacing: '-0.03em', fontWeight: '800' }], 'body-md': ['14px', { lineHeight: '20px', letterSpacing: '0em', fontWeight: '400' }], 'headline-xl': ['36px', { lineHeight: '42px', letterSpacing: '-0.025em', fontWeight: '700' }], 'metric-mono-md': ['15px', { lineHeight: '20px', letterSpacing: '-0.01em', fontWeight: '600' }], 'body-sm': ['12px', { lineHeight: '18px', letterSpacing: '0.01em', fontWeight: '400' }], 'headline-md': ['18px', { lineHeight: '24px', letterSpacing: '-0.01em', fontWeight: '600' }] } } } };</script>
+</head>
+
+<body
+  class="bg-background font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container">
+  <aside
+    class="fixed left-0 top-0 h-full w-64 bg-surface-container-lowest z-50 flex flex-col justify-between py-space-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
+    <div class="flex flex-col gap-space-md">
+      <div class="px-space-md flex items-center justify-between">
+        <div class="flex items-center gap-space-xs"><img alt="FIFA Ops Crest" class="h-8 w-auto object-contain"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3F8YxVS6wkUPJmomiMS9t9i3TWnIhjgzEMMX0KW4F2kNiNWUP4CZs_xrZvzwBbfjrbNpNbohS1pFth6bOiuhxlZsqf1L526RW3AUrpMpo7LXNbtoPhXtLBJsVPU1G-aPZHn7Lx-o6-sWidzf_IXlgyVzkhdupqMKlDfkEeA4l5nXxaxZgS42X7tXB05zZ2hBEdUPVip0X8rnS05GG_xLRnrOq_NjAXKMVZMMXIjBiAHVBv89y0TtQ" />
+          <div class="flex flex-col"><span
+              class="font-headline-md text-headline-md uppercase tracking-tight text-on-surface">FIFA OPS</span><span
+              class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Operations
+              Hub</span></div>
+        </div><button aria-label="Collapse Sidebar"
+          class="p-space-2xs text-on-surface-variant hover:text-on-surface transition-colors rounded"><span
+            class="material-symbols-outlined text-[18px]">menu_open</span></button>
+      </div>
+      <div class="px-space-md">
+        <div
+          class="flex items-center justify-between bg-surface-container px-space-sm py-space-xs rounded border border-outline-variant">
+          <div class="flex items-center gap-space-2xs"><span
+              class="material-symbols-outlined text-secondary text-[16px]">event_note</span><span
+              class="font-label-caps text-label-caps text-on-surface tracking-wider">SEASON 2026/27</span></div><span
+            class="material-symbols-outlined text-on-surface-variant text-[16px]">unfold_more</span>
+        </div>
+      </div>
+      <nav class="flex-1 flex flex-col gap-space-sm px-space-xs overflow-y-auto"
+        data-active-classes="bg-primary-container text-on-primary-container font-bold rounded">
+        <div class="flex flex-col gap-space-3xs"><span
+            class="px-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Overview</span><a
+            class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded"
+            data-path="dashboard" href="#"><span class="material-symbols-outlined text-[18px]">grid_view</span><span
+              class="font-body-md text-body-md">Dashboard</span></a></div>
+        <div class="flex flex-col gap-space-3xs"><span
+            class="px-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Governance</span><a
+            aria-current="page"
+            class="flex items-center gap-space-xs px-space-xs py-space-2xs transition-colors bg-primary-container text-on-primary-container font-bold rounded"
+            data-path="associations" href="#"><span class="material-symbols-outlined text-[18px]">flag</span><span
+              class="font-body-md text-body-md">Associations</span></a><a
+            class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded"
+            data-path="teams" href="#"><span class="material-symbols-outlined text-[18px]">shield</span><span
+              class="font-body-md text-body-md">Teams</span></a><a
+            class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded"
+            data-path="players" href="#"><span class="material-symbols-outlined text-[18px]">sports_soccer</span><span
+              class="font-body-md text-body-md">Players</span></a><a
+            class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded"
+            data-path="coaches" href="#"><span class="material-symbols-outlined text-[18px]">high_res</span><span
+              class="font-body-md text-body-md">Coaches</span></a><a
+            class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded"
+            data-path="referees" href="#"><span class="material-symbols-outlined text-[18px]">sports</span><span
+              class="font-body-md text-body-md">Referees</span></a></div>
+        <div class="flex flex-col gap-space-3xs"><span
+            class="px-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Venues
+            &amp; Assets</span><a
+            class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded"
+            data-path="stadiums" href="#"><span class="material-symbols-outlined text-[18px]">stadium</span><span
+              class="font-body-md text-body-md">Stadiums</span></a></div>
+        <div class="flex flex-col gap-space-3xs"><span
+            class="px-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Competitions</span><a
+            class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded"
+            data-path="tournaments" href="#"><span
+              class="material-symbols-outlined text-[18px]">emoji_events</span><span
+              class="font-body-md text-body-md">Tournaments</span></a><a
+            class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded"
+            data-path="fixtures-matches" href="#"><span
+              class="material-symbols-outlined text-[18px]">calendar_month</span><span
+              class="font-body-md text-body-md">Fixtures &amp; Matches</span></a><a
+            class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded"
+            data-path="match-events-timeline" href="#"><span
+              class="material-symbols-outlined text-[18px]">timeline</span><span class="font-body-md text-body-md">Match
+              Events Timeline</span></a></div>
+        <div class="flex flex-col gap-space-3xs"><span
+            class="px-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Commercial</span><a
+            class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded"
+            data-path="partners-sponsors" href="#"><span
+              class="material-symbols-outlined text-[18px]">handshake</span><span
+              class="font-body-md text-body-md">Global Partners &amp; Sponsors</span></a></div>
+      </nav>
+    </div>
+    <div class="px-space-md pt-space-xs flex flex-col gap-space-xs">
+      <div class="p-space-xs bg-surface-container-low rounded flex items-center justify-between">
+        <div class="flex items-center gap-space-xs"><span
+            class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span><span
+            class="font-label-caps text-label-caps text-on-surface-variant uppercase">TMS Synced</span></div><span
+          class="font-label-data text-label-data text-primary">99.98%</span>
+      </div>
+    </div>
+  </aside>
+  <div class="pl-64">
+    <header
+      class="fixed top-0 left-64 right-0 h-16 bg-surface/80 backdrop-blur-xl z-40 flex items-center justify-between px-gutter-desktop shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
+      <div class="flex items-center gap-space-md"><img alt="FIFA Ops Crest" class="h-8 w-auto object-contain"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3F8YxVS6wkUPJmomiMS9t9i3TWnIhjgzEMMX0KW4F2kNiNWUP4CZs_xrZvzwBbfjrbNpNbohS1pFth6bOiuhxlZsqf1L526RW3AUrpMpo7LXNbtoPhXtLBJsVPU1G-aPZHn7Lx-o6-sWidzf_IXlgyVzkhdupqMKlDfkEeA4l5nXxaxZgS42X7tXB05zZ2hBEdUPVip0X8rnS05GG_xLRnrOq_NjAXKMVZMMXIjBiAHVBv89y0TtQ" />
+        <div
+          class="flex items-center gap-space-xs bg-surface-container px-space-sm py-space-2xs rounded border border-outline-variant w-80">
+          <span class="material-symbols-outlined text-on-surface-variant text-[18px]">search</span><input
+            class="bg-transparent text-on-surface placeholder:text-on-surface-variant font-body-sm text-body-sm focus:outline-none w-full"
+            placeholder="Search entities, rules, matches..." readonly="" type="text" /><kbd
+            class="font-label-data text-label-data bg-surface-container-highest text-on-surface px-space-2xs py-space-3xs rounded border border-outline-variant">Ctrl+K</kbd>
+        </div>
+      </div>
+      <div class="flex items-center gap-space-md">
+        <div
+          class="flex items-center gap-space-xs px-space-sm py-space-2xs bg-surface-container-low rounded border border-outline-variant">
+          <span class="w-2 h-2 rounded-full bg-primary animate-ping"></span><span
+            class="font-label-caps text-label-caps text-primary tracking-wider uppercase">Live Feed 2026/27
+            Active</span></div><button aria-label="Notifications"
+          class="relative p-space-2xs text-on-surface-variant hover:text-on-surface transition-colors rounded"><span
+            class="material-symbols-outlined text-[20px]">notifications</span><span
+            class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full"></span></button>
+        <div class="flex items-center gap-space-xs pl-space-xs border-l border-outline-variant">
+          <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span
+              class="material-symbols-outlined text-on-primary text-[18px]">person</span></div>
+          <div class="hidden md:flex flex-col text-left"><span
+              class="font-label-caps text-label-caps text-on-surface uppercase">C. Del Piero</span><span
+              class="font-label-data text-label-data text-on-surface-variant">Lead Commissioner</span></div>
+        </div>
+      </div>
+    </header>
+    <main class="w-full px-gutter-desktop pt-16 bg-surface min-h-screen">
+      <div class="flex flex-col w-full gap-space-lg pb-space-3xl">
+        <!-- Top Command & Action Bar -->
+        <div class="flex flex-col xl:flex-row xl:items-end justify-between gap-space-md pt-space-xs">
+          <div class="flex flex-col gap-space-2xs">
+            <div class="flex items-center gap-space-xs">
+              <span
+                class="font-label-caps text-label-caps uppercase tracking-wider text-secondary px-space-xs py-space-3xs bg-surface-container-high rounded">Governance
+                &amp; Jurisdiction Hub</span>
+              <span class="font-label-data text-label-data text-on-surface-variant flex items-center gap-space-3xs">
+                <span class="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span>
+                TMS Node V4.2 Connected
+              </span>
+            </div>
+            <h1 class="font-headline-xl text-headline-xl uppercase tracking-tight text-on-surface">Football Associations
+              &amp; Confederations</h1>
+            <p class="font-body-md text-body-md text-on-surface-variant max-w-3xl">
+              Global administrative registry tracking continental confederations and recognized member associations
+              under FIFA Statutes 2026/27.
+            </p>
+          </div>
+          <div class="flex flex-wrap items-center gap-space-xs">
+            <button
+              class="flex items-center gap-space-xs px-space-sm py-space-xs bg-surface-container hover:bg-surface-container-high text-on-surface rounded font-label-caps text-label-caps uppercase tracking-wider transition-colors shadow-sm">
+              <span class="material-symbols-outlined text-[16px] text-secondary">verified_user</span>
+              Audit Reports
+            </button>
+            <button
+              class="flex items-center gap-space-xs px-space-sm py-space-xs bg-surface-container hover:bg-surface-container-high text-on-surface rounded font-label-caps text-label-caps uppercase tracking-wider transition-colors shadow-sm">
+              <span class="material-symbols-outlined text-[16px] text-tertiary">download</span>
+              Export Registry
+            </button>
+            <button
+              class="flex items-center gap-space-xs px-space-md py-space-xs bg-primary hover:bg-primary-container text-on-primary-fixed rounded font-label-caps text-label-caps uppercase tracking-wider transition-all shadow-md">
+              <span class="material-symbols-outlined text-[18px]">add_circle</span>
+              + Register Association
+            </button>
+          </div>
+        </div>
+        <!-- Telemetry / Summary Stat Band -->
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-space-xs">
+          <div
+            class="p-space-sm bg-surface-container-lowest rounded flex flex-col justify-between relative overflow-hidden shadow-sm">
+            <div class="absolute right-0 top-0 w-16 h-16 bg-secondary/5 rounded-full blur-xl pointer-events-none"></div>
+            <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Confederations</span>
+            <div class="flex items-baseline gap-space-xs mt-space-2xs">
+              <span class="font-metric-mono-lg text-metric-mono-lg text-secondary">06</span>
+              <span class="font-label-data text-label-data text-on-surface-variant">Continental</span>
+            </div>
+            <div class="w-full bg-surface-container-high h-1 rounded-full mt-space-xs overflow-hidden">
+              <div class="bg-secondary h-full w-full"></div>
+            </div>
+          </div>
+          <div
+            class="p-space-sm bg-surface-container-lowest rounded flex flex-col justify-between relative overflow-hidden shadow-sm">
+            <div class="absolute right-0 top-0 w-16 h-16 bg-primary/5 rounded-full blur-xl pointer-events-none"></div>
+            <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Active Federations</span>
+            <div class="flex items-baseline gap-space-xs mt-space-2xs">
+              <span class="font-metric-mono-lg text-metric-mono-lg text-primary">10</span>
+              <span class="font-label-data text-label-data text-primary">+2 pending</span>
+            </div>
+            <div class="w-full bg-surface-container-high h-1 rounded-full mt-space-xs overflow-hidden">
+              <div class="bg-primary h-full w-4/5"></div>
+            </div>
+          </div>
+          <div
+            class="p-space-sm bg-surface-container-lowest rounded flex flex-col justify-between relative overflow-hidden shadow-sm">
+            <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Affiliated Teams</span>
+            <div class="flex items-baseline gap-space-xs mt-space-2xs">
+              <span class="font-metric-mono-lg text-metric-mono-lg text-on-surface">12</span>
+              <span class="font-label-data text-label-data text-on-surface-variant">Elite Tier</span>
+            </div>
+            <div class="w-full bg-surface-container-high h-1 rounded-full mt-space-xs overflow-hidden">
+              <div class="bg-secondary-container h-full w-3/4"></div>
+            </div>
+          </div>
+          <div
+            class="p-space-sm bg-surface-container-lowest rounded flex flex-col justify-between relative overflow-hidden shadow-sm">
+            <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">FIFA Compliance</span>
+            <div class="flex items-baseline gap-space-xs mt-space-2xs">
+              <span class="font-metric-mono-lg text-metric-mono-lg text-primary">100%</span>
+              <span class="font-label-data text-label-data text-primary">Certified</span>
+            </div>
+            <div class="w-full bg-surface-container-high h-1 rounded-full mt-space-xs overflow-hidden">
+              <div class="bg-primary-container h-full w-full"></div>
+            </div>
+          </div>
+          <div
+            class="p-space-sm bg-surface-container-lowest rounded flex flex-col justify-between relative overflow-hidden shadow-sm">
+            <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Sanctions &amp; Flags</span>
+            <div class="flex items-baseline gap-space-xs mt-space-2xs">
+              <span class="font-metric-mono-lg text-metric-mono-lg text-tertiary">00</span>
+              <span class="font-label-data text-label-data text-on-surface-variant">Clean Slate</span>
+            </div>
+            <div class="w-full bg-surface-container-high h-1 rounded-full mt-space-xs overflow-hidden">
+              <div class="bg-tertiary h-full w-0"></div>
+            </div>
+          </div>
+          <div
+            class="p-space-sm bg-surface-container-lowest rounded flex flex-col justify-between relative overflow-hidden shadow-sm">
+            <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Active Competitions</span>
+            <div class="flex items-baseline gap-space-xs mt-space-2xs">
+              <span class="font-metric-mono-lg text-metric-mono-lg text-secondary">08</span>
+              <span class="font-label-data text-label-data text-on-surface-variant">Live Hubs</span>
+            </div>
+            <div class="w-full bg-surface-container-high h-1 rounded-full mt-space-xs overflow-hidden">
+              <div class="bg-secondary h-full w-5/6"></div>
+            </div>
+          </div>
+        </div>
+        <!-- Operational Filter & Utility Toolbar -->
+        <div
+          class="p-space-sm bg-surface-container-lowest rounded flex flex-col lg:flex-row lg:items-center justify-between gap-space-sm shadow-sm">
+          <div class="flex flex-1 items-center gap-space-sm flex-wrap">
+            <div class="relative flex-1 min-w-[240px] max-w-md">
+              <span
+                class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[18px] text-on-surface-variant">search</span>
+              <input
+                class="w-full pl-9 pr-space-md py-space-2xs bg-surface-container text-on-surface placeholder:text-on-surface-variant text-body-sm font-body-sm rounded focus:outline-none focus:ring-1 focus:ring-secondary transition-all"
+                id="associationSearch" placeholder="Search by association name, code, continent, city..." type="text" />
+            </div>
+            <!-- Segmented Confederation Pill Filter -->
+            <div class="flex items-center gap-space-3xs overflow-x-auto p-space-3xs bg-surface-container rounded"
+              id="confedFilters">
+              <button
+                class="filter-btn px-space-xs py-space-3xs rounded font-label-caps text-label-caps uppercase text-on-surface bg-surface-container-highest"
+                data-filter="all">All (10)</button>
+              <button
+                class="filter-btn px-space-xs py-space-3xs rounded font-label-caps text-label-caps uppercase text-on-surface-variant hover:text-on-surface"
+                data-filter="uefa">UEFA</button>
+              <button
+                class="filter-btn px-space-xs py-space-3xs rounded font-label-caps text-label-caps uppercase text-on-surface-variant hover:text-on-surface"
+                data-filter="conmebol">CONMEBOL</button>
+              <button
+                class="filter-btn px-space-xs py-space-3xs rounded font-label-caps text-label-caps uppercase text-on-surface-variant hover:text-on-surface"
+                data-filter="caf">CAF</button>
+              <button
+                class="filter-btn px-space-xs py-space-3xs rounded font-label-caps text-label-caps uppercase text-on-surface-variant hover:text-on-surface"
+                data-filter="afc">AFC</button>
+              <button
+                class="filter-btn px-space-xs py-space-3xs rounded font-label-caps text-label-caps uppercase text-on-surface-variant hover:text-on-surface"
+                data-filter="concacaf">CONCACAF</button>
+              <button
+                class="filter-btn px-space-xs py-space-3xs rounded font-label-caps text-label-caps uppercase text-on-surface-variant hover:text-on-surface"
+                data-filter="ofc">OFC</button>
+            </div>
+          </div>
+          <!-- Right Controls: Sort & View Toggle -->
+          <div class="flex items-center gap-space-sm self-end lg:self-auto">
+            <div class="flex items-center gap-space-2xs">
+              <span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Sort:</span>
+              <select
+                class="bg-surface-container text-on-surface text-body-sm font-body-sm px-space-xs py-space-3xs rounded focus:outline-none focus:ring-1 focus:ring-secondary cursor-pointer"
+                id="sortSelect">
+                <option value="name">Name (A-Z)</option>
+                <option value="est">Established Date</option>
+                <option value="teams">Team Count (High to Low)</option>
+                <option value="tier">Continental First</option>
+              </select>
+            </div>
+            <div class="flex items-center bg-surface-container rounded p-space-3xs">
+              <button class="p-space-3xs rounded bg-surface-container-highest text-primary" id="viewGridBtn"
+                title="Grid View">
+                <span class="material-symbols-outlined text-[18px]">grid_view</span>
+              </button>
+              <button class="p-space-3xs rounded text-on-surface-variant hover:text-on-surface" id="viewTableBtn"
+                title="Table View">
+                <span class="material-symbols-outlined text-[18px]">table_rows</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Cards View Container (3-Column Bento/Grid Layout) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-md" id="gridWrapper">
+          <!-- Card 1: UEFA -->
+          <div
+            class="assoc-card flex flex-col bg-surface-container-lowest rounded relative overflow-hidden shadow-md group hover:bg-surface-container-low transition-all"
+            data-confed="uefa" data-est="1954" data-name="UEFA Union of European Football Associations" data-teams="7">
+            <div class="h-1.5 w-full bg-secondary"></div>
+            <div class="p-space-md flex flex-col justify-between flex-1 gap-space-md">
+              <div class="flex items-start justify-between gap-space-sm">
+                <div class="flex items-center gap-space-sm">
+                  <div
+                    class="w-12 h-12 rounded bg-secondary/15 flex items-center justify-center font-metric-mono-md text-metric-mono-md text-secondary font-bold">
+                    UEFA
+                  </div>
+                  <div class="flex flex-col">
+                    <div class="flex items-center gap-space-2xs">
+                      <span class="font-label-caps text-label-caps uppercase text-secondary">Continental
+                        Confederation</span>
+                      <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                    </div>
+                    <h2 class="font-headline-md text-headline-md text-on-surface tracking-tight">Union of European
+                      Football Associations</h2>
+                    <span
+                      class="font-label-data text-label-data text-on-surface-variant flex items-center gap-space-3xs">
+                      <span class="material-symbols-outlined text-[12px]">location_on</span> Nyon, Switzerland • Est.
+                      1954
+                    </span>
+                  </div>
+                </div>
+                <span
+                  class="px-space-xs py-space-3xs rounded bg-surface-container-high font-label-data text-label-data text-primary font-bold">
+                  TIER 1
+                </span>
+              </div>
+              <div class="grid grid-cols-3 gap-space-2xs bg-surface-container p-space-xs rounded">
+                <div class="flex flex-col">
+                  <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Teams</span>
+                  <span class="font-metric-mono-md text-metric-mono-md text-on-surface">7 Elite</span>
+                </div>
+                <div class="flex flex-col">
+                  <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Competitions</span>
+                  <span class="font-metric-mono-md text-metric-mono-md text-secondary">3 Active</span>
+                </div>
+                <div class="flex flex-col text-right">
+                  <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Status</span>
+                  <span class="font-label-data text-label-data text-primary font-bold">Certified</span>
+                </div>
+              </div>
+              <div class="flex items-center justify-between pt-space-xs border-t border-surface-container-high">
+                <div class="flex items-center gap-space-2xs">
+                  <span class="font-label-data text-label-data text-on-surface-variant">Jurisdiction: 55 Nations</span>
+                </div>
+                <div class="flex items-center gap-space-xs">
+                  <button
+                    class="px-space-xs py-space-3xs rounded font-label-caps text-label-caps uppercase text-secondary hover:bg-surface-container transition-colors">View
+                    Squads</button>
+                  <button
+                    class="px-space-xs py-space-3xs rounded font-label-caps text-label-caps uppercase bg-secondary/10 hover:bg-secondary/20 text-secondary transition-colors">Manage</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Card 2: CBF (Brazil) -->
+          <div
+            class="assoc-card flex flex-col bg-surface-container-lowest rounded relative overflow-hidden shadow-md group hover:bg-surface-container-low transition-all"
+            data-confed="conmebol" data-est="1914" data-name="CBF Confederação Brasileira de Futebol" data-teams="8">
+            <div class="h-1.5 w-full bg-primary-container"></div>
+            <div class="p-space-md flex flex-col justify-between flex-1 gap-space-md">
+              <div class="flex items-start justify-between gap-space-sm">
+                <div class="flex items-center gap-space-sm">
+                  <div
+                    class="w-12 h-12 rounded bg-primary-container/20 flex items-center justify-center font-metric-mono-md text-metric-mono-md text-primary font-bold">
+                    CBF
+                  </div>
+                  <div class="flex flex-col">
+                    <div class="flex items-center gap-space-2xs">
+                      <span class="font-label-caps text-label-caps uppercase text-primary">Member Federation</span>
+                      <span
+                        class="px-space-2xs py-space-3xs bg-tertiary-container/30 text-tertiary font-label-data text-label-data rounded">FIFA
+                        #1</span>
+                    </div>
+                    <h2 class="font-headline-md text-headline-md text-on-surface tracking-tight">Confederação Brasileira
+                      de Futebol</h2>
+                    <span
+                      class="font-label-data text-label-data text-on-surface-variant flex items-center gap-space-3xs">
+                      <span class="material-symbols-outlined text-[12px]">location_on</span> Rio de Janeiro, Brazil •
+                      Est. 1914
+                    </span>
+                  </div>
+                </div>
+                <span
+                  class="px-space-xs py-space-3xs rounded bg-surface-container-high font-label-data text-label-data text-on-surface-variant">
+                  CONMEBOL
+                </span>
+              </div>
+              <div class="grid grid-cols-3 gap-space-2xs bg-surface-container p-space-xs rounded">
+                <div class="flex flex-col">
+                  <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Squad</span>
+                  <span class="font-metric-mono-md text-metric-mono-md text-primary">8 Members</span>
+                </div>
+                <div class="flex flex-col">
+                  <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Discipline</span>
+                  <span class="font-metric-mono-md text-metric-mono-md text-on-surface">0 Flags</span>
+                </div>
+                <div class="flex flex-col text-right">
+                  <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Status</span>
+                  <span class="font-label-data text-label-data text-primary font-bold">Active Valid</span>
+                </div>
+              </div>
+              <div class="flex items-center justify-between pt-space-xs border-t border-surface-container-high">
+                <span class="font-label-data text-label-data text-on-surface-variant">Pres: E. Rodrigues</span>
+                <div class="flex items-center gap-space-xs">
+                  <button
+                    class="px-space-xs py-space-3xs rounded font-label-caps text-label-caps uppercase text-primary hover:bg-surface-container transition-colors">View
+                    Squads</button>
+                  <button
+                    class="px-space-xs py-space-3xs rounded font-label-caps text-label-caps uppercase bg-primary-container/20 hover:bg-primary-container/30 text-primary transition-colors">Manage</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Card 3: CONMEBOL -->
+          <div
+            class="assoc-card flex flex-col bg-surface-container-lowest rounded relative overflow-hidden shadow-md group hover:bg-surface-container-low transition-all"
+            data-confed="conmebol" data-est="1916" data-name="CONMEBOL Confederación Sudamericana de Fútbol"
+            data-teams="3">
+            <div class="h-1.5 w-full bg-primary"></div>
+            <div class="p-space-md flex flex-col justify-between flex-1 gap-space-md">
+              <div class="flex items-start justify-between gap-space-sm">
+                <div class="flex items-center gap-space-sm">
+                  <div
+                    class="w-12 h-12 rounded bg-primary/15 flex items-center justify-center font-metric-mono-md text-metric-mono-md text-primary font-bold">
+                    CSM
+                  </div>
+                  <div class="flex flex-col">
+                    <div class="flex items-center gap-space-2xs">
+                      <span class="font-label-caps text-label-caps uppercase text-primary">Continental
+                        Confederation</span>
+                      <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                    </div>
+                    <h2 class="font-headline-md text-headline-md text-on-surface tracking-tight">Confederación
+                      Sudamericana de Fútbol</h2>
+                    <span
+                      class="font-label-data text-label-data text-on-surface-variant flex items-center gap-space-3xs">
+                      <span class="material-symbols-outlined text-[12px]">location_on</span> Luque, Paraguay • Est. 1916
+                    </span>
+                  </div>
+                </div>
+                <span
+                  class="px-space-xs py-space-3xs rounded bg-surface-container-high font-label-data text-label-data text-primary font-bold">
+                  TIER 1
+                </span>
+              </div>
+              <div class="grid grid-cols-3 gap-space-2xs bg-surface-container p-space-xs rounded">
+                <div class="flex flex-col">
+                  <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Active Teams</span>
+                  <span class="font-metric-mono-md text-metric-mono-md text-on-surface">3 Nations</span>
+                </div>
+                <div class="flex flex-col">
+                  <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Roster Pool</span>
+                  <span class="font-metric-mono-md text-metric-mono-md text-secondary">BRA, ARG, URU</span>
+                </div>
+                <div class="flex flex-col text-right">
+                  <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Status</span>
+                  <span class="font-label-data text-label-data text-primary font-bold">Certified</span>
+                </div>
+              </div>
+              <div class="flex items-center justify-between pt-space-xs border-t border-surface-container-high">
+                <span class="font-label-data text-label-data text-on-surface-variant">HQ: CONMEBOL Complex</span>
+                <div class="flex items-center gap-space-xs">
+                  <button
+                    class="px-space-xs py-space-3xs rounded font-label-caps text-label-caps uppercase text-primary hover:bg-surface-container transition-colors">View
+                    Squads</button>
+                  <button
+                    class="px-space-xs py-space-3xs rounded font-label-caps text-label-caps uppercase bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors">Manage</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Card 4: AFC (Asian Football Confederation) -->
+          <div
+            class="assoc-card flex flex-col bg-surface-container-lowest rounded relative overflow-hidden shadow-md group hover:bg-surface-container-low transition-all"
+            data-confed="afc" data-est="1954" data-name="AFC Asian Football Confederation" data-teams="1">
+            <div class="h-1.5 w-full bg-error"></div>
+            <div class="p-space-md flex flex-col justify-between flex-1 gap-space-md">
+              <div class="flex items-start justify-between gap-space-sm">
+                <div class="flex items-center gap-space-sm">
+                  <div
+                    class="w-12 h-12 rounded bg-error/15 flex items-center justify-center font-metric-mono-md text-metric-mono-md text-error font-bold">
+                    AFC
+                  </div>
+                  <div class="flex flex-col">
+                    <div class="flex items-center gap-space-2xs">
+                      <span class="font-label-caps text-label-caps uppercase text-error">Continental
+                        Confederation</span>
+                    </div>
+                    <h2 class="font-headline-md text-headline-md text-on-surface tracking-tight">Asian Football
+                      Confederation</h2>
+                    <span
+                      class="font-label-data text-label-data text-on-surface-variant flex items-center gap-space-3xs">
+                      <span class="material-symbols-outlined text-[12px]">location_on</span> Kuala Lumpur, Malaysia •
+                      Est. 1954
+                    </span>
+                  </div>
+                </div>
+                <span
+                  class="px-space-xs py-space-3xs rounded bg-surface-container-high font-label-data text-label-data text-primary font-bold">
+                  TIER 1
+                </span>
+              </div>
+              <div class="grid grid-cols-3 gap-space-2xs bg-surface-container p-space-xs rounded">
+                <div class="flex flex-col">
+                  <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Active Members</span>
+                  <span class="font-metric-mono-md text-metric-mono-md text-on-surface">1 Japan</span>
+                </div>
+                <div class="flex flex-col">
+                  <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Affiliates</span>
+                  <span class="font-metric-mono-md text-metric-mono-md text-secondary">47 FAs</span>
+                </div>
+                <div class="flex flex-col text-right">
+                  <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Status</span>
+                  <span class="font-label-data text-label-data text-primary font-bold">Certified</span>
+                </div>
+              </div>
+              <div class="flex items-center justify-between pt-space-xs border-t border-surface-container-high">
+                <span class="font-label-data text-label-data text-on-surface-variant">Pres: Salman Al Khalifa</span>
+                <div class="flex items-center gap-space-xs">
+                  <button
+                    class="px-space-xs py-space-3xs rounded font-label-caps text-label-caps uppercase text-error hover:bg-surface-container transition-colors">View
+                    Squads</button>
+                  <button
+                    class="px-space-xs py-space-3xs rounded font-label-caps text-label-caps uppercase bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors">Manage</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Card 5: CAF -->
+          <div
+            class="assoc-card flex flex-col bg-surface-container-lowest rounded relative overflow-hidden shadow-md group hover:bg-surface-container-low transition-all"
+            data-confed="caf" data-est="1957" data-name="CAF Confederation of African Football" data-teams="1">
+            <div class="h-1.5 w-full bg-tertiary"></div>
+            <div class="p-space-md flex flex-col justify-between flex-1 gap-space-md">
+              <div class="flex items-start justify-between gap-space-sm">
+                <div class="flex items-center gap-space-sm">
+                  <div
+                    class="w-12 h-12 rounded bg-tertiary/15 flex items-center justify-center font-metric-mono-md text-metric-mono-md text-tertiary font-bold">
+                    CAF
+                  </div>
+                  <div class="flex flex-col">
+                    <div class="flex items-center gap-space-2xs">
+                      <span class="font-label-caps text-label-caps uppercase text-tertiary">Continental
+                        Confederation</span>
+                    </div>
+                    <h2 class="font-headline-md text-headline-md text-on-surface tracking-tight">Confederation of
+                      African Football</h2>
+                    <span
+                      class="font-label-data text-label-data text-on-surface-variant flex items-center gap-space-3xs">
+                      <span class="material-symbols-outlined text-[12px]">location_on</span> Cairo, Egypt • Est. 1957
+                    </span>
+                  </div>
+                </div>
+                <span
+                  class="px-space-xs py-space-3xs rounded bg-surface-container-high font-label-data text-label-data text-primary font-bold">
+                  TIER 1
+                </span>
+              </div>
+              <div class="grid grid-cols-3 gap-space-2xs bg-surface-container p-space-xs rounded">
+                <div class="flex flex-col">
+                  <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Active Members</span>
+                  <span class="font-metric-mono-md text-metric-mono-md text-on-surface">1 Senegal</span>
+                </div>
+                <div class="flex flex-col">
+                  <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Regions</span>
+                  <span class="font-metric-mono-md text-metric-mono-md text-secondary">6 Zones</span>
+                </div>
+                <div class="flex flex-col text-right">
+                  <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Status</span>
+                  <span class="font-label-data text-label-data text-primary font-bold">Certified</span>
+                </div>
+              </div>
+              <div class="flex items-center justify-between pt-space-xs border-t border-surface-container-high">
+                <span class="font-label-data text-label-data text-on-surface-variant">Pres: P. Motsepe</span>
+                <div class="flex items-center gap-space-xs">
+                  <button
+                    class="px-space-xs py-space-3xs rounded font-label-caps text-label-caps uppercase text-tertiary hover:bg-surface-container transition-colors">View
+                    Squads</button>
+                  <button
+                    class="px-space-xs py-space-3xs rounded font-label-caps text-label-caps uppercase bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors">Manage</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Card 6: CONCACAF -->
+          <div
+            class="assoc-card flex flex-col bg-surface-container-lowest rounded relative overflow-hidden shadow-md group hover:bg-surface-container-low transition-all"
+            data-confed="concacaf" data-est="1961"
+            data-name="CONCACAF Confederation of North, Central America and Caribbean Association Football"
+            data-teams="0">
+            <div class="h-1.5 w-full bg-secondary-container"></div>
+            <div class="p-space-md flex flex-col justify-between flex-1 gap-space-md">
+              <div class="flex items-start justify-between gap-space-sm">
+                <div class="flex items-center gap-space-sm">
+                  <div
+                    class="w-12 h-12 rounded bg-secondary-container/20 flex items-center justify-center font-metric-mono-md text-metric-mono-md text-secondary font-bold">
+                    CCC
+                  </div>
+                  <div class="flex flex-col">
+                    <div class="flex items-center gap-space-2xs">
+                      <span class="font-label-caps text-label-caps uppercase text-secondary">Continental
+                        Confederation</span>
+                    </div>
+                    <h2 class="font-headline-md text-headline-md text-on-surface tracking-tight">Confed. of North,
+                      Central America &amp; Caribbean</h2>
+                    <span
+                      class="font-label-data text-label-data text-on-surface-variant flex items-center gap-space-3xs">
+                      <span class="material-symbols-outlined text-[12px]">location_on</span> Miami, USA • Est. 1961
+                    </span>
+                  </div>
+                </div>
+                <span
+                  class="px-space-xs py-space-3xs rounded bg-surface-container-high font-label-data text-label-data text-primary font-bold">
+                  TIER 1
+                </span>
+              </div>
+              <div class="grid grid-cols-3 gap-space-2xs bg-surface-container p-space-xs rounded">
+                <div class="flex flex-col">
+                  <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Active Teams</span>
+                  <span class="font-metric-mono-md text-metric-mono-md text-on-surface">0 Rosters</span>
+                </div>
+                <div class="flex flex-col">
+                  <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Host Status</span>
+                  <span class="font-metric-mono-md text-metric-mono-md text-primary">2026 Host</span>
+                </div>
+                <div class="flex flex-col text-right">
+                  <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Status</span>
+                  <span class="font-label-data text-label-data text-primary font-bold">Compliant</span>
+                </div>
+              </div>
+              <div class="flex items-center justify-between pt-space-xs border-t border-surface-container-high">
+                <span class="font-label-data text-label-data text-on-surface-variant">Pres: V. Montagliani</span>
+                <div class="flex items-center gap-space-xs">
+                  <button
+                    class="px-space-xs py-space-3xs rounded font-label-caps text-label-caps uppercase text-secondary hover:bg-surface-container transition-colors">View
+                    Squads</button>
+                  <button
+                    class="px-space-xs py-space-3xs rounded font-label-caps text-label-caps uppercase bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors">Manage</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Card 7: DFB (Germany) -->
+          <div
+            class="assoc-card flex flex-col bg-surface-container-lowest rounded relative overflow-hidden shadow-md group hover:bg-surface-container-low transition-all"
+            data-confed="uefa" data-est="1900" data-name="DFB Deutscher Fußball-Bund Germany" data-teams="7">
+            <div class="h-1.5 w-full bg-on-surface"></div>
+            <div class="p-space-md flex flex-col justify-between flex-1 gap-space-md">
+              <div class="flex items-start justify-between gap-space-sm">
+                <div class="flex items-center gap-space-sm">
+                  <div
+                    class="w-12 h-12 rounded bg-surface-container-highest flex items-center justify-center font-metric-mono-md text-metric-mono-md text-on-surface font-bold">
+                    DFB
+                  </div>
+                  <div class="flex flex-col">
+                    <div class="flex items-center gap-space-2xs">
+                      <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Member
+                        Federation</span>
+                      <span
+                        class="px-space-2xs py-space-3xs bg-surface-container-high text-on-surface font-label-data text-label-data rounded">FIFA
+                        #6</span>
+                    </div>
+                    <h2 class="font-headline-md text-headline-md text-on-surface tracking-tight">Deutscher Fußball-Bund
+                    </h2>
+                    <span
+                      class="font-label-data text-label-data text-on-surface-variant flex items-center gap-space-3xs">
+                      <span class="material-symbols-outlined text-[12px]">location_on</span> Frankfurt, Germany • Est.
+                      1900
+                    </span>
+                  </div>
+                </div>
+                <span
+                  class="px-space-xs py-space-3xs rounded bg-surface-container-high font-label-data text-label-data text-on-surface-variant">
+                  UEFA
+                </span>
+              </div>
+              <div class="grid grid-cols-3 gap-space-2xs bg-surface-container p-space-xs rounded">
+                <div class="flex flex-col">
+                  <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Squad</span>
+                  <span class="font-metric-mono-md text-metric-mono-md text-on-surface">7 Members</span>
+                </div>
+                <div class="flex flex-col">
+                  <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Audit Score</span>
+                  <span class="font-metric-mono-md text-metric-mono-md text-primary">99.4%</span>
+                </div>
+                <div class="flex flex-col text-right">
+                  <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Status</span>
+                  <span class="font-label-data text-label-data text-primary font-bold">Active Valid</span>
+                </div>
+              </div>
+              <div class="flex items-center justify-between pt-space-xs border-t border-surface-container-high">
+                <span class="font-label-data text-label-data text-on-surface-variant">Pres: B. Neuendorf</span>
+                <div class="flex items-center gap-space-xs">
+                  <button
+                    class="px-space-xs py-space-3xs rounded font-label-caps text-label-caps uppercase text-on-surface hover:bg-surface-container transition-colors">View
+                    Squads</button>
+                  <button
+                    class="px-space-xs py-space-3xs rounded font-label-caps text-label-caps uppercase bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors">Manage</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Card 8: FIGC (Italy) -->
+          <div
+            class="assoc-card flex flex-col bg-surface-container-lowest rounded relative overflow-hidden shadow-md group hover:bg-surface-container-low transition-all"
+            data-confed="uefa" data-est="1898" data-name="FIGC Federazione Italiana Giuoco Calcio Italy" data-teams="0">
+            <div class="h-1.5 w-full bg-secondary"></div>
+            <div class="p-space-md flex flex-col justify-between flex-1 gap-space-md">
+              <div class="flex items-start justify-between gap-space-sm">
+                <div class="flex items-center gap-space-sm">
+                  <div
+                    class="w-12 h-12 rounded bg-secondary/15 flex items-center justify-center font-metric-mono-md text-metric-mono-md text-secondary font-bold">
+                    FIGC
+                  </div>
+                  <div class="flex flex-col">
+                    <div class="flex items-center gap-space-2xs">
+                      <span class="font-label-caps text-label-caps uppercase text-secondary">Member Federation</span>
+                      <span
+                        class="px-space-2xs py-space-3xs bg-surface-container-high text-on-surface font-label-data text-label-data rounded">FIFA
+                        #7</span>
+                    </div>
+                    <h2 class="font-headline-md text-headline-md text-on-surface tracking-tight">Federazione Italiana
+                      Giuoco Calcio</h2>
+                    <span
+                      class="font-label-data text-label-data text-on-surface-variant flex items-center gap-space-3xs">
+                      <span class="material-symbols-outlined text-[12px]">location_on</span> Rome, Italy • Est. 1898
+                    </span>
+                  </div>
+                </div>
+                <span
+                  class="px-space-xs py-space-3xs rounded bg-surface-container-high font-label-data text-label-data text-on-surface-variant">
+                  UEFA
+                </span>
+              </div>
+              <div class="grid grid-cols-3 gap-space-2xs bg-surface-container p-space-xs rounded">
+                <div class="flex flex-col">
+                  <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Squad</span>
+                  <span class="font-metric-mono-md text-metric-mono-md text-on-surface">0 Rosters</span>
+                </div>
+                <div class="flex flex-col">
+                  <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Legacy</span>
+                  <span class="font-metric-mono-md text-metric-mono-md text-secondary">4 Titles</span>
+                </div>
+                <div class="flex flex-col text-right">
+                  <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Status</span>
+                  <span class="font-label-data text-label-data text-primary font-bold">Active Valid</span>
+                </div>
+              </div>
+              <div class="flex items-center justify-between pt-space-xs border-t border-surface-container-high">
+                <span class="font-label-data text-label-data text-on-surface-variant">Pres: G. Gravina</span>
+                <div class="flex items-center gap-space-xs">
+                  <button
+                    class="px-space-xs py-space-3xs rounded font-label-caps text-label-caps uppercase text-secondary hover:bg-surface-container transition-colors">View
+                    Squads</button>
+                  <button
+                    class="px-space-xs py-space-3xs rounded font-label-caps text-label-caps uppercase bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors">Manage</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Card 9: OFC (Oceania) -->
+          <div
+            class="assoc-card flex flex-col bg-surface-container-lowest rounded relative overflow-hidden shadow-md group hover:bg-surface-container-low transition-all"
+            data-confed="ofc" data-est="1966" data-name="OFC Oceania Football Confederation" data-teams="0">
+            <div class="h-1.5 w-full bg-secondary-fixed"></div>
+            <div class="p-space-md flex flex-col justify-between flex-1 gap-space-md">
+              <div class="flex items-start justify-between gap-space-sm">
+                <div class="flex items-center gap-space-sm">
+                  <div
+                    class="w-12 h-12 rounded bg-secondary-fixed/15 flex items-center justify-center font-metric-mono-md text-metric-mono-md text-secondary-fixed font-bold">
+                    OFC
+                  </div>
+                  <div class="flex flex-col">
+                    <div class="flex items-center gap-space-2xs">
+                      <span class="font-label-caps text-label-caps uppercase text-secondary-fixed">Continental
+                        Confederation</span>
+                    </div>
+                    <h2 class="font-headline-md text-headline-md text-on-surface tracking-tight">Oceania Football
+                      Confederation</h2>
+                    <span
+                      class="font-label-data text-label-data text-on-surface-variant flex items-center gap-space-3xs">
+                      <span class="material-symbols-outlined text-[12px]">location_on</span> Auckland, New Zealand •
+                      Est. 1966
+                    </span>
+                  </div>
+                </div>
+                <span
+                  class="px-space-xs py-space-3xs rounded bg-surface-container-high font-label-data text-label-data text-primary font-bold">
+                  TIER 1
+                </span>
+              </div>
+              <div class="grid grid-cols-3 gap-space-2xs bg-surface-container p-space-xs rounded">
+                <div class="flex flex-col">
+                  <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Active Teams</span>
+                  <span class="font-metric-mono-md text-metric-mono-md text-on-surface">0 Rosters</span>
+                </div>
+                <div class="flex flex-col">
+                  <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Member FAs</span>
+                  <span class="font-metric-mono-md text-metric-mono-md text-secondary">13 FAs</span>
+                </div>
+                <div class="flex flex-col text-right">
+                  <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Status</span>
+                  <span class="font-label-data text-label-data text-primary font-bold">Certified</span>
+                </div>
+              </div>
+              <div class="flex items-center justify-between pt-space-xs border-t border-surface-container-high">
+                <span class="font-label-data text-label-data text-on-surface-variant">Pres: L. Chung</span>
+                <div class="flex items-center gap-space-xs">
+                  <button
+                    class="px-space-xs py-space-3xs rounded font-label-caps text-label-caps uppercase text-secondary hover:bg-surface-container transition-colors">View
+                    Squads</button>
+                  <button
+                    class="px-space-xs py-space-3xs rounded font-label-caps text-label-caps uppercase bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors">Manage</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Card 10: RFEF (Spain) -->
+          <div
+            class="assoc-card flex flex-col bg-surface-container-lowest rounded relative overflow-hidden shadow-md group hover:bg-surface-container-low transition-all"
+            data-confed="uefa" data-est="1909" data-name="RFEF Real Federación Española de Fútbol Spain" data-teams="7">
+            <div class="h-1.5 w-full bg-tertiary"></div>
+            <div class="p-space-md flex flex-col justify-between flex-1 gap-space-md">
+              <div class="flex items-start justify-between gap-space-sm">
+                <div class="flex items-center gap-space-sm">
+                  <div
+                    class="w-12 h-12 rounded bg-tertiary/20 flex items-center justify-center font-metric-mono-md text-metric-mono-md text-tertiary font-bold">
+                    RFEF
+                  </div>
+                  <div class="flex flex-col">
+                    <div class="flex items-center gap-space-2xs">
+                      <span class="font-label-caps text-label-caps uppercase text-tertiary">Member Federation</span>
+                      <span
+                        class="px-space-2xs py-space-3xs bg-primary-container/20 text-primary font-label-data text-label-data rounded">UEFA
+                        Reigning</span>
+                    </div>
+                    <h2 class="font-headline-md text-headline-md text-on-surface tracking-tight">Real Federación
+                      Española de Fútbol</h2>
+                    <span
+                      class="font-label-data text-label-data text-on-surface-variant flex items-center gap-space-3xs">
+                      <span class="material-symbols-outlined text-[12px]">location_on</span> Las Rozas, Madrid, Spain •
+                      Est. 1909
+                    </span>
+                  </div>
+                </div>
+                <span
+                  class="px-space-xs py-space-3xs rounded bg-surface-container-high font-label-data text-label-data text-on-surface-variant">
+                  UEFA
+                </span>
+              </div>
+              <div class="grid grid-cols-3 gap-space-2xs bg-surface-container p-space-xs rounded">
+                <div class="flex flex-col">
+                  <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Squad</span>
+                  <span class="font-metric-mono-md text-metric-mono-md text-tertiary">7 Players</span>
+                </div>
+                <div class="flex flex-col">
+                  <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Audit Rating</span>
+                  <span class="font-metric-mono-md text-metric-mono-md text-primary">Class A</span>
+                </div>
+                <div class="flex flex-col text-right">
+                  <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Status</span>
+                  <span class="font-label-data text-label-data text-primary font-bold">Active Valid</span>
+                </div>
+              </div>
+              <div class="flex items-center justify-between pt-space-xs border-t border-surface-container-high">
+                <span class="font-label-data text-label-data text-on-surface-variant">Pres: P. Rocha</span>
+                <div class="flex items-center gap-space-xs">
+                  <button
+                    class="px-space-xs py-space-3xs rounded font-label-caps text-label-caps uppercase text-tertiary hover:bg-surface-container transition-colors">View
+                    Squads</button>
+                  <button
+                    class="px-space-xs py-space-3xs rounded font-label-caps text-label-caps uppercase bg-tertiary/20 hover:bg-tertiary/30 text-tertiary transition-colors">Manage</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Operational Data Table View (Hidden by default, switched via JS) -->
+        <div class="hidden flex-col bg-surface-container-lowest rounded overflow-hidden shadow-md" id="tableWrapper">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr
+                  class="bg-surface-container-low text-on-surface-variant font-label-caps text-label-caps uppercase tracking-wider">
+                  <th class="px-space-md py-space-sm">Code / Entity</th>
+                  <th class="px-space-md py-space-sm">Governance Tier</th>
+                  <th class="px-space-md py-space-sm">Confederation</th>
+                  <th class="px-space-md py-space-sm">HQ Jurisdiction</th>
+                  <th class="px-space-md py-space-sm text-right">Founded</th>
+                  <th class="px-space-md py-space-sm text-right">Affiliated Teams</th>
+                  <th class="px-space-md py-space-sm">Compliance</th>
+                  <th class="px-space-md py-space-sm text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-surface-container-high font-body-sm text-body-sm">
+                <tr class="hover:bg-surface-container transition-colors">
+                  <td class="px-space-md py-space-xs">
+                    <div class="flex items-center gap-space-xs">
+                      <span class="font-metric-mono-md text-metric-mono-md text-secondary font-bold">UEFA</span>
+                      <span class="font-body-md text-body-md text-on-surface font-semibold">Union of European Football
+                        Associations</span>
+                    </div>
+                  </td>
+                  <td class="px-space-md py-space-xs"><span
+                      class="px-space-xs py-space-3xs bg-secondary/15 text-secondary font-label-caps text-label-caps rounded uppercase">Continental</span>
+                  </td>
+                  <td class="px-space-md py-space-xs font-label-data text-label-data text-on-surface">UEFA</td>
+                  <td class="px-space-md py-space-xs text-on-surface-variant">Nyon, Switzerland</td>
+                  <td
+                    class="px-space-md py-space-xs text-right font-metric-mono-md text-metric-mono-md text-on-surface">
+                    1954</td>
+                  <td class="px-space-md py-space-xs text-right font-metric-mono-md text-metric-mono-md text-primary">7
+                  </td>
+                  <td class="px-space-md py-space-xs"><span
+                      class="text-primary font-label-data text-label-data font-bold uppercase">Certified</span></td>
+                  <td class="px-space-md py-space-xs text-right">
+                    <button
+                      class="px-space-xs py-space-3xs bg-surface-container text-on-surface rounded font-label-caps text-label-caps uppercase hover:bg-surface-container-highest">Manage</button>
+                  </td>
+                </tr>
+                <tr class="hover:bg-surface-container transition-colors">
+                  <td class="px-space-md py-space-xs">
+                    <div class="flex items-center gap-space-xs">
+                      <span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">CBF</span>
+                      <span class="font-body-md text-body-md text-on-surface font-semibold">Confederação Brasileira de
+                        Futebol</span>
+                    </div>
+                  </td>
+                  <td class="px-space-md py-space-xs"><span
+                      class="px-space-xs py-space-3xs bg-primary-container/20 text-primary font-label-caps text-label-caps rounded uppercase">National
+                      Member</span></td>
+                  <td class="px-space-md py-space-xs font-label-data text-label-data text-on-surface">CONMEBOL</td>
+                  <td class="px-space-md py-space-xs text-on-surface-variant">Rio de Janeiro, Brazil</td>
+                  <td
+                    class="px-space-md py-space-xs text-right font-metric-mono-md text-metric-mono-md text-on-surface">
+                    1914</td>
+                  <td class="px-space-md py-space-xs text-right font-metric-mono-md text-metric-mono-md text-primary">8
+                  </td>
+                  <td class="px-space-md py-space-xs"><span
+                      class="text-primary font-label-data text-label-data font-bold uppercase">Certified</span></td>
+                  <td class="px-space-md py-space-xs text-right">
+                    <button
+                      class="px-space-xs py-space-3xs bg-surface-container text-on-surface rounded font-label-caps text-label-caps uppercase hover:bg-surface-container-highest">Manage</button>
+                  </td>
+                </tr>
+                <tr class="hover:bg-surface-container transition-colors">
+                  <td class="px-space-md py-space-xs">
+                    <div class="flex items-center gap-space-xs">
+                      <span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">CONMEBOL</span>
+                      <span class="font-body-md text-body-md text-on-surface font-semibold">Confederación Sudamericana
+                        de Fútbol</span>
+                    </div>
+                  </td>
+                  <td class="px-space-md py-space-xs"><span
+                      class="px-space-xs py-space-3xs bg-primary/15 text-primary font-label-caps text-label-caps rounded uppercase">Continental</span>
+                  </td>
+                  <td class="px-space-md py-space-xs font-label-data text-label-data text-on-surface">CONMEBOL</td>
+                  <td class="px-space-md py-space-xs text-on-surface-variant">Luque, Paraguay</td>
+                  <td
+                    class="px-space-md py-space-xs text-right font-metric-mono-md text-metric-mono-md text-on-surface">
+                    1916</td>
+                  <td class="px-space-md py-space-xs text-right font-metric-mono-md text-metric-mono-md text-primary">3
+                  </td>
+                  <td class="px-space-md py-space-xs"><span
+                      class="text-primary font-label-data text-label-data font-bold uppercase">Certified</span></td>
+                  <td class="px-space-md py-space-xs text-right">
+                    <button
+                      class="px-space-xs py-space-3xs bg-surface-container text-on-surface rounded font-label-caps text-label-caps uppercase hover:bg-surface-container-highest">Manage</button>
+                  </td>
+                </tr>
+                <tr class="hover:bg-surface-container transition-colors">
+                  <td class="px-space-md py-space-xs">
+                    <div class="flex items-center gap-space-xs">
+                      <span class="font-metric-mono-md text-metric-mono-md text-error font-bold">AFC</span>
+                      <span class="font-body-md text-body-md text-on-surface font-semibold">Asian Football
+                        Confederation</span>
+                    </div>
+                  </td>
+                  <td class="px-space-md py-space-xs"><span
+                      class="px-space-xs py-space-3xs bg-error/15 text-error font-label-caps text-label-caps rounded uppercase">Continental</span>
+                  </td>
+                  <td class="px-space-md py-space-xs font-label-data text-label-data text-on-surface">AFC</td>
+                  <td class="px-space-md py-space-xs text-on-surface-variant">Kuala Lumpur, Malaysia</td>
+                  <td
+                    class="px-space-md py-space-xs text-right font-metric-mono-md text-metric-mono-md text-on-surface">
+                    1954</td>
+                  <td class="px-space-md py-space-xs text-right font-metric-mono-md text-metric-mono-md text-primary">1
+                  </td>
+                  <td class="px-space-md py-space-xs"><span
+                      class="text-primary font-label-data text-label-data font-bold uppercase">Certified</span></td>
+                  <td class="px-space-md py-space-xs text-right">
+                    <button
+                      class="px-space-xs py-space-3xs bg-surface-container text-on-surface rounded font-label-caps text-label-caps uppercase hover:bg-surface-container-highest">Manage</button>
+                  </td>
+                </tr>
+                <tr class="hover:bg-surface-container transition-colors">
+                  <td class="px-space-md py-space-xs">
+                    <div class="flex items-center gap-space-xs">
+                      <span class="font-metric-mono-md text-metric-mono-md text-tertiary font-bold">CAF</span>
+                      <span class="font-body-md text-body-md text-on-surface font-semibold">Confederation of African
+                        Football</span>
+                    </div>
+                  </td>
+                  <td class="px-space-md py-space-xs"><span
+                      class="px-space-xs py-space-3xs bg-tertiary/15 text-tertiary font-label-caps text-label-caps rounded uppercase">Continental</span>
+                  </td>
+                  <td class="px-space-md py-space-xs font-label-data text-label-data text-on-surface">CAF</td>
+                  <td class="px-space-md py-space-xs text-on-surface-variant">Cairo, Egypt</td>
+                  <td
+                    class="px-space-md py-space-xs text-right font-metric-mono-md text-metric-mono-md text-on-surface">
+                    1957</td>
+                  <td class="px-space-md py-space-xs text-right font-metric-mono-md text-metric-mono-md text-primary">1
+                  </td>
+                  <td class="px-space-md py-space-xs"><span
+                      class="text-primary font-label-data text-label-data font-bold uppercase">Certified</span></td>
+                  <td class="px-space-md py-space-xs text-right">
+                    <button
+                      class="px-space-xs py-space-3xs bg-surface-container text-on-surface rounded font-label-caps text-label-caps uppercase hover:bg-surface-container-highest">Manage</button>
+                  </td>
+                </tr>
+                <tr class="hover:bg-surface-container transition-colors">
+                  <td class="px-space-md py-space-xs">
+                    <div class="flex items-center gap-space-xs">
+                      <span class="font-metric-mono-md text-metric-mono-md text-secondary font-bold">CONCACAF</span>
+                      <span class="font-body-md text-body-md text-on-surface font-semibold">Confederation of North,
+                        Central America &amp; Caribbean</span>
+                    </div>
+                  </td>
+                  <td class="px-space-md py-space-xs"><span
+                      class="px-space-xs py-space-3xs bg-secondary-container/20 text-secondary font-label-caps text-label-caps rounded uppercase">Continental</span>
+                  </td>
+                  <td class="px-space-md py-space-xs font-label-data text-label-data text-on-surface">CONCACAF</td>
+                  <td class="px-space-md py-space-xs text-on-surface-variant">Miami, USA</td>
+                  <td
+                    class="px-space-md py-space-xs text-right font-metric-mono-md text-metric-mono-md text-on-surface">
+                    1961</td>
+                  <td
+                    class="px-space-md py-space-xs text-right font-metric-mono-md text-metric-mono-md text-on-surface-variant">
+                    0</td>
+                  <td class="px-space-md py-space-xs"><span
+                      class="text-primary font-label-data text-label-data font-bold uppercase">Certified</span></td>
+                  <td class="px-space-md py-space-xs text-right">
+                    <button
+                      class="px-space-xs py-space-3xs bg-surface-container text-on-surface rounded font-label-caps text-label-caps uppercase hover:bg-surface-container-highest">Manage</button>
+                  </td>
+                </tr>
+                <tr class="hover:bg-surface-container transition-colors">
+                  <td class="px-space-md py-space-xs">
+                    <div class="flex items-center gap-space-xs">
+                      <span class="font-metric-mono-md text-metric-mono-md text-on-surface font-bold">DFB</span>
+                      <span class="font-body-md text-body-md text-on-surface font-semibold">Deutscher
+                        Fußball-Bund</span>
+                    </div>
+                  </td>
+                  <td class="px-space-md py-space-xs"><span
+                      class="px-space-xs py-space-3xs bg-surface-container-high text-on-surface font-label-caps text-label-caps rounded uppercase">National
+                      Member</span></td>
+                  <td class="px-space-md py-space-xs font-label-data text-label-data text-on-surface">UEFA</td>
+                  <td class="px-space-md py-space-xs text-on-surface-variant">Frankfurt, Germany</td>
+                  <td
+                    class="px-space-md py-space-xs text-right font-metric-mono-md text-metric-mono-md text-on-surface">
+                    1900</td>
+                  <td class="px-space-md py-space-xs text-right font-metric-mono-md text-metric-mono-md text-primary">7
+                  </td>
+                  <td class="px-space-md py-space-xs"><span
+                      class="text-primary font-label-data text-label-data font-bold uppercase">Certified</span></td>
+                  <td class="px-space-md py-space-xs text-right">
+                    <button
+                      class="px-space-xs py-space-3xs bg-surface-container text-on-surface rounded font-label-caps text-label-caps uppercase hover:bg-surface-container-highest">Manage</button>
+                  </td>
+                </tr>
+                <tr class="hover:bg-surface-container transition-colors">
+                  <td class="px-space-md py-space-xs">
+                    <div class="flex items-center gap-space-xs">
+                      <span class="font-metric-mono-md text-metric-mono-md text-secondary font-bold">FIGC</span>
+                      <span class="font-body-md text-body-md text-on-surface font-semibold">Federazione Italiana Giuoco
+                        Calcio</span>
+                    </div>
+                  </td>
+                  <td class="px-space-md py-space-xs"><span
+                      class="px-space-xs py-space-3xs bg-secondary/15 text-secondary font-label-caps text-label-caps rounded uppercase">National
+                      Member</span></td>
+                  <td class="px-space-md py-space-xs font-label-data text-label-data text-on-surface">UEFA</td>
+                  <td class="px-space-md py-space-xs text-on-surface-variant">Rome, Italy</td>
+                  <td
+                    class="px-space-md py-space-xs text-right font-metric-mono-md text-metric-mono-md text-on-surface">
+                    1898</td>
+                  <td
+                    class="px-space-md py-space-xs text-right font-metric-mono-md text-metric-mono-md text-on-surface-variant">
+                    0</td>
+                  <td class="px-space-md py-space-xs"><span
+                      class="text-primary font-label-data text-label-data font-bold uppercase">Certified</span></td>
+                  <td class="px-space-md py-space-xs text-right">
+                    <button
+                      class="px-space-xs py-space-3xs bg-surface-container text-on-surface rounded font-label-caps text-label-caps uppercase hover:bg-surface-container-highest">Manage</button>
+                  </td>
+                </tr>
+                <tr class="hover:bg-surface-container transition-colors">
+                  <td class="px-space-md py-space-xs">
+                    <div class="flex items-center gap-space-xs">
+                      <span class="font-metric-mono-md text-metric-mono-md text-secondary font-bold">OFC</span>
+                      <span class="font-body-md text-body-md text-on-surface font-semibold">Oceania Football
+                        Confederation</span>
+                    </div>
+                  </td>
+                  <td class="px-space-md py-space-xs"><span
+                      class="px-space-xs py-space-3xs bg-secondary-fixed/15 text-secondary font-label-caps text-label-caps rounded uppercase">Continental</span>
+                  </td>
+                  <td class="px-space-md py-space-xs font-label-data text-label-data text-on-surface">OFC</td>
+                  <td class="px-space-md py-space-xs text-on-surface-variant">Auckland, New Zealand</td>
+                  <td
+                    class="px-space-md py-space-xs text-right font-metric-mono-md text-metric-mono-md text-on-surface">
+                    1966</td>
+                  <td
+                    class="px-space-md py-space-xs text-right font-metric-mono-md text-metric-mono-md text-on-surface-variant">
+                    0</td>
+                  <td class="px-space-md py-space-xs"><span
+                      class="text-primary font-label-data text-label-data font-bold uppercase">Certified</span></td>
+                  <td class="px-space-md py-space-xs text-right">
+                    <button
+                      class="px-space-xs py-space-3xs bg-surface-container text-on-surface rounded font-label-caps text-label-caps uppercase hover:bg-surface-container-highest">Manage</button>
+                  </td>
+                </tr>
+                <tr class="hover:bg-surface-container transition-colors">
+                  <td class="px-space-md py-space-xs">
+                    <div class="flex items-center gap-space-xs">
+                      <span class="font-metric-mono-md text-metric-mono-md text-tertiary font-bold">RFEF</span>
+                      <span class="font-body-md text-body-md text-on-surface font-semibold">Real Federación Española de
+                        Fútbol</span>
+                    </div>
+                  </td>
+                  <td class="px-space-md py-space-xs"><span
+                      class="px-space-xs py-space-3xs bg-tertiary/20 text-tertiary font-label-caps text-label-caps rounded uppercase">National
+                      Member</span></td>
+                  <td class="px-space-md py-space-xs font-label-data text-label-data text-on-surface">UEFA</td>
+                  <td class="px-space-md py-space-xs text-on-surface-variant">Madrid, Spain</td>
+                  <td
+                    class="px-space-md py-space-xs text-right font-metric-mono-md text-metric-mono-md text-on-surface">
+                    1909</td>
+                  <td class="px-space-md py-space-xs text-right font-metric-mono-md text-metric-mono-md text-tertiary">7
+                  </td>
+                  <td class="px-space-md py-space-xs"><span
+                      class="text-primary font-label-data text-label-data font-bold uppercase">Certified</span></td>
+                  <td class="px-space-md py-space-xs text-right">
+                    <button
+                      class="px-space-xs py-space-3xs bg-surface-container text-on-surface rounded font-label-caps text-label-caps uppercase hover:bg-surface-container-highest">Manage</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- Operational Footer Governance Notice -->
+        <div
+          class="p-space-md bg-surface-container-low rounded flex flex-col md:flex-row items-center justify-between gap-space-sm">
+          <div class="flex items-center gap-space-sm">
+            <span class="material-symbols-outlined text-primary text-[24px]">gavel</span>
+            <div class="flex flex-col">
+              <span class="font-headline-md text-headline-md text-on-surface">Statutory Compliance Status</span>
+              <span class="font-body-sm text-body-sm text-on-surface-variant">All 10 governing entities hold active
+                voting status for the 77th FIFA Congress. Zero statutory suspensions logged.</span>
+            </div>
+          </div>
+          <button
+            class="px-space-sm py-space-xs bg-surface-container-highest hover:bg-surface-bright text-on-surface font-label-caps text-label-caps uppercase tracking-wider rounded transition-colors whitespace-nowrap">
+            View Integrity Registry
+          </button>
+        </div>
+      </div>
+      <script>
+        (function () {
+          const searchInput = document.getElementById('associationSearch');
+          const filterButtons = document.querySelectorAll('#confedFilters .filter-btn');
+          const sortSelect = document.getElementById('sortSelect');
+          const cards = Array.from(document.querySelectorAll('.assoc-card'));
+          const gridWrapper = document.getElementById('gridWrapper');
+          const tableWrapper = document.getElementById('tableWrapper');
+          const viewGridBtn = document.getElementById('viewGridBtn');
+          const viewTableBtn = document.getElementById('viewTableBtn');
+
+          let currentConfed = 'all';
+          let searchQuery = '';
+
+          function applyFilters() {
+            cards.forEach(card => {
+              const confed = card.getAttribute('data-confed');
+              const name = card.getAttribute('data-name').toLowerCase();
+              const matchesConfed = (currentConfed === 'all' || confed === currentConfed);
+              const matchesSearch = (!searchQuery || name.includes(searchQuery));
+
+              if (matchesConfed && matchesSearch) {
+                card.classList.remove('hidden');
+                card.classList.add('flex');
+              } else {
+                card.classList.add('hidden');
+                card.classList.remove('flex');
+              }
+            });
+          }
+
+          if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+              searchQuery = e.target.value.toLowerCase().trim();
+              applyFilters();
+            });
+          }
+
+          filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+              filterButtons.forEach(b => {
+                b.classList.remove('bg-surface-container-highest', 'text-on-surface');
+                b.classList.add('text-on-surface-variant');
+              });
+              btn.classList.add('bg-surface-container-highest', 'text-on-surface');
+              btn.classList.remove('text-on-surface-variant');
+
+              currentConfed = btn.getAttribute('data-filter');
+              applyFilters();
+            });
+          });
+
+          if (sortSelect) {
+            sortSelect.addEventListener('change', (e) => {
+              const val = e.target.value;
+              const sorted = [...cards].sort((a, b) => {
+                if (val === 'name') {
+                  return a.getAttribute('data-name').localeCompare(b.getAttribute('data-name'));
+                } else if (val === 'est') {
+                  return parseInt(a.getAttribute('data-est')) - parseInt(b.getAttribute('data-est'));
+                } else if (val === 'teams') {
+                  return parseInt(b.getAttribute('data-teams')) - parseInt(a.getAttribute('data-teams'));
+                }
+                return 0;
+              });
+
+              sorted.forEach(card => gridWrapper.appendChild(card));
+            });
+          }
+
+          if (viewGridBtn && viewTableBtn) {
+            viewGridBtn.addEventListener('click', () => {
+              gridWrapper.classList.remove('hidden');
+              tableWrapper.classList.add('hidden');
+              viewGridBtn.classList.add('bg-surface-container-highest', 'text-primary');
+              viewGridBtn.classList.remove('text-on-surface-variant');
+              viewTableBtn.classList.remove('bg-surface-container-highest', 'text-primary');
+              viewTableBtn.classList.add('text-on-surface-variant');
+            });
+
+            viewTableBtn.addEventListener('click', () => {
+              gridWrapper.classList.add('hidden');
+              tableWrapper.classList.remove('hidden');
+              tableWrapper.classList.add('flex');
+              viewTableBtn.classList.add('bg-surface-container-highest', 'text-primary');
+              viewTableBtn.classList.remove('text-on-surface-variant');
+              viewGridBtn.classList.remove('bg-surface-container-highest', 'text-primary');
+              viewGridBtn.classList.add('text-on-surface-variant');
+            });
+          }
+        })();
+      </script>
+    </main>
+  </div>
+</body>
+
+</html>

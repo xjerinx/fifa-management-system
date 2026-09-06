@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Chivo:wght@600;700;800&amp;family=Hanken+Grotesk:wght@400;500;600&amp;family=JetBrains+Mono:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: 'class', theme: { extend: { colors: { 'error': '#ffb4ab', 'on-tertiary-fixed-variant': '#653e00', 'surface': '#0f131c', 'on-surface': '#dfe2ee', 'inverse-surface': '#dfe2ee', 'tertiary': '#ffb95f', 'surface-variant': '#31353e', 'on-error': '#690005', 'on-secondary-container': '#00374d', 'surface-bright': '#353942', 'on-tertiary-container': '#523200', 'tertiary-fixed': '#ffddb8', 'outline': '#86948a', 'tertiary-fixed-dim': '#ffb95f', 'secondary': '#7bd0ff', 'on-tertiary': '#472a00', 'secondary-container': '#00a6e0', 'outline-variant': '#3c4a42', 'on-primary-fixed': '#002113', 'surface-container-lowest': '#0a0e16', 'error-container': '#93000a', 'on-primary-container': '#00422b', 'on-secondary': '#00354a', 'primary-fixed-dim': '#4edea3', 'secondary-fixed': '#c4e7ff', 'on-secondary-fixed': '#001e2c', 'surface-container-low': '#181c24', 'surface-container-high': '#262a33', 'on-primary': '#003824', 'on-secondary-fixed-variant': '#004c69', 'on-surface-variant': '#bbcabf', 'tertiary-container': '#e29100', 'inverse-on-surface': '#2c3039', 'surface-container-highest': '#31353e', 'surface-container': '#1c2028', 'background': '#0f131c', 'primary-fixed': '#6ffbbe', 'primary-container': '#10b981', 'on-primary-fixed-variant': '#005236', 'on-background': '#dfe2ee', 'on-tertiary-fixed': '#2a1700', 'surface-tint': '#4edea3', 'surface-dim': '#0f131c', 'inverse-primary': '#006c49', 'on-error-container': '#ffdad6', 'primary': '#4edea3', 'secondary-fixed-dim': '#7bd0ff' }, borderRadius: { 'DEFAULT': '0.125rem', 'lg': '0.25rem', 'xl': '0.5rem', 'full': '0.75rem' }, spacing: { 'margin-mobile': '1rem', 'space-3xs': '0.125rem', 'space-3xl': '4rem', 'margin-desktop': '1.5rem', 'space-2xs': '0.25rem', 'space-xs': '0.5rem', 'space-sm': '0.75rem', 'space-xl': '2rem', 'space-2xl': '3rem', 'gutter-mobile': '0.75rem', 'space-lg': '1.5rem', 'space-md': '1rem', 'gutter-desktop': '1rem' }, fontFamily: { 'label-data': ['JetBrains Mono'], 'body-lg': ['Hanken Grotesk'], 'label-caps': ['Chivo'], 'headline-xl-mobile': ['Chivo'], 'metric-mono-lg': ['JetBrains Mono'], 'headline-2xl-mobile': ['Chivo'], 'headline-lg': ['Chivo'], 'headline-2xl': ['Chivo'], 'body-md': ['Hanken Grotesk'], 'headline-xl': ['Chivo'], 'metric-mono-md': ['JetBrains Mono'], 'body-sm': ['Hanken Grotesk'], 'headline-md': ['Chivo'] }, fontSize: { 'label-data': ['11px', { lineHeight: '14px', letterSpacing: '0.02em', fontWeight: '500' }], 'body-lg': ['16px', { lineHeight: '24px', letterSpacing: '0em', fontWeight: '400' }], 'label-caps': ['11px', { lineHeight: '14px', letterSpacing: '0.08em', fontWeight: '700' }], 'headline-xl-mobile': ['26px', { lineHeight: '32px', letterSpacing: '-0.015em', fontWeight: '700' }], 'metric-mono-lg': ['28px', { lineHeight: '32px', letterSpacing: '-0.02em', fontWeight: '700' }], 'headline-2xl-mobile': ['32px', { lineHeight: '38px', letterSpacing: '-0.02em', fontWeight: '800' }], 'headline-lg': ['24px', { lineHeight: '30px', letterSpacing: '-0.02em', fontWeight: '700' }], 'headline-2xl': ['48px', { lineHeight: '52px', letterSpacing: '-0.03em', fontWeight: '800' }], 'body-md': ['14px', { lineHeight: '20px', letterSpacing: '0em', fontWeight: '400' }], 'headline-xl': ['36px', { lineHeight: '42px', letterSpacing: '-0.025em', fontWeight: '700' }], 'metric-mono-md': ['15px', { lineHeight: '20px', letterSpacing: '-0.01em', fontWeight: '600' }], 'body-sm': ['12px', { lineHeight: '18px', letterSpacing: '0.01em', fontWeight: '400' }], 'headline-md': ['18px', { lineHeight: '24px', letterSpacing: '-0.01em', fontWeight: '600' }] } } } };</script></head><body class="bg-background font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-lowest z-50 flex flex-col justify-between py-space-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col gap-space-md"><div class="px-space-md flex items-center justify-between"><div class="flex items-center gap-space-xs"><img alt="FIFA Ops Crest" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3F8YxVS6wkUPJmomiMS9t9i3TWnIhjgzEMMX0KW4F2kNiNWUP4CZs_xrZvzwBbfjrbNpNbohS1pFth6bOiuhxlZsqf1L526RW3AUrpMpo7LXNbtoPhXtLBJsVPU1G-aPZHn7Lx-o6-sWidzf_IXlgyVzkhdupqMKlDfkEeA4l5nXxaxZgS42X7tXB05zZ2hBEdUPVip0X8rnS05GG_xLRnrOq_NjAXKMVZMMXIjBiAHVBv89y0TtQ"/><div class="flex flex-col"><span class="font-headline-md text-headline-md uppercase tracking-tight text-on-surface">FIFA OPS</span><span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Operations Hub</span></div></div><button aria-label="Collapse Sidebar" class="p-space-2xs text-on-surface-variant hover:text-on-surface transition-colors rounded"><span class="material-symbols-outlined text-[18px]">menu_open</span></button></div><div class="px-space-md"><div class="flex items-center justify-between bg-surface-container px-space-sm py-space-xs rounded border border-outline-variant"><div class="flex items-center gap-space-2xs"><span class="material-symbols-outlined text-secondary text-[16px]">event_note</span><span class="font-label-caps text-label-caps text-on-surface tracking-wider">SEASON 2026/27</span></div><span class="material-symbols-outlined text-on-surface-variant text-[16px]">unfold_more</span></div></div><nav class="flex-1 flex flex-col gap-space-sm px-space-xs overflow-y-auto" data-active-classes="bg-primary-container text-on-primary-container font-bold rounded"><div class="flex flex-col gap-space-3xs"><span class="px-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Overview</span><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[18px]">grid_view</span><span class="font-body-md text-body-md">Dashboard</span></a></div><div class="flex flex-col gap-space-3xs"><span class="px-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Governance</span><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="associations" href="#"><span class="material-symbols-outlined text-[18px]">flag</span><span class="font-body-md text-body-md">Associations</span></a><a aria-current="page" class="flex items-center gap-space-xs px-space-xs py-space-2xs transition-colors bg-primary-container text-on-primary-container font-bold rounded" data-path="teams" href="#"><span class="material-symbols-outlined text-[18px]">shield</span><span class="font-body-md text-body-md">Teams</span></a><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="players" href="#"><span class="material-symbols-outlined text-[18px]">sports_soccer</span><span class="font-body-md text-body-md">Players</span></a><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="coaches" href="#"><span class="material-symbols-outlined text-[18px]">high_res</span><span class="font-body-md text-body-md">Coaches</span></a><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="referees" href="#"><span class="material-symbols-outlined text-[18px]">sports</span><span class="font-body-md text-body-md">Referees</span></a></div><div class="flex flex-col gap-space-3xs"><span class="px-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Venues &amp; Assets</span><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="stadiums" href="#"><span class="material-symbols-outlined text-[18px]">stadium</span><span class="font-body-md text-body-md">Stadiums</span></a></div><div class="flex flex-col gap-space-3xs"><span class="px-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Competitions</span><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="tournaments" href="#"><span class="material-symbols-outlined text-[18px]">emoji_events</span><span class="font-body-md text-body-md">Tournaments</span></a><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="fixtures-matches" href="#"><span class="material-symbols-outlined text-[18px]">calendar_month</span><span class="font-body-md text-body-md">Fixtures &amp; Matches</span></a><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="match-events-timeline" href="#"><span class="material-symbols-outlined text-[18px]">timeline</span><span class="font-body-md text-body-md">Match Events Timeline</span></a></div><div class="flex flex-col gap-space-3xs"><span class="px-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Commercial</span><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="partners-sponsors" href="#"><span class="material-symbols-outlined text-[18px]">handshake</span><span class="font-body-md text-body-md">Global Partners &amp; Sponsors</span></a></div></nav></div><div class="px-space-md pt-space-xs flex flex-col gap-space-xs"><div class="p-space-xs bg-surface-container-low rounded flex items-center justify-between"><div class="flex items-center gap-space-xs"><span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span><span class="font-label-caps text-label-caps text-on-surface-variant uppercase">TMS Synced</span></div><span class="font-label-data text-label-data text-primary">99.98%</span></div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/80 backdrop-blur-xl z-40 flex items-center justify-between px-gutter-desktop shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center gap-space-md"><img alt="FIFA Ops Crest" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3F8YxVS6wkUPJmomiMS9t9i3TWnIhjgzEMMX0KW4F2kNiNWUP4CZs_xrZvzwBbfjrbNpNbohS1pFth6bOiuhxlZsqf1L526RW3AUrpMpo7LXNbtoPhXtLBJsVPU1G-aPZHn7Lx-o6-sWidzf_IXlgyVzkhdupqMKlDfkEeA4l5nXxaxZgS42X7tXB05zZ2hBEdUPVip0X8rnS05GG_xLRnrOq_NjAXKMVZMMXIjBiAHVBv89y0TtQ"/><div class="flex items-center gap-space-xs bg-surface-container px-space-sm py-space-2xs rounded border border-outline-variant w-80"><span class="material-symbols-outlined text-on-surface-variant text-[18px]">search</span><input class="bg-transparent text-on-surface placeholder:text-on-surface-variant font-body-sm text-body-sm focus:outline-none w-full" placeholder="Search entities, rules, matches..." readonly="" type="text"/><kbd class="font-label-data text-label-data bg-surface-container-highest text-on-surface px-space-2xs py-space-3xs rounded border border-outline-variant">Ctrl+K</kbd></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs px-space-sm py-space-2xs bg-surface-container-low rounded border border-outline-variant"><span class="w-2 h-2 rounded-full bg-primary animate-ping"></span><span class="font-label-caps text-label-caps text-primary tracking-wider uppercase">Live Feed 2026/27 Active</span></div><button aria-label="Notifications" class="relative p-space-2xs text-on-surface-variant hover:text-on-surface transition-colors rounded"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full"></span></button><div class="flex items-center gap-space-xs pl-space-xs border-l border-outline-variant"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="hidden md:flex flex-col text-left"><span class="font-label-caps text-label-caps text-on-surface uppercase">C. Del Piero</span><span class="font-label-data text-label-data text-on-surface-variant">Lead Commissioner</span></div></div></div></header><main class="w-full px-gutter-desktop pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full pb-space-2xl gap-space-lg text-on-surface">
+<!-- Breadcrumb & Top Context Strip -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-xs pt-space-xs">
+<div class="flex items-center gap-space-xs font-label-caps text-label-caps text-on-surface-variant tracking-wider uppercase">
+<span class="text-primary font-bold">TOURNAMENTS &amp; COMPETITIONS REGISTRY</span>
+<span class="text-outline-variant">//</span>
+<span>GLOBAL CALENDAR</span>
+<span class="inline-block w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="text-secondary">FIFA STATUTES 2026/27</span>
+</div>
+<div class="flex items-center gap-space-sm font-label-data text-label-data text-on-surface-variant">
+<span class="flex items-center gap-space-3xs text-primary">
+<span class="inline-block w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>
+        TMS ENGINE v9.8.2 ACTIVE
+      </span>
+<span>•</span>
+<span>SYS UTC: 2026-06-08 09:14:22</span>
+</div>
+</div>
+<!-- Header Block & Actions -->
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-space-md">
+<div class="flex flex-col gap-space-2xs max-w-3xl">
+<div class="flex items-center gap-space-sm flex-wrap">
+<h1 class="font-headline-xl text-headline-xl tracking-tight text-on-surface uppercase">
+          INTERNATIONAL TOURNAMENTS &amp; CUPS
+        </h1>
+<span class="px-space-xs py-space-3xs rounded bg-primary-container/20 text-primary font-label-caps text-label-caps uppercase tracking-wider">
+          5 ACTIVE EDITIONS
+        </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+        Governing continental and global football competitions, tournament formats, host nation assignments, prize pools, and qualification standings.
+      </p>
+</div>
+<!-- Quick Actions Group -->
+<div class="flex items-center gap-space-xs flex-wrap self-start lg:self-auto">
+<button class="flex items-center gap-space-xs px-space-md py-space-xs bg-primary text-on-primary font-label-caps text-label-caps uppercase tracking-wider rounded font-bold hover:bg-primary-fixed-dim transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[16px]">add_circle</span>
+        REGISTER TOURNAMENT
+      </button>
+<button class="flex items-center gap-space-xs px-space-md py-space-xs bg-surface-container hover:bg-surface-container-high text-on-surface font-label-caps text-label-caps uppercase tracking-wider rounded transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-secondary">table_chart</span>
+        STANDINGS MATRIX
+      </button>
+<button class="flex items-center gap-space-xs px-space-md py-space-xs bg-surface-container hover:bg-surface-container-high text-on-surface font-label-caps text-label-caps uppercase tracking-wider rounded transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">download</span>
+        EXPORT CALENDAR
+      </button>
+</div>
+</div>
+<!-- Top KPI Strip (5 Modules) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-space-sm">
+<!-- KPI 1 -->
+<div class="flex flex-col justify-between p-space-md bg-surface-container-low rounded shadow-sm relative overflow-hidden">
+<div class="flex items-start justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Total Tournaments</span>
+<div class="p-space-2xs rounded bg-surface-container text-tertiary">
+<span class="material-symbols-outlined text-[18px]">emoji_events</span>
+</div>
+</div>
+<div class="mt-space-sm">
+<div class="font-metric-mono-lg text-metric-mono-lg text-on-surface">5</div>
+<div class="font-label-data text-label-data text-on-surface-variant mt-space-3xs">3 Global · 2 Continental</div>
+</div>
+<div class="w-full h-0.5 bg-surface-container-highest mt-space-sm overflow-hidden rounded">
+<div class="bg-tertiary h-full w-full"></div>
+</div>
+</div>
+<!-- KPI 2 -->
+<div class="flex flex-col justify-between p-space-md bg-surface-container-low rounded shadow-sm relative overflow-hidden">
+<div class="flex items-start justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Participating Nations</span>
+<div class="p-space-2xs rounded bg-surface-container text-secondary">
+<span class="material-symbols-outlined text-[18px]">flag</span>
+</div>
+</div>
+<div class="mt-space-sm">
+<div class="font-metric-mono-lg text-metric-mono-lg text-secondary">48</div>
+<div class="font-label-data text-label-data text-on-surface-variant mt-space-3xs">Active tournament slots</div>
+</div>
+<div class="w-full h-0.5 bg-surface-container-highest mt-space-sm overflow-hidden rounded">
+<div class="bg-secondary h-full w-[85%]"></div>
+</div>
+</div>
+<!-- KPI 3 -->
+<div class="flex flex-col justify-between p-space-md bg-surface-container-low rounded shadow-sm relative overflow-hidden">
+<div class="flex items-start justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Scheduled Matches</span>
+<div class="p-space-2xs rounded bg-surface-container text-primary">
+<span class="material-symbols-outlined text-[18px]">calendar_month</span>
+</div>
+</div>
+<div class="mt-space-sm">
+<div class="font-metric-mono-lg text-metric-mono-lg text-primary">104</div>
+<div class="font-label-data text-label-data text-on-surface-variant mt-space-3xs">64 Completed · 40 Pending</div>
+</div>
+<div class="w-full h-0.5 bg-surface-container-highest mt-space-sm overflow-hidden rounded">
+<div class="bg-primary h-full w-[61%]"></div>
+</div>
+</div>
+<!-- KPI 4 -->
+<div class="flex flex-col justify-between p-space-md bg-surface-container-low rounded shadow-sm relative overflow-hidden">
+<div class="flex items-start justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Total Prize Pool</span>
+<div class="p-space-2xs rounded bg-surface-container text-primary-fixed">
+<span class="material-symbols-outlined text-[18px]">monetization_on</span>
+</div>
+</div>
+<div class="mt-space-sm">
+<div class="font-metric-mono-lg text-metric-mono-lg text-on-surface">$440M</div>
+<div class="font-label-data text-label-data text-primary mt-space-3xs">+12% vs previous cycle</div>
+</div>
+<div class="w-full h-0.5 bg-surface-container-highest mt-space-sm overflow-hidden rounded">
+<div class="bg-primary h-full w-[90%]"></div>
+</div>
+</div>
+<!-- KPI 5 -->
+<div class="flex flex-col justify-between p-space-md bg-surface-container-low rounded shadow-sm relative overflow-hidden">
+<div class="flex items-start justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Global Viewership</span>
+<div class="p-space-2xs rounded bg-surface-container text-secondary-fixed-dim">
+<span class="material-symbols-outlined text-[18px]">cell_tower</span>
+</div>
+</div>
+<div class="mt-space-sm">
+<div class="font-metric-mono-lg text-metric-mono-lg text-on-surface">3.8B</div>
+<div class="font-label-data text-label-data text-on-surface-variant mt-space-3xs">Audited broadcast reach</div>
+</div>
+<div class="w-full h-0.5 bg-surface-container-highest mt-space-sm overflow-hidden rounded">
+<div class="bg-secondary h-full w-full"></div>
+</div>
+</div>
+</div>
+<!-- Filter, Search & View Controls Bar -->
+<div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-space-sm p-space-sm bg-surface-container-low rounded shadow-sm">
+<!-- Left: Search & Filter Tabs -->
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-space-sm flex-1">
+<div class="flex items-center gap-space-xs bg-surface-container px-space-sm py-space-xs rounded w-full sm:w-80">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">search</span>
+<input class="bg-transparent text-on-surface placeholder:text-on-surface-variant font-body-sm text-body-sm focus:outline-none w-full" placeholder="Search tournament by title, confederation, host..." type="text"/>
+</div>
+<!-- Quick Category Pills -->
+<div class="flex items-center gap-space-2xs overflow-x-auto py-space-3xs">
+<button class="px-space-sm py-space-2xs bg-primary text-on-primary font-label-caps text-label-caps uppercase tracking-wider rounded font-bold whitespace-nowrap shadow-sm">
+          ALL (5)
+        </button>
+<button class="px-space-sm py-space-2xs bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps uppercase tracking-wider rounded transition-colors whitespace-nowrap">
+          FIFA GLOBAL (2)
+        </button>
+<button class="px-space-sm py-space-2xs bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps uppercase tracking-wider rounded transition-colors whitespace-nowrap">
+          UEFA (2)
+        </button>
+<button class="px-space-sm py-space-2xs bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps uppercase tracking-wider rounded transition-colors whitespace-nowrap">
+          CONMEBOL (1)
+        </button>
+</div>
+</div>
+<!-- Right: Dropdown Selectors & Layout Toggle -->
+<div class="flex items-center gap-space-xs flex-wrap justify-between sm:justify-end">
+<!-- Season Filter -->
+<div class="flex items-center gap-space-2xs px-space-sm py-space-xs bg-surface-container rounded text-on-surface font-body-sm text-body-sm cursor-pointer hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">calendar_today</span>
+<span>Season 2024–2026</span>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">arrow_drop_down</span>
+</div>
+<!-- Status Dropdown -->
+<div class="flex items-center gap-space-2xs px-space-sm py-space-xs bg-surface-container rounded text-on-surface font-body-sm text-body-sm cursor-pointer hover:bg-surface-container-high transition-colors">
+<span>Status: Active &amp; Completed</span>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">arrow_drop_down</span>
+</div>
+<!-- Sort Dropdown -->
+<div class="flex items-center gap-space-2xs px-space-sm py-space-xs bg-surface-container rounded text-on-surface font-body-sm text-body-sm cursor-pointer hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">sort</span>
+<span>Prize: High to Low</span>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">arrow_drop_down</span>
+</div>
+<!-- View Switcher -->
+<div class="flex items-center bg-surface-container p-space-3xs rounded">
+<button class="p-space-2xs bg-surface-container-highest text-primary rounded" title="Grid View">
+<span class="material-symbols-outlined text-[18px]">grid_view</span>
+</button>
+<button class="p-space-2xs text-on-surface-variant hover:text-on-surface rounded" title="Table View">
+<span class="material-symbols-outlined text-[18px]">view_list</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Tournament Cards Grid (5 Competition Cards) -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-space-md">
+<!-- Card 1: FIFA World Cup 2026 (Flagship) -->
+<div class="flex flex-col justify-between bg-surface-container-low rounded shadow-md relative overflow-hidden xl:col-span-2">
+<!-- Glow Accent Line -->
+<div class="h-1 bg-primary w-full"></div>
+<div class="p-space-lg flex flex-col gap-space-md">
+<!-- Card Header Info -->
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm">
+<div class="w-12 h-12 rounded bg-surface-container flex items-center justify-center text-primary shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[28px]">sports_soccer</span>
+</div>
+<div class="flex flex-col gap-space-3xs">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="px-space-xs py-space-3xs rounded bg-primary-container/20 text-primary font-label-caps text-label-caps uppercase flex items-center gap-space-3xs">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                  UPCOMING / IN PREPARATION
+                </span>
+<span class="px-space-xs py-space-3xs rounded bg-surface-container text-on-surface-variant font-label-caps text-label-caps uppercase">
+                  FIFA GLOBAL
+                </span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface uppercase tracking-tight">FIFA World Cup 2026™</h2>
+<div class="flex items-center gap-space-2xs text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[16px] text-secondary">location_on</span>
+<span>United States · Canada · Mexico</span>
+<span>•</span>
+<span class="font-label-data text-label-data text-on-surface">June 11 – July 19, 2026</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-start sm:items-end bg-surface-container/60 p-space-sm rounded">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Total Prize Pool</span>
+<span class="font-metric-mono-lg text-metric-mono-lg text-primary">$440,000,000</span>
+<span class="font-label-data text-label-data text-on-surface-variant">Champion: $50,000,000</span>
+</div>
+</div>
+<!-- Metric Grid -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-sm p-space-md bg-surface-container rounded">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Format &amp; Teams</span>
+<span class="font-metric-mono-md text-metric-mono-md text-on-surface mt-space-3xs">48 Teams</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">12 Groups · 104 Matches</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Venues &amp; Stadia</span>
+<span class="font-metric-mono-md text-metric-mono-md text-on-surface mt-space-3xs">16 Certified</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Azteca, MetLife, SoFi</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Slots Filled</span>
+<span class="font-metric-mono-md text-metric-mono-md text-secondary mt-space-3xs">38 / 48</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">10 Playoff Spots Open</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Match Officials</span>
+<span class="font-metric-mono-md text-metric-mono-md text-tertiary mt-space-3xs">129 Pool</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">36 Refs · 69 Asst · 24 VAR</span>
+</div>
+</div>
+<!-- Progress Track -->
+<div class="flex flex-col gap-space-2xs">
+<div class="flex items-center justify-between font-label-caps text-label-caps">
+<span class="text-on-surface-variant uppercase">Continental Qualification Lifecycle</span>
+<span class="text-primary font-label-data">78% COMPLETED (162 OF 208 MATCHES PLAYED)</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container rounded overflow-hidden flex">
+<div class="bg-primary h-full w-[78%]"></div>
+<div class="bg-secondary h-full w-[12%]"></div>
+<div class="bg-surface-container-highest h-full w-[10%]"></div>
+</div>
+</div>
+<!-- Action Ribbon -->
+<div class="flex items-center justify-between gap-space-xs pt-space-xs flex-wrap">
+<div class="flex items-center gap-space-xs">
+<button class="px-space-md py-space-xs bg-primary text-on-primary font-label-caps text-label-caps uppercase tracking-wider rounded font-bold hover:bg-primary-fixed-dim transition-colors shadow-sm">
+              View Standings &amp; Groups
+            </button>
+<button class="px-space-sm py-space-xs bg-surface-container hover:bg-surface-container-high text-on-surface font-label-caps text-label-caps uppercase tracking-wider rounded transition-colors shadow-sm">
+              Fixtures (104)
+            </button>
+<button class="px-space-sm py-space-xs bg-surface-container hover:bg-surface-container-high text-on-surface font-label-caps text-label-caps uppercase tracking-wider rounded transition-colors shadow-sm">
+              Manage Specs
+            </button>
+</div>
+<span class="font-label-data text-label-data text-on-surface-variant flex items-center gap-space-3xs">
+<span class="material-symbols-outlined text-[16px] text-primary">verified</span>
+            LOC Operations Ready
+          </span>
+</div>
+</div>
+</div>
+<!-- Card 2: UEFA Euro 2024 -->
+<div class="flex flex-col justify-between bg-surface-container-low rounded shadow-md relative overflow-hidden">
+<div class="h-1 bg-secondary w-full"></div>
+<div class="p-space-md flex flex-col gap-space-sm">
+<div class="flex items-start justify-between">
+<div class="flex flex-col gap-space-3xs">
+<div class="flex items-center gap-space-xs">
+<span class="px-space-xs py-space-3xs rounded bg-surface-container-highest text-on-surface-variant font-label-caps text-label-caps uppercase">
+                COMPLETED
+              </span>
+<span class="px-space-xs py-space-3xs rounded bg-secondary-container/20 text-secondary font-label-caps text-label-caps uppercase">
+                UEFA CONTINENTAL
+              </span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface uppercase mt-space-3xs">UEFA EURO 2024™</h3>
+<div class="flex items-center gap-space-2xs text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[16px]">pin_drop</span>
+<span>Germany · June 14 – July 14, 2024</span>
+</div>
+</div>
+<div class="p-space-2xs rounded bg-surface-container text-secondary">
+<span class="material-symbols-outlined text-[20px]">military_tech</span>
+</div>
+</div>
+<div class="p-space-sm bg-surface-container rounded flex flex-col gap-space-xs">
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface-variant">Reigning Champion:</span>
+<span class="font-bold text-on-surface flex items-center gap-space-3xs">
+<span class="w-2 h-2 rounded-full bg-error"></span> Spain (La Roja)
+            </span>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface-variant">Runner-Up:</span>
+<span class="text-on-surface">England (2-1 Final)</span>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface-variant">Format &amp; Scope:</span>
+<span class="font-label-data text-label-data text-on-surface">24 Teams · 51 Matches</span>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface-variant">Audited Statistics:</span>
+<span class="font-label-data text-label-data text-secondary">117 Goals (2.29/m) · 2.7M Att.</span>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface-variant">Total Prize Pool:</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary">€331,000,000</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs pt-space-xs">
+<button class="flex-1 py-space-xs bg-surface-container hover:bg-surface-container-high text-on-surface font-label-caps text-label-caps uppercase rounded transition-colors text-center shadow-sm">
+            Tournament Archive
+          </button>
+<button class="flex-1 py-space-xs bg-surface-container hover:bg-surface-container-high text-on-surface font-label-caps text-label-caps uppercase rounded transition-colors text-center shadow-sm">
+            Results &amp; Bracket
+          </button>
+<button class="p-space-xs bg-surface-container hover:bg-surface-container-high text-on-surface-variant rounded transition-colors shadow-sm" title="Audit Report">
+<span class="material-symbols-outlined text-[16px]">description</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 3: Copa América 2024 -->
+<div class="flex flex-col justify-between bg-surface-container-low rounded shadow-md relative overflow-hidden">
+<div class="h-1 bg-secondary-container w-full"></div>
+<div class="p-space-md flex flex-col gap-space-sm">
+<div class="flex items-start justify-between">
+<div class="flex flex-col gap-space-3xs">
+<div class="flex items-center gap-space-xs">
+<span class="px-space-xs py-space-3xs rounded bg-surface-container-highest text-on-surface-variant font-label-caps text-label-caps uppercase">
+                COMPLETED
+              </span>
+<span class="px-space-xs py-space-3xs rounded bg-secondary-container/20 text-secondary font-label-caps text-label-caps uppercase">
+                CONMEBOL / CONCACAF
+              </span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface uppercase mt-space-3xs">Copa América 2024</h3>
+<div class="flex items-center gap-space-2xs text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[16px]">pin_drop</span>
+<span>United States · June 20 – July 14, 2024</span>
+</div>
+</div>
+<div class="p-space-2xs rounded bg-surface-container text-secondary">
+<span class="material-symbols-outlined text-[20px]">emoji_events</span>
+</div>
+</div>
+<div class="p-space-sm bg-surface-container rounded flex flex-col gap-space-xs">
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface-variant">Reigning Champion:</span>
+<span class="font-bold text-on-surface flex items-center gap-space-3xs">
+<span class="w-2 h-2 rounded-full bg-secondary"></span> Argentina (La Albiceleste)
+            </span>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface-variant">Runner-Up:</span>
+<span class="text-on-surface">Colombia (1-0 AET)</span>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface-variant">Format &amp; Scope:</span>
+<span class="font-label-data text-label-data text-on-surface">16 Teams · 32 Matches</span>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface-variant">Audited Statistics:</span>
+<span class="font-label-data text-label-data text-on-surface">70 Goals · Lautaro Martínez (5)</span>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface-variant">Total Prize Pool:</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary">$72,000,000</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs pt-space-xs">
+<button class="flex-1 py-space-xs bg-surface-container hover:bg-surface-container-high text-on-surface font-label-caps text-label-caps uppercase rounded transition-colors text-center shadow-sm">
+            Tournament Archive
+          </button>
+<button class="flex-1 py-space-xs bg-surface-container hover:bg-surface-container-high text-on-surface font-label-caps text-label-caps uppercase rounded transition-colors text-center shadow-sm">
+            Results &amp; Bracket
+          </button>
+<button class="p-space-xs bg-surface-container hover:bg-surface-container-high text-on-surface-variant rounded transition-colors shadow-sm" title="Audit Report">
+<span class="material-symbols-outlined text-[16px]">description</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 4: UEFA Nations League 2024–25 -->
+<div class="flex flex-col justify-between bg-surface-container-low rounded shadow-md relative overflow-hidden">
+<div class="h-1 bg-tertiary w-full"></div>
+<div class="p-space-md flex flex-col gap-space-sm">
+<div class="flex items-start justify-between">
+<div class="flex flex-col gap-space-3xs">
+<div class="flex items-center gap-space-xs">
+<span class="px-space-xs py-space-3xs rounded bg-tertiary-container/20 text-tertiary font-label-caps text-label-caps uppercase flex items-center gap-space-3xs">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span>
+                IN PROGRESS
+              </span>
+<span class="px-space-xs py-space-3xs rounded bg-surface-container text-on-surface-variant font-label-caps text-label-caps uppercase">
+                UEFA CONTINENTAL
+              </span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface uppercase mt-space-3xs">UEFA Nations League 2024–25</h3>
+<div class="flex items-center gap-space-2xs text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[16px]">calendar_today</span>
+<span>Sept 2024 – June 2025</span>
+</div>
+</div>
+<div class="p-space-2xs rounded bg-surface-container text-tertiary">
+<span class="material-symbols-outlined text-[20px]">swap_calls</span>
+</div>
+</div>
+<div class="p-space-sm bg-surface-container rounded flex flex-col gap-space-xs">
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface-variant">Scope &amp; Tiers:</span>
+<span class="font-label-data text-label-data text-on-surface">54 Nations · Leagues A, B, C, D</span>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface-variant">Current Phase:</span>
+<span class="font-bold text-tertiary">Quarter-Finals Stage Set</span>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface-variant">Key Contenders:</span>
+<span class="text-on-surface">Spain, Germany, France, Italy</span>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface-variant">Final Four Venue:</span>
+<span class="text-on-surface-variant">TBD (Rotterdam / Munich)</span>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface-variant">Format:</span>
+<span class="font-label-data text-label-data text-on-surface">League + 2-Leg Knockouts</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs pt-space-xs">
+<button class="flex-1 py-space-xs bg-primary text-on-primary font-label-caps text-label-caps uppercase rounded font-bold hover:bg-primary-fixed-dim transition-colors text-center shadow-sm">
+            League Standings
+          </button>
+<button class="flex-1 py-space-xs bg-surface-container hover:bg-surface-container-high text-on-surface font-label-caps text-label-caps uppercase rounded transition-colors text-center shadow-sm">
+            Upcoming Fixtures
+          </button>
+<button class="p-space-xs bg-surface-container hover:bg-surface-container-high text-on-surface-variant rounded transition-colors shadow-sm" title="Regulations">
+<span class="material-symbols-outlined text-[16px]">gavel</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 5: FIFA World Cup 2022 -->
+<div class="flex flex-col justify-between bg-surface-container-low rounded shadow-md relative overflow-hidden">
+<div class="h-1 bg-surface-container-highest w-full"></div>
+<div class="p-space-md flex flex-col gap-space-sm">
+<div class="flex items-start justify-between">
+<div class="flex flex-col gap-space-3xs">
+<div class="flex items-center gap-space-xs">
+<span class="px-space-xs py-space-3xs rounded bg-surface-container text-on-surface-variant font-label-caps text-label-caps uppercase">
+                HISTORIC / CONCLUDED
+              </span>
+<span class="px-space-xs py-space-3xs rounded bg-surface-container text-on-surface-variant font-label-caps text-label-caps uppercase">
+                FIFA GLOBAL
+              </span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface uppercase mt-space-3xs">FIFA World Cup 2022™</h3>
+<div class="flex items-center gap-space-2xs text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[16px]">pin_drop</span>
+<span>Qatar · Nov 20 – Dec 18, 2022</span>
+</div>
+</div>
+<div class="p-space-2xs rounded bg-surface-container text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">history_edu</span>
+</div>
+</div>
+<div class="p-space-sm bg-surface-container rounded flex flex-col gap-space-xs">
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface-variant">World Champion:</span>
+<span class="font-bold text-on-surface">Argentina (3rd Star)</span>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface-variant">Final Stadium:</span>
+<span class="text-on-surface">Lusail Iconic Stadium</span>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface-variant">Metrics:</span>
+<span class="font-label-data text-label-data text-on-surface">32 Teams · 64 Matches · 172 G</span>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface-variant">Individual Honors:</span>
+<span class="font-label-data text-label-data text-tertiary">Messi (Ball) · Mbappé (Boot: 8)</span>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface-variant">Global Reach:</span>
+<span class="font-metric-mono-md text-metric-mono-md text-on-surface">5.4 Billion Viewers</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs pt-space-xs">
+<button class="flex-1 py-space-xs bg-surface-container hover:bg-surface-container-high text-on-surface font-label-caps text-label-caps uppercase rounded transition-colors text-center shadow-sm">
+            Historical Archive
+          </button>
+<button class="flex-1 py-space-xs bg-surface-container hover:bg-surface-container-high text-on-surface font-label-caps text-label-caps uppercase rounded transition-colors text-center shadow-sm">
+            Match Reports
+          </button>
+<button class="p-space-xs bg-surface-container hover:bg-surface-container-high text-on-surface-variant rounded transition-colors shadow-sm" title="Technical Summary">
+<span class="material-symbols-outlined text-[16px]">menu_book</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Live Standings & Bracket Tracker (Official Seeding Matrix) -->
+<div class="flex flex-col bg-surface-container-low rounded shadow-md overflow-hidden">
+<!-- Matrix Header -->
+<div class="p-space-md bg-surface-container flex flex-col md:flex-row md:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="p-space-2xs rounded bg-primary-container/20 text-primary">
+<span class="material-symbols-outlined text-[20px]">account_tree</span>
+</div>
+<div>
+<div class="flex items-center gap-space-xs">
+<h3 class="font-headline-md text-headline-md text-on-surface uppercase tracking-tight">
+              2026 WORLD SHOWCASE // PRE-TOURNAMENT SEEDING &amp; POT ALLOCATION
+            </h3>
+<span class="px-space-xs py-space-3xs rounded bg-surface-container-highest text-primary font-label-data text-label-data uppercase">
+              CONFIRMED POT 1 &amp; POT 2
+            </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Seeding coefficients derived from FIFA Men's World Ranking, host allocations, and continental quotas.
+          </p>
+</div>
+</div>
+<div class="flex items-center gap-space-xs">
+<div class="flex items-center gap-space-2xs font-label-caps text-label-caps text-on-surface-variant bg-surface-container-lowest px-space-sm py-space-2xs rounded">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span>DRAW DATE: DEC 2025</span>
+</div>
+<button class="px-space-sm py-space-2xs bg-surface-container-high hover:bg-surface-bright text-on-surface font-label-caps text-label-caps uppercase rounded transition-colors shadow-sm flex items-center gap-space-3xs">
+<span class="material-symbols-outlined text-[16px]">refresh</span>
+          RECALCULATE ELO
+        </button>
+</div>
+</div>
+<!-- Seeding Table -->
+<div class="overflow-x-auto w-full">
+<table class="w-full text-left font-body-sm text-body-sm border-collapse">
+<thead>
+<tr class="bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps uppercase tracking-wider">
+<th class="py-space-xs px-space-md text-left">Pot Slot</th>
+<th class="py-space-xs px-space-md text-left">Nation / Association</th>
+<th class="py-space-xs px-space-md text-left">Confederation</th>
+<th class="py-space-xs px-space-md text-right">FIFA Rank</th>
+<th class="py-space-xs px-space-md text-right">ELO Rating</th>
+<th class="py-space-xs px-space-md text-right">Squad Value (€)</th>
+<th class="py-space-xs px-space-md text-center">Status / Pathway</th>
+<th class="py-space-xs px-space-md text-right">Audit</th>
+</tr>
+</thead>
+<tbody class="divide-y-0">
+<!-- Pot 1 Header -->
+<tr class="bg-surface-container/60 font-label-caps text-label-caps text-primary">
+<td class="py-space-2xs px-space-md uppercase tracking-wider font-bold" colspan="8">
+              POT 1 — SEEDS 1 TO 8 (HOSTS &amp; TOP GLOBAL SEEDS)
+            </td>
+</tr>
+<!-- Row 1: USA -->
+<tr class="bg-surface-container-low hover:bg-surface-container transition-colors">
+<td class="py-space-xs px-space-md font-label-data text-label-data text-primary font-bold">POT 1 · A1</td>
+<td class="py-space-xs px-space-md font-bold text-on-surface flex items-center gap-space-xs">
+<span class="w-5 h-3.5 rounded-sm bg-surface-container-highest inline-block overflow-hidden flex items-center justify-center font-label-data text-[8px]">USA</span>
+              United States
+              <span class="px-space-3xs py-space-3xs rounded bg-surface-container-highest font-label-caps text-[9px] text-secondary">HOST</span>
+</td>
+<td class="py-space-xs px-space-md font-label-caps text-label-caps text-on-surface-variant">CONCACAF</td>
+<td class="py-space-xs px-space-md font-metric-mono-md text-metric-mono-md text-right text-on-surface">#11</td>
+<td class="py-space-xs px-space-md font-label-data text-label-data text-right text-on-surface-variant">1,665.27</td>
+<td class="py-space-xs px-space-md font-label-data text-label-data text-right text-on-surface">€348.5M</td>
+<td class="py-space-xs px-space-md text-center">
+<span class="px-space-xs py-space-3xs rounded bg-primary-container/20 text-primary font-label-caps text-label-caps uppercase">Auto Qualified</span>
+</td>
+<td class="py-space-xs px-space-md text-right text-primary">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+</td>
+</tr>
+<!-- Row 2: Mexico -->
+<tr class="bg-surface-container hover:bg-surface-container-high transition-colors">
+<td class="py-space-xs px-space-md font-label-data text-label-data text-primary font-bold">POT 1 · B1</td>
+<td class="py-space-xs px-space-md font-bold text-on-surface flex items-center gap-space-xs">
+<span class="w-5 h-3.5 rounded-sm bg-surface-container-highest inline-block overflow-hidden flex items-center justify-center font-label-data text-[8px]">MEX</span>
+              Mexico
+              <span class="px-space-3xs py-space-3xs rounded bg-surface-container-highest font-label-caps text-[9px] text-secondary">HOST</span>
+</td>
+<td class="py-space-xs px-space-md font-label-caps text-label-caps text-on-surface-variant">CONCACAF</td>
+<td class="py-space-xs px-space-md font-metric-mono-md text-metric-mono-md text-right text-on-surface">#15</td>
+<td class="py-space-xs px-space-md font-label-data text-label-data text-right text-on-surface-variant">1,635.11</td>
+<td class="py-space-xs px-space-md font-label-data text-label-data text-right text-on-surface">€212.0M</td>
+<td class="py-space-xs px-space-md text-center">
+<span class="px-space-xs py-space-3xs rounded bg-primary-container/20 text-primary font-label-caps text-label-caps uppercase">Auto Qualified</span>
+</td>
+<td class="py-space-xs px-space-md text-right text-primary">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+</td>
+</tr>
+<!-- Row 3: Canada -->
+<tr class="bg-surface-container-low hover:bg-surface-container transition-colors">
+<td class="py-space-xs px-space-md font-label-data text-label-data text-primary font-bold">POT 1 · C1</td>
+<td class="py-space-xs px-space-md font-bold text-on-surface flex items-center gap-space-xs">
+<span class="w-5 h-3.5 rounded-sm bg-surface-container-highest inline-block overflow-hidden flex items-center justify-center font-label-data text-[8px]">CAN</span>
+              Canada
+              <span class="px-space-3xs py-space-3xs rounded bg-surface-container-highest font-label-caps text-[9px] text-secondary">HOST</span>
+</td>
+<td class="py-space-xs px-space-md font-label-caps text-label-caps text-on-surface-variant">CONCACAF</td>
+<td class="py-space-xs px-space-md font-metric-mono-md text-metric-mono-md text-right text-on-surface">#40</td>
+<td class="py-space-xs px-space-md font-label-data text-label-data text-right text-on-surface-variant">1,494.66</td>
+<td class="py-space-xs px-space-md font-label-data text-label-data text-right text-on-surface">€181.2M</td>
+<td class="py-space-xs px-space-md text-center">
+<span class="px-space-xs py-space-3xs rounded bg-primary-container/20 text-primary font-label-caps text-label-caps uppercase">Auto Qualified</span>
+</td>
+<td class="py-space-xs px-space-md text-right text-primary">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+</td>
+</tr>
+<!-- Row 4: Argentina -->
+<tr class="bg-surface-container hover:bg-surface-container-high transition-colors">
+<td class="py-space-xs px-space-md font-label-data text-label-data text-primary font-bold">POT 1 · D1</td>
+<td class="py-space-xs px-space-md font-bold text-on-surface flex items-center gap-space-xs">
+<span class="w-5 h-3.5 rounded-sm bg-surface-container-highest inline-block overflow-hidden flex items-center justify-center font-label-data text-[8px]">ARG</span>
+              Argentina
+              <span class="px-space-3xs py-space-3xs rounded bg-tertiary-container/20 font-label-caps text-[9px] text-tertiary">DEFENDING CHAMP</span>
+</td>
+<td class="py-space-xs px-space-md font-label-caps text-label-caps text-on-surface-variant">CONMEBOL</td>
+<td class="py-space-xs px-space-md font-metric-mono-md text-metric-mono-md text-right text-primary">#1</td>
+<td class="py-space-xs px-space-md font-label-data text-label-data text-right text-on-surface-variant">1,889.02</td>
+<td class="py-space-xs px-space-md font-label-data text-label-data text-right text-on-surface">€842.0M</td>
+<td class="py-space-xs px-space-md text-center">
+<span class="px-space-xs py-space-3xs rounded bg-primary-container/20 text-primary font-label-caps text-label-caps uppercase">CONMEBOL Qualified</span>
+</td>
+<td class="py-space-xs px-space-md text-right text-primary">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+</td>
+</tr>
+<!-- Row 5: France -->
+<tr class="bg-surface-container-low hover:bg-surface-container transition-colors">
+<td class="py-space-xs px-space-md font-label-data text-label-data text-primary font-bold">POT 1 · E1</td>
+<td class="py-space-xs px-space-md font-bold text-on-surface flex items-center gap-space-xs">
+<span class="w-5 h-3.5 rounded-sm bg-surface-container-highest inline-block overflow-hidden flex items-center justify-center font-label-data text-[8px]">FRA</span>
+              France
+            </td>
+<td class="py-space-xs px-space-md font-label-caps text-label-caps text-on-surface-variant">UEFA</td>
+<td class="py-space-xs px-space-md font-metric-mono-md text-metric-mono-md text-right text-on-surface">#2</td>
+<td class="py-space-xs px-space-md font-label-data text-label-data text-right text-on-surface-variant">1,851.92</td>
+<td class="py-space-xs px-space-md font-label-data text-label-data text-right text-on-surface">€1.05B</td>
+<td class="py-space-xs px-space-md text-center">
+<span class="px-space-xs py-space-3xs rounded bg-primary-container/20 text-primary font-label-caps text-label-caps uppercase">UEFA Group Leader</span>
+</td>
+<td class="py-space-xs px-space-md text-right text-primary">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+</td>
+</tr>
+<!-- Row 6: Spain -->
+<tr class="bg-surface-container hover:bg-surface-container-high transition-colors">
+<td class="py-space-xs px-space-md font-label-data text-label-data text-primary font-bold">POT 1 · F1</td>
+<td class="py-space-xs px-space-md font-bold text-on-surface flex items-center gap-space-xs">
+<span class="w-5 h-3.5 rounded-sm bg-surface-container-highest inline-block overflow-hidden flex items-center justify-center font-label-data text-[8px]">ESP</span>
+              Spain
+              <span class="px-space-3xs py-space-3xs rounded bg-secondary-container/20 font-label-caps text-[9px] text-secondary">EURO CHAMP</span>
+</td>
+<td class="py-space-xs px-space-md font-label-caps text-label-caps text-on-surface-variant">UEFA</td>
+<td class="py-space-xs px-space-md font-metric-mono-md text-metric-mono-md text-right text-on-surface">#3</td>
+<td class="py-space-xs px-space-md font-label-data text-label-data text-right text-on-surface-variant">1,836.42</td>
+<td class="py-space-xs px-space-md font-label-data text-label-data text-right text-on-surface">€985.0M</td>
+<td class="py-space-xs px-space-md text-center">
+<span class="px-space-xs py-space-3xs rounded bg-primary-container/20 text-primary font-label-caps text-label-caps uppercase">UEFA Group Leader</span>
+</td>
+<td class="py-space-xs px-space-md text-right text-primary">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+</td>
+</tr>
+<!-- Row 7: England -->
+<tr class="bg-surface-container-low hover:bg-surface-container transition-colors">
+<td class="py-space-xs px-space-md font-label-data text-label-data text-primary font-bold">POT 1 · G1</td>
+<td class="py-space-xs px-space-md font-bold text-on-surface flex items-center gap-space-xs">
+<span class="w-5 h-3.5 rounded-sm bg-surface-container-highest inline-block overflow-hidden flex items-center justify-center font-label-data text-[8px]">ENG</span>
+              England
+            </td>
+<td class="py-space-xs px-space-md font-label-caps text-label-caps text-on-surface-variant">UEFA</td>
+<td class="py-space-xs px-space-md font-metric-mono-md text-metric-mono-md text-right text-on-surface">#4</td>
+<td class="py-space-xs px-space-md font-label-data text-label-data text-right text-on-surface-variant">1,812.26</td>
+<td class="py-space-xs px-space-md font-label-data text-label-data text-right text-on-surface">€1.12B</td>
+<td class="py-space-xs px-space-md text-center">
+<span class="px-space-xs py-space-3xs rounded bg-primary-container/20 text-primary font-label-caps text-label-caps uppercase">UEFA Group Leader</span>
+</td>
+<td class="py-space-xs px-space-md text-right text-primary">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+</td>
+</tr>
+<!-- Row 8: Brazil -->
+<tr class="bg-surface-container hover:bg-surface-container-high transition-colors">
+<td class="py-space-xs px-space-md font-label-data text-label-data text-primary font-bold">POT 1 · H1</td>
+<td class="py-space-xs px-space-md font-bold text-on-surface flex items-center gap-space-xs">
+<span class="w-5 h-3.5 rounded-sm bg-surface-container-highest inline-block overflow-hidden flex items-center justify-center font-label-data text-[8px]">BRA</span>
+              Brazil
+            </td>
+<td class="py-space-xs px-space-md font-label-caps text-label-caps text-on-surface-variant">CONMEBOL</td>
+<td class="py-space-xs px-space-md font-metric-mono-md text-metric-mono-md text-right text-on-surface">#5</td>
+<td class="py-space-xs px-space-md font-label-data text-label-data text-right text-on-surface-variant">1,775.85</td>
+<td class="py-space-xs px-space-md font-label-data text-label-data text-right text-on-surface">€960.0M</td>
+<td class="py-space-xs px-space-md text-center">
+<span class="px-space-xs py-space-3xs rounded bg-primary-container/20 text-primary font-label-caps text-label-caps uppercase">CONMEBOL Qualified</span>
+</td>
+<td class="py-space-xs px-space-md text-right text-primary">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+</td>
+</tr>
+<!-- Pot 2 Header -->
+<tr class="bg-surface-container/60 font-label-caps text-label-caps text-secondary">
+<td class="py-space-2xs px-space-md uppercase tracking-wider font-bold" colspan="8">
+              POT 2 — SEEDS 9 TO 16 (TIER-2 GLOBAL QUALIFIERS)
+            </td>
+</tr>
+<!-- Row 9: Belgium -->
+<tr class="bg-surface-container-low hover:bg-surface-container transition-colors">
+<td class="py-space-xs px-space-md font-label-data text-label-data text-secondary">POT 2 · 01</td>
+<td class="py-space-xs px-space-md font-bold text-on-surface flex items-center gap-space-xs">
+<span class="w-5 h-3.5 rounded-sm bg-surface-container-highest inline-block overflow-hidden flex items-center justify-center font-label-data text-[8px]">BEL</span>
+              Belgium
+            </td>
+<td class="py-space-xs px-space-md font-label-caps text-label-caps text-on-surface-variant">UEFA</td>
+<td class="py-space-xs px-space-md font-metric-mono-md text-metric-mono-md text-right text-on-surface">#6</td>
+<td class="py-space-xs px-space-md font-label-data text-label-data text-right text-on-surface-variant">1,768.14</td>
+<td class="py-space-xs px-space-md font-label-data text-label-data text-right text-on-surface">€475.0M</td>
+<td class="py-space-xs px-space-md text-center">
+<span class="px-space-xs py-space-3xs rounded bg-surface-container-highest text-secondary font-label-caps text-label-caps uppercase">Seeding Verified</span>
+</td>
+<td class="py-space-xs px-space-md text-right text-primary">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+</td>
+</tr>
+<!-- Row 10: Netherlands -->
+<tr class="bg-surface-container hover:bg-surface-container-high transition-colors">
+<td class="py-space-xs px-space-md font-label-data text-label-data text-secondary">POT 2 · 02</td>
+<td class="py-space-xs px-space-md font-bold text-on-surface flex items-center gap-space-xs">
+<span class="w-5 h-3.5 rounded-sm bg-surface-container-highest inline-block overflow-hidden flex items-center justify-center font-label-data text-[8px]">NED</span>
+              Netherlands
+            </td>
+<td class="py-space-xs px-space-md font-label-caps text-label-caps text-on-surface-variant">UEFA</td>
+<td class="py-space-xs px-space-md font-metric-mono-md text-metric-mono-md text-right text-on-surface">#7</td>
+<td class="py-space-xs px-space-md font-label-data text-label-data text-right text-on-surface-variant">1,759.95</td>
+<td class="py-space-xs px-space-md font-label-data text-label-data text-right text-on-surface">€540.0M</td>
+<td class="py-space-xs px-space-md text-center">
+<span class="px-space-xs py-space-3xs rounded bg-surface-container-highest text-secondary font-label-caps text-label-caps uppercase">Seeding Verified</span>
+</td>
+<td class="py-space-xs px-space-md text-right text-primary">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+</td>
+</tr>
+<!-- Row 11: Portugal -->
+<tr class="bg-surface-container-low hover:bg-surface-container transition-colors">
+<td class="py-space-xs px-space-md font-label-data text-label-data text-secondary">POT 2 · 03</td>
+<td class="py-space-xs px-space-md font-bold text-on-surface flex items-center gap-space-xs">
+<span class="w-5 h-3.5 rounded-sm bg-surface-container-highest inline-block overflow-hidden flex items-center justify-center font-label-data text-[8px]">POR</span>
+              Portugal
+            </td>
+<td class="py-space-xs px-space-md font-label-caps text-label-caps text-on-surface-variant">UEFA</td>
+<td class="py-space-xs px-space-md font-metric-mono-md text-metric-mono-md text-right text-on-surface">#8</td>
+<td class="py-space-xs px-space-md font-label-data text-label-data text-right text-on-surface-variant">1,752.14</td>
+<td class="py-space-xs px-space-md font-label-data text-label-data text-right text-on-surface">€820.0M</td>
+<td class="py-space-xs px-space-md text-center">
+<span class="px-space-xs py-space-3xs rounded bg-surface-container-highest text-secondary font-label-caps text-label-caps uppercase">Seeding Verified</span>
+</td>
+<td class="py-space-xs px-space-md text-right text-primary">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+</td>
+</tr>
+<!-- Row 12: Germany -->
+<tr class="bg-surface-container hover:bg-surface-container-high transition-colors">
+<td class="py-space-xs px-space-md font-label-data text-label-data text-secondary">POT 2 · 04</td>
+<td class="py-space-xs px-space-md font-bold text-on-surface flex items-center gap-space-xs">
+<span class="w-5 h-3.5 rounded-sm bg-surface-container-highest inline-block overflow-hidden flex items-center justify-center font-label-data text-[8px]">GER</span>
+              Germany
+            </td>
+<td class="py-space-xs px-space-md font-label-caps text-label-caps text-on-surface-variant">UEFA</td>
+<td class="py-space-xs px-space-md font-metric-mono-md text-metric-mono-md text-right text-on-surface">#9</td>
+<td class="py-space-xs px-space-md font-label-data text-label-data text-right text-on-surface-variant">1,732.48</td>
+<td class="py-space-xs px-space-md font-label-data text-label-data text-right text-on-surface">€790.0M</td>
+<td class="py-space-xs px-space-md text-center">
+<span class="px-space-xs py-space-3xs rounded bg-surface-container-highest text-secondary font-label-caps text-label-caps uppercase">Seeding Verified</span>
+</td>
+<td class="py-space-xs px-space-md text-right text-primary">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+</td>
+</tr>
+<!-- Row 13: Italy -->
+<tr class="bg-surface-container-low hover:bg-surface-container transition-colors">
+<td class="py-space-xs px-space-md font-label-data text-label-data text-secondary">POT 2 · 05</td>
+<td class="py-space-xs px-space-md font-bold text-on-surface flex items-center gap-space-xs">
+<span class="w-5 h-3.5 rounded-sm bg-surface-container-highest inline-block overflow-hidden flex items-center justify-center font-label-data text-[8px]">ITA</span>
+              Italy
+            </td>
+<td class="py-space-xs px-space-md font-label-caps text-label-caps text-on-surface-variant">UEFA</td>
+<td class="py-space-xs px-space-md font-metric-mono-md text-metric-mono-md text-right text-on-surface">#10</td>
+<td class="py-space-xs px-space-md font-label-data text-label-data text-right text-on-surface-variant">1,714.29</td>
+<td class="py-space-xs px-space-md font-label-data text-label-data text-right text-on-surface">€610.0M</td>
+<td class="py-space-xs px-space-md text-center">
+<span class="px-space-xs py-space-3xs rounded bg-surface-container-highest text-secondary font-label-caps text-label-caps uppercase">Seeding Verified</span>
+</td>
+<td class="py-space-xs px-space-md text-right text-primary">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+</td>
+</tr>
+<!-- Row 14: Uruguay -->
+<tr class="bg-surface-container hover:bg-surface-container-high transition-colors">
+<td class="py-space-xs px-space-md font-label-data text-label-data text-secondary">POT 2 · 06</td>
+<td class="py-space-xs px-space-md font-bold text-on-surface flex items-center gap-space-xs">
+<span class="w-5 h-3.5 rounded-sm bg-surface-container-highest inline-block overflow-hidden flex items-center justify-center font-label-data text-[8px]">URU</span>
+              Uruguay
+            </td>
+<td class="py-space-xs px-space-md font-label-caps text-label-caps text-on-surface-variant">CONMEBOL</td>
+<td class="py-space-xs px-space-md font-metric-mono-md text-metric-mono-md text-right text-on-surface">#14</td>
+<td class="py-space-xs px-space-md font-label-data text-label-data text-right text-on-surface-variant">1,658.33</td>
+<td class="py-space-xs px-space-md font-label-data text-label-data text-right text-on-surface">€425.0M</td>
+<td class="py-space-xs px-space-md text-center">
+<span class="px-space-xs py-space-3xs rounded bg-surface-container-highest text-secondary font-label-caps text-label-caps uppercase">Seeding Verified</span>
+</td>
+<td class="py-space-xs px-space-md text-right text-primary">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+</td>
+</tr>
+<!-- Row 15: Japan -->
+<tr class="bg-surface-container-low hover:bg-surface-container transition-colors">
+<td class="py-space-xs px-space-md font-label-data text-label-data text-secondary">POT 2 · 07</td>
+<td class="py-space-xs px-space-md font-bold text-on-surface flex items-center gap-space-xs">
+<span class="w-5 h-3.5 rounded-sm bg-surface-container-highest inline-block overflow-hidden flex items-center justify-center font-label-data text-[8px]">JPN</span>
+              Japan
+            </td>
+<td class="py-space-xs px-space-md font-label-caps text-label-caps text-on-surface-variant">AFC</td>
+<td class="py-space-xs px-space-md font-metric-mono-md text-metric-mono-md text-right text-on-surface">#17</td>
+<td class="py-space-xs px-space-md font-label-data text-label-data text-right text-on-surface-variant">1,628.81</td>
+<td class="py-space-xs px-space-md font-label-data text-label-data text-right text-on-surface">€280.0M</td>
+<td class="py-space-xs px-space-md text-center">
+<span class="px-space-xs py-space-3xs rounded bg-surface-container-highest text-secondary font-label-caps text-label-caps uppercase">AFC Qualified</span>
+</td>
+<td class="py-space-xs px-space-md text-right text-primary">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+</td>
+</tr>
+<!-- Row 16: Senegal -->
+<tr class="bg-surface-container hover:bg-surface-container-high transition-colors">
+<td class="py-space-xs px-space-md font-label-data text-label-data text-secondary">POT 2 · 08</td>
+<td class="py-space-xs px-space-md font-bold text-on-surface flex items-center gap-space-xs">
+<span class="w-5 h-3.5 rounded-sm bg-surface-container-highest inline-block overflow-hidden flex items-center justify-center font-label-data text-[8px]">SEN</span>
+              Senegal
+            </td>
+<td class="py-space-xs px-space-md font-label-caps text-label-caps text-on-surface-variant">CAF</td>
+<td class="py-space-xs px-space-md font-metric-mono-md text-metric-mono-md text-right text-on-surface">#19</td>
+<td class="py-space-xs px-space-md font-label-data text-label-data text-right text-on-surface-variant">1,610.15</td>
+<td class="py-space-xs px-space-md font-label-data text-label-data text-right text-on-surface">€315.0M</td>
+<td class="py-space-xs px-space-md text-center">
+<span class="px-space-xs py-space-3xs rounded bg-surface-container-highest text-secondary font-label-caps text-label-caps uppercase">CAF Group Leader</span>
+</td>
+<td class="py-space-xs px-space-md text-right text-primary">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer / Telemetry Status -->
+<div class="p-space-sm bg-surface-container flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs font-label-data text-label-data text-on-surface-variant">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px] text-primary">verified_user</span>
+<span>AUDIT PASSED: All 16 pot seed quotas strictly satisfy FIFA Statute 32.b continental divergence rules.</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<span>Displaying 16 of 48 Seeds</span>
+<button class="text-primary hover:underline uppercase font-bold">Show Pots 3 &amp; 4 (32 Teams)</button>
+</div>
+</div>
+</div>
+<!-- Compliance & Legal Execution Footer Strip -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs pt-space-md text-on-surface-variant font-label-data text-label-data">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="text-on-surface">FIFA Competition Regulations 2026/27 Compliant</span>
+<span>•</span>
+<span>TMS Scheduling Protocol v9.8.2</span>
+<span>•</span>
+<span class="text-secondary">Real-time bracket sync active</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<span>ZÜRICH HQ DIRECT CONNECT</span>
+<span class="text-primary font-bold">LATENCY: 14ms</span>
+</div>
+</div>
+</div></main></div></body></html>

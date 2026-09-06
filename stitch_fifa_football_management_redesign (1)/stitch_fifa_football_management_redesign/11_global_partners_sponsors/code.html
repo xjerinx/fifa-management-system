@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Chivo:wght@600;700;800&amp;family=Hanken+Grotesk:wght@400;500;600&amp;family=JetBrains+Mono:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: 'class', theme: { extend: { colors: { 'error': '#ffb4ab', 'on-tertiary-fixed-variant': '#653e00', 'surface': '#0f131c', 'on-surface': '#dfe2ee', 'inverse-surface': '#dfe2ee', 'tertiary': '#ffb95f', 'surface-variant': '#31353e', 'on-error': '#690005', 'on-secondary-container': '#00374d', 'surface-bright': '#353942', 'on-tertiary-container': '#523200', 'tertiary-fixed': '#ffddb8', 'outline': '#86948a', 'tertiary-fixed-dim': '#ffb95f', 'secondary': '#7bd0ff', 'on-tertiary': '#472a00', 'secondary-container': '#00a6e0', 'outline-variant': '#3c4a42', 'on-primary-fixed': '#002113', 'surface-container-lowest': '#0a0e16', 'error-container': '#93000a', 'on-primary-container': '#00422b', 'on-secondary': '#00354a', 'primary-fixed-dim': '#4edea3', 'secondary-fixed': '#c4e7ff', 'on-secondary-fixed': '#001e2c', 'surface-container-low': '#181c24', 'surface-container-high': '#262a33', 'on-primary': '#003824', 'on-secondary-fixed-variant': '#004c69', 'on-surface-variant': '#bbcabf', 'tertiary-container': '#e29100', 'inverse-on-surface': '#2c3039', 'surface-container-highest': '#31353e', 'surface-container': '#1c2028', 'background': '#0f131c', 'primary-fixed': '#6ffbbe', 'primary-container': '#10b981', 'on-primary-fixed-variant': '#005236', 'on-background': '#dfe2ee', 'on-tertiary-fixed': '#2a1700', 'surface-tint': '#4edea3', 'surface-dim': '#0f131c', 'inverse-primary': '#006c49', 'on-error-container': '#ffdad6', 'primary': '#4edea3', 'secondary-fixed-dim': '#7bd0ff' }, borderRadius: { 'DEFAULT': '0.125rem', 'lg': '0.25rem', 'xl': '0.5rem', 'full': '0.75rem' }, spacing: { 'margin-mobile': '1rem', 'space-3xs': '0.125rem', 'space-3xl': '4rem', 'margin-desktop': '1.5rem', 'space-2xs': '0.25rem', 'space-xs': '0.5rem', 'space-sm': '0.75rem', 'space-xl': '2rem', 'space-2xl': '3rem', 'gutter-mobile': '0.75rem', 'space-lg': '1.5rem', 'space-md': '1rem', 'gutter-desktop': '1rem' }, fontFamily: { 'label-data': ['JetBrains Mono'], 'body-lg': ['Hanken Grotesk'], 'label-caps': ['Chivo'], 'headline-xl-mobile': ['Chivo'], 'metric-mono-lg': ['JetBrains Mono'], 'headline-2xl-mobile': ['Chivo'], 'headline-lg': ['Chivo'], 'headline-2xl': ['Chivo'], 'body-md': ['Hanken Grotesk'], 'headline-xl': ['Chivo'], 'metric-mono-md': ['JetBrains Mono'], 'body-sm': ['Hanken Grotesk'], 'headline-md': ['Chivo'] }, fontSize: { 'label-data': ['11px', { lineHeight: '14px', letterSpacing: '0.02em', fontWeight: '500' }], 'body-lg': ['16px', { lineHeight: '24px', letterSpacing: '0em', fontWeight: '400' }], 'label-caps': ['11px', { lineHeight: '14px', letterSpacing: '0.08em', fontWeight: '700' }], 'headline-xl-mobile': ['26px', { lineHeight: '32px', letterSpacing: '-0.015em', fontWeight: '700' }], 'metric-mono-lg': ['28px', { lineHeight: '32px', letterSpacing: '-0.02em', fontWeight: '700' }], 'headline-2xl-mobile': ['32px', { lineHeight: '38px', letterSpacing: '-0.02em', fontWeight: '800' }], 'headline-lg': ['24px', { lineHeight: '30px', letterSpacing: '-0.02em', fontWeight: '700' }], 'headline-2xl': ['48px', { lineHeight: '52px', letterSpacing: '-0.03em', fontWeight: '800' }], 'body-md': ['14px', { lineHeight: '20px', letterSpacing: '0em', fontWeight: '400' }], 'headline-xl': ['36px', { lineHeight: '42px', letterSpacing: '-0.025em', fontWeight: '700' }], 'metric-mono-md': ['15px', { lineHeight: '20px', letterSpacing: '-0.01em', fontWeight: '600' }], 'body-sm': ['12px', { lineHeight: '18px', letterSpacing: '0.01em', fontWeight: '400' }], 'headline-md': ['18px', { lineHeight: '24px', letterSpacing: '-0.01em', fontWeight: '600' }] } } } };</script></head><body class="bg-background font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-lowest z-50 flex flex-col justify-between py-space-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col gap-space-md"><div class="px-space-md flex items-center justify-between"><div class="flex items-center gap-space-xs"><img alt="FIFA Ops Crest" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3F8YxVS6wkUPJmomiMS9t9i3TWnIhjgzEMMX0KW4F2kNiNWUP4CZs_xrZvzwBbfjrbNpNbohS1pFth6bOiuhxlZsqf1L526RW3AUrpMpo7LXNbtoPhXtLBJsVPU1G-aPZHn7Lx-o6-sWidzf_IXlgyVzkhdupqMKlDfkEeA4l5nXxaxZgS42X7tXB05zZ2hBEdUPVip0X8rnS05GG_xLRnrOq_NjAXKMVZMMXIjBiAHVBv89y0TtQ"/><div class="flex flex-col"><span class="font-headline-md text-headline-md uppercase tracking-tight text-on-surface">FIFA OPS</span><span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Operations Hub</span></div></div><button aria-label="Collapse Sidebar" class="p-space-2xs text-on-surface-variant hover:text-on-surface transition-colors rounded"><span class="material-symbols-outlined text-[18px]">menu_open</span></button></div><div class="px-space-md"><div class="flex items-center justify-between bg-surface-container px-space-sm py-space-xs rounded border border-outline-variant"><div class="flex items-center gap-space-2xs"><span class="material-symbols-outlined text-secondary text-[16px]">event_note</span><span class="font-label-caps text-label-caps text-on-surface tracking-wider">SEASON 2026/27</span></div><span class="material-symbols-outlined text-on-surface-variant text-[16px]">unfold_more</span></div></div><nav class="flex-1 flex flex-col gap-space-sm px-space-xs overflow-y-auto" data-active-classes="bg-primary-container text-on-primary-container font-bold rounded"><div class="flex flex-col gap-space-3xs"><span class="px-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Overview</span><a aria-current="page" class="flex items-center gap-space-xs px-space-xs py-space-2xs transition-colors bg-primary-container text-on-primary-container font-bold rounded" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[18px]">grid_view</span><span class="font-body-md text-body-md">Dashboard</span></a></div><div class="flex flex-col gap-space-3xs"><span class="px-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Governance</span><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="associations" href="#"><span class="material-symbols-outlined text-[18px]">flag</span><span class="font-body-md text-body-md">Associations</span></a><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="teams" href="#"><span class="material-symbols-outlined text-[18px]">shield</span><span class="font-body-md text-body-md">Teams</span></a><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="players" href="#"><span class="material-symbols-outlined text-[18px]">sports_soccer</span><span class="font-body-md text-body-md">Players</span></a><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="coaches" href="#"><span class="material-symbols-outlined text-[18px]">high_res</span><span class="font-body-md text-body-md">Coaches</span></a><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="referees" href="#"><span class="material-symbols-outlined text-[18px]">sports</span><span class="font-body-md text-body-md">Referees</span></a></div><div class="flex flex-col gap-space-3xs"><span class="px-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Venues &amp; Assets</span><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="stadiums" href="#"><span class="material-symbols-outlined text-[18px]">stadium</span><span class="font-body-md text-body-md">Stadiums</span></a></div><div class="flex flex-col gap-space-3xs"><span class="px-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Competitions</span><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="tournaments" href="#"><span class="material-symbols-outlined text-[18px]">emoji_events</span><span class="font-body-md text-body-md">Tournaments</span></a><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="fixtures-matches" href="#"><span class="material-symbols-outlined text-[18px]">calendar_month</span><span class="font-body-md text-body-md">Fixtures &amp; Matches</span></a><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="match-events-timeline" href="#"><span class="material-symbols-outlined text-[18px]">timeline</span><span class="font-body-md text-body-md">Match Events Timeline</span></a></div><div class="flex flex-col gap-space-3xs"><span class="px-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Commercial</span><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="partners-sponsors" href="#"><span class="material-symbols-outlined text-[18px]">handshake</span><span class="font-body-md text-body-md">Global Partners &amp; Sponsors</span></a></div></nav></div><div class="px-space-md pt-space-xs flex flex-col gap-space-xs"><div class="p-space-xs bg-surface-container-low rounded flex items-center justify-between"><div class="flex items-center gap-space-xs"><span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span><span class="font-label-caps text-label-caps text-on-surface-variant uppercase">TMS Synced</span></div><span class="font-label-data text-label-data text-primary">99.98%</span></div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/80 backdrop-blur-xl z-40 flex items-center justify-between px-gutter-desktop shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center gap-space-md"><img alt="FIFA Ops Crest" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3F8YxVS6wkUPJmomiMS9t9i3TWnIhjgzEMMX0KW4F2kNiNWUP4CZs_xrZvzwBbfjrbNpNbohS1pFth6bOiuhxlZsqf1L526RW3AUrpMpo7LXNbtoPhXtLBJsVPU1G-aPZHn7Lx-o6-sWidzf_IXlgyVzkhdupqMKlDfkEeA4l5nXxaxZgS42X7tXB05zZ2hBEdUPVip0X8rnS05GG_xLRnrOq_NjAXKMVZMMXIjBiAHVBv89y0TtQ"/><div class="flex items-center gap-space-xs bg-surface-container px-space-sm py-space-2xs rounded border border-outline-variant w-80"><span class="material-symbols-outlined text-on-surface-variant text-[18px]">search</span><input class="bg-transparent text-on-surface placeholder:text-on-surface-variant font-body-sm text-body-sm focus:outline-none w-full" placeholder="Search entities, rules, matches..." readonly="" type="text"/><kbd class="font-label-data text-label-data bg-surface-container-highest text-on-surface px-space-2xs py-space-3xs rounded border border-outline-variant">Ctrl+K</kbd></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs px-space-sm py-space-2xs bg-surface-container-low rounded border border-outline-variant"><span class="w-2 h-2 rounded-full bg-primary animate-ping"></span><span class="font-label-caps text-label-caps text-primary tracking-wider uppercase">Live Feed 2026/27 Active</span></div><button aria-label="Notifications" class="relative p-space-2xs text-on-surface-variant hover:text-on-surface transition-colors rounded"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full"></span></button><div class="flex items-center gap-space-xs pl-space-xs border-l border-outline-variant"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="hidden md:flex flex-col text-left"><span class="font-label-caps text-label-caps text-on-surface uppercase">C. Del Piero</span><span class="font-label-data text-label-data text-on-surface-variant">Lead Commissioner</span></div></div></div></header><main class="w-full px-gutter-desktop pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full pb-space-3xl gap-space-lg text-on-surface">
+<!-- Breadcrumb & Global Commercial Header -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex flex-wrap items-center gap-space-xs font-label-data text-label-data text-on-surface-variant">
+<span class="text-primary flex items-center gap-space-3xs">
+<span class="material-symbols-outlined text-[14px]">verified</span> COMMERCIAL &amp; ASSET GOVERNANCE
+      </span>
+<span>//</span>
+<span>SPONSORSHIP PORTFOLIO</span>
+<span>//</span>
+<span class="text-on-surface">CONTRACT CYCLE 2024–2027</span>
+<span class="ml-auto px-space-xs py-space-3xs bg-surface-container-high rounded text-primary font-label-caps text-label-caps uppercase tracking-wider flex items-center gap-space-2xs">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span> Live Master Ledger
+      </span>
+</div>
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md mt-space-2xs">
+<div class="flex flex-col max-w-4xl">
+<h1 class="font-headline-xl text-headline-xl uppercase text-on-surface tracking-tight font-extrabold flex items-center gap-space-sm">
+          GLOBAL PARTNERS &amp; COMMERCIAL SPONSORS
+          <span class="font-label-caps text-label-caps text-on-primary-container bg-primary-container px-space-xs py-space-3xs rounded font-bold uppercase tracking-wider">
+            Cycle Tier 1–3
+          </span>
+</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-space-3xs leading-relaxed">
+          Centralized commercial rights tracking, broadcast LED allocation, contractual deliverable compliance, and multi-tournament brand valuation for FIFA official partners.
+        </p>
+</div>
+<!-- Action Cluster -->
+<div class="flex items-center gap-space-xs shrink-0 flex-wrap">
+<button class="flex items-center gap-space-xs px-space-sm py-space-xs bg-surface-container-high text-on-surface hover:bg-surface-container-highest hover:text-secondary rounded font-label-caps text-label-caps uppercase tracking-wider transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[16px]">file_download</span>
+          Export Portfolio (PDF/CSV)
+        </button>
+<button class="flex items-center gap-space-xs px-space-sm py-space-xs bg-surface-container-high text-on-surface hover:bg-surface-container-highest hover:text-primary rounded font-label-caps text-label-caps uppercase tracking-wider transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[16px]">grid_view</span>
+          LED Matrix Audit
+        </button>
+<button class="flex items-center gap-space-xs px-space-md py-space-xs bg-primary-container text-on-primary-container font-headline-md text-body-sm font-bold uppercase tracking-wider rounded hover:bg-primary transition-all shadow-md">
+<span class="material-symbols-outlined text-[16px]">add_circle</span>
+          + Onboard Partner
+        </button>
+</div>
+</div>
+</div>
+<!-- Telemetry 5-Stat Ribbon -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-space-sm">
+<!-- Stat 1 -->
+<div class="bg-surface-container-low p-space-md rounded shadow-sm flex flex-col justify-between relative overflow-hidden group">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Total Partners</span>
+<span class="material-symbols-outlined text-primary text-[18px]">verified_user</span>
+</div>
+<div class="mt-space-xs flex items-baseline gap-space-xs">
+<span class="font-metric-mono-lg text-metric-mono-lg text-on-surface font-extrabold">8</span>
+<span class="font-label-data text-label-data text-primary">100% Ratified</span>
+</div>
+<div class="mt-space-2xs font-body-sm text-body-sm text-on-surface-variant flex items-center justify-between">
+<span>4 Global Partners</span>
+<span class="font-label-data text-label-data text-secondary">4 Supporters</span>
+</div>
+<div class="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary via-primary-container to-transparent"></div>
+</div>
+<!-- Stat 2 -->
+<div class="bg-surface-container-low p-space-md rounded shadow-sm flex flex-col justify-between relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Aggregate Value</span>
+<span class="material-symbols-outlined text-secondary text-[18px]">account_balance</span>
+</div>
+<div class="mt-space-xs flex items-baseline gap-space-xs">
+<span class="font-metric-mono-lg text-metric-mono-lg text-on-surface font-extrabold">$1.84B</span>
+<span class="font-label-data text-label-data text-primary">+18.4% YoY</span>
+</div>
+<div class="mt-space-2xs font-body-sm text-body-sm text-on-surface-variant flex items-center justify-between">
+<span>Annualized Run Rate</span>
+<span class="font-label-data text-label-data text-on-surface">$460M / yr</span>
+</div>
+<div class="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-secondary to-transparent"></div>
+</div>
+<!-- Stat 3 -->
+<div class="bg-surface-container-low p-space-md rounded shadow-sm flex flex-col justify-between relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Matches Sponsored</span>
+<span class="material-symbols-outlined text-tertiary text-[18px]">stadium</span>
+</div>
+<div class="mt-space-xs flex items-baseline gap-space-xs">
+<span class="font-metric-mono-lg text-metric-mono-lg text-on-surface font-extrabold">22 / 22</span>
+<span class="font-label-data text-label-data text-primary">100% Ingress</span>
+</div>
+<div class="mt-space-2xs font-body-sm text-body-sm text-on-surface-variant flex items-center justify-between">
+<span>Activated Roster</span>
+<span class="font-label-data text-label-data text-tertiary">All Venues</span>
+</div>
+<div class="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-tertiary to-transparent"></div>
+</div>
+<!-- Stat 4 -->
+<div class="bg-surface-container-low p-space-md rounded shadow-sm flex flex-col justify-between relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Broadcast Exposure</span>
+<span class="material-symbols-outlined text-secondary-fixed text-[18px]">tv_gen</span>
+</div>
+<div class="mt-space-xs flex items-baseline gap-space-xs">
+<span class="font-metric-mono-lg text-metric-mono-lg text-on-surface font-extrabold">4.2B</span>
+<span class="font-label-data text-label-data text-secondary">Audited</span>
+</div>
+<div class="mt-space-2xs font-body-sm text-body-sm text-on-surface-variant flex items-center justify-between">
+<span>Min On-Screen LED</span>
+<span class="font-label-data text-label-data text-on-surface">84.6% Avg</span>
+</div>
+<div class="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-secondary-fixed to-transparent"></div>
+</div>
+<!-- Stat 5 -->
+<div class="bg-surface-container-low p-space-md rounded shadow-sm flex flex-col justify-between relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Asset Clearance</span>
+<span class="material-symbols-outlined text-primary text-[18px]">gavel</span>
+</div>
+<div class="mt-space-xs flex items-baseline gap-space-xs">
+<span class="font-metric-mono-lg text-metric-mono-lg text-primary font-extrabold">99.2%</span>
+<span class="font-label-data text-label-data text-primary">0 Ambush</span>
+</div>
+<div class="mt-space-2xs font-body-sm text-body-sm text-on-surface-variant flex items-center justify-between">
+<span>Infractions Logged</span>
+<span class="font-label-data text-label-data text-primary">CLEARED (0)</span>
+</div>
+<div class="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary to-transparent"></div>
+</div>
+</div>
+<!-- Interactive Controls & Categorization Strip -->
+<div class="flex flex-col xl:flex-row items-stretch xl:items-center justify-between gap-space-sm bg-surface-container-low p-space-xs rounded shadow-sm">
+<!-- Search Bar with Instant Reset -->
+<div class="flex items-center gap-space-xs bg-surface-container px-space-sm py-space-xs rounded flex-1 max-w-2xl">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">filter_list</span>
+<input class="bg-transparent text-on-surface placeholder:text-on-surface-variant font-body-sm text-body-sm focus:outline-none w-full" id="partner-search-input" placeholder="Search partner by brand, industry, territory, or contract ID..." type="text"/>
+<button class="font-label-data text-label-data text-on-surface-variant hover:text-on-surface px-space-2xs py-space-3xs rounded bg-surface-container-high transition-colors" onclick="document.getElementById('partner-search-input').value = ''" title="Clear">
+        ESC
+      </button>
+</div>
+<!-- Category Filter Tabs -->
+<div class="flex items-center gap-space-2xs overflow-x-auto pb-space-2xs xl:pb-0 scrollbar-none">
+<button class="px-space-sm py-space-xs rounded bg-surface-container-highest text-primary font-label-caps text-label-caps tracking-wider uppercase whitespace-nowrap shadow-sm">
+        ALL (8)
+      </button>
+<button class="px-space-sm py-space-xs rounded bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-caps text-label-caps tracking-wider uppercase whitespace-nowrap transition-colors">
+        FIFA PARTNERS (4)
+      </button>
+<button class="px-space-sm py-space-xs rounded bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-caps text-label-caps tracking-wider uppercase whitespace-nowrap transition-colors">
+        REGIONAL SUPPORTERS (4)
+      </button>
+<button class="px-space-sm py-space-xs rounded bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-caps text-label-caps tracking-wider uppercase whitespace-nowrap transition-colors">
+        AUTOMOTIVE &amp; TECH
+      </button>
+<button class="px-space-sm py-space-xs rounded bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-caps text-label-caps tracking-wider uppercase whitespace-nowrap transition-colors">
+        BEVERAGES &amp; FMCG
+      </button>
+</div>
+<!-- Layout & Ordering Toggle -->
+<div class="flex items-center gap-space-xs shrink-0 self-end xl:self-auto">
+<div class="flex items-center gap-space-2xs bg-surface-container px-space-sm py-space-xs rounded text-on-surface font-body-sm text-body-sm">
+<span class="text-on-surface-variant font-label-caps text-label-caps uppercase">Sort by:</span>
+<span class="font-label-data text-label-data text-secondary">Matches Sponsored / Tier</span>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">expand_more</span>
+</div>
+<div class="flex items-center bg-surface-container p-space-3xs rounded">
+<button aria-label="Grid View" class="p-space-2xs rounded bg-surface-container-highest text-primary">
+<span class="material-symbols-outlined text-[18px]">grid_view</span>
+</button>
+<button aria-label="List View" class="p-space-2xs rounded text-on-surface-variant hover:text-on-surface">
+<span class="material-symbols-outlined text-[18px]">format_list_bulleted</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Commercial Partner Dossier Bento Grid (8 Entities) -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-space-md">
+<!-- Card 1: ADIDAS -->
+<div class="bg-surface-container-low rounded p-space-md flex flex-col justify-between shadow-sm relative group hover:bg-surface-container transition-all">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-start justify-between gap-space-xs">
+<span class="font-label-caps text-label-caps text-on-primary-container bg-primary-container px-space-xs py-space-3xs rounded uppercase font-bold tracking-wider">
+            FIFA PARTNER · TIER 1 GLOBAL
+          </span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">4 matches</span>
+</div>
+<div class="flex items-center justify-between mt-space-2xs">
+<div class="flex flex-col">
+<h2 class="font-headline-lg text-headline-lg uppercase text-on-surface font-black tracking-tight">ADIDAS</h2>
+<span class="font-label-data text-label-data text-on-surface-variant">Sportswear &amp; Equipment · Herzogenaurach, DE</span>
+</div>
+<div class="w-12 h-12 rounded bg-surface-container-high flex items-center justify-center font-headline-md text-headline-md font-extrabold text-on-surface tracking-tighter">
+            ADS
+          </div>
+</div>
+<div class="mt-space-xs grid grid-cols-2 gap-space-xs bg-surface-container p-space-xs rounded">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Term Cycle</span>
+<span class="font-label-data text-label-data text-on-surface font-semibold">2023 – 2030</span>
+</div>
+<div class="flex flex-col text-right">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Contract Value</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">$380M</span>
+</div>
+</div>
+<div class="flex flex-col gap-space-3xs mt-space-2xs">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Core Rights &amp; Deliverables</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+            Official Match Ball (Al Rihla / Fussballliebe), Referee Kits, Ball Crew Apparel, Global Fan Zone Retail Rights.
+          </p>
+</div>
+<!-- Telemetry Bar -->
+<div class="flex flex-col gap-space-3xs mt-space-xs">
+<div class="flex justify-between font-label-data text-label-data">
+<span class="text-on-surface-variant">LED Pitch Perimeter Share</span>
+<span class="text-secondary font-bold">18.5% rotation</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 82%"></div>
+</div>
+<div class="flex items-center justify-between text-label-data font-label-data mt-space-3xs text-primary">
+<span class="flex items-center gap-space-3xs"><span class="material-symbols-outlined text-[14px]">check_circle</span> 100% Cleared</span>
+<span class="text-on-surface-variant font-label-data text-label-data">Ref ID: FIFA-23-ADS-01</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-xs mt-space-md pt-space-xs bg-surface-container-low">
+<button class="flex-1 py-space-xs bg-surface-container-high hover:bg-surface-container-highest text-on-surface rounded font-label-caps text-label-caps uppercase tracking-wider text-center transition-colors">
+          Asset Roster
+        </button>
+<button class="flex-1 py-space-xs bg-surface-container-high hover:bg-primary-container hover:text-on-primary-container text-on-surface rounded font-label-caps text-label-caps uppercase tracking-wider text-center transition-colors">
+          Contract Specs
+        </button>
+</div>
+</div>
+<!-- Card 2: COCA-COLA -->
+<div class="bg-surface-container-low rounded p-space-md flex flex-col justify-between shadow-sm relative group hover:bg-surface-container transition-all">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-start justify-between gap-space-xs">
+<span class="font-label-caps text-label-caps text-on-primary-container bg-primary-container px-space-xs py-space-3xs rounded uppercase font-bold tracking-wider">
+            FIFA PARTNER · TIER 1 GLOBAL
+          </span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">4 matches</span>
+</div>
+<div class="flex items-center justify-between mt-space-2xs">
+<div class="flex flex-col">
+<h2 class="font-headline-lg text-headline-lg uppercase text-on-surface font-black tracking-tight">COCA-COLA</h2>
+<span class="font-label-data text-label-data text-on-surface-variant">Beverages · Atlanta, United States</span>
+</div>
+<div class="w-12 h-12 rounded bg-surface-container-high flex items-center justify-center font-headline-md text-headline-md font-extrabold text-error tracking-tighter">
+            KO
+          </div>
+</div>
+<div class="mt-space-xs grid grid-cols-2 gap-space-xs bg-surface-container p-space-xs rounded">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Term Cycle</span>
+<span class="font-label-data text-label-data text-on-surface font-semibold">2022 – 2030</span>
+</div>
+<div class="flex flex-col text-right">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Contract Value</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">$320M</span>
+</div>
+</div>
+<div class="flex flex-col gap-space-3xs mt-space-2xs">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Core Rights &amp; Deliverables</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+            Exclusive Concession Pouring Rights, Trophy Tour Title Sponsor, Youth Flag Bearers &amp; Mascot Program.
+          </p>
+</div>
+<!-- Telemetry Bar -->
+<div class="flex flex-col gap-space-3xs mt-space-xs">
+<div class="flex justify-between font-label-data text-label-data">
+<span class="text-on-surface-variant">LED Pitch Perimeter Share</span>
+<span class="text-secondary font-bold">16.0% rotation</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 74%"></div>
+</div>
+<div class="flex items-center justify-between text-label-data font-label-data mt-space-3xs text-primary">
+<span class="flex items-center gap-space-3xs"><span class="material-symbols-outlined text-[14px]">check_circle</span> 100% Cleared</span>
+<span class="text-on-surface-variant font-label-data text-label-data">Ref ID: FIFA-22-CCE-04</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-xs mt-space-md pt-space-xs bg-surface-container-low">
+<button class="flex-1 py-space-xs bg-surface-container-high hover:bg-surface-container-highest text-on-surface rounded font-label-caps text-label-caps uppercase tracking-wider text-center transition-colors">
+          Asset Roster
+        </button>
+<button class="flex-1 py-space-xs bg-surface-container-high hover:bg-primary-container hover:text-on-primary-container text-on-surface rounded font-label-caps text-label-caps uppercase tracking-wider text-center transition-colors">
+          Contract Specs
+        </button>
+</div>
+</div>
+<!-- Card 3: QATAR AIRWAYS -->
+<div class="bg-surface-container-low rounded p-space-md flex flex-col justify-between shadow-sm relative group hover:bg-surface-container transition-all">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-start justify-between gap-space-xs">
+<span class="font-label-caps text-label-caps text-secondary-fixed-dim bg-surface-container-high px-space-xs py-space-3xs rounded uppercase font-bold tracking-wider">
+            FIFA GLOBAL AIRLINE PARTNER
+          </span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">3 matches</span>
+</div>
+<div class="flex items-center justify-between mt-space-2xs">
+<div class="flex flex-col">
+<h2 class="font-headline-lg text-headline-lg uppercase text-on-surface font-black tracking-tight">QATAR AIRWAYS</h2>
+<span class="font-label-data text-label-data text-on-surface-variant">Aviation &amp; Logistics · Doha, Qatar</span>
+</div>
+<div class="w-12 h-12 rounded bg-surface-container-high flex items-center justify-center font-headline-md text-headline-md font-extrabold text-secondary tracking-tighter">
+            QTR
+          </div>
+</div>
+<div class="mt-space-xs grid grid-cols-2 gap-space-xs bg-surface-container p-space-xs rounded">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Term Cycle</span>
+<span class="font-label-data text-label-data text-on-surface font-semibold">2023 – 2027</span>
+</div>
+<div class="flex flex-col text-right">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Contract Value</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">$250M</span>
+</div>
+</div>
+<div class="flex flex-col gap-space-3xs mt-space-2xs">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Core Rights &amp; Deliverables</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+            VIP Delegation Charters, National Team Flight Corridors, Halftime Broadcast Sting &amp; Replay Presenter.
+          </p>
+</div>
+<!-- Telemetry Bar -->
+<div class="flex flex-col gap-space-3xs mt-space-xs">
+<div class="flex justify-between font-label-data text-label-data">
+<span class="text-on-surface-variant">LED Pitch Perimeter Share</span>
+<span class="text-secondary font-bold">14.5% rotation</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 68%"></div>
+</div>
+<div class="flex items-center justify-between text-label-data font-label-data mt-space-3xs text-primary">
+<span class="flex items-center gap-space-3xs"><span class="material-symbols-outlined text-[14px]">check_circle</span> 100% Cleared</span>
+<span class="text-on-surface-variant font-label-data text-label-data">Ref ID: FIFA-23-QTR-09</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-xs mt-space-md pt-space-xs bg-surface-container-low">
+<button class="flex-1 py-space-xs bg-surface-container-high hover:bg-surface-container-highest text-on-surface rounded font-label-caps text-label-caps uppercase tracking-wider text-center transition-colors">
+          Asset Roster
+        </button>
+<button class="flex-1 py-space-xs bg-surface-container-high hover:bg-primary-container hover:text-on-primary-container text-on-surface rounded font-label-caps text-label-caps uppercase tracking-wider text-center transition-colors">
+          Contract Specs
+        </button>
+</div>
+</div>
+<!-- Card 4: VISA -->
+<div class="bg-surface-container-low rounded p-space-md flex flex-col justify-between shadow-sm relative group hover:bg-surface-container transition-all">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-start justify-between gap-space-xs">
+<span class="font-label-caps text-label-caps text-secondary-fixed bg-surface-container-high px-space-xs py-space-3xs rounded uppercase font-bold tracking-wider">
+            FIFA GLOBAL PAYMENT SERVICE
+          </span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">3 matches</span>
+</div>
+<div class="flex items-center justify-between mt-space-2xs">
+<div class="flex flex-col">
+<h2 class="font-headline-lg text-headline-lg uppercase text-on-surface font-black tracking-tight">VISA</h2>
+<span class="font-label-data text-label-data text-on-surface-variant">Financial Services · San Francisco, US</span>
+</div>
+<div class="w-12 h-12 rounded bg-surface-container-high flex items-center justify-center font-headline-md text-headline-md font-extrabold text-tertiary tracking-tighter">
+            V
+          </div>
+</div>
+<div class="mt-space-xs grid grid-cols-2 gap-space-xs bg-surface-container p-space-xs rounded">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Term Cycle</span>
+<span class="font-label-data text-label-data text-on-surface font-semibold">2021 – 2026</span>
+</div>
+<div class="flex flex-col text-right">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Contract Value</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">$240M</span>
+</div>
+</div>
+<div class="flex flex-col gap-space-3xs mt-space-2xs">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Core Rights &amp; Deliverables</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+            Exclusive Cashless Stadium Turnstiles, Official Player of the Match Trophy, Pre-Match Coin Toss Branding.
+          </p>
+</div>
+<!-- Telemetry Bar -->
+<div class="flex flex-col gap-space-3xs mt-space-xs">
+<div class="flex justify-between font-label-data text-label-data">
+<span class="text-on-surface-variant">LED Pitch Perimeter Share</span>
+<span class="text-secondary font-bold">15.0% rotation</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 70%"></div>
+</div>
+<div class="flex items-center justify-between text-label-data font-label-data mt-space-3xs text-primary">
+<span class="flex items-center gap-space-3xs"><span class="material-symbols-outlined text-[14px]">check_circle</span> 100% Cleared</span>
+<span class="text-on-surface-variant font-label-data text-label-data">Ref ID: FIFA-21-VSA-02</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-xs mt-space-md pt-space-xs bg-surface-container-low">
+<button class="flex-1 py-space-xs bg-surface-container-high hover:bg-surface-container-highest text-on-surface rounded font-label-caps text-label-caps uppercase tracking-wider text-center transition-colors">
+          Asset Roster
+        </button>
+<button class="flex-1 py-space-xs bg-surface-container-high hover:bg-primary-container hover:text-on-primary-container text-on-surface rounded font-label-caps text-label-caps uppercase tracking-wider text-center transition-colors">
+          Contract Specs
+        </button>
+</div>
+</div>
+<!-- Card 5: BUDWEISER -->
+<div class="bg-surface-container-low rounded p-space-md flex flex-col justify-between shadow-sm relative group hover:bg-surface-container transition-all">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-start justify-between gap-space-xs">
+<span class="font-label-caps text-label-caps text-tertiary bg-surface-container-high px-space-xs py-space-3xs rounded uppercase font-bold tracking-wider">
+            OFFICIAL BEER SUPPORTER
+          </span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">2 matches</span>
+</div>
+<div class="flex items-center justify-between mt-space-2xs">
+<div class="flex flex-col">
+<h2 class="font-headline-lg text-headline-lg uppercase text-on-surface font-black tracking-tight">BUDWEISER</h2>
+<span class="font-label-data text-label-data text-on-surface-variant">Beverages (AB InBev) · St. Louis, US</span>
+</div>
+<div class="w-12 h-12 rounded bg-surface-container-high flex items-center justify-center font-headline-md text-headline-md font-extrabold text-tertiary tracking-tighter">
+            BUD
+          </div>
+</div>
+<div class="mt-space-xs grid grid-cols-2 gap-space-xs bg-surface-container p-space-xs rounded">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Term Cycle</span>
+<span class="font-label-data text-label-data text-on-surface font-semibold">2023 – 2026</span>
+</div>
+<div class="flex flex-col text-right">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Contract Value</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">$190M</span>
+</div>
+</div>
+<div class="flex flex-col gap-space-3xs mt-space-2xs">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Core Rights &amp; Deliverables</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+            FIFA Fan Festival Exclusive Beer Garden, Player of the Match Fan Voting Presenter, VIP Hospitality Lounges.
+          </p>
+</div>
+<!-- Telemetry Bar -->
+<div class="flex flex-col gap-space-3xs mt-space-xs">
+<div class="flex justify-between font-label-data text-label-data">
+<span class="text-on-surface-variant">LED Pitch Perimeter Share</span>
+<span class="text-secondary font-bold">12.0% rotation</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 58%"></div>
+</div>
+<div class="flex items-center justify-between text-label-data font-label-data mt-space-3xs text-tertiary">
+<span class="flex items-center gap-space-3xs"><span class="material-symbols-outlined text-[14px]">policy</span> 98.5% Venue Compliance</span>
+<span class="text-on-surface-variant font-label-data text-label-data">Ref ID: FIFA-23-ABI-05</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-xs mt-space-md pt-space-xs bg-surface-container-low">
+<button class="flex-1 py-space-xs bg-surface-container-high hover:bg-surface-container-highest text-on-surface rounded font-label-caps text-label-caps uppercase tracking-wider text-center transition-colors">
+          Asset Roster
+        </button>
+<button class="flex-1 py-space-xs bg-surface-container-high hover:bg-primary-container hover:text-on-primary-container text-on-surface rounded font-label-caps text-label-caps uppercase tracking-wider text-center transition-colors">
+          Contract Specs
+        </button>
+</div>
+</div>
+<!-- Card 6: HYUNDAI / KIA -->
+<div class="bg-surface-container-low rounded p-space-md flex flex-col justify-between shadow-sm relative group hover:bg-surface-container transition-all">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-start justify-between gap-space-xs">
+<span class="font-label-caps text-label-caps text-secondary-fixed bg-surface-container-high px-space-xs py-space-3xs rounded uppercase font-bold tracking-wider">
+            OFFICIAL MOBILITY PARTNER
+          </span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">2 matches</span>
+</div>
+<div class="flex items-center justify-between mt-space-2xs">
+<div class="flex flex-col">
+<h2 class="font-headline-lg text-headline-lg uppercase text-on-surface font-black tracking-tight">HYUNDAI / KIA</h2>
+<span class="font-label-data text-label-data text-on-surface-variant">Automotive &amp; Mobility · Seoul, South Korea</span>
+</div>
+<div class="w-12 h-12 rounded bg-surface-container-high flex items-center justify-center font-headline-md text-headline-md font-extrabold text-secondary tracking-tighter">
+            HYU
+          </div>
+</div>
+<div class="mt-space-xs grid grid-cols-2 gap-space-xs bg-surface-container p-space-xs rounded">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Term Cycle</span>
+<span class="font-label-data text-label-data text-on-surface font-semibold">2023 – 2030</span>
+</div>
+<div class="flex flex-col text-right">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Contract Value</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">$210M</span>
+</div>
+</div>
+<div class="flex flex-col gap-space-3xs mt-space-2xs">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Core Rights &amp; Deliverables</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+            650 Official Delegations EV Fleets, Team Buses, Stadium Green Shuttles, Goal-Line Replay Telecast Stings.
+          </p>
+</div>
+<!-- Telemetry Bar -->
+<div class="flex flex-col gap-space-3xs mt-space-xs">
+<div class="flex justify-between font-label-data text-label-data">
+<span class="text-on-surface-variant">LED Pitch Perimeter Share</span>
+<span class="text-secondary font-bold">11.5% rotation</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 55%"></div>
+</div>
+<div class="flex items-center justify-between text-label-data font-label-data mt-space-3xs text-primary">
+<span class="flex items-center gap-space-3xs"><span class="material-symbols-outlined text-[14px]">check_circle</span> 100% Cleared</span>
+<span class="text-on-surface-variant font-label-data text-label-data">Ref ID: FIFA-23-HMC-08</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-xs mt-space-md pt-space-xs bg-surface-container-low">
+<button class="flex-1 py-space-xs bg-surface-container-high hover:bg-surface-container-highest text-on-surface rounded font-label-caps text-label-caps uppercase tracking-wider text-center transition-colors">
+          Asset Roster
+        </button>
+<button class="flex-1 py-space-xs bg-surface-container-high hover:bg-primary-container hover:text-on-primary-container text-on-surface rounded font-label-caps text-label-caps uppercase tracking-wider text-center transition-colors">
+          Contract Specs
+        </button>
+</div>
+</div>
+<!-- Card 7: MCDONALD'S -->
+<div class="bg-surface-container-low rounded p-space-md flex flex-col justify-between shadow-sm relative group hover:bg-surface-container transition-all">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-start justify-between gap-space-xs">
+<span class="font-label-caps text-label-caps text-tertiary bg-surface-container-high px-space-xs py-space-3xs rounded uppercase font-bold tracking-wider">
+            REGIONAL SUPPORTER · TOURNAMENT
+          </span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">1 match</span>
+</div>
+<div class="flex items-center justify-between mt-space-2xs">
+<div class="flex flex-col">
+<h2 class="font-headline-lg text-headline-lg uppercase text-on-surface font-black tracking-tight">MCDONALD'S</h2>
+<span class="font-label-data text-label-data text-on-surface-variant">Food &amp; Quick Service · Chicago, US</span>
+</div>
+<div class="w-12 h-12 rounded bg-surface-container-high flex items-center justify-center font-headline-md text-headline-md font-extrabold text-tertiary tracking-tighter">
+            MCD
+          </div>
+</div>
+<div class="mt-space-xs grid grid-cols-2 gap-space-xs bg-surface-container p-space-xs rounded">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Term Cycle</span>
+<span class="font-label-data text-label-data text-on-surface font-semibold">2024 – 2026</span>
+</div>
+<div class="flex flex-col text-right">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Contract Value</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">$135M</span>
+</div>
+</div>
+<div class="flex flex-col gap-space-3xs mt-space-2xs">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Core Rights &amp; Deliverables</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+            Player Escort Program (Child Mascots), Tournament Volunteer Program Apparel, Fan Zone Kiosks.
+          </p>
+</div>
+<!-- Telemetry Bar -->
+<div class="flex flex-col gap-space-3xs mt-space-xs">
+<div class="flex justify-between font-label-data text-label-data">
+<span class="text-on-surface-variant">LED Pitch Perimeter Share</span>
+<span class="text-secondary font-bold">8.0% rotation</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 40%"></div>
+</div>
+<div class="flex items-center justify-between text-label-data font-label-data mt-space-3xs text-primary">
+<span class="flex items-center gap-space-3xs"><span class="material-symbols-outlined text-[14px]">check_circle</span> 100% Cleared</span>
+<span class="text-on-surface-variant font-label-data text-label-data">Ref ID: FIFA-24-MCD-11</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-xs mt-space-md pt-space-xs bg-surface-container-low">
+<button class="flex-1 py-space-xs bg-surface-container-high hover:bg-surface-container-highest text-on-surface rounded font-label-caps text-label-caps uppercase tracking-wider text-center transition-colors">
+          Asset Roster
+        </button>
+<button class="flex-1 py-space-xs bg-surface-container-high hover:bg-primary-container hover:text-on-primary-container text-on-surface rounded font-label-caps text-label-caps uppercase tracking-wider text-center transition-colors">
+          Contract Specs
+        </button>
+</div>
+</div>
+<!-- Card 8: WANDA GROUP -->
+<div class="bg-surface-container-low rounded p-space-md flex flex-col justify-between shadow-sm relative group hover:bg-surface-container transition-all">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-start justify-between gap-space-xs">
+<span class="font-label-caps text-label-caps text-on-primary-container bg-primary-container px-space-xs py-space-3xs rounded uppercase font-bold tracking-wider">
+            FIFA PARTNER · TIER 1 GLOBAL
+          </span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">1 match</span>
+</div>
+<div class="flex items-center justify-between mt-space-2xs">
+<div class="flex flex-col">
+<h2 class="font-headline-lg text-headline-lg uppercase text-on-surface font-black tracking-tight">WANDA GROUP</h2>
+<span class="font-label-data text-label-data text-on-surface-variant">Conglomerate &amp; Media · Beijing, China</span>
+</div>
+<div class="w-12 h-12 rounded bg-surface-container-high flex items-center justify-center font-headline-md text-headline-md font-extrabold text-secondary-container tracking-tighter">
+            WAN
+          </div>
+</div>
+<div class="mt-space-xs grid grid-cols-2 gap-space-xs bg-surface-container p-space-xs rounded">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Term Cycle</span>
+<span class="font-label-data text-label-data text-on-surface font-semibold">2016 – 2030</span>
+</div>
+<div class="flex flex-col text-right">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Contract Value</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">$310M</span>
+</div>
+</div>
+<div class="flex flex-col gap-space-3xs mt-space-2xs">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Core Rights &amp; Deliverables</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+            FIFA Youth Development Program, Exclusive Chinese Broadcast Virtual LED Insertion Override Rights.
+          </p>
+</div>
+<!-- Telemetry Bar -->
+<div class="flex flex-col gap-space-3xs mt-space-xs">
+<div class="flex justify-between font-label-data text-label-data">
+<span class="text-on-surface-variant">LED Pitch Perimeter Share</span>
+<span class="text-secondary font-bold">10.0% rotation</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 50%"></div>
+</div>
+<div class="flex items-center justify-between text-label-data font-label-data mt-space-3xs text-primary">
+<span class="flex items-center gap-space-3xs"><span class="material-symbols-outlined text-[14px]">check_circle</span> 100% Cleared</span>
+<span class="text-on-surface-variant font-label-data text-label-data">Ref ID: FIFA-16-WAN-03</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-xs mt-space-md pt-space-xs bg-surface-container-low">
+<button class="flex-1 py-space-xs bg-surface-container-high hover:bg-surface-container-highest text-on-surface rounded font-label-caps text-label-caps uppercase tracking-wider text-center transition-colors">
+          Asset Roster
+        </button>
+<button class="flex-1 py-space-xs bg-surface-container-high hover:bg-primary-container hover:text-on-primary-container text-on-surface rounded font-label-caps text-label-caps uppercase tracking-wider text-center transition-colors">
+          Contract Specs
+        </button>
+</div>
+</div>
+</div>
+<!-- Real-Time Pitchside LED Virtual Insertion & Deliverables Compliance Table -->
+<div class="flex flex-col gap-space-xs bg-surface-container-low p-space-md rounded shadow-sm">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-xs">
+<div>
+<h3 class="font-headline-md text-headline-md uppercase text-on-surface font-bold tracking-tight flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">monitor</span>
+          MATCHDAY LED INGRESS &amp; VIRTUAL BOARD TELEMETRY (BROADCAST CYCLE 2026)
+        </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Real-time verification of dynamic dual-feed digi-board rotation, regional geo-targeted replacement feeds, and tier time allocations.
+        </p>
+</div>
+<div class="flex items-center gap-space-xs shrink-0">
+<span class="font-label-data text-label-data text-primary px-space-xs py-space-3xs bg-surface-container rounded flex items-center gap-space-2xs">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>
+          LED FEED: 59.94 FPS / 4K HDR
+        </span>
+<button class="px-space-sm py-space-xs bg-surface-container-high hover:bg-surface-container-highest text-on-surface rounded font-label-caps text-label-caps uppercase tracking-wider transition-colors">
+          Configure Overrides
+        </button>
+</div>
+</div>
+<!-- Data Table Container -->
+<div class="overflow-x-auto mt-space-xs">
+<table class="w-full text-left border-collapse font-body-sm text-body-sm">
+<thead>
+<tr class="bg-surface-container text-on-surface-variant font-label-caps text-label-caps uppercase tracking-wider">
+<th class="py-space-xs px-space-sm">Partner &amp; Tier</th>
+<th class="py-space-xs px-space-sm">Allocated Matches / Venues</th>
+<th class="py-space-xs px-space-sm">Dual-Feed LED Rotation</th>
+<th class="py-space-xs px-space-sm">Virtual Ad Targeting Feeds</th>
+<th class="py-space-xs px-space-sm">Asset Audit Status</th>
+<th class="py-space-xs px-space-sm text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-transparent">
+<!-- Row 1: Adidas -->
+<tr class="bg-surface-container-low hover:bg-surface-container transition-colors">
+<td class="py-space-xs px-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="w-7 h-7 rounded bg-surface-container-highest text-primary font-headline-md text-body-sm font-black flex items-center justify-center">AD</span>
+<div class="flex flex-col">
+<span class="font-headline-md text-body-sm uppercase font-bold text-on-surface">Adidas</span>
+<span class="font-label-data text-label-data text-primary">TIER 1 GLOBAL</span>
+</div>
+</div>
+</td>
+<td class="py-space-xs px-space-sm">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-semibold">Lusail Iconic Stadium (Match #4)</span>
+<span class="font-label-data text-label-data text-on-surface-variant">Opening Match, Semifinal 1 &amp; Final</span>
+</div>
+</td>
+<td class="py-space-xs px-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="font-metric-mono-md text-metric-mono-md text-on-surface font-bold">540s</span>
+<span class="font-label-data text-label-data text-on-surface-variant">/ 90 min (18.5%)</span>
+</div>
+</td>
+<td class="py-space-xs px-space-sm">
+<div class="flex items-center gap-space-2xs flex-wrap">
+<span class="px-space-2xs py-space-3xs bg-surface-container rounded text-primary font-label-data text-label-data">Global Unicast</span>
+<span class="px-space-2xs py-space-3xs bg-surface-container rounded text-secondary font-label-data text-label-data">EMEA Dynamic</span>
+</div>
+</td>
+<td class="py-space-xs px-space-sm">
+<span class="inline-flex items-center gap-space-2xs px-space-xs py-space-3xs bg-surface-container rounded text-primary font-label-caps text-label-caps uppercase font-bold">
+<span class="material-symbols-outlined text-[14px]">task_alt</span> 100% Delivered
+              </span>
+</td>
+<td class="py-space-xs px-space-sm text-right">
+<div class="flex items-center justify-end gap-space-2xs">
+<button class="p-space-2xs bg-surface-container hover:bg-primary-container hover:text-on-primary-container text-on-surface rounded transition-colors" title="Launch LED Monitor">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+</button>
+<button class="p-space-2xs bg-surface-container hover:bg-surface-container-highest text-on-surface rounded transition-colors" title="Audit Log">
+<span class="material-symbols-outlined text-[16px]">receipt_long</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2: Coca-Cola -->
+<tr class="bg-surface-container hover:bg-surface-container-high transition-colors">
+<td class="py-space-xs px-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="w-7 h-7 rounded bg-surface-container-highest text-error font-headline-md text-body-sm font-black flex items-center justify-center">CC</span>
+<div class="flex flex-col">
+<span class="font-headline-md text-body-sm uppercase font-bold text-on-surface">Coca-Cola</span>
+<span class="font-label-data text-label-data text-primary">TIER 1 GLOBAL</span>
+</div>
+</div>
+</td>
+<td class="py-space-xs px-space-sm">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-semibold">Wembley Stadium (Match #2)</span>
+<span class="font-label-data text-label-data text-on-surface-variant">Round of 16 &amp; Quarterfinal 2</span>
+</div>
+</td>
+<td class="py-space-xs px-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="font-metric-mono-md text-metric-mono-md text-on-surface font-bold">480s</span>
+<span class="font-label-data text-label-data text-on-surface-variant">/ 90 min (16.0%)</span>
+</div>
+</td>
+<td class="py-space-xs px-space-sm">
+<div class="flex items-center gap-space-2xs flex-wrap">
+<span class="px-space-2xs py-space-3xs bg-surface-container rounded text-primary font-label-data text-label-data">Global Unicast</span>
+<span class="px-space-2xs py-space-3xs bg-surface-container rounded text-secondary font-label-data text-label-data">Americas Feed</span>
+</div>
+</td>
+<td class="py-space-xs px-space-sm">
+<span class="inline-flex items-center gap-space-2xs px-space-xs py-space-3xs bg-surface-container rounded text-primary font-label-caps text-label-caps uppercase font-bold">
+<span class="material-symbols-outlined text-[14px]">task_alt</span> 100% Delivered
+              </span>
+</td>
+<td class="py-space-xs px-space-sm text-right">
+<div class="flex items-center justify-end gap-space-2xs">
+<button class="p-space-2xs bg-surface-container-low hover:bg-primary-container hover:text-on-primary-container text-on-surface rounded transition-colors" title="Launch LED Monitor">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+</button>
+<button class="p-space-2xs bg-surface-container-low hover:bg-surface-container-highest text-on-surface rounded transition-colors" title="Audit Log">
+<span class="material-symbols-outlined text-[16px]">receipt_long</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3: Qatar Airways -->
+<tr class="bg-surface-container-low hover:bg-surface-container transition-colors">
+<td class="py-space-xs px-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="w-7 h-7 rounded bg-surface-container-highest text-secondary font-headline-md text-body-sm font-black flex items-center justify-center">QA</span>
+<div class="flex flex-col">
+<span class="font-headline-md text-body-sm uppercase font-bold text-on-surface">Qatar Airways</span>
+<span class="font-label-data text-label-data text-secondary">GLOBAL AIRLINE</span>
+</div>
+</div>
+</td>
+<td class="py-space-xs px-space-sm">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-semibold">Maracanã (Match #7)</span>
+<span class="font-label-data text-label-data text-on-surface-variant">Quarterfinal 4 &amp; 3rd Place Playoff</span>
+</div>
+</td>
+<td class="py-space-xs px-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="font-metric-mono-md text-metric-mono-md text-on-surface font-bold">420s</span>
+<span class="font-label-data text-label-data text-on-surface-variant">/ 90 min (14.5%)</span>
+</div>
+</td>
+<td class="py-space-xs px-space-sm">
+<div class="flex items-center gap-space-2xs flex-wrap">
+<span class="px-space-2xs py-space-3xs bg-surface-container rounded text-primary font-label-data text-label-data">Global Broadcast</span>
+<span class="px-space-2xs py-space-3xs bg-surface-container rounded text-tertiary font-label-data text-label-data">MENA Feed</span>
+</div>
+</td>
+<td class="py-space-xs px-space-sm">
+<span class="inline-flex items-center gap-space-2xs px-space-xs py-space-3xs bg-surface-container rounded text-primary font-label-caps text-label-caps uppercase font-bold">
+<span class="material-symbols-outlined text-[14px]">task_alt</span> 100% Delivered
+              </span>
+</td>
+<td class="py-space-xs px-space-sm text-right">
+<div class="flex items-center justify-end gap-space-2xs">
+<button class="p-space-2xs bg-surface-container hover:bg-primary-container hover:text-on-primary-container text-on-surface rounded transition-colors" title="Launch LED Monitor">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+</button>
+<button class="p-space-2xs bg-surface-container hover:bg-surface-container-highest text-on-surface rounded transition-colors" title="Audit Log">
+<span class="material-symbols-outlined text-[16px]">receipt_long</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4: Visa -->
+<tr class="bg-surface-container hover:bg-surface-container-high transition-colors">
+<td class="py-space-xs px-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="w-7 h-7 rounded bg-surface-container-highest text-tertiary font-headline-md text-body-sm font-black flex items-center justify-center">VI</span>
+<div class="flex flex-col">
+<span class="font-headline-md text-body-sm uppercase font-bold text-on-surface">Visa</span>
+<span class="font-label-data text-label-data text-secondary">GLOBAL PAYMENT</span>
+</div>
+</div>
+</td>
+<td class="py-space-xs px-space-sm">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-semibold">MetLife Stadium (Match #1)</span>
+<span class="font-label-data text-label-data text-on-surface-variant">Round of 32 &amp; Group Stage Finale</span>
+</div>
+</td>
+<td class="py-space-xs px-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="font-metric-mono-md text-metric-mono-md text-on-surface font-bold">450s</span>
+<span class="font-label-data text-label-data text-on-surface-variant">/ 90 min (15.0%)</span>
+</div>
+</td>
+<td class="py-space-xs px-space-sm">
+<div class="flex items-center gap-space-2xs flex-wrap">
+<span class="px-space-2xs py-space-3xs bg-surface-container rounded text-primary font-label-data text-label-data">Global Unicast</span>
+<span class="px-space-2xs py-space-3xs bg-surface-container rounded text-secondary font-label-data text-label-data">LatAm Feed</span>
+</div>
+</td>
+<td class="py-space-xs px-space-sm">
+<span class="inline-flex items-center gap-space-2xs px-space-xs py-space-3xs bg-surface-container rounded text-primary font-label-caps text-label-caps uppercase font-bold">
+<span class="material-symbols-outlined text-[14px]">task_alt</span> 100% Delivered
+              </span>
+</td>
+<td class="py-space-xs px-space-sm text-right">
+<div class="flex items-center justify-end gap-space-2xs">
+<button class="p-space-2xs bg-surface-container-low hover:bg-primary-container hover:text-on-primary-container text-on-surface rounded transition-colors" title="Launch LED Monitor">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+</button>
+<button class="p-space-2xs bg-surface-container-low hover:bg-surface-container-highest text-on-surface rounded transition-colors" title="Audit Log">
+<span class="material-symbols-outlined text-[16px]">receipt_long</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 5: Budweiser -->
+<tr class="bg-surface-container-low hover:bg-surface-container transition-colors">
+<td class="py-space-xs px-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="w-7 h-7 rounded bg-surface-container-highest text-tertiary font-headline-md text-body-sm font-black flex items-center justify-center">BW</span>
+<div class="flex flex-col">
+<span class="font-headline-md text-body-sm uppercase font-bold text-on-surface">Budweiser</span>
+<span class="font-label-data text-label-data text-tertiary">OFFICIAL BEER</span>
+</div>
+</div>
+</td>
+<td class="py-space-xs px-space-sm">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-semibold">Estadio Azteca (Match #9)</span>
+<span class="font-label-data text-label-data text-on-surface-variant">Round of 16 Group Stage Matches</span>
+</div>
+</td>
+<td class="py-space-xs px-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="font-metric-mono-md text-metric-mono-md text-on-surface font-bold">360s</span>
+<span class="font-label-data text-label-data text-on-surface-variant">/ 90 min (12.0%)</span>
+</div>
+</td>
+<td class="py-space-xs px-space-sm">
+<div class="flex items-center gap-space-2xs flex-wrap">
+<span class="px-space-2xs py-space-3xs bg-surface-container rounded text-tertiary font-label-data text-label-data">NA / CONCACAF</span>
+<span class="px-space-2xs py-space-3xs bg-surface-container rounded text-on-surface-variant font-label-data text-label-data">Zero Alc Alt (MEA)</span>
+</div>
+</td>
+<td class="py-space-xs px-space-sm">
+<span class="inline-flex items-center gap-space-2xs px-space-xs py-space-3xs bg-surface-container rounded text-tertiary font-label-caps text-label-caps uppercase font-bold">
+<span class="material-symbols-outlined text-[14px]">policy</span> 98.5% Venue Cleared
+              </span>
+</td>
+<td class="py-space-xs px-space-sm text-right">
+<div class="flex items-center justify-end gap-space-2xs">
+<button class="p-space-2xs bg-surface-container hover:bg-primary-container hover:text-on-primary-container text-on-surface rounded transition-colors" title="Launch LED Monitor">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+</button>
+<button class="p-space-2xs bg-surface-container hover:bg-surface-container-highest text-on-surface rounded transition-colors" title="Audit Log">
+<span class="material-symbols-outlined text-[16px]">receipt_long</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Operational Protocol & Commercial Compliance Footnote -->
+<div class="flex flex-col md:flex-row items-center justify-between gap-space-sm bg-surface-container-lowest p-space-sm rounded shadow-sm">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[24px]">verified</span>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface uppercase tracking-wider font-bold">
+          FIFA COMMERCIAL RIGHTS PROTECTION &amp; ANTI-AMBUSH PROTOCOL REV 3.8
+        </span>
+<span class="font-label-data text-label-data text-on-surface-variant">
+          Cryptographic TMS synchronization active · Verified by Zurich Commercial Rights Division · Zero rights breaches recorded cycle-to-date.
+        </span>
+</div>
+</div>
+<div class="flex items-center gap-space-md shrink-0">
+<div class="flex flex-col text-right">
+<span class="font-label-data text-label-data text-on-surface font-semibold">Ledger Hash: 8f4a9b2c-2026-crd</span>
+<span class="font-label-data text-label-data text-primary">AUDITED: 2026-06-18 14:32:09 UTC</span>
+</div>
+<button class="px-space-sm py-space-xs bg-surface-container-high hover:bg-surface-container-highest text-on-surface rounded font-label-caps text-label-caps uppercase tracking-wider transition-colors">
+        Audit Log
+      </button>
+</div>
+</div>
+</div>
+<!-- Real-time Active Sidebar Sync Script -->
+<script>
+  (function() {
+    // Dynamically highlight "Global Partners & Sponsors" in sidebar as active route
+    const currentLink = document.querySelector('aside nav a[data-path="partners-sponsors"]');
+    if (currentLink) {
+      // Remove active from any existing link
+      document.querySelectorAll('aside nav a').forEach(el => {
+        el.classList.remove('bg-primary-container', 'text-on-primary-container', 'font-bold');
+        el.classList.add('text-on-surface-variant');
+      });
+      // Apply active tokens
+      currentLink.classList.remove('text-on-surface-variant');
+      currentLink.classList.add('bg-primary-container', 'text-on-primary-container', 'font-bold', 'rounded');
+    }
+  })();
+</script></main></div></body></html>

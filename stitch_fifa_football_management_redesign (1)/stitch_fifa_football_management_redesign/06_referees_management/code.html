@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Chivo:wght@600;700;800&amp;family=Hanken+Grotesk:wght@400;500;600&amp;family=JetBrains+Mono:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: 'class', theme: { extend: { colors: { 'error': '#ffb4ab', 'on-tertiary-fixed-variant': '#653e00', 'surface': '#0f131c', 'on-surface': '#dfe2ee', 'inverse-surface': '#dfe2ee', 'tertiary': '#ffb95f', 'surface-variant': '#31353e', 'on-error': '#690005', 'on-secondary-container': '#00374d', 'surface-bright': '#353942', 'on-tertiary-container': '#523200', 'tertiary-fixed': '#ffddb8', 'outline': '#86948a', 'tertiary-fixed-dim': '#ffb95f', 'secondary': '#7bd0ff', 'on-tertiary': '#472a00', 'secondary-container': '#00a6e0', 'outline-variant': '#3c4a42', 'on-primary-fixed': '#002113', 'surface-container-lowest': '#0a0e16', 'error-container': '#93000a', 'on-primary-container': '#00422b', 'on-secondary': '#00354a', 'primary-fixed-dim': '#4edea3', 'secondary-fixed': '#c4e7ff', 'on-secondary-fixed': '#001e2c', 'surface-container-low': '#181c24', 'surface-container-high': '#262a33', 'on-primary': '#003824', 'on-secondary-fixed-variant': '#004c69', 'on-surface-variant': '#bbcabf', 'tertiary-container': '#e29100', 'inverse-on-surface': '#2c3039', 'surface-container-highest': '#31353e', 'surface-container': '#1c2028', 'background': '#0f131c', 'primary-fixed': '#6ffbbe', 'primary-container': '#10b981', 'on-primary-fixed-variant': '#005236', 'on-background': '#dfe2ee', 'on-tertiary-fixed': '#2a1700', 'surface-tint': '#4edea3', 'surface-dim': '#0f131c', 'inverse-primary': '#006c49', 'on-error-container': '#ffdad6', 'primary': '#4edea3', 'secondary-fixed-dim': '#7bd0ff' }, borderRadius: { 'DEFAULT': '0.125rem', 'lg': '0.25rem', 'xl': '0.5rem', 'full': '0.75rem' }, spacing: { 'margin-mobile': '1rem', 'space-3xs': '0.125rem', 'space-3xl': '4rem', 'margin-desktop': '1.5rem', 'space-2xs': '0.25rem', 'space-xs': '0.5rem', 'space-sm': '0.75rem', 'space-xl': '2rem', 'space-2xl': '3rem', 'gutter-mobile': '0.75rem', 'space-lg': '1.5rem', 'space-md': '1rem', 'gutter-desktop': '1rem' }, fontFamily: { 'label-data': ['JetBrains Mono'], 'body-lg': ['Hanken Grotesk'], 'label-caps': ['Chivo'], 'headline-xl-mobile': ['Chivo'], 'metric-mono-lg': ['JetBrains Mono'], 'headline-2xl-mobile': ['Chivo'], 'headline-lg': ['Chivo'], 'headline-2xl': ['Chivo'], 'body-md': ['Hanken Grotesk'], 'headline-xl': ['Chivo'], 'metric-mono-md': ['JetBrains Mono'], 'body-sm': ['Hanken Grotesk'], 'headline-md': ['Chivo'] }, fontSize: { 'label-data': ['11px', { lineHeight: '14px', letterSpacing: '0.02em', fontWeight: '500' }], 'body-lg': ['16px', { lineHeight: '24px', letterSpacing: '0em', fontWeight: '400' }], 'label-caps': ['11px', { lineHeight: '14px', letterSpacing: '0.08em', fontWeight: '700' }], 'headline-xl-mobile': ['26px', { lineHeight: '32px', letterSpacing: '-0.015em', fontWeight: '700' }], 'metric-mono-lg': ['28px', { lineHeight: '32px', letterSpacing: '-0.02em', fontWeight: '700' }], 'headline-2xl-mobile': ['32px', { lineHeight: '38px', letterSpacing: '-0.02em', fontWeight: '800' }], 'headline-lg': ['24px', { lineHeight: '30px', letterSpacing: '-0.02em', fontWeight: '700' }], 'headline-2xl': ['48px', { lineHeight: '52px', letterSpacing: '-0.03em', fontWeight: '800' }], 'body-md': ['14px', { lineHeight: '20px', letterSpacing: '0em', fontWeight: '400' }], 'headline-xl': ['36px', { lineHeight: '42px', letterSpacing: '-0.025em', fontWeight: '700' }], 'metric-mono-md': ['15px', { lineHeight: '20px', letterSpacing: '-0.01em', fontWeight: '600' }], 'body-sm': ['12px', { lineHeight: '18px', letterSpacing: '0.01em', fontWeight: '400' }], 'headline-md': ['18px', { lineHeight: '24px', letterSpacing: '-0.01em', fontWeight: '600' }] } } } };</script></head><body class="bg-background font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-lowest z-50 flex flex-col justify-between py-space-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col gap-space-md"><div class="px-space-md flex items-center justify-between"><div class="flex items-center gap-space-xs"><img alt="FIFA Ops Crest" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3F8YxVS6wkUPJmomiMS9t9i3TWnIhjgzEMMX0KW4F2kNiNWUP4CZs_xrZvzwBbfjrbNpNbohS1pFth6bOiuhxlZsqf1L526RW3AUrpMpo7LXNbtoPhXtLBJsVPU1G-aPZHn7Lx-o6-sWidzf_IXlgyVzkhdupqMKlDfkEeA4l5nXxaxZgS42X7tXB05zZ2hBEdUPVip0X8rnS05GG_xLRnrOq_NjAXKMVZMMXIjBiAHVBv89y0TtQ"/><div class="flex flex-col"><span class="font-headline-md text-headline-md uppercase tracking-tight text-on-surface">FIFA OPS</span><span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Operations Hub</span></div></div><button aria-label="Collapse Sidebar" class="p-space-2xs text-on-surface-variant hover:text-on-surface transition-colors rounded"><span class="material-symbols-outlined text-[18px]">menu_open</span></button></div><div class="px-space-md"><div class="flex items-center justify-between bg-surface-container px-space-sm py-space-xs rounded border border-outline-variant"><div class="flex items-center gap-space-2xs"><span class="material-symbols-outlined text-secondary text-[16px]">event_note</span><span class="font-label-caps text-label-caps text-on-surface tracking-wider">SEASON 2026/27</span></div><span class="material-symbols-outlined text-on-surface-variant text-[16px]">unfold_more</span></div></div><nav class="flex-1 flex flex-col gap-space-sm px-space-xs overflow-y-auto" data-active-classes="bg-primary-container text-on-primary-container font-bold rounded"><div class="flex flex-col gap-space-3xs"><span class="px-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Overview</span><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[18px]">grid_view</span><span class="font-body-md text-body-md">Dashboard</span></a></div><div class="flex flex-col gap-space-3xs"><span class="px-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Governance</span><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="associations" href="#"><span class="material-symbols-outlined text-[18px]">flag</span><span class="font-body-md text-body-md">Associations</span></a><a aria-current="page" class="flex items-center gap-space-xs px-space-xs py-space-2xs transition-colors bg-primary-container text-on-primary-container font-bold rounded" data-path="teams" href="#"><span class="material-symbols-outlined text-[18px]">shield</span><span class="font-body-md text-body-md">Teams</span></a><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="players" href="#"><span class="material-symbols-outlined text-[18px]">sports_soccer</span><span class="font-body-md text-body-md">Players</span></a><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="coaches" href="#"><span class="material-symbols-outlined text-[18px]">high_res</span><span class="font-body-md text-body-md">Coaches</span></a><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="referees" href="#"><span class="material-symbols-outlined text-[18px]">sports</span><span class="font-body-md text-body-md">Referees</span></a></div><div class="flex flex-col gap-space-3xs"><span class="px-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Venues &amp; Assets</span><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="stadiums" href="#"><span class="material-symbols-outlined text-[18px]">stadium</span><span class="font-body-md text-body-md">Stadiums</span></a></div><div class="flex flex-col gap-space-3xs"><span class="px-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Competitions</span><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="tournaments" href="#"><span class="material-symbols-outlined text-[18px]">emoji_events</span><span class="font-body-md text-body-md">Tournaments</span></a><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="fixtures-matches" href="#"><span class="material-symbols-outlined text-[18px]">calendar_month</span><span class="font-body-md text-body-md">Fixtures &amp; Matches</span></a><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="match-events-timeline" href="#"><span class="material-symbols-outlined text-[18px]">timeline</span><span class="font-body-md text-body-md">Match Events Timeline</span></a></div><div class="flex flex-col gap-space-3xs"><span class="px-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Commercial</span><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="partners-sponsors" href="#"><span class="material-symbols-outlined text-[18px]">handshake</span><span class="font-body-md text-body-md">Global Partners &amp; Sponsors</span></a></div></nav></div><div class="px-space-md pt-space-xs flex flex-col gap-space-xs"><div class="p-space-xs bg-surface-container-low rounded flex items-center justify-between"><div class="flex items-center gap-space-xs"><span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span><span class="font-label-caps text-label-caps text-on-surface-variant uppercase">TMS Synced</span></div><span class="font-label-data text-label-data text-primary">99.98%</span></div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/80 backdrop-blur-xl z-40 flex items-center justify-between px-gutter-desktop shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center gap-space-md"><img alt="FIFA Ops Crest" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3F8YxVS6wkUPJmomiMS9t9i3TWnIhjgzEMMX0KW4F2kNiNWUP4CZs_xrZvzwBbfjrbNpNbohS1pFth6bOiuhxlZsqf1L526RW3AUrpMpo7LXNbtoPhXtLBJsVPU1G-aPZHn7Lx-o6-sWidzf_IXlgyVzkhdupqMKlDfkEeA4l5nXxaxZgS42X7tXB05zZ2hBEdUPVip0X8rnS05GG_xLRnrOq_NjAXKMVZMMXIjBiAHVBv89y0TtQ"/><div class="flex items-center gap-space-xs bg-surface-container px-space-sm py-space-2xs rounded border border-outline-variant w-80"><span class="material-symbols-outlined text-on-surface-variant text-[18px]">search</span><input class="bg-transparent text-on-surface placeholder:text-on-surface-variant font-body-sm text-body-sm focus:outline-none w-full" placeholder="Search entities, rules, matches..." readonly="" type="text"/><kbd class="font-label-data text-label-data bg-surface-container-highest text-on-surface px-space-2xs py-space-3xs rounded border border-outline-variant">Ctrl+K</kbd></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs px-space-sm py-space-2xs bg-surface-container-low rounded border border-outline-variant"><span class="w-2 h-2 rounded-full bg-primary animate-ping"></span><span class="font-label-caps text-label-caps text-primary tracking-wider uppercase">Live Feed 2026/27 Active</span></div><button aria-label="Notifications" class="relative p-space-2xs text-on-surface-variant hover:text-on-surface transition-colors rounded"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full"></span></button><div class="flex items-center gap-space-xs pl-space-xs border-l border-outline-variant"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="hidden md:flex flex-col text-left"><span class="font-label-caps text-label-caps text-on-surface uppercase">C. Del Piero</span><span class="font-label-data text-label-data text-on-surface-variant">Lead Commissioner</span></div></div></div></header><main class="w-full px-gutter-desktop pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full pb-space-2xl space-y-space-md">
+<!-- Breadcrumb & Top Executive Meta Strip -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-sm bg-surface-container-lowest p-space-md rounded-lg shadow-sm">
+<div class="flex flex-col space-y-space-2xs">
+<div class="flex items-center gap-space-xs">
+<span class="inline-flex items-center gap-space-3xs font-label-caps text-label-caps text-secondary uppercase tracking-widest">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+          Match Officials Registry
+        </span>
+<span class="text-outline-variant font-label-data text-label-data">//</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Arbitration Division • FIFA Elite Panel</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight uppercase">Match Officials &amp; Referees</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+        8 FIFA international certified referees and VAR video match officials assigned to competitive international fixtures and tournament assignments.
+      </p>
+</div>
+<!-- Quick Action Controls -->
+<div class="flex items-center gap-space-xs flex-wrap">
+<button class="flex items-center gap-space-xs bg-surface-container hover:bg-surface-container-high text-on-surface font-headline-md text-[12px] px-space-sm py-space-xs rounded uppercase tracking-wider transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-secondary">analytics</span>
+        Audit Performance
+      </button>
+<button class="flex items-center gap-space-xs bg-surface-container hover:bg-surface-container-high text-on-surface font-headline-md text-[12px] px-space-sm py-space-xs rounded uppercase tracking-wider transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-tertiary">tune</span>
+        Assignments Filter
+      </button>
+<button class="flex items-center gap-space-xs bg-primary hover:bg-primary-fixed text-on-primary font-headline-md text-[12px] px-space-md py-space-xs rounded uppercase tracking-wider font-bold transition-colors shadow-md" id="addRefereeBtn">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+        + Add Referee
+      </button>
+</div>
+</div>
+<!-- Telemetry KPI Summary Ribbon -->
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-space-xs">
+<!-- KPI 1 -->
+<div class="bg-surface-container-lowest p-space-sm rounded-lg flex flex-col justify-between space-y-space-xs relative overflow-hidden shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Certified Officials</span>
+<span class="material-symbols-outlined text-primary text-[18px]">badge</span>
+</div>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-metric-mono-lg text-metric-mono-lg text-on-surface">8</span>
+<span class="font-label-data text-label-data text-primary">FIFA Int'l</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-full"></div>
+</div>
+</div>
+<!-- KPI 2 -->
+<div class="bg-surface-container-lowest p-space-sm rounded-lg flex flex-col justify-between space-y-space-xs relative overflow-hidden shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Main Referees</span>
+<span class="material-symbols-outlined text-primary text-[18px]">sports</span>
+</div>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-metric-mono-lg text-metric-mono-lg text-on-surface">5</span>
+<span class="font-label-data text-label-data text-on-surface-variant">Category 1 &amp; Elite</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[62.5%]"></div>
+</div>
+</div>
+<!-- KPI 3 -->
+<div class="bg-surface-container-lowest p-space-sm rounded-lg flex flex-col justify-between space-y-space-xs relative overflow-hidden shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">VAR Specialists</span>
+<span class="material-symbols-outlined text-secondary text-[18px]">videocam</span>
+</div>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-metric-mono-lg text-metric-mono-lg text-on-surface">1</span>
+<span class="font-label-data text-label-data text-secondary">VMO Certified</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-secondary h-full w-[12.5%]"></div>
+</div>
+</div>
+<!-- KPI 4 -->
+<div class="bg-surface-container-lowest p-space-sm rounded-lg flex flex-col justify-between space-y-space-xs relative overflow-hidden shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Assistant Referees</span>
+<span class="material-symbols-outlined text-tertiary text-[18px]">flag</span>
+</div>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-metric-mono-lg text-metric-mono-lg text-on-surface">2</span>
+<span class="font-label-data text-label-data text-tertiary">FIFA AR Badge</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-tertiary h-full w-[25%]"></div>
+</div>
+</div>
+<!-- KPI 5 -->
+<div class="bg-surface-container-lowest p-space-sm rounded-lg flex flex-col justify-between space-y-space-xs relative overflow-hidden shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Total Matches</span>
+<span class="material-symbols-outlined text-on-surface text-[18px]">event_available</span>
+</div>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-metric-mono-lg text-metric-mono-lg text-on-surface">26</span>
+<span class="font-label-data text-label-data text-on-surface-variant">Logged</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[84%]"></div>
+</div>
+</div>
+<!-- KPI 6 -->
+<div class="bg-surface-container-lowest p-space-sm rounded-lg flex flex-col justify-between space-y-space-xs relative overflow-hidden shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Disciplinary Index</span>
+<span class="flex items-center gap-1">
+<span class="w-2.5 h-3.5 bg-tertiary rounded-sm"></span>
+<span class="w-2.5 h-3.5 bg-error rounded-sm"></span>
+</span>
+</div>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-metric-mono-lg text-metric-mono-lg text-tertiary">3.8</span>
+<span class="font-label-data text-label-data text-on-surface-variant">Cards/Match</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-tertiary h-full w-[45%]"></div>
+</div>
+</div>
+</div>
+<!-- Operational Filter & Search Bar -->
+<div class="flex flex-col xl:flex-row items-stretch xl:items-center justify-between gap-space-sm bg-surface-container-low p-space-sm rounded-lg shadow-sm">
+<!-- Search Query Input -->
+<div class="relative flex-1 min-w-[280px]">
+<span class="material-symbols-outlined absolute left-space-sm top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
+<input class="w-full pl-9 pr-space-md py-space-xs bg-surface-container-lowest text-on-surface placeholder:text-on-surface-variant font-body-sm text-body-sm rounded focus:outline-none focus:bg-surface-container" id="refereeSearch" placeholder="Search official by name, nationality, FIFA badge ID, role..." type="text"/>
+</div>
+<!-- Categorical Filter Pills -->
+<div class="flex items-center gap-space-2xs overflow-x-auto pb-1 xl:pb-0" id="filterPillsContainer">
+<button class="filter-pill px-space-sm py-space-3xs bg-primary-container text-on-primary-container font-label-caps text-label-caps rounded uppercase font-bold tracking-wider whitespace-nowrap shadow-sm" data-filter="all">
+        All (8)
+      </button>
+<button class="filter-pill px-space-sm py-space-3xs bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-caps text-label-caps rounded uppercase font-bold tracking-wider whitespace-nowrap transition-colors" data-filter="main">
+        Main Referee (5)
+      </button>
+<button class="filter-pill px-space-sm py-space-3xs bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-caps text-label-caps rounded uppercase font-bold tracking-wider whitespace-nowrap transition-colors" data-filter="var">
+        VAR Official (1)
+      </button>
+<button class="filter-pill px-space-sm py-space-3xs bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-caps text-label-caps rounded uppercase font-bold tracking-wider whitespace-nowrap transition-colors" data-filter="assistant">
+        Assistant (2)
+      </button>
+<button class="confed-pill px-space-sm py-space-3xs bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-caps text-label-caps rounded uppercase font-bold tracking-wider whitespace-nowrap transition-colors" data-confed="UEFA">
+        UEFA
+      </button>
+<button class="confed-pill px-space-sm py-space-3xs bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-caps text-label-caps rounded uppercase font-bold tracking-wider whitespace-nowrap transition-colors" data-confed="CONMEBOL">
+        CONMEBOL
+      </button>
+<button class="confed-pill px-space-sm py-space-3xs bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-caps text-label-caps rounded uppercase font-bold tracking-wider whitespace-nowrap transition-colors" data-confed="AFC">
+        AFC
+      </button>
+</div>
+<!-- Sort & View Modes -->
+<div class="flex items-center gap-space-xs justify-between xl:justify-end">
+<div class="flex items-center gap-space-2xs bg-surface-container-lowest px-space-sm py-space-xs rounded">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">sort</span>
+<select class="bg-transparent text-on-surface font-label-caps text-label-caps uppercase focus:outline-none cursor-pointer" id="sortSelect">
+<option class="bg-surface-container text-on-surface" value="matches">Sort: Most Matches</option>
+<option class="bg-surface-container text-on-surface" value="fitness">Sort: Fitness Rating</option>
+<option class="bg-surface-container text-on-surface" value="cards">Sort: Card Index</option>
+<option class="bg-surface-container text-on-surface" value="name">Sort: Official Name (A-Z)</option>
+</select>
+</div>
+<div class="flex items-center bg-surface-container-lowest p-space-3xs rounded">
+<button aria-label="Grid View" class="p-space-2xs bg-surface-container-highest text-on-surface rounded" id="viewGridBtn">
+<span class="material-symbols-outlined text-[16px]">grid_view</span>
+</button>
+<button aria-label="List View" class="p-space-2xs text-on-surface-variant hover:text-on-surface rounded" id="viewListBtn">
+<span class="material-symbols-outlined text-[16px]">view_list</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Referees & Match Officials Grid (Primary View) -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-space-sm" id="officialsGrid">
+<!-- Card 1: Szymon Marciniak -->
+<div class="official-card bg-surface-container-lowest rounded-lg p-space-md flex flex-col justify-between space-y-space-md shadow-sm hover:shadow-md transition-shadow relative overflow-hidden" data-cards="19" data-confed="UEFA" data-fitness="99.1" data-matches="5" data-name="Szymon Marciniak" data-role="main">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<!-- Monogram / Emblem -->
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center font-metric-mono-md text-metric-mono-md font-bold text-primary shadow-inner">
+            SM
+          </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-2xs">
+<span class="font-headline-md text-headline-md text-on-surface">Szymon Marciniak</span>
+<span class="material-symbols-outlined text-primary text-[16px]" title="FIFA Elite Panel Confirmed">verified</span>
+</div>
+<div class="flex items-center gap-space-2xs">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Poland</span>
+<span class="text-outline-variant font-label-data text-label-data">•</span>
+<span class="font-label-data text-label-data text-secondary">PZPN / UEFA</span>
+</div>
+</div>
+</div>
+<!-- Role Badge -->
+<span class="px-space-xs py-space-3xs rounded bg-surface-container font-label-caps text-label-caps text-primary tracking-wider uppercase font-bold">
+          Main Referee
+        </span>
+</div>
+<!-- Telemetry Strip -->
+<div class="grid grid-cols-3 gap-space-xs bg-surface-container-low p-space-xs rounded">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Badge ID</span>
+<span class="font-label-data text-label-data text-on-surface font-bold">#FIFA-REF-001</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Tier</span>
+<span class="font-label-data text-label-data text-primary">Established</span>
+</div>
+<div class="flex flex-col text-right">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Assignments</span>
+<span class="font-label-data text-label-data text-on-surface font-bold">5 Matches</span>
+</div>
+</div>
+<!-- Tactical Match Metrics -->
+<div class="space-y-space-xs">
+<div class="flex items-center justify-between text-body-sm font-body-sm text-on-surface-variant">
+<span>Disciplinary Distribution</span>
+<div class="flex items-center gap-space-xs font-label-data text-label-data">
+<span class="flex items-center gap-1 text-tertiary">
+<span class="w-2.5 h-3.5 bg-tertiary rounded-sm"></span> 18
+            </span>
+<span class="flex items-center gap-1 text-error">
+<span class="w-2.5 h-3.5 bg-error rounded-sm"></span> 1
+            </span>
+<span class="text-on-surface">Pen: 3</span>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">FIFA Fitness Rating</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">99.1%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 99.1%;"></div>
+</div>
+<div class="flex items-center justify-between font-label-data text-label-data text-on-surface-variant pt-space-2xs">
+<span>Fouls/Match: <strong class="text-on-surface">22.4</strong></span>
+<span>Last: <span class="text-secondary">Brazil vs France</span></span>
+</div>
+</div>
+<!-- Action Links -->
+<div class="flex items-center justify-between pt-space-xs bg-surface-container-lowest">
+<button class="font-headline-md text-[11px] text-on-surface-variant hover:text-primary uppercase tracking-wider transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">history</span> Match History
+        </button>
+<button class="px-space-sm py-space-3xs bg-surface-container hover:bg-surface-container-high text-on-surface rounded font-label-caps text-label-caps uppercase tracking-wider transition-colors">
+          Assign Match
+        </button>
+</div>
+</div>
+<!-- Card 2: Félix Brych -->
+<div class="official-card bg-surface-container-lowest rounded-lg p-space-md flex flex-col justify-between space-y-space-md shadow-sm hover:shadow-md transition-shadow relative overflow-hidden" data-cards="11" data-confed="UEFA" data-fitness="97.8" data-matches="3" data-name="Félix Brych" data-role="main">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center font-metric-mono-md text-metric-mono-md font-bold text-primary shadow-inner">
+            FB
+          </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-2xs">
+<span class="font-headline-md text-headline-md text-on-surface">Félix Brych</span>
+<span class="material-symbols-outlined text-primary text-[16px]">verified</span>
+</div>
+<div class="flex items-center gap-space-2xs">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Germany</span>
+<span class="text-outline-variant font-label-data text-label-data">•</span>
+<span class="font-label-data text-label-data text-secondary">DFB / UEFA</span>
+</div>
+</div>
+</div>
+<span class="px-space-xs py-space-3xs rounded bg-surface-container font-label-caps text-label-caps text-primary tracking-wider uppercase font-bold">
+          Main Referee
+        </span>
+</div>
+<div class="grid grid-cols-3 gap-space-xs bg-surface-container-low p-space-xs rounded">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Badge ID</span>
+<span class="font-label-data text-label-data text-on-surface font-bold">#FIFA-REF-003</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Tier</span>
+<span class="font-label-data text-label-data text-primary">Elite Senior</span>
+</div>
+<div class="flex flex-col text-right">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Assignments</span>
+<span class="font-label-data text-label-data text-on-surface font-bold">3 Matches</span>
+</div>
+</div>
+<div class="space-y-space-xs">
+<div class="flex items-center justify-between text-body-sm font-body-sm text-on-surface-variant">
+<span>Disciplinary Distribution</span>
+<div class="flex items-center gap-space-xs font-label-data text-label-data">
+<span class="flex items-center gap-1 text-tertiary">
+<span class="w-2.5 h-3.5 bg-tertiary rounded-sm"></span> 11
+            </span>
+<span class="flex items-center gap-1 text-error">
+<span class="w-2.5 h-3.5 bg-error rounded-sm"></span> 0
+            </span>
+<span class="text-on-surface">Pen: 1</span>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">FIFA Fitness Rating</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">97.8%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 97.8%;"></div>
+</div>
+<div class="flex items-center justify-between font-label-data text-label-data text-on-surface-variant pt-space-2xs">
+<span>Fouls/Match: <strong class="text-on-surface">20.1</strong></span>
+<span>Last: <span class="text-secondary">England vs Netherlands</span></span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs bg-surface-container-lowest">
+<button class="font-headline-md text-[11px] text-on-surface-variant hover:text-primary uppercase tracking-wider transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">history</span> Match History
+        </button>
+<button class="px-space-sm py-space-3xs bg-surface-container hover:bg-surface-container-high text-on-surface rounded font-label-caps text-label-caps uppercase tracking-wider transition-colors">
+          Assign Match
+        </button>
+</div>
+</div>
+<!-- Card 3: Daniele Orsato -->
+<div class="official-card bg-surface-container-lowest rounded-lg p-space-md flex flex-col justify-between space-y-space-md shadow-sm hover:shadow-md transition-shadow relative overflow-hidden" data-cards="15" data-confed="UEFA" data-fitness="98.2" data-matches="3" data-name="Daniele Orsato" data-role="main">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center font-metric-mono-md text-metric-mono-md font-bold text-primary shadow-inner">
+            DO
+          </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-2xs">
+<span class="font-headline-md text-headline-md text-on-surface">Daniele Orsato</span>
+<span class="material-symbols-outlined text-primary text-[16px]">verified</span>
+</div>
+<div class="flex items-center gap-space-2xs">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Italy</span>
+<span class="text-outline-variant font-label-data text-label-data">•</span>
+<span class="font-label-data text-label-data text-secondary">FIGC / UEFA</span>
+</div>
+</div>
+</div>
+<span class="px-space-xs py-space-3xs rounded bg-surface-container font-label-caps text-label-caps text-primary tracking-wider uppercase font-bold">
+          Main Referee
+        </span>
+</div>
+<div class="grid grid-cols-3 gap-space-xs bg-surface-container-low p-space-xs rounded">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Badge ID</span>
+<span class="font-label-data text-label-data text-on-surface font-bold">#FIFA-REF-002</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Tier</span>
+<span class="font-label-data text-label-data text-primary">Master Official</span>
+</div>
+<div class="flex flex-col text-right">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Assignments</span>
+<span class="font-label-data text-label-data text-on-surface font-bold">3 Matches</span>
+</div>
+</div>
+<div class="space-y-space-xs">
+<div class="flex items-center justify-between text-body-sm font-body-sm text-on-surface-variant">
+<span>Disciplinary Distribution</span>
+<div class="flex items-center gap-space-xs font-label-data text-label-data">
+<span class="flex items-center gap-1 text-tertiary">
+<span class="w-2.5 h-3.5 bg-tertiary rounded-sm"></span> 14
+            </span>
+<span class="flex items-center gap-1 text-error">
+<span class="w-2.5 h-3.5 bg-error rounded-sm"></span> 1
+            </span>
+<span class="text-on-surface">Pen: 2</span>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">FIFA Fitness Rating</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">98.2%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 98.2%;"></div>
+</div>
+<div class="flex items-center justify-between font-label-data text-label-data text-on-surface-variant pt-space-2xs">
+<span>Fouls/Match: <strong class="text-on-surface">24.0</strong></span>
+<span>Last: <span class="text-secondary">Argentina vs Uruguay</span></span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs bg-surface-container-lowest">
+<button class="font-headline-md text-[11px] text-on-surface-variant hover:text-primary uppercase tracking-wider transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">history</span> Match History
+        </button>
+<button class="px-space-sm py-space-3xs bg-surface-container hover:bg-surface-container-high text-on-surface rounded font-label-caps text-label-caps uppercase tracking-wider transition-colors">
+          Assign Match
+        </button>
+</div>
+</div>
+<!-- Card 4: Clément Turpin -->
+<div class="official-card bg-surface-container-lowest rounded-lg p-space-md flex flex-col justify-between space-y-space-md shadow-sm hover:shadow-md transition-shadow relative overflow-hidden" data-cards="9" data-confed="UEFA" data-fitness="98.9" data-matches="3" data-name="Clément Turpin" data-role="main">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center font-metric-mono-md text-metric-mono-md font-bold text-primary shadow-inner">
+            CT
+          </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-2xs">
+<span class="font-headline-md text-headline-md text-on-surface">Clément Turpin</span>
+<span class="material-symbols-outlined text-primary text-[16px]">verified</span>
+</div>
+<div class="flex items-center gap-space-2xs">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">France</span>
+<span class="text-outline-variant font-label-data text-label-data">•</span>
+<span class="font-label-data text-label-data text-secondary">FFF / UEFA</span>
+</div>
+</div>
+</div>
+<span class="px-space-xs py-space-3xs rounded bg-surface-container font-label-caps text-label-caps text-primary tracking-wider uppercase font-bold">
+          Main Referee
+        </span>
+</div>
+<div class="grid grid-cols-3 gap-space-xs bg-surface-container-low p-space-xs rounded">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Badge ID</span>
+<span class="font-label-data text-label-data text-on-surface font-bold">#FIFA-REF-004</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Tier</span>
+<span class="font-label-data text-label-data text-primary">Elite</span>
+</div>
+<div class="flex flex-col text-right">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Assignments</span>
+<span class="font-label-data text-label-data text-on-surface font-bold">3 Matches</span>
+</div>
+</div>
+<div class="space-y-space-xs">
+<div class="flex items-center justify-between text-body-sm font-body-sm text-on-surface-variant">
+<span>Disciplinary Distribution</span>
+<div class="flex items-center gap-space-xs font-label-data text-label-data">
+<span class="flex items-center gap-1 text-tertiary">
+<span class="w-2.5 h-3.5 bg-tertiary rounded-sm"></span> 9
+            </span>
+<span class="flex items-center gap-1 text-error">
+<span class="w-2.5 h-3.5 bg-error rounded-sm"></span> 0
+            </span>
+<span class="text-on-surface">Pen: 1</span>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">FIFA Fitness Rating</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">98.9%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 98.9%;"></div>
+</div>
+<div class="flex items-center justify-between font-label-data text-label-data text-on-surface-variant pt-space-2xs">
+<span>Fouls/Match: <strong class="text-on-surface">19.5</strong></span>
+<span>Last: <span class="text-secondary">Spain vs Germany</span></span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs bg-surface-container-lowest">
+<button class="font-headline-md text-[11px] text-on-surface-variant hover:text-primary uppercase tracking-wider transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">history</span> Match History
+        </button>
+<button class="px-space-sm py-space-3xs bg-surface-container hover:bg-surface-container-high text-on-surface rounded font-label-caps text-label-caps uppercase tracking-wider transition-colors">
+          Assign Match
+        </button>
+</div>
+</div>
+<!-- Card 5: Howard Webb (VAR Specialist) -->
+<div class="official-card bg-surface-container-lowest rounded-lg p-space-md flex flex-col justify-between space-y-space-md shadow-sm hover:shadow-md transition-shadow relative overflow-hidden" data-cards="0" data-confed="UEFA" data-fitness="99.0" data-matches="3" data-name="Howard Webb" data-role="var">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center font-metric-mono-md text-metric-mono-md font-bold text-secondary shadow-inner">
+            HW
+          </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-2xs">
+<span class="font-headline-md text-headline-md text-on-surface">Howard Webb</span>
+<span class="material-symbols-outlined text-secondary text-[16px]">videocam</span>
+</div>
+<div class="flex items-center gap-space-2xs">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">England</span>
+<span class="text-outline-variant font-label-data text-label-data">•</span>
+<span class="font-label-data text-label-data text-secondary">The FA / UEFA</span>
+</div>
+</div>
+</div>
+<span class="px-space-xs py-space-3xs rounded bg-surface-container font-label-caps text-label-caps text-secondary tracking-wider uppercase font-bold">
+          VAR Official
+        </span>
+</div>
+<div class="grid grid-cols-3 gap-space-xs bg-surface-container-low p-space-xs rounded">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Badge ID</span>
+<span class="font-label-data text-label-data text-on-surface font-bold">#FIFA-REF-007</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Specialty</span>
+<span class="font-label-data text-label-data text-secondary">Senior VMO</span>
+</div>
+<div class="flex flex-col text-right">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Supervised</span>
+<span class="font-label-data text-label-data text-on-surface font-bold">3 Matches</span>
+</div>
+</div>
+<div class="space-y-space-xs">
+<div class="flex items-center justify-between text-body-sm font-body-sm text-on-surface-variant">
+<span>VAR Decision Precision</span>
+<div class="flex items-center gap-space-xs font-label-data text-label-data">
+<span class="text-secondary font-bold">2 Overturns</span>
+<span class="text-on-surface-variant">• 100% Protocol Acc.</span>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Technology Compliance</span>
+<span class="font-metric-mono-md text-metric-mono-md text-secondary font-bold">100.0%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 100%;"></div>
+</div>
+<div class="flex items-center justify-between font-label-data text-label-data text-on-surface-variant pt-space-2xs">
+<span>Avg Check Time: <strong class="text-on-surface">42 sec</strong></span>
+<span>Room: <span class="text-secondary">Hub VAR-B (Zurich)</span></span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs bg-surface-container-lowest">
+<button class="font-headline-md text-[11px] text-on-surface-variant hover:text-secondary uppercase tracking-wider transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">videocam</span> Video Log
+        </button>
+<button class="px-space-sm py-space-3xs bg-surface-container hover:bg-surface-container-high text-on-surface rounded font-label-caps text-label-caps uppercase tracking-wider transition-colors">
+          Assign Room
+        </button>
+</div>
+</div>
+<!-- Card 6: Abdulrahman Al Jassim -->
+<div class="official-card bg-surface-container-lowest rounded-lg p-space-md flex flex-col justify-between space-y-space-md shadow-sm hover:shadow-md transition-shadow relative overflow-hidden" data-cards="6" data-confed="AFC" data-fitness="97.4" data-matches="2" data-name="Abdulrahman Al Jassim" data-role="main">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center font-metric-mono-md text-metric-mono-md font-bold text-primary shadow-inner">
+            AA
+          </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-2xs">
+<span class="font-headline-md text-headline-md text-on-surface">Abdulrahman Al Jassim</span>
+<span class="material-symbols-outlined text-primary text-[16px]">verified</span>
+</div>
+<div class="flex items-center gap-space-2xs">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Qatar</span>
+<span class="text-outline-variant font-label-data text-label-data">•</span>
+<span class="font-label-data text-label-data text-secondary">QFA / AFC</span>
+</div>
+</div>
+</div>
+<span class="px-space-xs py-space-3xs rounded bg-surface-container font-label-caps text-label-caps text-primary tracking-wider uppercase font-bold">
+          Main Referee
+        </span>
+</div>
+<div class="grid grid-cols-3 gap-space-xs bg-surface-container-low p-space-xs rounded">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Badge ID</span>
+<span class="font-label-data text-label-data text-on-surface font-bold">#FIFA-REF-005</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Tier</span>
+<span class="font-label-data text-label-data text-primary">AFC Elite</span>
+</div>
+<div class="flex flex-col text-right">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Assignments</span>
+<span class="font-label-data text-label-data text-on-surface font-bold">2 Matches</span>
+</div>
+</div>
+<div class="space-y-space-xs">
+<div class="flex items-center justify-between text-body-sm font-body-sm text-on-surface-variant">
+<span>Disciplinary Distribution</span>
+<div class="flex items-center gap-space-xs font-label-data text-label-data">
+<span class="flex items-center gap-1 text-tertiary">
+<span class="w-2.5 h-3.5 bg-tertiary rounded-sm"></span> 6
+            </span>
+<span class="flex items-center gap-1 text-error">
+<span class="w-2.5 h-3.5 bg-error rounded-sm"></span> 0
+            </span>
+<span class="text-on-surface">Pen: 1</span>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">FIFA Fitness Rating</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">97.4%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 97.4%;"></div>
+</div>
+<div class="flex items-center justify-between font-label-data text-label-data text-on-surface-variant pt-space-2xs">
+<span>Fouls/Match: <strong class="text-on-surface">21.0</strong></span>
+<span>Last: <span class="text-secondary">Croatia vs Morocco</span></span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs bg-surface-container-lowest">
+<button class="font-headline-md text-[11px] text-on-surface-variant hover:text-primary uppercase tracking-wider transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">history</span> Match History
+        </button>
+<button class="px-space-sm py-space-3xs bg-surface-container hover:bg-surface-container-high text-on-surface rounded font-label-caps text-label-caps uppercase tracking-wider transition-colors">
+          Assign Match
+        </button>
+</div>
+</div>
+<!-- Card 7: Raphael Claus -->
+<div class="official-card bg-surface-container-lowest rounded-lg p-space-md flex flex-col justify-between space-y-space-md shadow-sm hover:shadow-md transition-shadow relative overflow-hidden" data-cards="12" data-confed="CONMEBOL" data-fitness="98.0" data-matches="2" data-name="Raphael Claus" data-role="main">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center font-metric-mono-md text-metric-mono-md font-bold text-primary shadow-inner">
+            RC
+          </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-2xs">
+<span class="font-headline-md text-headline-md text-on-surface">Raphael Claus</span>
+<span class="material-symbols-outlined text-primary text-[16px]">verified</span>
+</div>
+<div class="flex items-center gap-space-2xs">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Brazil</span>
+<span class="text-outline-variant font-label-data text-label-data">•</span>
+<span class="font-label-data text-label-data text-secondary">CBF / CONMEBOL</span>
+</div>
+</div>
+</div>
+<span class="px-space-xs py-space-3xs rounded bg-surface-container font-label-caps text-label-caps text-primary tracking-wider uppercase font-bold">
+          Main Referee
+        </span>
+</div>
+<div class="grid grid-cols-3 gap-space-xs bg-surface-container-low p-space-xs rounded">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Badge ID</span>
+<span class="font-label-data text-label-data text-on-surface font-bold">#FIFA-REF-006</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Tier</span>
+<span class="font-label-data text-label-data text-primary">CONMEBOL Elite</span>
+</div>
+<div class="flex flex-col text-right">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Assignments</span>
+<span class="font-label-data text-label-data text-on-surface font-bold">2 Matches</span>
+</div>
+</div>
+<div class="space-y-space-xs">
+<div class="flex items-center justify-between text-body-sm font-body-sm text-on-surface-variant">
+<span>Disciplinary Distribution</span>
+<div class="flex items-center gap-space-xs font-label-data text-label-data">
+<span class="flex items-center gap-1 text-tertiary">
+<span class="w-2.5 h-3.5 bg-tertiary rounded-sm"></span> 10
+            </span>
+<span class="flex items-center gap-1 text-error">
+<span class="w-2.5 h-3.5 bg-error rounded-sm"></span> 2
+            </span>
+<span class="text-on-surface">Pen: 2</span>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">FIFA Fitness Rating</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">98.0%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 98.0%;"></div>
+</div>
+<div class="flex items-center justify-between font-label-data text-label-data text-on-surface-variant pt-space-2xs">
+<span>Fouls/Match: <strong class="text-on-surface">25.2</strong></span>
+<span>Last: <span class="text-secondary">England vs Iran</span></span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs bg-surface-container-lowest">
+<button class="font-headline-md text-[11px] text-on-surface-variant hover:text-primary uppercase tracking-wider transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">history</span> Match History
+        </button>
+<button class="px-space-sm py-space-3xs bg-surface-container hover:bg-surface-container-high text-on-surface rounded font-label-caps text-label-caps uppercase tracking-wider transition-colors">
+          Assign Match
+        </button>
+</div>
+</div>
+<!-- Card 8: Stéphanie Frappart -->
+<div class="official-card bg-surface-container-lowest rounded-lg p-space-md flex flex-col justify-between space-y-space-md shadow-sm hover:shadow-md transition-shadow relative overflow-hidden" data-cards="3" data-confed="UEFA" data-fitness="99.5" data-matches="2" data-name="Stéphanie Frappart" data-role="assistant">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center font-metric-mono-md text-metric-mono-md font-bold text-tertiary shadow-inner">
+            SF
+          </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-2xs">
+<span class="font-headline-md text-headline-md text-on-surface">Stéphanie Frappart</span>
+<span class="material-symbols-outlined text-tertiary text-[16px]">verified</span>
+</div>
+<div class="flex items-center gap-space-2xs">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">France</span>
+<span class="text-outline-variant font-label-data text-label-data">•</span>
+<span class="font-label-data text-label-data text-secondary">FFF / UEFA</span>
+</div>
+</div>
+</div>
+<span class="px-space-xs py-space-3xs rounded bg-surface-container font-label-caps text-label-caps text-tertiary tracking-wider uppercase font-bold">
+          Assistant / 4th
+        </span>
+</div>
+<div class="grid grid-cols-3 gap-space-xs bg-surface-container-low p-space-xs rounded">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Badge ID</span>
+<span class="font-label-data text-label-data text-on-surface font-bold">#FIFA-ASS-002</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Tier</span>
+<span class="font-label-data text-label-data text-tertiary">Historic Elite</span>
+</div>
+<div class="flex flex-col text-right">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Assignments</span>
+<span class="font-label-data text-label-data text-on-surface font-bold">2 Matches</span>
+</div>
+</div>
+<div class="space-y-space-xs">
+<div class="flex items-center justify-between text-body-sm font-body-sm text-on-surface-variant">
+<span>Offside Telemetry &amp; Line Calls</span>
+<div class="flex items-center gap-space-xs font-label-data text-label-data">
+<span class="text-tertiary font-bold">14 Decisions</span>
+<span class="text-primary">• 99.4% Precision</span>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">FIFA Fitness Rating</span>
+<span class="font-metric-mono-md text-metric-mono-md text-primary font-bold">99.5%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 99.5%;"></div>
+</div>
+<div class="flex items-center justify-between font-label-data text-label-data text-on-surface-variant pt-space-2xs">
+<span>Sprint Velocity: <strong class="text-on-surface">31.2 km/h</strong></span>
+<span>Last: <span class="text-secondary">Costa Rica vs Germany</span></span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs bg-surface-container-lowest">
+<button class="font-headline-md text-[11px] text-on-surface-variant hover:text-tertiary uppercase tracking-wider transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">flag</span> AR Incident Log
+        </button>
+<button class="px-space-sm py-space-3xs bg-surface-container hover:bg-surface-container-high text-on-surface rounded font-label-caps text-label-caps uppercase tracking-wider transition-colors">
+          Assign Match
+        </button>
+</div>
+</div>
+</div>
+<!-- Operational Fixtures Allocation Table / Active Match Deployments -->
+<div class="bg-surface-container-lowest rounded-lg p-space-md shadow-sm space-y-space-sm">
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">checklist</span>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md uppercase tracking-tight text-on-surface">Upcoming Match Officials Roster Allocations</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Official Appointments • Round of 16 Schedule</span>
+</div>
+</div>
+<span class="px-space-sm py-space-3xs bg-surface-container font-label-data text-label-data text-secondary rounded">
+        TMS Real-time Sync Active
+      </span>
+</div>
+<!-- Allocation Scannable Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left font-body-sm text-body-sm">
+<thead>
+<tr class="bg-surface-container text-on-surface-variant font-label-caps text-label-caps uppercase tracking-wider">
+<th class="py-space-xs px-space-sm">Match Ref</th>
+<th class="py-space-xs px-space-sm">Fixture</th>
+<th class="py-space-xs px-space-sm">Main Referee</th>
+<th class="py-space-xs px-space-sm">Assistant 1 &amp; 2</th>
+<th class="py-space-xs px-space-sm">VAR Lead Official</th>
+<th class="py-space-xs px-space-sm text-right">Operational Status</th>
+</tr>
+</thead>
+<tbody class="divide-y-0">
+<tr class="bg-surface-container-low hover:bg-surface-container transition-colors">
+<td class="py-space-xs px-space-sm font-label-data text-label-data text-on-surface-variant">M-49</td>
+<td class="py-space-xs px-space-sm font-headline-md text-[13px] text-on-surface">Spain vs Germany</td>
+<td class="py-space-xs px-space-sm flex items-center gap-space-2xs">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="text-on-surface font-bold">C. Turpin (FRA)</span>
+</td>
+<td class="py-space-xs px-space-sm text-on-surface-variant">N. Danos / C. Gringore</td>
+<td class="py-space-xs px-space-sm text-secondary font-label-data text-label-data">H. Webb (ENG)</td>
+<td class="py-space-xs px-space-sm text-right">
+<span class="px-space-xs py-space-3xs bg-primary-container text-on-primary-container font-label-caps text-[10px] rounded font-bold uppercase tracking-wider">
+                Confirmed
+              </span>
+</td>
+</tr>
+<tr class="bg-surface-container-lowest hover:bg-surface-container transition-colors">
+<td class="py-space-xs px-space-sm font-label-data text-label-data text-on-surface-variant">M-50</td>
+<td class="py-space-xs px-space-sm font-headline-md text-[13px] text-on-surface">Argentina vs Australia</td>
+<td class="py-space-xs px-space-sm flex items-center gap-space-2xs">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="text-on-surface font-bold">S. Marciniak (POL)</span>
+</td>
+<td class="py-space-xs px-space-sm text-on-surface-variant">P. Sokolnicki / T. Listkiewicz</td>
+<td class="py-space-xs px-space-sm text-secondary font-label-data text-label-data">T. Kwiatkowski (POL)</td>
+<td class="py-space-xs px-space-sm text-right">
+<span class="px-space-xs py-space-3xs bg-primary-container text-on-primary-container font-label-caps text-[10px] rounded font-bold uppercase tracking-wider">
+                Confirmed
+              </span>
+</td>
+</tr>
+<tr class="bg-surface-container-low hover:bg-surface-container transition-colors">
+<td class="py-space-xs px-space-sm font-label-data text-label-data text-on-surface-variant">M-51</td>
+<td class="py-space-xs px-space-sm font-headline-md text-[13px] text-on-surface">France vs Poland</td>
+<td class="py-space-xs px-space-sm flex items-center gap-space-2xs">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="text-on-surface font-bold">D. Orsato (ITA)</span>
+</td>
+<td class="py-space-xs px-space-sm text-on-surface-variant">C. Carbone / A. Giallatini</td>
+<td class="py-space-xs px-space-sm text-secondary font-label-data text-label-data">M. Irrati (ITA)</td>
+<td class="py-space-xs px-space-sm text-right">
+<span class="px-space-xs py-space-3xs bg-surface-container text-tertiary font-label-caps text-[10px] rounded font-bold uppercase tracking-wider">
+                Pre-Briefing
+              </span>
+</td>
+</tr>
+<tr class="bg-surface-container-lowest hover:bg-surface-container transition-colors">
+<td class="py-space-xs px-space-sm font-label-data text-label-data text-on-surface-variant">M-52</td>
+<td class="py-space-xs px-space-sm font-headline-md text-[13px] text-on-surface">England vs Senegal</td>
+<td class="py-space-xs px-space-sm flex items-center gap-space-2xs">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span class="text-on-surface font-bold">S. Frappart (FRA) [4th]</span>
+</td>
+<td class="py-space-xs px-space-sm text-on-surface-variant">M. Back / K. Nesbitt</td>
+<td class="py-space-xs px-space-sm text-secondary font-label-data text-label-data">D. Fischer (CAN)</td>
+<td class="py-space-xs px-space-sm text-right">
+<span class="px-space-xs py-space-3xs bg-primary-container text-on-primary-container font-label-caps text-[10px] rounded font-bold uppercase tracking-wider">
+                Confirmed
+              </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Modal Dialog: Add Referee (Initially hidden) -->
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-surface-container-lowest/80 backdrop-blur-sm hidden" id="addRefereeModal">
+<div class="bg-surface-container-low p-space-lg rounded-lg shadow-xl w-full max-w-xl space-y-space-md">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[24px]">person_add</span>
+<h2 class="font-headline-md text-headline-md uppercase text-on-surface">Register International Match Official</h2>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors" id="closeModalBtn">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<form class="space-y-space-sm" id="addRefereeForm">
+<div class="grid grid-cols-2 gap-space-sm">
+<div class="flex flex-col space-y-space-3xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Full Legal Name</label>
+<input class="bg-surface-container-lowest px-space-sm py-space-xs rounded text-on-surface font-body-sm text-body-sm focus:outline-none" placeholder="e.g., Daniele Orsato" required="" type="text"/>
+</div>
+<div class="flex flex-col space-y-space-3xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">FIFA Badge ID</label>
+<input class="bg-surface-container-lowest px-space-sm py-space-xs rounded text-on-surface font-body-sm text-body-sm focus:outline-none" placeholder="#FIFA-REF-008" required="" type="text"/>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-space-sm">
+<div class="flex flex-col space-y-space-3xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Primary Role</label>
+<select class="bg-surface-container-lowest px-space-sm py-space-xs rounded text-on-surface font-body-sm text-body-sm focus:outline-none">
+<option value="main">Main Referee</option>
+<option value="var">VAR Video Match Official</option>
+<option value="assistant">Assistant Referee</option>
+<option value="fourth">Fourth Official</option>
+</select>
+</div>
+<div class="flex flex-col space-y-space-3xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Confederation</label>
+<select class="bg-surface-container-lowest px-space-sm py-space-xs rounded text-on-surface font-body-sm text-body-sm focus:outline-none">
+<option value="UEFA">UEFA (Europe)</option>
+<option value="CONMEBOL">CONMEBOL (South America)</option>
+<option value="CONCACAF">CONCACAF (North America)</option>
+<option value="CAF">CAF (Africa)</option>
+<option value="AFC">AFC (Asia)</option>
+<option value="OFC">OFC (Oceania)</option>
+</select>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-space-sm">
+<div class="flex flex-col space-y-space-3xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">National Association</label>
+<input class="bg-surface-container-lowest px-space-sm py-space-xs rounded text-on-surface font-body-sm text-body-sm focus:outline-none" placeholder="e.g., FIGC (Italy)" type="text"/>
+</div>
+<div class="flex flex-col space-y-space-3xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">FIFA Fitness Index (%)</label>
+<input class="bg-surface-container-lowest px-space-sm py-space-xs rounded text-on-surface font-body-sm text-body-sm focus:outline-none" step="0.1" type="number" value="98.5"/>
+</div>
+</div>
+<div class="flex justify-end gap-space-xs pt-space-sm">
+<button class="px-space-md py-space-xs rounded bg-surface-container text-on-surface hover:bg-surface-container-high font-label-caps text-label-caps uppercase tracking-wider" id="cancelModalBtn" type="button">
+            Cancel
+          </button>
+<button class="px-space-md py-space-xs rounded bg-primary text-on-primary font-headline-md text-[12px] uppercase tracking-wider font-bold shadow-md" type="submit">
+            Register Official
+          </button>
+</div>
+</form>
+</div>
+</div>
+</div>
+<script>
+  (function initOfficialsRegistry() {
+    // Interactive filter pills
+    const filterPills = document.querySelectorAll('.filter-pill');
+    const confedPills = document.querySelectorAll('.confed-pill');
+    const officialCards = document.querySelectorAll('.official-card');
+    const searchInput = document.getElementById('refereeSearch');
+    const sortSelect = document.getElementById('sortSelect');
+    const gridContainer = document.getElementById('officialsGrid');
+    const viewGridBtn = document.getElementById('viewGridBtn');
+    const viewListBtn = document.getElementById('viewListBtn');
+
+    let currentRoleFilter = 'all';
+    let currentConfedFilter = null;
+    let currentSearchTerm = '';
+
+    function filterCards() {
+      officialCards.forEach(card => {
+        const role = card.dataset.role;
+        const confed = card.dataset.confed;
+        const name = card.dataset.name.toLowerCase();
+
+        const roleMatch = (currentRoleFilter === 'all') || (role === currentRoleFilter);
+        const confedMatch = !currentConfedFilter || (confed === currentConfedFilter);
+        const searchMatch = name.includes(currentSearchTerm.toLowerCase());
+
+        if (roleMatch && confedMatch && searchMatch) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    filterPills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        filterPills.forEach(p => {
+          p.classList.remove('bg-primary-container', 'text-on-primary-container');
+          p.classList.add('bg-surface-container', 'text-on-surface-variant');
+        });
+        pill.classList.remove('bg-surface-container', 'text-on-surface-variant');
+        pill.classList.add('bg-primary-container', 'text-on-primary-container');
+        currentRoleFilter = pill.dataset.filter;
+        filterCards();
+      });
+    });
+
+    confedPills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        if (currentConfedFilter === pill.dataset.confed) {
+          currentConfedFilter = null;
+          pill.classList.remove('bg-secondary', 'text-on-secondary');
+          pill.classList.add('bg-surface-container', 'text-on-surface-variant');
+        } else {
+          confedPills.forEach(p => {
+            p.classList.remove('bg-secondary', 'text-on-secondary');
+            p.classList.add('bg-surface-container', 'text-on-surface-variant');
+          });
+          currentConfedFilter = pill.dataset.confed;
+          pill.classList.remove('bg-surface-container', 'text-on-surface-variant');
+          pill.classList.add('bg-secondary', 'text-on-secondary');
+        }
+        filterCards();
+      });
+    });
+
+    searchInput.addEventListener('input', (e) => {
+      currentSearchTerm = e.target.value.trim();
+      filterCards();
+    });
+
+    // Sorting logic
+    sortSelect.addEventListener('change', () => {
+      const criteria = sortSelect.value;
+      const cardsArr = Array.from(officialCards);
+
+      cardsArr.sort((a, b) => {
+        if (criteria === 'matches') {
+          return Number(b.dataset.matches) - Number(a.dataset.matches);
+        } else if (criteria === 'fitness') {
+          return Number(b.dataset.fitness) - Number(a.dataset.fitness);
+        } else if (criteria === 'cards') {
+          return Number(b.dataset.cards) - Number(a.dataset.cards);
+        } else if (criteria === 'name') {
+          return a.dataset.name.localeCompare(b.dataset.name);
+        }
+        return 0;
+      });
+
+      cardsArr.forEach(card => gridContainer.appendChild(card));
+    });
+
+    // View toggles (Grid vs List density)
+    viewGridBtn.addEventListener('click', () => {
+      gridContainer.classList.remove('grid-cols-1');
+      gridContainer.classList.add('md:grid-cols-2', 'xl:grid-cols-3');
+      viewGridBtn.classList.add('bg-surface-container-highest', 'text-on-surface');
+      viewListBtn.classList.remove('bg-surface-container-highest', 'text-on-surface');
+      viewListBtn.classList.add('text-on-surface-variant');
+    });
+
+    viewListBtn.addEventListener('click', () => {
+      gridContainer.classList.remove('md:grid-cols-2', 'xl:grid-cols-3');
+      gridContainer.classList.add('grid-cols-1');
+      viewListBtn.classList.add('bg-surface-container-highest', 'text-on-surface');
+      viewGridBtn.classList.remove('bg-surface-container-highest', 'text-on-surface');
+      viewGridBtn.classList.add('text-on-surface-variant');
+    });
+
+    // Add Referee Modal toggling
+    const addBtn = document.getElementById('addRefereeBtn');
+    const modal = document.getElementById('addRefereeModal');
+    const closeModal = document.getElementById('closeModalBtn');
+    const cancelModal = document.getElementById('cancelModalBtn');
+    const addForm = document.getElementById('addRefereeForm');
+
+    function openModal() {
+      modal.classList.remove('hidden');
+    }
+    function hideModal() {
+      modal.classList.add('hidden');
+    }
+
+    if (addBtn) addBtn.addEventListener('click', openModal);
+    if (closeModal) closeModal.addEventListener('click', hideModal);
+    if (cancelModal) cancelModal.addEventListener('click', hideModal);
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) hideModal();
+    });
+
+    addForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      hideModal();
+    });
+
+    // Sidebar active state highlight update
+    const navLinks = document.querySelectorAll('aside nav a[data-path="referees"]');
+    if (navLinks.length > 0) {
+      navLinks.forEach(link => {
+        link.classList.add('bg-primary-container', 'text-on-primary-container', 'font-bold');
+        link.classList.remove('text-on-surface-variant');
+      });
+    }
+  })();
+</script></main></div></body></html>

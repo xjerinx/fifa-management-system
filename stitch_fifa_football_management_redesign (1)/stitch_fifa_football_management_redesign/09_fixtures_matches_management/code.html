@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Chivo:wght@600;700;800&amp;family=Hanken+Grotesk:wght@400;500;600&amp;family=JetBrains+Mono:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: 'class', theme: { extend: { colors: { 'error': '#ffb4ab', 'on-tertiary-fixed-variant': '#653e00', 'surface': '#0f131c', 'on-surface': '#dfe2ee', 'inverse-surface': '#dfe2ee', 'tertiary': '#ffb95f', 'surface-variant': '#31353e', 'on-error': '#690005', 'on-secondary-container': '#00374d', 'surface-bright': '#353942', 'on-tertiary-container': '#523200', 'tertiary-fixed': '#ffddb8', 'outline': '#86948a', 'tertiary-fixed-dim': '#ffb95f', 'secondary': '#7bd0ff', 'on-tertiary': '#472a00', 'secondary-container': '#00a6e0', 'outline-variant': '#3c4a42', 'on-primary-fixed': '#002113', 'surface-container-lowest': '#0a0e16', 'error-container': '#93000a', 'on-primary-container': '#00422b', 'on-secondary': '#00354a', 'primary-fixed-dim': '#4edea3', 'secondary-fixed': '#c4e7ff', 'on-secondary-fixed': '#001e2c', 'surface-container-low': '#181c24', 'surface-container-high': '#262a33', 'on-primary': '#003824', 'on-secondary-fixed-variant': '#004c69', 'on-surface-variant': '#bbcabf', 'tertiary-container': '#e29100', 'inverse-on-surface': '#2c3039', 'surface-container-highest': '#31353e', 'surface-container': '#1c2028', 'background': '#0f131c', 'primary-fixed': '#6ffbbe', 'primary-container': '#10b981', 'on-primary-fixed-variant': '#005236', 'on-background': '#dfe2ee', 'on-tertiary-fixed': '#2a1700', 'surface-tint': '#4edea3', 'surface-dim': '#0f131c', 'inverse-primary': '#006c49', 'on-error-container': '#ffdad6', 'primary': '#4edea3', 'secondary-fixed-dim': '#7bd0ff' }, borderRadius: { 'DEFAULT': '0.125rem', 'lg': '0.25rem', 'xl': '0.5rem', 'full': '0.75rem' }, spacing: { 'margin-mobile': '1rem', 'space-3xs': '0.125rem', 'space-3xl': '4rem', 'margin-desktop': '1.5rem', 'space-2xs': '0.25rem', 'space-xs': '0.5rem', 'space-sm': '0.75rem', 'space-xl': '2rem', 'space-2xl': '3rem', 'gutter-mobile': '0.75rem', 'space-lg': '1.5rem', 'space-md': '1rem', 'gutter-desktop': '1rem' }, fontFamily: { 'label-data': ['JetBrains Mono'], 'body-lg': ['Hanken Grotesk'], 'label-caps': ['Chivo'], 'headline-xl-mobile': ['Chivo'], 'metric-mono-lg': ['JetBrains Mono'], 'headline-2xl-mobile': ['Chivo'], 'headline-lg': ['Chivo'], 'headline-2xl': ['Chivo'], 'body-md': ['Hanken Grotesk'], 'headline-xl': ['Chivo'], 'metric-mono-md': ['JetBrains Mono'], 'body-sm': ['Hanken Grotesk'], 'headline-md': ['Chivo'] }, fontSize: { 'label-data': ['11px', { lineHeight: '14px', letterSpacing: '0.02em', fontWeight: '500' }], 'body-lg': ['16px', { lineHeight: '24px', letterSpacing: '0em', fontWeight: '400' }], 'label-caps': ['11px', { lineHeight: '14px', letterSpacing: '0.08em', fontWeight: '700' }], 'headline-xl-mobile': ['26px', { lineHeight: '32px', letterSpacing: '-0.015em', fontWeight: '700' }], 'metric-mono-lg': ['28px', { lineHeight: '32px', letterSpacing: '-0.02em', fontWeight: '700' }], 'headline-2xl-mobile': ['32px', { lineHeight: '38px', letterSpacing: '-0.02em', fontWeight: '800' }], 'headline-lg': ['24px', { lineHeight: '30px', letterSpacing: '-0.02em', fontWeight: '700' }], 'headline-2xl': ['48px', { lineHeight: '52px', letterSpacing: '-0.03em', fontWeight: '800' }], 'body-md': ['14px', { lineHeight: '20px', letterSpacing: '0em', fontWeight: '400' }], 'headline-xl': ['36px', { lineHeight: '42px', letterSpacing: '-0.025em', fontWeight: '700' }], 'metric-mono-md': ['15px', { lineHeight: '20px', letterSpacing: '-0.01em', fontWeight: '600' }], 'body-sm': ['12px', { lineHeight: '18px', letterSpacing: '0.01em', fontWeight: '400' }], 'headline-md': ['18px', { lineHeight: '24px', letterSpacing: '-0.01em', fontWeight: '600' }] } } } };</script></head><body class="bg-background font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-lowest z-50 flex flex-col justify-between py-space-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col gap-space-md"><div class="px-space-md flex items-center justify-between"><div class="flex items-center gap-space-xs"><img alt="FIFA Ops Crest" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3F8YxVS6wkUPJmomiMS9t9i3TWnIhjgzEMMX0KW4F2kNiNWUP4CZs_xrZvzwBbfjrbNpNbohS1pFth6bOiuhxlZsqf1L526RW3AUrpMpo7LXNbtoPhXtLBJsVPU1G-aPZHn7Lx-o6-sWidzf_IXlgyVzkhdupqMKlDfkEeA4l5nXxaxZgS42X7tXB05zZ2hBEdUPVip0X8rnS05GG_xLRnrOq_NjAXKMVZMMXIjBiAHVBv89y0TtQ"/><div class="flex flex-col"><span class="font-headline-md text-headline-md uppercase tracking-tight text-on-surface">FIFA OPS</span><span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Operations Hub</span></div></div><button aria-label="Collapse Sidebar" class="p-space-2xs text-on-surface-variant hover:text-on-surface transition-colors rounded"><span class="material-symbols-outlined text-[18px]">menu_open</span></button></div><div class="px-space-md"><div class="flex items-center justify-between bg-surface-container px-space-sm py-space-xs rounded border border-outline-variant"><div class="flex items-center gap-space-2xs"><span class="material-symbols-outlined text-secondary text-[16px]">event_note</span><span class="font-label-caps text-label-caps text-on-surface tracking-wider">SEASON 2026/27</span></div><span class="material-symbols-outlined text-on-surface-variant text-[16px]">unfold_more</span></div></div><nav class="flex-1 flex flex-col gap-space-sm px-space-xs overflow-y-auto" data-active-classes="bg-primary-container text-on-primary-container font-bold rounded"><div class="flex flex-col gap-space-3xs"><span class="px-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Overview</span><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[18px]">grid_view</span><span class="font-body-md text-body-md">Dashboard</span></a></div><div class="flex flex-col gap-space-3xs"><span class="px-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Governance</span><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="associations" href="#"><span class="material-symbols-outlined text-[18px]">flag</span><span class="font-body-md text-body-md">Associations</span></a><a aria-current="page" class="flex items-center gap-space-xs px-space-xs py-space-2xs transition-colors bg-primary-container text-on-primary-container font-bold rounded" data-path="teams" href="#"><span class="material-symbols-outlined text-[18px]">shield</span><span class="font-body-md text-body-md">Teams</span></a><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="players" href="#"><span class="material-symbols-outlined text-[18px]">sports_soccer</span><span class="font-body-md text-body-md">Players</span></a><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="coaches" href="#"><span class="material-symbols-outlined text-[18px]">high_res</span><span class="font-body-md text-body-md">Coaches</span></a><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="referees" href="#"><span class="material-symbols-outlined text-[18px]">sports</span><span class="font-body-md text-body-md">Referees</span></a></div><div class="flex flex-col gap-space-3xs"><span class="px-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Venues &amp; Assets</span><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="stadiums" href="#"><span class="material-symbols-outlined text-[18px]">stadium</span><span class="font-body-md text-body-md">Stadiums</span></a></div><div class="flex flex-col gap-space-3xs"><span class="px-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Competitions</span><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="tournaments" href="#"><span class="material-symbols-outlined text-[18px]">emoji_events</span><span class="font-body-md text-body-md">Tournaments</span></a><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="fixtures-matches" href="#"><span class="material-symbols-outlined text-[18px]">calendar_month</span><span class="font-body-md text-body-md">Fixtures &amp; Matches</span></a><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="match-events-timeline" href="#"><span class="material-symbols-outlined text-[18px]">timeline</span><span class="font-body-md text-body-md">Match Events Timeline</span></a></div><div class="flex flex-col gap-space-3xs"><span class="px-space-xs font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Commercial</span><a class="flex items-center gap-space-xs px-space-xs py-space-2xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors rounded" data-path="partners-sponsors" href="#"><span class="material-symbols-outlined text-[18px]">handshake</span><span class="font-body-md text-body-md">Global Partners &amp; Sponsors</span></a></div></nav></div><div class="px-space-md pt-space-xs flex flex-col gap-space-xs"><div class="p-space-xs bg-surface-container-low rounded flex items-center justify-between"><div class="flex items-center gap-space-xs"><span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span><span class="font-label-caps text-label-caps text-on-surface-variant uppercase">TMS Synced</span></div><span class="font-label-data text-label-data text-primary">99.98%</span></div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/80 backdrop-blur-xl z-40 flex items-center justify-between px-gutter-desktop shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center gap-space-md"><img alt="FIFA Ops Crest" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3F8YxVS6wkUPJmomiMS9t9i3TWnIhjgzEMMX0KW4F2kNiNWUP4CZs_xrZvzwBbfjrbNpNbohS1pFth6bOiuhxlZsqf1L526RW3AUrpMpo7LXNbtoPhXtLBJsVPU1G-aPZHn7Lx-o6-sWidzf_IXlgyVzkhdupqMKlDfkEeA4l5nXxaxZgS42X7tXB05zZ2hBEdUPVip0X8rnS05GG_xLRnrOq_NjAXKMVZMMXIjBiAHVBv89y0TtQ"/><div class="flex items-center gap-space-xs bg-surface-container px-space-sm py-space-2xs rounded border border-outline-variant w-80"><span class="material-symbols-outlined text-on-surface-variant text-[18px]">search</span><input class="bg-transparent text-on-surface placeholder:text-on-surface-variant font-body-sm text-body-sm focus:outline-none w-full" placeholder="Search entities, rules, matches..." readonly="" type="text"/><kbd class="font-label-data text-label-data bg-surface-container-highest text-on-surface px-space-2xs py-space-3xs rounded border border-outline-variant">Ctrl+K</kbd></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs px-space-sm py-space-2xs bg-surface-container-low rounded border border-outline-variant"><span class="w-2 h-2 rounded-full bg-primary animate-ping"></span><span class="font-label-caps text-label-caps text-primary tracking-wider uppercase">Live Feed 2026/27 Active</span></div><button aria-label="Notifications" class="relative p-space-2xs text-on-surface-variant hover:text-on-surface transition-colors rounded"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full"></span></button><div class="flex items-center gap-space-xs pl-space-xs border-l border-outline-variant"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="hidden md:flex flex-col text-left"><span class="font-label-caps text-label-caps text-on-surface uppercase">C. Del Piero</span><span class="font-label-data text-label-data text-on-surface-variant">Lead Commissioner</span></div></div></div></header><main class="w-full px-gutter-desktop pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full pb-space-3xl">
+<!-- Active Sidebar Sync Script -->
+<script>
+    (function () {
+      try {
+        const navLinks = document.querySelectorAll('aside nav a');
+        navLinks.forEach((link) => {
+          if (link.getAttribute('data-path') === 'fixtures-matches') {
+            link.classList.remove('text-on-surface-variant', 'hover:bg-surface-container');
+            link.classList.add('bg-primary-container', 'text-on-primary-container', 'font-bold', 'rounded');
+            const icon = link.querySelector('.material-symbols-outlined');
+            if (icon) {
+              icon.setAttribute('style', "font-variation-settings: 'FILL' 1;");
+            }
+          }
+        });
+      } catch (e) {
+        console.error(e);
+      }
+    })();
+  </script>
+<!-- Sub-header & Tactical Control Bar -->
+<div class="flex flex-col gap-space-sm mb-space-lg">
+<div class="flex items-center justify-between flex-wrap gap-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-caps text-label-caps text-primary tracking-widest uppercase">REGISTRY</span>
+<span class="text-on-surface-variant font-label-data text-label-data">/</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant tracking-wider uppercase">INTERNATIONAL MATCH ENGINE</span>
+<span class="text-on-surface-variant font-label-data text-label-data">/</span>
+<span class="font-label-data text-label-data text-secondary bg-surface-container-high px-space-xs py-space-3xs rounded">TMS PROTOCOL v9.8.2</span>
+</div>
+<div class="flex items-center gap-space-xs font-label-data text-label-data text-on-surface-variant">
+<span class="inline-block w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span>SATCOM FEED 1080p60 · LATENCY 18ms</span>
+</div>
+</div>
+<div class="flex flex-col xl:flex-row xl:items-end justify-between gap-space-md">
+<div>
+<h1 class="font-headline-2xl text-headline-2xl text-on-surface uppercase tracking-tight">
+          MATCHES &amp; SCOREBOARDS
+        </h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-4xl mt-space-2xs">
+          22 competitive international fixtures across FIFA World Cup, UEFA Euro, and Copa América cycles. Real-time scoreboard telemetry, official assignments, and stadium ingress synchronisation.
+        </p>
+</div>
+<div class="flex items-center gap-space-xs flex-wrap">
+<button class="bg-surface-container-high hover:bg-surface-container-highest text-on-surface px-space-md py-space-xs rounded font-label-caps text-label-caps uppercase tracking-wider flex items-center gap-space-2xs transition-colors">
+<span class="material-symbols-outlined text-[16px] text-secondary">broadcast_on_personal</span>
+          SPEC SHEET
+        </button>
+<button class="bg-surface-container-high hover:bg-surface-container-highest text-on-surface px-space-md py-space-xs rounded font-label-caps text-label-caps uppercase tracking-wider flex items-center gap-space-2xs transition-colors">
+<span class="material-symbols-outlined text-[16px] text-primary">calendar_add_on</span>
+          EXPORT (.ICS)
+        </button>
+<button class="bg-primary hover:bg-primary-container text-on-primary font-headline-md text-label-caps uppercase tracking-widest px-space-md py-space-xs rounded flex items-center gap-space-2xs transition-all shadow-md">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+          SCHEDULE FIXTURE
+        </button>
+</div>
+</div>
+</div>
+<!-- Executive Operational KPI Strip -->
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-space-xs mb-space-lg">
+<div class="bg-surface-container-low p-space-sm rounded flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Total Match Registry</span>
+<span class="material-symbols-outlined text-[18px] text-primary">sports_soccer</span>
+</div>
+<div class="mt-space-xs">
+<div class="font-metric-mono-lg text-metric-mono-lg text-on-surface">22</div>
+<div class="font-label-data text-label-data text-on-surface-variant mt-space-3xs">
+<span class="text-primary font-bold">18</span> FINALIZED · <span class="text-tertiary font-bold">4</span> PENDING
+        </div>
+</div>
+</div>
+<div class="bg-surface-container-low p-space-sm rounded flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Total Goals Recorded</span>
+<span class="material-symbols-outlined text-[18px] text-secondary">scoreboard</span>
+</div>
+<div class="mt-space-xs">
+<div class="font-metric-mono-lg text-metric-mono-lg text-on-surface">64</div>
+<div class="font-label-data text-label-data text-secondary mt-space-3xs">
+          2.91 GOALS / MATCH INDEX
+        </div>
+</div>
+</div>
+<div class="bg-surface-container-low p-space-sm rounded flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Disciplinary Index</span>
+<span class="material-symbols-outlined text-[18px] text-tertiary">warning</span>
+</div>
+<div class="mt-space-xs">
+<div class="flex items-baseline gap-space-xs">
+<span class="font-metric-mono-lg text-metric-mono-lg text-on-surface">78</span>
+<span class="w-2.5 h-3.5 bg-tertiary rounded-xs inline-block ml-space-3xs"></span>
+<span class="font-metric-mono-md text-metric-mono-md text-error ml-space-2xs">4</span>
+<span class="w-2.5 h-3.5 bg-error rounded-xs inline-block"></span>
+</div>
+<div class="font-label-data text-label-data text-on-surface-variant mt-space-3xs">
+          9 PENALTIES SANCTIONED
+        </div>
+</div>
+</div>
+<div class="bg-surface-container-low p-space-sm rounded flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Broadcast Sat-Link</span>
+<span class="material-symbols-outlined text-[18px] text-primary">live_tv</span>
+</div>
+<div class="mt-space-xs">
+<div class="font-metric-mono-lg text-metric-mono-lg text-on-surface">214</div>
+<div class="font-label-data text-label-data text-primary mt-space-3xs">
+          4K HDR + SAOT TRACKING ACTIVE
+        </div>
+</div>
+</div>
+<div class="bg-surface-container-low p-space-sm rounded flex flex-col justify-between col-span-2 md:col-span-1">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Ingress &amp; Occupancy</span>
+<span class="material-symbols-outlined text-[18px] text-secondary">stadium</span>
+</div>
+<div class="mt-space-xs">
+<div class="font-metric-mono-lg text-metric-mono-lg text-on-surface">76,420</div>
+<div class="font-label-data text-label-data text-on-surface-variant mt-space-3xs">
+<span class="text-primary font-bold">94.8%</span> AGGREGATE SEAT CAP
+        </div>
+</div>
+</div>
+</div>
+<!-- Command Filters and Search Header Bar -->
+<div class="bg-surface-container-low p-space-sm rounded mb-space-lg flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-xs flex-1 max-w-2xl bg-surface-container px-space-sm py-space-xs rounded">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">search</span>
+<input class="bg-transparent text-on-surface placeholder:text-on-surface-variant font-body-sm text-body-sm focus:outline-none w-full" id="matchSearchInput" placeholder="Filter by country, venue (Wembley, Lusail, Maracanã), match official, tournament..." type="text"/>
+<span class="font-label-data text-label-data text-on-surface-variant bg-surface-container-highest px-space-2xs py-space-3xs rounded">ESC TO CLEAR</span>
+</div>
+<div class="flex items-center gap-space-xs flex-wrap">
+<div class="flex items-center bg-surface-container rounded p-space-3xs">
+<button class="filter-pill bg-surface-container-highest text-primary font-label-caps text-label-caps px-space-sm py-space-2xs rounded uppercase tracking-wider transition-colors" data-filter="all">ALL (22)</button>
+<button class="filter-pill text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps px-space-sm py-space-2xs rounded uppercase tracking-wider transition-colors" data-filter="upcoming">UPCOMING 2026 (4)</button>
+<button class="filter-pill text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps px-space-sm py-space-2xs rounded uppercase tracking-wider transition-colors" data-filter="completed">COMPLETED (18)</button>
+<button class="filter-pill text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps px-space-sm py-space-2xs rounded uppercase tracking-wider transition-colors" data-filter="knockout">FINALS (6)</button>
+</div>
+<div class="flex items-center gap-space-2xs">
+<select class="bg-surface-container text-on-surface font-label-caps text-label-caps px-space-sm py-space-2xs rounded uppercase tracking-wider focus:outline-none cursor-pointer">
+<option>ALL TOURNAMENTS</option>
+<option>FIFA WORLD CUP 2026</option>
+<option>UEFA EURO 2024</option>
+<option>CONMEBOL COPA AMÉRICA</option>
+</select>
+<select class="bg-surface-container text-on-surface font-label-caps text-label-caps px-space-sm py-space-2xs rounded uppercase tracking-wider focus:outline-none cursor-pointer">
+<option>SORT: CHRONOLOGICAL</option>
+<option>SORT: HIGHEST ATTENDANCE</option>
+<option>SORT: GOALS LOGGED</option>
+</select>
+</div>
+</div>
+</div>
+<!-- FEATURED BROADCAST SHOWCASE MATCH: BRAZIL VS FRANCE -->
+<section class="mb-space-xl">
+<div class="flex items-center justify-between mb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="inline-block w-2.5 h-2.5 rounded-full bg-tertiary animate-ping"></span>
+<span class="font-label-caps text-label-caps text-tertiary uppercase tracking-widest">IMPENDING MARQUEE SHOWDOWN · MATCH NO. 01</span>
+</div>
+<div class="font-label-data text-label-data text-on-surface-variant uppercase tracking-wider">
+        BROADCAST SPEC: UHD-HDR · 48 CAMERAS · SEMI-AUTOMATED OFFSIDE READY
+      </div>
+</div>
+<div class="relative overflow-hidden rounded bg-surface-container-low p-space-md lg:p-space-lg shadow-xl">
+<!-- Background Ambient Stadium Visual Layer -->
+<div class="absolute inset-0 opacity-15 pointer-events-none bg-cover bg-center mix-blend-screen" data-alt="Futuristic glowing football stadium pitch viewed from the executive gantry under floodlights with electric cyan and emerald beam reflections on midnight grass, broadcast quality tactical perspective." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAab0gVXXmeWv2BOzLHBhbdxfkili5-VvACj97lryt74Y5GkYI4J5EHkZMXSG-ollZ_TMRLR3zdYE7PZqygVt-NlNqCpIb1omsZ5tFFBYqjSKaZC0NTLM0b_x4CCptfe3EZyvH7NdqNOw7T6apBVwzRFZb22VrgnU7SGYXeHQqAhu4z4YZq2_YcCk6sxOdIYjJcGJB7poSNAkA-OLkS_-exWyHjts6bcSZHSEsnq43dJjfG-POgu6lU')">
+</div>
+<div class="absolute inset-0 bg-gradient-to-r from-surface-container-lowest via-surface-container-low/95 to-surface-container-lowest pointer-events-none"></div>
+<div class="relative z-10 flex flex-col gap-space-lg">
+<!-- Top Telemetry Row -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm pb-space-sm border-b border-surface-container-highest">
+<div class="flex items-center gap-space-sm">
+<span class="px-space-xs py-space-3xs bg-primary/10 text-primary font-label-caps text-label-caps uppercase tracking-widest rounded">FIFA WORLD CUP 2026</span>
+<span class="px-space-xs py-space-3xs bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps uppercase tracking-wider rounded">GROUP A · MATCHDAY 1</span>
+<span class="px-space-xs py-space-3xs bg-tertiary/20 text-tertiary font-label-caps text-label-caps uppercase tracking-widest rounded animate-pulse">AWAITING KICKOFF</span>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="flex items-center gap-space-2xs text-on-surface font-label-data text-label-data">
+<span class="material-symbols-outlined text-primary text-[18px]">stadium</span>
+<span>LUSAIL ICONIC STADIUM, DOHA</span>
+<span class="text-on-surface-variant">(88,966 SEATS)</span>
+</div>
+<div class="flex items-center gap-space-2xs font-label-data text-label-data text-secondary">
+<span class="material-symbols-outlined text-[18px]">schedule</span>
+<span>15/06/2026 · 20:00 UTC</span>
+</div>
+</div>
+</div>
+<!-- Centre Scoreboard / Teams Confrontation -->
+<div class="grid grid-cols-1 md:grid-cols-12 items-center gap-space-md py-space-xs">
+<!-- Home Team: BRAZIL -->
+<div class="md:col-span-4 flex items-center justify-between md:justify-end gap-space-md">
+<div class="text-left md:text-right">
+<div class="flex items-center md:justify-end gap-space-2xs">
+<span class="font-label-caps text-label-caps text-primary bg-primary/10 px-space-2xs py-space-3xs rounded">FIFA #1</span>
+<span class="font-label-data text-label-data text-on-surface-variant">CONMEBOL</span>
+</div>
+<div class="font-headline-2xl text-headline-2xl uppercase tracking-tighter text-on-surface mt-space-3xs">BRAZIL</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Head Coach: Dorival Júnior</div>
+<div class="font-label-data text-label-data text-primary mt-space-3xs">STATUS: SQUAD ACCREDITED (26/26)</div>
+</div>
+<div class="w-16 h-16 rounded bg-surface-container flex items-center justify-center text-primary font-headline-xl text-headline-xl uppercase shadow-md flex-shrink-0">
+              BRA
+            </div>
+</div>
+<!-- Central Match Center Block -->
+<div class="md:col-span-4 flex flex-col items-center justify-center text-center px-space-sm">
+<div class="bg-surface-container-highest px-space-md py-space-2xs rounded-full font-label-data text-label-data text-tertiary tracking-wider uppercase mb-space-xs">
+              T-MINUS 04 DAYS · 07:18:22
+            </div>
+<div class="font-metric-mono-lg text-metric-mono-lg text-on-surface-variant flex items-center gap-space-sm tracking-widest">
+<span>VS</span>
+</div>
+<div class="font-label-caps text-label-caps text-on-surface-variant tracking-wider mt-space-2xs">
+              MATCH OFFICIAL: SZYMON MARCINIAK (POL) · VAR: HOWARD WEBB (ENG)
+            </div>
+<!-- Pre-match ELO Win Forecast Bar -->
+<div class="w-full max-w-xs mt-space-sm">
+<div class="flex justify-between font-label-data text-label-data mb-space-3xs text-on-surface-variant">
+<span class="text-primary font-bold">BRA 48%</span>
+<span class="text-on-surface-variant">DRAW 24%</span>
+<span class="text-secondary font-bold">FRA 28%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden flex">
+<div class="bg-primary h-full" style="width: 48%"></div>
+<div class="bg-surface-variant h-full" style="width: 24%"></div>
+<div class="bg-secondary h-full" style="width: 28%"></div>
+</div>
+</div>
+</div>
+<!-- Away Team: FRANCE -->
+<div class="md:col-span-4 flex items-center justify-between md:justify-start gap-space-md flex-row-reverse md:flex-row">
+<div class="w-16 h-16 rounded bg-surface-container flex items-center justify-center text-secondary font-headline-xl text-headline-xl uppercase shadow-md flex-shrink-0">
+              FRA
+            </div>
+<div class="text-left">
+<div class="flex items-center gap-space-2xs">
+<span class="font-label-caps text-label-caps text-secondary bg-secondary/10 px-space-2xs py-space-3xs rounded">FIFA #2</span>
+<span class="font-label-data text-label-data text-on-surface-variant">UEFA</span>
+</div>
+<div class="font-headline-2xl text-headline-2xl uppercase tracking-tighter text-on-surface mt-space-3xs">FRANCE</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Head Coach: Didier Deschamps</div>
+<div class="font-label-data text-label-data text-secondary mt-space-3xs">STATUS: ROSTER SUBMITTED &amp; VERIFIED</div>
+</div>
+</div>
+</div>
+<!-- Operational Action Bar -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm pt-space-sm border-t border-surface-container-highest">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">COMMAND SHORTCUTS:</span>
+<button class="bg-surface-container hover:bg-surface-container-highest text-on-surface font-label-caps text-label-caps uppercase tracking-wider px-space-sm py-space-2xs rounded flex items-center gap-space-3xs">
+<span class="material-symbols-outlined text-[16px] text-primary">groups</span>
+              LINEUPS (26 MAN)
+            </button>
+<button class="bg-surface-container hover:bg-surface-container-highest text-on-surface font-label-caps text-label-caps uppercase tracking-wider px-space-sm py-space-2xs rounded flex items-center gap-space-3xs">
+<span class="material-symbols-outlined text-[16px] text-secondary">badge</span>
+              DELEGATE BRIEFING
+            </button>
+<button class="bg-surface-container hover:bg-surface-container-highest text-on-surface font-label-caps text-label-caps uppercase tracking-wider px-space-sm py-space-2xs rounded flex items-center gap-space-3xs">
+<span class="material-symbols-outlined text-[16px] text-tertiary">qr_code_scanner</span>
+              STADIUM INGRESS (88,966)
+            </button>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="bg-primary hover:bg-primary-container text-on-primary font-headline-md text-label-caps uppercase tracking-widest px-space-md py-space-2xs rounded flex items-center gap-space-2xs transition-colors">
+<span class="material-symbols-outlined text-[16px]">sensors</span>
+              LAUNCH MATCH TELEMETRY CONSOLE
+            </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 1: UPCOMING WORLD CUP 2026 FIXTURES GRID -->
+<section class="mb-space-xl">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">upcoming</span>
+<h2 class="font-headline-lg text-headline-lg uppercase tracking-tight text-on-surface">
+          UPCOMING WORLD CUP 2026 FIXTURES
+        </h2>
+<span class="bg-surface-container-high font-label-data text-label-data text-primary px-space-xs py-space-3xs rounded">
+          4 SCHEDULED
+        </span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">
+        CONSECUTIVE MATCHDAY OPERATIONS
+      </span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-space-sm">
+<!-- Card 1: England vs Spain -->
+<div class="match-item upcoming bg-surface-container-low p-space-md rounded flex flex-col justify-between hover:bg-surface-container transition-colors">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-primary bg-primary/10 px-space-xs py-space-3xs rounded">FIFA WORLD CUP 2026</span>
+<span class="font-label-caps text-label-caps text-tertiary bg-tertiary/10 px-space-xs py-space-3xs rounded">GROUP B</span>
+</div>
+<div class="py-space-sm flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<div class="w-10 h-10 rounded bg-surface-container-highest flex items-center justify-center font-headline-md text-headline-md text-on-surface">ENG</div>
+<div>
+<div class="font-headline-md text-headline-md uppercase text-on-surface">ENGLAND</div>
+<div class="font-label-data text-label-data text-on-surface-variant">RANK #4</div>
+</div>
+</div>
+<div class="font-metric-mono-md text-metric-mono-md text-on-surface-variant px-space-xs">VS</div>
+<div class="flex items-center gap-space-xs flex-row-reverse text-right">
+<div class="w-10 h-10 rounded bg-surface-container-highest flex items-center justify-center font-headline-md text-headline-md text-on-surface">ESP</div>
+<div>
+<div class="font-headline-md text-headline-md uppercase text-on-surface">SPAIN</div>
+<div class="font-label-data text-label-data text-on-surface-variant">RANK #3</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container p-space-xs rounded flex flex-col gap-space-3xs font-label-data text-label-data">
+<div class="flex items-center justify-between text-on-surface">
+<span class="flex items-center gap-space-3xs text-on-surface-variant"><span class="material-symbols-outlined text-[14px]">calendar_today</span> 16/06/2026</span>
+<span class="font-bold text-secondary">20:00 BST (UTC+1)</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="flex items-center gap-space-3xs"><span class="material-symbols-outlined text-[14px]">location_on</span> Wembley Stadium, London</span>
+<span class="text-primary font-bold">SOLD OUT (90,000)</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant pt-space-3xs border-t border-surface-container-highest">
+<span>Referee: Clément Turpin (FRA)</span>
+<span>VAR: Jerome Brisard</span>
+</div>
+</div>
+</div>
+<div class="mt-space-sm pt-space-xs flex items-center justify-between">
+<span class="font-label-data text-label-data text-tertiary">AWAITING RESULT</span>
+<button class="bg-surface-container-highest hover:bg-surface-bright text-on-surface font-label-caps text-label-caps uppercase tracking-wider px-space-sm py-space-2xs rounded">
+            MANAGE FIXTURE
+          </button>
+</div>
+</div>
+<!-- Card 2: Argentina vs Germany -->
+<div class="match-item upcoming bg-surface-container-low p-space-md rounded flex flex-col justify-between hover:bg-surface-container transition-colors">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-primary bg-primary/10 px-space-xs py-space-3xs rounded">FIFA WORLD CUP 2026</span>
+<span class="font-label-caps text-label-caps text-tertiary bg-tertiary/10 px-space-xs py-space-3xs rounded">GROUP C</span>
+</div>
+<div class="py-space-sm flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<div class="w-10 h-10 rounded bg-surface-container-highest flex items-center justify-center font-headline-md text-headline-md text-on-surface">ARG</div>
+<div>
+<div class="font-headline-md text-headline-md uppercase text-on-surface">ARGENTINA</div>
+<div class="font-label-data text-label-data text-on-surface-variant">DEFENDING CHMP</div>
+</div>
+</div>
+<div class="font-metric-mono-md text-metric-mono-md text-on-surface-variant px-space-xs">VS</div>
+<div class="flex items-center gap-space-xs flex-row-reverse text-right">
+<div class="w-10 h-10 rounded bg-surface-container-highest flex items-center justify-center font-headline-md text-headline-md text-on-surface">GER</div>
+<div>
+<div class="font-headline-md text-headline-md uppercase text-on-surface">GERMANY</div>
+<div class="font-label-data text-label-data text-on-surface-variant">RANK #9</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container p-space-xs rounded flex flex-col gap-space-3xs font-label-data text-label-data">
+<div class="flex items-center justify-between text-on-surface">
+<span class="flex items-center gap-space-3xs text-on-surface-variant"><span class="material-symbols-outlined text-[14px]">calendar_today</span> 17/06/2026</span>
+<span class="font-bold text-secondary">20:00 BRT (UTC-3)</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="flex items-center gap-space-3xs"><span class="material-symbols-outlined text-[14px]">location_on</span> Maracanã, Rio de Janeiro</span>
+<span class="text-primary font-bold">CAP 78,838</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant pt-space-3xs border-t border-surface-container-highest">
+<span>Referee: Daniele Orsato (ITA)</span>
+<span>VAR: Massimiliano Irrati</span>
+</div>
+</div>
+</div>
+<div class="mt-space-sm pt-space-xs flex items-center justify-between">
+<span class="font-label-data text-label-data text-tertiary">AWAITING RESULT</span>
+<button class="bg-surface-container-highest hover:bg-surface-bright text-on-surface font-label-caps text-label-caps uppercase tracking-wider px-space-sm py-space-2xs rounded">
+            MANAGE FIXTURE
+          </button>
+</div>
+</div>
+<!-- Card 3: Italy vs Portugal -->
+<div class="match-item upcoming bg-surface-container-low p-space-md rounded flex flex-col justify-between hover:bg-surface-container transition-colors">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-primary bg-primary/10 px-space-xs py-space-3xs rounded">FIFA WORLD CUP 2026</span>
+<span class="font-label-caps text-label-caps text-tertiary bg-tertiary/10 px-space-xs py-space-3xs rounded">GROUP D</span>
+</div>
+<div class="py-space-sm flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<div class="w-10 h-10 rounded bg-surface-container-highest flex items-center justify-center font-headline-md text-headline-md text-on-surface">ITA</div>
+<div>
+<div class="font-headline-md text-headline-md uppercase text-on-surface">ITALY</div>
+<div class="font-label-data text-label-data text-on-surface-variant">RANK #8</div>
+</div>
+</div>
+<div class="font-metric-mono-md text-metric-mono-md text-on-surface-variant px-space-xs">VS</div>
+<div class="flex items-center gap-space-xs flex-row-reverse text-right">
+<div class="w-10 h-10 rounded bg-surface-container-highest flex items-center justify-center font-headline-md text-headline-md text-on-surface">POR</div>
+<div>
+<div class="font-headline-md text-headline-md uppercase text-on-surface">PORTUGAL</div>
+<div class="font-label-data text-label-data text-on-surface-variant">RANK #6</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container p-space-xs rounded flex flex-col gap-space-3xs font-label-data text-label-data">
+<div class="flex items-center justify-between text-on-surface">
+<span class="flex items-center gap-space-3xs text-on-surface-variant"><span class="material-symbols-outlined text-[14px]">calendar_today</span> 18/06/2026</span>
+<span class="font-bold text-secondary">20:00 UTC (DOHA)</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="flex items-center gap-space-3xs"><span class="material-symbols-outlined text-[14px]">location_on</span> Lusail Iconic Stadium</span>
+<span class="text-primary font-bold">CAP 88,966</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant pt-space-3xs border-t border-surface-container-highest">
+<span>Referee: Stéphanie Frappart (FRA)</span>
+<span>VAR: Bastian Dankert</span>
+</div>
+</div>
+</div>
+<div class="mt-space-sm pt-space-xs flex items-center justify-between">
+<span class="font-label-data text-label-data text-tertiary">AWAITING RESULT</span>
+<button class="bg-surface-container-highest hover:bg-surface-bright text-on-surface font-label-caps text-label-caps uppercase tracking-wider px-space-sm py-space-2xs rounded">
+            MANAGE FIXTURE
+          </button>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 2: COMPLETED INTERNATIONAL TOURNAMENTS & SCOREBOARDS REGISTRY -->
+<section class="mb-space-xl">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">verified</span>
+<h2 class="font-headline-lg text-headline-lg uppercase tracking-tight text-on-surface">
+          OFFICIAL MATCH RESULTS &amp; SCOREBOARD TELEMETRY
+        </h2>
+<span class="bg-surface-container-high font-label-data text-label-data text-on-surface-variant px-space-xs py-space-3xs rounded">
+          18 RATIFIED
+        </span>
+</div>
+<div class="font-label-caps text-label-caps text-on-surface-variant tracking-wider">
+        STATUS: POST-MATCH TMS AUDIT SIGNED OFF
+      </div>
+</div>
+<!-- Match Scoreboard List Stack -->
+<div class="flex flex-col gap-space-sm" id="matchesListContainer">
+<!-- Item 1: Spain 2 - 1 England (UEFA EURO 2024 Final) -->
+<div class="match-item completed knockout bg-surface-container-low rounded p-space-md hover:bg-surface-container transition-colors">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<!-- Tournament & Stadium Specs -->
+<div class="lg:w-1/4 flex flex-col gap-space-3xs">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-caps text-label-caps text-secondary bg-secondary/15 px-space-xs py-space-3xs rounded">UEFA EURO 2024</span>
+<span class="font-label-caps text-label-caps text-primary bg-primary/10 px-space-xs py-space-3xs rounded">GRAND FINAL</span>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-space-3xs mt-space-3xs">
+<span class="material-symbols-outlined text-[14px]">stadium</span>
+<span>Wembley Stadium, London · Att: 65,600</span>
+</div>
+<div class="font-label-data text-label-data text-on-surface-variant">
+              DATE: 14/07/2024 21:00 CEST · REF: François Letexier
+            </div>
+</div>
+<!-- Main Live-Style Scoreboard Component -->
+<div class="lg:w-2/4 flex flex-col items-center">
+<div class="w-full flex items-center justify-between gap-space-md px-space-sm">
+<!-- Home: Spain -->
+<div class="flex items-center gap-space-sm flex-1 justify-end text-right">
+<div>
+<div class="font-headline-md text-headline-md text-on-surface uppercase font-bold">SPAIN</div>
+<div class="font-label-data text-label-data text-primary">CHAMPIONS</div>
+</div>
+<div class="w-10 h-10 rounded bg-surface-container-high flex items-center justify-center font-headline-md text-headline-md text-primary">ESP</div>
+</div>
+<!-- Score Box -->
+<div class="bg-surface-container-highest px-space-md py-space-xs rounded flex items-center gap-space-md shadow-md">
+<span class="font-metric-mono-lg text-metric-mono-lg text-on-surface">2</span>
+<span class="font-metric-mono-md text-metric-mono-md text-on-surface-variant">-</span>
+<span class="font-metric-mono-lg text-metric-mono-lg text-on-surface">1</span>
+<span class="font-label-caps text-label-caps bg-surface-container text-on-surface-variant px-space-2xs py-space-3xs rounded uppercase ml-space-xs">FT</span>
+</div>
+<!-- Away: England -->
+<div class="flex items-center gap-space-sm flex-1 justify-start text-left">
+<div class="w-10 h-10 rounded bg-surface-container-high flex items-center justify-center font-headline-md text-headline-md text-on-surface">ENG</div>
+<div>
+<div class="font-headline-md text-headline-md text-on-surface uppercase font-bold">ENGLAND</div>
+<div class="font-label-data text-label-data text-on-surface-variant">RUNNER-UP</div>
+</div>
+</div>
+</div>
+<!-- Goalscorers Ticker -->
+<div class="w-full mt-space-xs pt-space-xs border-t border-surface-container-highest flex flex-col md:flex-row items-center justify-between text-left font-label-data text-label-data px-space-sm gap-space-2xs">
+<div class="text-primary flex items-center gap-space-2xs">
+<span class="material-symbols-outlined text-[14px]">sports_soccer</span>
+<span>N. Williams 47', M. Oyarzabal 86'</span>
+</div>
+<div class="text-on-surface-variant flex items-center gap-space-2xs">
+<span class="material-symbols-outlined text-[14px]">sports_soccer</span>
+<span>C. Palmer 73'</span>
+</div>
+</div>
+</div>
+<!-- Micro Analytics and Action Buttons -->
+<div class="lg:w-1/4 flex flex-col items-end gap-space-xs">
+<div class="flex items-center gap-space-sm font-label-data text-label-data text-on-surface-variant">
+<span>POSS: 65% - 35%</span>
+<span>·</span>
+<span>SHOTS: 15 (6) - 9 (3)</span>
+</div>
+<div class="flex items-center gap-space-xs mt-space-2xs">
+<a class="bg-surface-container hover:bg-surface-container-highest text-secondary font-label-caps text-label-caps uppercase tracking-wider px-space-sm py-space-2xs rounded flex items-center gap-space-3xs transition-colors" data-path="match-events-timeline" href="#">
+<span class="material-symbols-outlined text-[16px]">timeline</span>
+                TIMELINE
+              </a>
+<button class="bg-surface-container hover:bg-surface-container-highest text-on-surface font-label-caps text-label-caps uppercase tracking-wider px-space-sm py-space-2xs rounded flex items-center gap-space-3xs transition-colors">
+<span class="material-symbols-outlined text-[16px] text-primary">description</span>
+                TMS REPORT
+              </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Item 2: Argentina 1 - 0 Uruguay (Copa América 2024 Final) -->
+<div class="match-item completed knockout bg-surface-container-low rounded p-space-md hover:bg-surface-container transition-colors">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<!-- Tournament & Stadium Specs -->
+<div class="lg:w-1/4 flex flex-col gap-space-3xs">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-caps text-label-caps text-tertiary bg-tertiary/15 px-space-xs py-space-3xs rounded">CONMEBOL COPA AMÉRICA</span>
+<span class="font-label-caps text-label-caps text-primary bg-primary/10 px-space-xs py-space-3xs rounded">FINAL</span>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-space-3xs mt-space-3xs">
+<span class="material-symbols-outlined text-[14px]">stadium</span>
+<span>Maracanã, Rio de Janeiro · Att: 78,000</span>
+</div>
+<div class="font-label-data text-label-data text-on-surface-variant">
+              DATE: 14/07/2024 21:00 BRT · REF: Raphael Claus
+            </div>
+</div>
+<!-- Main Live-Style Scoreboard Component -->
+<div class="lg:w-2/4 flex flex-col items-center">
+<div class="w-full flex items-center justify-between gap-space-md px-space-sm">
+<!-- Home: Argentina -->
+<div class="flex items-center gap-space-sm flex-1 justify-end text-right">
+<div>
+<div class="font-headline-md text-headline-md text-on-surface uppercase font-bold">ARGENTINA</div>
+<div class="font-label-data text-label-data text-primary">CHAMPIONS</div>
+</div>
+<div class="w-10 h-10 rounded bg-surface-container-high flex items-center justify-center font-headline-md text-headline-md text-primary">ARG</div>
+</div>
+<!-- Score Box -->
+<div class="bg-surface-container-highest px-space-md py-space-xs rounded flex items-center gap-space-md shadow-md">
+<span class="font-metric-mono-lg text-metric-mono-lg text-on-surface">1</span>
+<span class="font-metric-mono-md text-metric-mono-md text-on-surface-variant">-</span>
+<span class="font-metric-mono-lg text-metric-mono-lg text-on-surface">0</span>
+<span class="font-label-caps text-label-caps bg-surface-container text-tertiary px-space-2xs py-space-3xs rounded uppercase ml-space-xs">AET</span>
+</div>
+<!-- Away: Uruguay -->
+<div class="flex items-center gap-space-sm flex-1 justify-start text-left">
+<div class="w-10 h-10 rounded bg-surface-container-high flex items-center justify-center font-headline-md text-headline-md text-on-surface">URU</div>
+<div>
+<div class="font-headline-md text-headline-md text-on-surface uppercase font-bold">URUGUAY</div>
+<div class="font-label-data text-label-data text-on-surface-variant">RUNNER-UP</div>
+</div>
+</div>
+</div>
+<!-- Goalscorers Ticker -->
+<div class="w-full mt-space-xs pt-space-xs border-t border-surface-container-highest flex flex-col md:flex-row items-center justify-between text-left font-label-data text-label-data px-space-sm gap-space-2xs">
+<div class="text-primary flex items-center gap-space-2xs">
+<span class="material-symbols-outlined text-[14px]">sports_soccer</span>
+<span>Lautaro Martínez 112' (ET)</span>
+</div>
+<div class="text-on-surface-variant flex items-center gap-space-2xs">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+<span>4 Yellow Cards Issued</span>
+</div>
+</div>
+</div>
+<!-- Micro Analytics and Action Buttons -->
+<div class="lg:w-1/4 flex flex-col items-end gap-space-xs">
+<div class="flex items-center gap-space-sm font-label-data text-label-data text-on-surface-variant">
+<span>POSS: 52% - 48%</span>
+<span>·</span>
+<span>FOULS: 18 - 22</span>
+</div>
+<div class="flex items-center gap-space-xs mt-space-2xs">
+<a class="bg-surface-container hover:bg-surface-container-highest text-secondary font-label-caps text-label-caps uppercase tracking-wider px-space-sm py-space-2xs rounded flex items-center gap-space-3xs transition-colors" data-path="match-events-timeline" href="#">
+<span class="material-symbols-outlined text-[16px]">timeline</span>
+                TIMELINE
+              </a>
+<button class="bg-surface-container hover:bg-surface-container-highest text-on-surface font-label-caps text-label-caps uppercase tracking-wider px-space-sm py-space-2xs rounded flex items-center gap-space-3xs transition-colors">
+<span class="material-symbols-outlined text-[16px] text-primary">description</span>
+                TMS REPORT
+              </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Item 3: England 1 - 0 Netherlands (UEFA Euro 2024 Semi-Final) -->
+<div class="match-item completed knockout bg-surface-container-low rounded p-space-md hover:bg-surface-container transition-colors">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div class="lg:w-1/4 flex flex-col gap-space-3xs">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-caps text-label-caps text-secondary bg-secondary/15 px-space-xs py-space-3xs rounded">UEFA EURO 2024</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant bg-surface-container-highest px-space-xs py-space-3xs rounded">SEMI-FINAL</span>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-space-3xs mt-space-3xs">
+<span class="material-symbols-outlined text-[14px]">stadium</span>
+<span>Wembley Stadium, London · Att: 60,140</span>
+</div>
+<div class="font-label-data text-label-data text-on-surface-variant">
+              DATE: 10/07/2024 21:00 CEST · REF: Felix Zwayer
+            </div>
+</div>
+<div class="lg:w-2/4 flex flex-col items-center">
+<div class="w-full flex items-center justify-between gap-space-md px-space-sm">
+<div class="flex items-center gap-space-sm flex-1 justify-end text-right">
+<div>
+<div class="font-headline-md text-headline-md text-on-surface uppercase font-bold">ENGLAND</div>
+<div class="font-label-data text-label-data text-secondary">FINALIST</div>
+</div>
+<div class="w-10 h-10 rounded bg-surface-container-high flex items-center justify-center font-headline-md text-headline-md text-on-surface">ENG</div>
+</div>
+<div class="bg-surface-container-highest px-space-md py-space-xs rounded flex items-center gap-space-md shadow-md">
+<span class="font-metric-mono-lg text-metric-mono-lg text-on-surface">1</span>
+<span class="font-metric-mono-md text-metric-mono-md text-on-surface-variant">-</span>
+<span class="font-metric-mono-lg text-metric-mono-lg text-on-surface">0</span>
+<span class="font-label-caps text-label-caps bg-surface-container text-on-surface-variant px-space-2xs py-space-3xs rounded uppercase ml-space-xs">FT</span>
+</div>
+<div class="flex items-center gap-space-sm flex-1 justify-start text-left">
+<div class="w-10 h-10 rounded bg-surface-container-high flex items-center justify-center font-headline-md text-headline-md text-on-surface">NED</div>
+<div>
+<div class="font-headline-md text-headline-md text-on-surface uppercase font-bold">NETHERLANDS</div>
+<div class="font-label-data text-label-data text-on-surface-variant">ELIMINATED</div>
+</div>
+</div>
+</div>
+<div class="w-full mt-space-xs pt-space-xs border-t border-surface-container-highest flex flex-col md:flex-row items-center justify-between text-left font-label-data text-label-data px-space-sm gap-space-2xs">
+<div class="text-primary flex items-center gap-space-2xs">
+<span class="material-symbols-outlined text-[14px]">sports_soccer</span>
+<span>O. Watkins 90+1'</span>
+</div>
+<div class="text-on-surface-variant flex items-center gap-space-2xs">
+<span class="material-symbols-outlined text-[14px]">sports_soccer</span>
+<span>X. Simons 7' (Disallowed VAR)</span>
+</div>
+</div>
+</div>
+<div class="lg:w-1/4 flex flex-col items-end gap-space-xs">
+<div class="flex items-center gap-space-sm font-label-data text-label-data text-on-surface-variant">
+<span>POSS: 58% - 42%</span>
+<span>·</span>
+<span>XG: 1.45 - 0.78</span>
+</div>
+<div class="flex items-center gap-space-xs mt-space-2xs">
+<a class="bg-surface-container hover:bg-surface-container-highest text-secondary font-label-caps text-label-caps uppercase tracking-wider px-space-sm py-space-2xs rounded flex items-center gap-space-3xs transition-colors" data-path="match-events-timeline" href="#">
+<span class="material-symbols-outlined text-[16px]">timeline</span>
+                TIMELINE
+              </a>
+<button class="bg-surface-container hover:bg-surface-container-highest text-on-surface font-label-caps text-label-caps uppercase tracking-wider px-space-sm py-space-2xs rounded flex items-center gap-space-3xs transition-colors">
+<span class="material-symbols-outlined text-[16px] text-primary">description</span>
+                TMS REPORT
+              </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Item 4: Spain 2 - 1 France (UEFA Euro 2024 Semi-Final) -->
+<div class="match-item completed knockout bg-surface-container-low rounded p-space-md hover:bg-surface-container transition-colors">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div class="lg:w-1/4 flex flex-col gap-space-3xs">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-caps text-label-caps text-secondary bg-secondary/15 px-space-xs py-space-3xs rounded">UEFA EURO 2024</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant bg-surface-container-highest px-space-xs py-space-3xs rounded">SEMI-FINAL</span>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-space-3xs mt-space-3xs">
+<span class="material-symbols-outlined text-[14px]">stadium</span>
+<span>Munich Football Arena · Att: 62,045</span>
+</div>
+<div class="font-label-data text-label-data text-on-surface-variant">
+              DATE: 09/07/2024 21:00 CEST · REF: Slavko Vinčić
+            </div>
+</div>
+<div class="lg:w-2/4 flex flex-col items-center">
+<div class="w-full flex items-center justify-between gap-space-md px-space-sm">
+<div class="flex items-center gap-space-sm flex-1 justify-end text-right">
+<div>
+<div class="font-headline-md text-headline-md text-on-surface uppercase font-bold">SPAIN</div>
+<div class="font-label-data text-label-data text-secondary">FINALIST</div>
+</div>
+<div class="w-10 h-10 rounded bg-surface-container-high flex items-center justify-center font-headline-md text-headline-md text-on-surface">ESP</div>
+</div>
+<div class="bg-surface-container-highest px-space-md py-space-xs rounded flex items-center gap-space-md shadow-md">
+<span class="font-metric-mono-lg text-metric-mono-lg text-on-surface">2</span>
+<span class="font-metric-mono-md text-metric-mono-md text-on-surface-variant">-</span>
+<span class="font-metric-mono-lg text-metric-mono-lg text-on-surface">1</span>
+<span class="font-label-caps text-label-caps bg-surface-container text-on-surface-variant px-space-2xs py-space-3xs rounded uppercase ml-space-xs">FT</span>
+</div>
+<div class="flex items-center gap-space-sm flex-1 justify-start text-left">
+<div class="w-10 h-10 rounded bg-surface-container-high flex items-center justify-center font-headline-md text-headline-md text-on-surface">FRA</div>
+<div>
+<div class="font-headline-md text-headline-md text-on-surface uppercase font-bold">FRANCE</div>
+<div class="font-label-data text-label-data text-on-surface-variant">ELIMINATED</div>
+</div>
+</div>
+</div>
+<div class="w-full mt-space-xs pt-space-xs border-t border-surface-container-highest flex flex-col md:flex-row items-center justify-between text-left font-label-data text-label-data px-space-sm gap-space-2xs">
+<div class="text-primary flex items-center gap-space-2xs">
+<span class="material-symbols-outlined text-[14px]">sports_soccer</span>
+<span>L. Yamal 21', Dani Olmo 25'</span>
+</div>
+<div class="text-on-surface-variant flex items-center gap-space-2xs">
+<span class="material-symbols-outlined text-[14px]">sports_soccer</span>
+<span>R. Kolo Muani 9'</span>
+</div>
+</div>
+</div>
+<div class="lg:w-1/4 flex flex-col items-end gap-space-xs">
+<div class="flex items-center gap-space-sm font-label-data text-label-data text-on-surface-variant">
+<span>POSS: 58% - 42%</span>
+<span>·</span>
+<span>SHOTS: 6 (2) - 9 (3)</span>
+</div>
+<div class="flex items-center gap-space-xs mt-space-2xs">
+<a class="bg-surface-container hover:bg-surface-container-highest text-secondary font-label-caps text-label-caps uppercase tracking-wider px-space-sm py-space-2xs rounded flex items-center gap-space-3xs transition-colors" data-path="match-events-timeline" href="#">
+<span class="material-symbols-outlined text-[16px]">timeline</span>
+                TIMELINE
+              </a>
+<button class="bg-surface-container hover:bg-surface-container-highest text-on-surface font-label-caps text-label-caps uppercase tracking-wider px-space-sm py-space-2xs rounded flex items-center gap-space-3xs transition-colors">
+<span class="material-symbols-outlined text-[16px] text-primary">description</span>
+                TMS REPORT
+              </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Item 5: Brazil 2 - 1 Uruguay (Copa América 2024 Semi-Final) -->
+<div class="match-item completed bg-surface-container-low rounded p-space-md hover:bg-surface-container transition-colors">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div class="lg:w-1/4 flex flex-col gap-space-3xs">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-caps text-label-caps text-tertiary bg-tertiary/15 px-space-xs py-space-3xs rounded">CONMEBOL COPA AMÉRICA</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant bg-surface-container-highest px-space-xs py-space-3xs rounded">SEMI-FINAL</span>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-space-3xs mt-space-3xs">
+<span class="material-symbols-outlined text-[14px]">stadium</span>
+<span>Estádio do Maracanã · Att: 71,200</span>
+</div>
+<div class="font-label-data text-label-data text-on-surface-variant">
+              DATE: 06/07/2024 20:00 BRT · REF: Wilmar Roldán
+            </div>
+</div>
+<div class="lg:w-2/4 flex flex-col items-center">
+<div class="w-full flex items-center justify-between gap-space-md px-space-sm">
+<div class="flex items-center gap-space-sm flex-1 justify-end text-right">
+<div>
+<div class="font-headline-md text-headline-md text-on-surface uppercase font-bold">BRAZIL</div>
+<div class="font-label-data text-label-data text-secondary">FINALIST</div>
+</div>
+<div class="w-10 h-10 rounded bg-surface-container-high flex items-center justify-center font-headline-md text-headline-md text-on-surface">BRA</div>
+</div>
+<div class="bg-surface-container-highest px-space-md py-space-xs rounded flex items-center gap-space-md shadow-md">
+<span class="font-metric-mono-lg text-metric-mono-lg text-on-surface">2</span>
+<span class="font-metric-mono-md text-metric-mono-md text-on-surface-variant">-</span>
+<span class="font-metric-mono-lg text-metric-mono-lg text-on-surface">1</span>
+<span class="font-label-caps text-label-caps bg-surface-container text-on-surface-variant px-space-2xs py-space-3xs rounded uppercase ml-space-xs">FT</span>
+</div>
+<div class="flex items-center gap-space-sm flex-1 justify-start text-left">
+<div class="w-10 h-10 rounded bg-surface-container-high flex items-center justify-center font-headline-md text-headline-md text-on-surface">URU</div>
+<div>
+<div class="font-headline-md text-headline-md text-on-surface uppercase font-bold">URUGUAY</div>
+<div class="font-label-data text-label-data text-on-surface-variant">ELIMINATED</div>
+</div>
+</div>
+</div>
+<div class="w-full mt-space-xs pt-space-xs border-t border-surface-container-highest flex flex-col md:flex-row items-center justify-between text-left font-label-data text-label-data px-space-sm gap-space-2xs">
+<div class="text-primary flex items-center gap-space-2xs">
+<span class="material-symbols-outlined text-[14px]">sports_soccer</span>
+<span>Vinícius Jr 34', Rodrygo 62'</span>
+</div>
+<div class="text-on-surface-variant flex items-center gap-space-2xs">
+<span class="material-symbols-outlined text-[14px]">sports_soccer</span>
+<span>D. Núñez 45'</span>
+</div>
+</div>
+</div>
+<div class="lg:w-1/4 flex flex-col items-end gap-space-xs">
+<div class="flex items-center gap-space-sm font-label-data text-label-data text-on-surface-variant">
+<span>POSS: 54% - 46%</span>
+<span>·</span>
+<span>RED: N. Nández 74'</span>
+</div>
+<div class="flex items-center gap-space-xs mt-space-2xs">
+<a class="bg-surface-container hover:bg-surface-container-highest text-secondary font-label-caps text-label-caps uppercase tracking-wider px-space-sm py-space-2xs rounded flex items-center gap-space-3xs transition-colors" data-path="match-events-timeline" href="#">
+<span class="material-symbols-outlined text-[16px]">timeline</span>
+                TIMELINE
+              </a>
+<button class="bg-surface-container hover:bg-surface-container-highest text-on-surface font-label-caps text-label-caps uppercase tracking-wider px-space-sm py-space-2xs rounded flex items-center gap-space-3xs transition-colors">
+<span class="material-symbols-outlined text-[16px] text-primary">description</span>
+                TMS REPORT
+              </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Real-time Pitch Telemetry & Stadium Status Strip -->
+<section class="mt-space-lg bg-surface-container-low p-space-md rounded flex flex-col md:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-3 h-3 rounded-full bg-primary animate-ping"></div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface uppercase tracking-wider">
+          LIVE MATCH INTEGRITY &amp; DATA BUS (DOP-09)
+        </span>
+<span class="font-label-data text-label-data text-on-surface-variant">
+          All scoreboards, VAR audit logs, and electronic match reports synchronized with Zurich Head Office.
+        </span>
+</div>
+</div>
+<div class="flex items-center gap-space-md font-label-data text-label-data text-on-surface-variant">
+<div class="flex items-center gap-space-2xs">
+<span class="text-primary font-bold">ENCRYPTED:</span> AES-256 GCM
+      </div>
+<div class="flex items-center gap-space-2xs">
+<span class="text-secondary font-bold">BACKEND:</span> LIVE FEED OPERATIONAL
+      </div>
+</div>
+</section>
+<!-- Interactive Client-side Filter Script -->
+<script>
+    (function () {
+      const searchInput = document.getElementById('matchSearchInput');
+      const filterPills = document.querySelectorAll('.filter-pill');
+      const matchItems = document.querySelectorAll('.match-item');
+
+      let currentFilter = 'all';
+      let searchQuery = '';
+
+      function applyFilters() {
+        matchItems.forEach((item) => {
+          const text = item.textContent.toLowerCase();
+          const matchesSearch = searchQuery === '' || text.includes(searchQuery);
+
+          let matchesCategory = true;
+          if (currentFilter === 'upcoming') {
+            matchesCategory = item.classList.contains('upcoming');
+          } else if (currentFilter === 'completed') {
+            matchesCategory = item.classList.contains('completed');
+          } else if (currentFilter === 'knockout') {
+            matchesCategory = item.classList.contains('knockout');
+          }
+
+          if (matchesSearch && matchesCategory) {
+            item.classList.remove('hidden');
+          } else {
+            item.classList.add('hidden');
+          }
+        });
+      }
+
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          searchQuery = e.target.value.toLowerCase().trim();
+          applyFilters();
+        });
+      }
+
+      filterPills.forEach((pill) => {
+        pill.addEventListener('click', () => {
+          filterPills.forEach((p) => {
+            p.classList.remove('bg-surface-container-highest', 'text-primary');
+            p.classList.add('text-on-surface-variant');
+          });
+
+          pill.classList.add('bg-surface-container-highest', 'text-primary');
+          pill.classList.remove('text-on-surface-variant');
+
+          currentFilter = pill.getAttribute('data-filter');
+          applyFilters();
+        });
+      });
+    })();
+  </script>
+</div></main></div></body></html>
