@@ -985,10 +985,8 @@ export default function Players() {
               NATION_CODES[item.nationality] ||
               item.nationality?.slice(0, 3).toUpperCase() ||
               "FIFA";
-            const club =
-              item.club
-                ? item.club.toUpperCase()
-                : (scouting.club || (item.team_name ? item.team_name.toUpperCase() : ""));
+            const playerClub =
+              item.club && item.club.trim() ? item.club.trim() : null;
             const jersey = item.jersey_number ? `#${item.jersey_number}` : "—";
             const posCode =
               scouting.posCode ||
@@ -1037,8 +1035,8 @@ export default function Players() {
                       {posCode}
                     </span>
 
-                    <span className="text-[9.5px] font-mono font-bold tracking-wider uppercase text-white/90 truncate max-w-[150px]">
-                      {club ? `${countryCode} // ${club}` : countryCode}
+                    <span className="text-[9.5px] font-mono font-bold tracking-wider text-white/90 truncate max-w-[170px]">
+                      {playerClub ? `${countryCode} // ${playerClub}` : countryCode}
                     </span>
 
                     <span className="text-sm font-black font-mono tracking-tight text-white">
@@ -1051,7 +1049,7 @@ export default function Players() {
                     {/* Foot / Sub-bar & OVR Rating */}
                     <div className="flex items-center justify-between pb-1 text-[10px]">
                       <span className="text-slate-400 font-medium">
-                        {countryCode}{item.club ? ` • ${item.club}` : ""} • {item.preferred_foot || "Right"} Foot
+                        {countryCode} · {item.preferred_foot || "Right"} Foot
                       </span>
 
                       <div className="flex items-baseline gap-1">
