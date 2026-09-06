@@ -48,6 +48,137 @@ const NATION_CODES = {
   Senegal: "SEN",
 };
 
+const CLUB_CATEGORIES = [
+  {
+    league: "Premier League (England)",
+    clubs: [
+      "Arsenal",
+      "Aston Villa",
+      "Brighton & Hove Albion",
+      "Chelsea",
+      "Everton",
+      "Fulham",
+      "Liverpool",
+      "Manchester City",
+      "Manchester United",
+      "Newcastle United",
+      "Tottenham Hotspur",
+      "West Ham United",
+      "Wolverhampton Wanderers",
+    ],
+  },
+  {
+    league: "La Liga (Spain)",
+    clubs: [
+      "Athletic Bilbao",
+      "Atlético Madrid",
+      "FC Barcelona",
+      "Real Betis",
+      "Real Madrid",
+      "Real Sociedad",
+      "Sevilla",
+      "Valencia",
+      "Villarreal",
+    ],
+  },
+  {
+    league: "Bundesliga (Germany)",
+    clubs: [
+      "Bayer Leverkusen",
+      "Bayern Munich",
+      "Borussia Dortmund",
+      "Eintracht Frankfurt",
+      "RB Leipzig",
+      "VfB Stuttgart",
+      "VfL Wolfsburg",
+    ],
+  },
+  {
+    league: "Serie A (Italy)",
+    clubs: [
+      "AC Milan",
+      "AS Roma",
+      "Atalanta",
+      "Fiorentina",
+      "Inter Milan",
+      "Juventus",
+      "Lazio",
+      "Napoli",
+    ],
+  },
+  {
+    league: "Ligue 1 (France)",
+    clubs: [
+      "AS Monaco",
+      "Lille",
+      "Lyon",
+      "Marseille",
+      "Nice",
+      "Paris Saint-Germain",
+    ],
+  },
+  {
+    league: "Other European Giants",
+    clubs: [
+      "Ajax",
+      "Benfica",
+      "Celtic",
+      "FC Porto",
+      "Fenerbahçe",
+      "Feyenoord",
+      "Galatasaray",
+      "PSV Eindhoven",
+      "Rangers",
+      "Sporting CP",
+    ],
+  },
+  {
+    league: "Americas & Rest of World",
+    clubs: [
+      "Al-Hilal",
+      "Al-Ittihad",
+      "Al-Nassr",
+      "Boca Juniors",
+      "Flamengo",
+      "Inter Miami",
+      "LA Galaxy",
+      "Los Angeles FC",
+      "Palmeiras",
+      "River Plate",
+    ],
+  },
+];
+
+const ALL_PREDEFINED_CLUBS = CLUB_CATEGORIES.flatMap((cat) => cat.clubs);
+
+const findCanonicalClub = (name) => {
+  if (!name) return "";
+  const trimmed = name.trim();
+  const direct = ALL_PREDEFINED_CLUBS.find(
+    (c) => c.toLowerCase() === trimmed.toLowerCase()
+  );
+  if (direct) return direct;
+
+  const upper = trimmed.toUpperCase();
+  const aliases = {
+    "MAN CITY": "Manchester City",
+    "MAN UNITED": "Manchester United",
+    "MAN UTD": "Manchester United",
+    "BARCA": "FC Barcelona",
+    "BARCELONA": "FC Barcelona",
+    "REAL": "Real Madrid",
+    "PSG": "Paris Saint-Germain",
+    "BAYERN": "Bayern Munich",
+    "LEVERKUSEN": "Bayer Leverkusen",
+    "ATLETICO": "Atlético Madrid",
+    "ATLETICO MADRID": "Atlético Madrid",
+    "DORTMUND": "Borussia Dortmund",
+    "INTER": "Inter Milan",
+    "MILAN": "AC Milan",
+  };
+  return aliases[upper] || null;
+};
+
 // Rich scouting metadata matching the reference image layout
 const SCOUTING_DATA = {
   "Kylian Mbappé": {
@@ -261,6 +392,8 @@ export default function Players() {
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [form, setForm] = useState(emptyForm);
+  const [isCustomClub, setIsCustomClub] = useState(false);
+  const [customClubText, setCustomClubText] = useState("");
   const [error, setError] = useState("");
   const [loadingAction, setLoadingAction] = useState(false);
   const [search, setSearch] = useState("");
@@ -300,12 +433,31 @@ export default function Players() {
 
   const openCreate = () => {
     setForm(emptyForm);
+    setIsCustomClub(false);
+    setCustomClubText("");
     setEditingId(null);
     setError("");
     setShowForm(true);
   };
 
   const openEdit = (item) => {
+    const rawClub = item.club || "";
+    const canonical = findCanonicalClub(rawClub);
+    let initialClub = rawClub;
+    let customMode = false;
+    let customText = "";
+
+    if (rawClub) {
+      if (canonical) {
+        initialClub = canonical;
+        customMode = false;
+      } else {
+        initialClub = rawClub;
+        customMode = true;
+        customText = rawClub;
+      }
+    }
+
     setForm({
       first_name: item.first_name,
       last_name: item.last_name,
@@ -317,8 +469,10 @@ export default function Players() {
       market_value_m: item.market_value_m || "",
       jersey_number: item.jersey_number || "",
       team_id: item.team_id || "",
-      club: item.club || "",
+      club: initialClub,
     });
+    setIsCustomClub(customMode);
+    setCustomClubText(customText);
     setEditingId(item.player_id);
     setError("");
     setShowForm(true);
@@ -363,6 +517,7 @@ export default function Players() {
       [
         "Player ID",
         "Full Name",
+        "Club",
         "Nationality",
         "Position",
         "Jersey Number",
@@ -375,6 +530,7 @@ export default function Players() {
       ...filtered.map((p) => [
         p.player_id,
         `"${p.first_name} ${p.last_name}"`,
+        `"${p.club || ""}"`,
         `"${p.nationality}"`,
         `"${p.position}"`,
         p.jersey_number || "",
@@ -1295,16 +1451,85 @@ export default function Players() {
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-slate-300 mb-1.5">
-                Club <span className="text-slate-500 font-normal">(Optional)</span>
-              </label>
-              <input
-                type="text"
-                value={form.club}
-                onChange={(e) => setForm({ ...form, club: e.target.value })}
-                placeholder="e.g. Real Madrid"
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
-              />
+              <div className="flex items-center justify-between mb-1.5">
+                <label className="text-xs font-medium text-slate-300">
+                  Club <span className="text-slate-500 font-normal">(Optional)</span>
+                </label>
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (isCustomClub) {
+                      setIsCustomClub(false);
+                      const canonical = findCanonicalClub(form.club);
+                      setForm({ ...form, club: canonical || "" });
+                    } else {
+                      setIsCustomClub(true);
+                      setCustomClubText(form.club || "");
+                    }
+                  }}
+                  className="text-[10.5px] font-medium text-emerald-400 hover:text-emerald-300 transition-colors cursor-pointer"
+                >
+                  {isCustomClub ? "📋 Pick from list" : "✏️ Custom"}
+                </button>
+              </div>
+
+              {isCustomClub ? (
+                <input
+                  type="text"
+                  value={customClubText}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    setCustomClubText(val);
+                    setForm({ ...form, club: val });
+                  }}
+                  placeholder="e.g. Santos FC, Al Nassr..."
+                  className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+                  autoFocus
+                />
+              ) : (
+                <select
+                  value={form.club || ""}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    if (val === "__custom__") {
+                      setIsCustomClub(true);
+                      setCustomClubText("");
+                      setForm({ ...form, club: "" });
+                    } else {
+                      setForm({ ...form, club: val });
+                    }
+                  }}
+                  className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors cursor-pointer"
+                >
+                  <option value="">Select Club (or Free Agent / None)</option>
+                  {form.club && !ALL_PREDEFINED_CLUBS.includes(form.club) && (
+                    <option value={form.club}>{form.club} (Current)</option>
+                  )}
+                  {CLUB_CATEGORIES.map((cat) => (
+                    <optgroup
+                      key={cat.league}
+                      label={cat.league}
+                      className="bg-[#121722] text-emerald-400 font-semibold"
+                    >
+                      {cat.clubs.map((c) => (
+                        <option
+                          key={c}
+                          value={c}
+                          className="bg-[#0a0e16] text-white font-normal"
+                        >
+                          {c}
+                        </option>
+                      ))}
+                    </optgroup>
+                  ))}
+                  <option
+                    value="__custom__"
+                    className="bg-[#121722] text-emerald-400 font-semibold"
+                  >
+                    + Other / Custom Club...
+                  </option>
+                </select>
+              )}
             </div>
 
             <div>

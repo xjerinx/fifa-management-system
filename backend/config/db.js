@@ -13,10 +13,19 @@ const pool = mysql.createPool({
 
 const promisePool = pool.promise();
 
-// Test the database connection on startup
+// Test the database connection on startup and ensure schema compatibility
 promisePool.query('SELECT 1')
-    .then(() => {
+    .then(async () => {
         console.log(`[DB] Connected to MySQL database "${process.env.DB_NAME || 'fifa_management'}" successfully`);
+        try {
+            const [cols] = await promisePool.query("SHOW COLUMNS FROM player LIKE 'club'");
+            if (cols.length === 0) {
+                await promisePool.query('ALTER TABLE player ADD COLUMN club VARCHAR(100) DEFAULT NULL AFTER team_id');
+                console.log('[DB] Added missing "club" column to player table');
+            }
+        } catch (e) {
+            console.warn('[DB] Schema check warning:', e.message);
+        }
     })
     .catch((err) => {
         console.error(`[DB] Connection failed: ${err.message}`);

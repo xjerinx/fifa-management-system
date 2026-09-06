@@ -53,10 +53,31 @@ exports.create = async (req, res, next) => {
         if (isNaN(marketVal) || marketVal < 0)
             return res.status(400).json({ success: false, message: 'Market value cannot be negative' });
 
-        const [result] = await db.query(
-            'INSERT INTO player (first_name, last_name, dob, nationality, position, height_cm, preferred_foot, market_value_m, jersey_number, team_id, club) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
-            [first_name.trim(), last_name.trim(), dob, nationality.trim(), position.trim(), height, preferred_foot || 'Right', marketVal, jerseyNum, teamId, playerClub]
-        );
+        let result;
+        try {
+            [result] = await db.query(
+                'INSERT INTO player (first_name, last_name, dob, nationality, position, height_cm, preferred_foot, market_value_m, jersey_number, team_id, club) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+                [first_name.trim(), last_name.trim(), dob, nationality.trim(), position.trim(), height, preferred_foot || 'Right', marketVal, jerseyNum, teamId, playerClub]
+            );
+        } catch (dbErr) {
+            if (dbErr.code === 'ER_BAD_FIELD_ERROR' && (dbErr.sqlMessage?.includes('club') || dbErr.message?.includes('club'))) {
+                try {
+                    await db.query('ALTER TABLE player ADD COLUMN club VARCHAR(100) DEFAULT NULL AFTER team_id');
+                    [result] = await db.query(
+                        'INSERT INTO player (first_name, last_name, dob, nationality, position, height_cm, preferred_foot, market_value_m, jersey_number, team_id, club) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+                        [first_name.trim(), last_name.trim(), dob, nationality.trim(), position.trim(), height, preferred_foot || 'Right', marketVal, jerseyNum, teamId, playerClub]
+                    );
+                } catch (retryErr) {
+                    // Fallback to insertion without club column if alter table fails
+                    [result] = await db.query(
+                        'INSERT INTO player (first_name, last_name, dob, nationality, position, height_cm, preferred_foot, market_value_m, jersey_number, team_id) VALUES (?,?,?,?,?,?,?,?,?,?)',
+                        [first_name.trim(), last_name.trim(), dob, nationality.trim(), position.trim(), height, preferred_foot || 'Right', marketVal, jerseyNum, teamId]
+                    );
+                }
+            } else {
+                throw dbErr;
+            }
+        }
         res.status(201).json({ success: true, data: { player_id: result.insertId, ...req.body, club: playerClub } });
     } catch (err) { next(err); }
 };
@@ -80,10 +101,30 @@ exports.update = async (req, res, next) => {
         if (isNaN(marketVal) || marketVal < 0)
             return res.status(400).json({ success: false, message: 'Market value cannot be negative' });
 
-        const [result] = await db.query(
-            'UPDATE player SET first_name=?, last_name=?, dob=?, nationality=?, position=?, height_cm=?, preferred_foot=?, market_value_m=?, jersey_number=?, team_id=?, club=? WHERE player_id=?',
-            [first_name.trim(), last_name.trim(), dob, nationality.trim(), position.trim(), height, preferred_foot || 'Right', marketVal, jerseyNum, teamId, playerClub, req.params.id]
-        );
+        let result;
+        try {
+            [result] = await db.query(
+                'UPDATE player SET first_name=?, last_name=?, dob=?, nationality=?, position=?, height_cm=?, preferred_foot=?, market_value_m=?, jersey_number=?, team_id=?, club=? WHERE player_id=?',
+                [first_name.trim(), last_name.trim(), dob, nationality.trim(), position.trim(), height, preferred_foot || 'Right', marketVal, jerseyNum, teamId, playerClub, req.params.id]
+            );
+        } catch (dbErr) {
+            if (dbErr.code === 'ER_BAD_FIELD_ERROR' && (dbErr.sqlMessage?.includes('club') || dbErr.message?.includes('club'))) {
+                try {
+                    await db.query('ALTER TABLE player ADD COLUMN club VARCHAR(100) DEFAULT NULL AFTER team_id');
+                    [result] = await db.query(
+                        'UPDATE player SET first_name=?, last_name=?, dob=?, nationality=?, position=?, height_cm=?, preferred_foot=?, market_value_m=?, jersey_number=?, team_id=?, club=? WHERE player_id=?',
+                        [first_name.trim(), last_name.trim(), dob, nationality.trim(), position.trim(), height, preferred_foot || 'Right', marketVal, jerseyNum, teamId, playerClub, req.params.id]
+                    );
+                } catch (retryErr) {
+                    [result] = await db.query(
+                        'UPDATE player SET first_name=?, last_name=?, dob=?, nationality=?, position=?, height_cm=?, preferred_foot=?, market_value_m=?, jersey_number=?, team_id=? WHERE player_id=?',
+                        [first_name.trim(), last_name.trim(), dob, nationality.trim(), position.trim(), height, preferred_foot || 'Right', marketVal, jerseyNum, teamId, req.params.id]
+                    );
+                }
+            } else {
+                throw dbErr;
+            }
+        }
         if (!result.affectedRows) return res.status(404).json({ success: false, message: 'Player not found' });
         res.json({ success: true, message: 'Player updated successfully' });
     } catch (err) { next(err); }
