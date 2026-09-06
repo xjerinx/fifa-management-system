@@ -386,7 +386,7 @@ export default function Sponsors() {
         </div>
 
         {/* Action Buttons */}
-        <div className="flex flex-wrap items-center gap-2 self-start lg:self-center">
+        <div className="flex flex-wrap items-center justify-end gap-2 shrink-0 self-end lg:self-center ml-auto">
           <button
             onClick={exportJSON}
             className="flex items-center gap-1.5 px-3 py-2 bg-[#121722] hover:bg-[#1b2234] text-xs font-semibold text-slate-300 hover:text-white border border-[#1f293d] rounded-lg transition-colors shadow-sm"
@@ -408,7 +408,7 @@ export default function Sponsors() {
 
           <button
             onClick={openCreate}
-            className="flex items-center gap-1.5 px-3.5 py-2 bg-[#00f59b] hover:bg-[#00d685] text-black text-xs font-bold rounded-lg transition-all shadow-md shadow-[#00f59b]/15 active:scale-[0.98]"
+            className="flex items-center gap-1.5 px-3.5 py-2 bg-[#00f59b] hover:bg-[#00d685] text-black text-xs font-bold rounded-lg transition-all shadow-md shadow-[#00f59b]/15 active:scale-[0.98] ml-auto"
           >
             <Plus size={15} strokeWidth={2.5} />
             <span className="tracking-wide uppercase font-mono text-[11px]">+ ONBOARD PARTNER</span>
