@@ -242,6 +242,17 @@ function calculateTenure(startDate, endDate) {
   return `${years} yrs`;
 }
 
+function calculateAge(dob) {
+  if (!dob) return null;
+  const birth = new Date(dob);
+  if (isNaN(birth.getTime())) return null;
+  const now = new Date();
+  let age = now.getFullYear() - birth.getFullYear();
+  const m = now.getMonth() - birth.getMonth();
+  if (m < 0 || (m === 0 && now.getDate() < birth.getDate())) age--;
+  return age >= 0 ? age : null;
+}
+
 function formatDate(dateStr) {
   if (!dateStr) return "—";
   const d = new Date(dateStr);
@@ -264,7 +275,7 @@ export default function Coaches() {
   const [loadingAction, setLoadingAction] = useState(false);
   const [search, setSearch] = useState("");
   const [activeFilter, setActiveFilter] = useState("ALL"); // ALL, ACTIVE, UEFA, CONMEBOL, AFC
-  const [sortBy, setSortBy] = useState("win_rate"); // win_rate, name, tenure, date
+  const [sortBy, setSortBy] = useState("name"); // name, dob, tenure, date
   const [viewMode, setViewMode] = useState("grid"); // 'grid' | 'table'
 
   const load = () => {
@@ -460,21 +471,18 @@ export default function Coaches() {
         item.nationality?.toLowerCase().includes(q) ||
         item.team_name?.toLowerCase().includes(q) ||
         item.license_no?.toLowerCase().includes(q) ||
-        scout.countryCode?.toLowerCase().includes(q) ||
-        scout.tacticalSystem?.toLowerCase().includes(q);
+        scout.countryCode?.toLowerCase().includes(q);
 
       return matchesFilter && matchesSearch;
     });
 
     // Sort logic
     result.sort((a, b) => {
-      const scoutA = getScouting(a);
-      const scoutB = getScouting(b);
-      if (sortBy === "win_rate") {
-        return (scoutB.winRate || 0) - (scoutA.winRate || 0);
-      }
       if (sortBy === "name") {
         return getCoachName(a).localeCompare(getCoachName(b));
+      }
+      if (sortBy === "dob") {
+        return new Date(b.dob || 0) - new Date(a.dob || 0);
       }
       if (sortBy === "tenure") {
         return calculateTenureYears(b.start_date, b.end_date) - calculateTenureYears(a.start_date, a.end_date);
@@ -780,10 +788,10 @@ export default function Coaches() {
               onChange={(e) => setSortBy(e.target.value)}
               className="bg-transparent text-[11px] text-slate-300 font-mono font-medium focus:outline-none cursor-pointer pr-1"
             >
-              <option value="win_rate" className="bg-[#10141e] text-white">Sort: Win Rate %</option>
               <option value="name" className="bg-[#10141e] text-white">Sort: Coach Name</option>
-              <option value="tenure" className="bg-[#10141e] text-white">Sort: Longest Tenure</option>
+              <option value="dob" className="bg-[#10141e] text-white">Sort: Date of Birth</option>
               <option value="date" className="bg-[#10141e] text-white">Sort: Appointed Date</option>
+              <option value="tenure" className="bg-[#10141e] text-white">Sort: Longest Tenure</option>
             </select>
           </div>
 
@@ -889,7 +897,7 @@ export default function Coaches() {
                     </div>
                   </div>
 
-                  {/* License + Appointment + Tactical Box */}
+                  {/* License + Appointment + Date of Birth Box */}
                   <div className="bg-[#0a0d14] rounded border border-white/5 p-2.5 my-2.5 text-left">
                     <div className="grid grid-cols-2 gap-2">
                       <div>
@@ -912,93 +920,52 @@ export default function Coaches() {
                       </div>
                     </div>
 
-                    {/* Tactical System */}
-                    <div className="mt-2 pt-2 border-t border-white/5">
-                      <span className="text-[9px] font-mono uppercase text-slate-400 tracking-wider font-semibold block">
-                        TACTICAL SYSTEM
-                      </span>
-                      <span className="text-[11px] font-medium text-slate-300 leading-snug block mt-0.5 truncate">
-                        {scout.tacticalSystem}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Honor / Trophy & Win Rate % Row */}
-                  <div className="flex items-center justify-between gap-2 py-1 text-xs">
-                    {scout.isArchive ? (
-                      <div className="flex items-center gap-1.5 text-slate-400 text-[11px] font-mono">
-                        <span className="material-symbols-outlined text-[14px]">history</span>
-                        <span className="truncate">{scout.honor}</span>
-                      </div>
-                    ) : (
-                      <div className="flex items-center gap-1.5 text-amber-300/90 text-[11px] font-medium min-w-0">
-                        <span className="material-symbols-outlined text-[14px] text-amber-400 shrink-0">
-                          emoji_events
+                    {/* Date of Birth */}
+                    <div className="mt-2 pt-2 border-t border-white/5 flex items-center justify-between">
+                      <div>
+                        <span className="text-[9px] font-mono uppercase text-slate-400 tracking-wider font-semibold block">
+                          DATE OF BIRTH
                         </span>
-                        <span className="truncate">{scout.honor}</span>
-                      </div>
-                    )}
-
-                    <div className="shrink-0">
-                      {scout.isArchive ? (
-                        <span className="text-[11px] font-mono font-semibold text-slate-400">
-                          {scout.winRate ? `${scout.winRate}% WR` : "Concluded"}
+                        <span className="text-[11px] font-mono font-medium text-slate-200 block mt-0.5">
+                          {formatDate(item.dob)}
                         </span>
-                      ) : (
-                        <span className="text-[11px] font-mono font-bold text-emerald-400">
-                          {scout.winRate}% WR
+                      </div>
+                      {calculateAge(item.dob) !== null && (
+                        <span className="text-[10px] font-mono text-slate-400 bg-white/5 px-2 py-0.5 rounded border border-white/5">
+                          {calculateAge(item.dob)} yrs old
                         </span>
                       )}
                     </div>
                   </div>
                 </div>
 
-                {/* Footer Row: Squad + Contract + Quick Actions */}
+                {/* Footer Row: Contract & Quick Actions */}
                 <div className="flex items-center justify-between pt-2.5 mt-2 border-t border-white/5 text-[11px] font-mono">
-                  {/* Left: View Squad / Archive */}
-                  <div className="flex items-center gap-1.5">
-                    {scout.isArchive ? (
-                      <span className="text-slate-400 text-[10px] uppercase tracking-wider font-semibold">
-                        TENURE ARCHIVE
-                      </span>
-                    ) : (
-                      <button
-                        onClick={() => {
-                          toast?.showToast(
-                            `Squad roster: ${fullName} leads ${item.team_name || "National Team"} (${scout.squadCount || 26} players)`
-                          );
-                        }}
-                        className="flex items-center gap-1 text-slate-300 hover:text-emerald-400 transition-colors font-bold text-[10px] tracking-wider"
-                      >
-                        <span className="material-symbols-outlined text-[13px] text-sky-400">
-                          sports_soccer
-                        </span>
-                        <span>VIEW SQUAD ({scout.squadCount || 26})</span>
-                      </button>
-                    )}
+                  <div className="flex items-center gap-1.5 text-slate-400 text-[10px]">
+                    <span className="material-symbols-outlined text-[13px] text-emerald-400">
+                      calendar_month
+                    </span>
+                    <span>
+                      {item.end_date ? `Until ${formatDate(item.end_date)}` : "Active Contract"}
+                    </span>
                   </div>
 
-                  {/* Right: Contract & Edit/Delete Buttons */}
-                  <div className="flex items-center gap-2">
-                    <span className="text-slate-400 text-[10px]">
-                      {scout.isArchive ? "Concluded" : `Contract ${scout.contract}`}
-                    </span>
-                    <div className="flex items-center gap-0.5 pl-1 border-l border-white/10">
-                      <button
-                        onClick={() => openEdit(item)}
-                        className="p-1 text-slate-400 hover:text-white hover:bg-white/5 rounded transition-colors"
-                        title="Edit Coach"
-                      >
-                        <span className="material-symbols-outlined text-[15px] block">edit</span>
-                      </button>
-                      <button
-                        onClick={() => handleDelete(item.coach_id, fullName)}
-                        className="p-1 text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 rounded transition-colors"
-                        title="Delete Coach"
-                      >
-                        <span className="material-symbols-outlined text-[15px] block">delete</span>
-                      </button>
-                    </div>
+                  {/* Right: Edit/Delete Buttons */}
+                  <div className="flex items-center gap-0.5">
+                    <button
+                      onClick={() => openEdit(item)}
+                      className="p-1 text-slate-400 hover:text-white hover:bg-white/5 rounded transition-colors"
+                      title="Edit Coach"
+                    >
+                      <span className="material-symbols-outlined text-[15px] block">edit</span>
+                    </button>
+                    <button
+                      onClick={() => handleDelete(item.coach_id, fullName)}
+                      className="p-1 text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 rounded transition-colors"
+                      title="Delete Coach"
+                    >
+                      <span className="material-symbols-outlined text-[15px] block">delete</span>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -1016,8 +983,7 @@ export default function Coaches() {
                   <th className="py-3 px-4">Confederation</th>
                   <th className="py-3 px-4">License No.</th>
                   <th className="py-3 px-4">Appointed</th>
-                  <th className="py-3 px-4">Tactical System</th>
-                  <th className="py-3 px-4">Win Rate</th>
+                  <th className="py-3 px-4">Date of Birth</th>
                   <th className="py-3 px-4">Status</th>
                   <th className="py-3 px-4 text-right">Actions</th>
                 </tr>
@@ -1061,11 +1027,8 @@ export default function Coaches() {
                       <td className="py-3 px-4 font-mono text-slate-300">
                         {scout.appointedFormatted}
                       </td>
-                      <td className="py-3 px-4 text-slate-300">
-                        {scout.tacticalSystem}
-                      </td>
-                      <td className="py-3 px-4 font-mono font-bold text-emerald-400">
-                        {scout.winRate}%
+                      <td className="py-3 px-4 font-mono text-slate-300">
+                        {formatDate(item.dob)}
                       </td>
                       <td className="py-3 px-4">
                         {isActive ? (
