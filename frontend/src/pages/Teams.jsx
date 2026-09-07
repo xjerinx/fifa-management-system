@@ -329,8 +329,8 @@ export default function Teams() {
       {/* ========================================================
           1. EDITORIAL PAGE HEADER
           ======================================================== */}
-      <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-5 pt-1">
-        <div>
+      <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4 pt-1">
+        <div className="min-w-0 max-w-lg">
           <div className="flex items-center gap-2 text-[11px] font-mono tracking-wider text-emerald-400 font-semibold mb-1">
             <span>FEDERATION CONSOLE // REGISTRY</span>
             <span className="text-slate-600">•</span>
@@ -343,27 +343,27 @@ export default function Teams() {
             DIRECTORY
           </h1>
 
-          <p className="text-xs sm:text-sm text-slate-400 mt-2 max-w-2xl font-normal">
+          <p className="text-xs sm:text-sm text-slate-400 mt-2 font-normal">
             {items.length} registered senior national teams competing in FIFA and continental
             championships
           </p>
         </div>
 
         {/* Right Header Actions */}
-        <div className="flex items-center gap-2.5 flex-wrap">
+        <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap shrink-0">
           <button
             onClick={handleExport}
-            className="flex items-center gap-2 px-3.5 py-2 bg-[#121722] hover:bg-[#1a2233] text-slate-300 hover:text-white text-xs font-semibold uppercase tracking-wider rounded-lg border border-[#1e2738] transition-colors shadow-sm"
+            className="flex items-center gap-1.5 px-3 py-2 bg-[#121722] hover:bg-[#1a2233] text-slate-300 hover:text-white text-xs font-semibold uppercase tracking-wider rounded-lg border border-[#1e2738] transition-colors shadow-sm whitespace-nowrap"
           >
             <span className="material-symbols-outlined text-[16px] text-slate-400">
               download
             </span>
-            <span>Export Squad Rosters</span>
+            <span>Export Rosters</span>
           </button>
 
           <button
             onClick={() => setSortBy(sortBy === "ranking" ? "name" : "ranking")}
-            className={`flex items-center gap-2 px-3.5 py-2 bg-[#121722] hover:bg-[#1a2233] text-xs font-semibold uppercase tracking-wider rounded-lg border transition-colors shadow-sm ${sortBy === "ranking"
+            className={`flex items-center gap-1.5 px-3 py-2 bg-[#121722] hover:bg-[#1a2233] text-xs font-semibold uppercase tracking-wider rounded-lg border transition-colors shadow-sm whitespace-nowrap ${sortBy === "ranking"
               ? "text-emerald-400 border-emerald-500/30"
               : "text-slate-300 border-[#1e2738]"
               }`}
@@ -375,7 +375,7 @@ export default function Teams() {
           <button
             type="button"
             onClick={toggleSelectionMode}
-            className={`flex items-center gap-2 px-3.5 py-2 text-xs font-semibold uppercase tracking-wider rounded-lg border transition-colors shadow-sm cursor-pointer ${
+            className={`flex items-center gap-1.5 px-3 py-2 text-xs font-semibold uppercase tracking-wider rounded-lg border transition-colors shadow-sm cursor-pointer whitespace-nowrap ${
               isSelectionMode
                 ? "bg-rose-500/20 text-rose-300 border-rose-500/40"
                 : "bg-[#121722] hover:bg-[#1a2233] text-slate-300 hover:text-white border-[#1e2738]"
@@ -385,12 +385,12 @@ export default function Teams() {
             <span className="material-symbols-outlined text-[16px]">
               {isSelectionMode ? "close" : "checklist"}
             </span>
-            <span>{isSelectionMode ? "Cancel Selection" : "Multiple Deletion"}</span>
+            <span>{isSelectionMode ? "Cancel" : "Multiple Deletion"}</span>
           </button>
 
           <button
             onClick={openCreate}
-            className="flex items-center gap-2 px-4 py-2 bg-[#00f59b] hover:bg-[#00d685] text-black font-bold text-xs uppercase tracking-wider rounded-lg transition-colors shadow-sm"
+            className="flex items-center gap-1.5 px-3.5 py-2 bg-[#00f59b] hover:bg-[#00d685] text-black font-bold text-xs uppercase tracking-wider rounded-lg transition-colors shadow-sm whitespace-nowrap"
           >
             <span className="material-symbols-outlined text-[18px]">add</span>
             <span>Register Team</span>

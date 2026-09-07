@@ -569,8 +569,8 @@ export default function Coaches() {
   return (
     <div className="flex flex-col w-full pb-14 gap-6 text-on-surface bg-[#0a0d14] min-h-screen">
       {/* 1. Header Section */}
-      <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-5 pt-1">
-        <div>
+      <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4 pt-1">
+        <div className="min-w-0 max-w-xl">
           {/* Eyebrow badge */}
           <div className="flex items-center gap-2 mb-1.5">
             <span className="material-symbols-outlined text-[16px] text-sky-400">
@@ -584,19 +584,19 @@ export default function Coaches() {
           <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight uppercase">
             HEAD COACHES & TACTICAL DIRECTORS
           </h1>
-          <p className="text-xs sm:text-sm text-slate-400 mt-1 max-w-3xl">
+          <p className="text-xs sm:text-sm text-slate-400 mt-1">
             {items.length} accredited head coaches leading registered national team delegations for the 2026/27 international cycle.
           </p>
         </div>
 
         {/* Action Buttons */}
-        <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+        <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap shrink-0">
           <button
             onClick={handleExport}
-            className="flex items-center gap-2 px-3 py-2 bg-[#121722] hover:bg-[#1b2333] text-slate-200 text-xs font-semibold rounded border border-white/10 transition-colors shadow-sm tracking-wide"
+            className="flex items-center gap-1.5 px-3 py-2 bg-[#121722] hover:bg-[#1b2333] text-slate-200 text-xs font-semibold rounded border border-white/10 transition-colors shadow-sm tracking-wide whitespace-nowrap"
           >
             <span className="material-symbols-outlined text-[16px] text-slate-400">download</span>
-            <span>EXPORT CREDENTIALS</span>
+            <span>Export Credentials</span>
           </button>
 
           <button
@@ -604,16 +604,16 @@ export default function Coaches() {
               setActiveFilter(activeFilter === "ACTIVE" ? "ALL" : "ACTIVE");
               toast?.showToast(`Filter toggled: ${activeFilter === "ACTIVE" ? "All Coaches" : "Active Only"}`);
             }}
-            className="flex items-center gap-2 px-3 py-2 bg-[#121722] hover:bg-[#1b2333] text-slate-200 text-xs font-semibold rounded border border-white/10 transition-colors shadow-sm tracking-wide"
+            className="flex items-center gap-1.5 px-3 py-2 bg-[#121722] hover:bg-[#1b2333] text-slate-200 text-xs font-semibold rounded border border-white/10 transition-colors shadow-sm tracking-wide whitespace-nowrap"
           >
             <span className="material-symbols-outlined text-[16px] text-emerald-400">tune</span>
-            <span>ACCREDITATION FILTER</span>
+            <span>Accreditation</span>
           </button>
 
           <button
             type="button"
             onClick={toggleSelectionMode}
-            className={`flex items-center gap-2 px-3 py-2 text-xs font-semibold rounded border transition-colors shadow-sm tracking-wide cursor-pointer ${
+            className={`flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded border transition-colors shadow-sm tracking-wide cursor-pointer whitespace-nowrap ${
               isSelectionMode
                 ? "bg-rose-500/20 text-rose-300 border-rose-500/40"
                 : "bg-[#121722] hover:bg-[#1b2333] text-slate-200 border-white/10"
@@ -623,15 +623,15 @@ export default function Coaches() {
             <span className="material-symbols-outlined text-[16px]">
               {isSelectionMode ? "close" : "checklist"}
             </span>
-            <span>{isSelectionMode ? "Cancel Selection" : "Multiple Deletion"}</span>
+            <span>{isSelectionMode ? "Cancel" : "Multiple Deletion"}</span>
           </button>
 
           <button
             onClick={openCreate}
-            className="flex items-center gap-1.5 px-3.5 py-2 bg-[#00f59b] hover:bg-[#00d685] text-black font-bold text-xs rounded transition-colors shadow-sm tracking-wide"
+            className="flex items-center gap-1.5 px-3.5 py-2 bg-[#00f59b] hover:bg-[#00d685] text-black font-bold text-xs rounded transition-colors shadow-sm tracking-wide whitespace-nowrap"
           >
             <span className="material-symbols-outlined text-[17px] font-bold">add</span>
-            <span>+ REGISTER HEAD COACH</span>
+            <span>Register Head Coach</span>
           </button>
         </div>
       </div>
