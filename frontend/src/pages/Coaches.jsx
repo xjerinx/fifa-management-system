@@ -20,7 +20,7 @@ const COACH_SCOUTING_DATA = {
     countryCode: "ESP",
     fed: "RFEF",
     confederation: "UEFA",
-    licenseDisplay: "RFEF-005 (UEFA Pro)",
+    licenseDisplay: "RFEF-005",
     appointedFormatted: "01/01/2023",
     tacticalSystem: "4-3-3 Possession / High Press",
     honor: "Euro 2024 • Nations Lg.",
@@ -35,7 +35,7 @@ const COACH_SCOUTING_DATA = {
     countryCode: "URU",
     fed: "AUF",
     confederation: "CONMEBOL",
-    licenseDisplay: "AUF-010 (CONMEBOL)",
+    licenseDisplay: "AUF-010",
     appointedFormatted: "15/03/2023",
     tacticalSystem: "4-2-3-1 Intense Press / Man-Mark",
     honor: "Copa América 3rd",
@@ -50,7 +50,7 @@ const COACH_SCOUTING_DATA = {
     countryCode: "SEN",
     fed: "FSF",
     confederation: "AFC/CAF",
-    licenseDisplay: "FSF-012 (CAF Pro)",
+    licenseDisplay: "FSF-012",
     appointedFormatted: "05/03/2015",
     tacticalSystem: "4-3-3 Compact Counter Transition",
     honor: "AFCON Champions",
@@ -65,7 +65,7 @@ const COACH_SCOUTING_DATA = {
     countryCode: "FRA",
     fed: "FFF",
     confederation: "UEFA",
-    licenseDisplay: "FFF-003 (UEFA Master)",
+    licenseDisplay: "FFF-003",
     appointedFormatted: "08/07/2012",
     tacticalSystem: "4-2-3-1 Hybrid Direct",
     honor: "FIFA World Cup '18",
@@ -80,7 +80,7 @@ const COACH_SCOUTING_DATA = {
     countryCode: "BRA",
     fed: "CBF",
     confederation: "CONMEBOL",
-    licenseDisplay: "CBF-001 (Academy Pro)",
+    licenseDisplay: "CBF-001",
     appointedFormatted: "08/01/2024",
     tacticalSystem: "4-3-3 Fluid Samba Dynamism",
     honor: "Copa Libertadores x2",
@@ -95,7 +95,7 @@ const COACH_SCOUTING_DATA = {
     countryCode: "NED",
     fed: "KNVB",
     confederation: "UEFA",
-    licenseDisplay: "KNVB-008 (UEFA Pro)",
+    licenseDisplay: "KNVB-008",
     appointedFormatted: "01/07/2023",
     tacticalSystem: "3-4-2-1 Wing Back Overload",
     honor: "Euro 2024 Semi-Final",
@@ -110,7 +110,7 @@ const COACH_SCOUTING_DATA = {
     countryCode: "POR",
     fed: "FPF",
     confederation: "UEFA",
-    licenseDisplay: "FPF-009 (UEFA Pro)",
+    licenseDisplay: "FPF-009",
     appointedFormatted: "09/01/2023",
     tacticalSystem: "4-3-3 / 3-4-3 Positional",
     honor: "Euro Qualifiers (10-0-0)",
@@ -125,7 +125,7 @@ const COACH_SCOUTING_DATA = {
     countryCode: "JPN",
     fed: "JFA",
     confederation: "AFC",
-    licenseDisplay: "JFA-011 (AFC Elite)",
+    licenseDisplay: "JFA-011",
     appointedFormatted: "26/07/2018",
     tacticalSystem: "4-2-3-1 Rapid Transition",
     honor: "Asian Cup Finalist",
@@ -140,7 +140,7 @@ const COACH_SCOUTING_DATA = {
     countryCode: "GER",
     fed: "DFB",
     confederation: "UEFA",
-    licenseDisplay: "DFB-006 (H-W Akad.)",
+    licenseDisplay: "DFB-006",
     appointedFormatted: "22/09/2023",
     tacticalSystem: "4-2-2-2 Gegenpress / Vert",
     honor: "Euro 2024 QF",
@@ -155,7 +155,7 @@ const COACH_SCOUTING_DATA = {
     countryCode: "ARG",
     fed: "AFA",
     confederation: "CONMEBOL",
-    licenseDisplay: "AFA-002 (CONMEBOL Pro)",
+    licenseDisplay: "AFA-002",
     appointedFormatted: "14/11/2018",
     tacticalSystem: "4-3-3 / 4-4-2 Fluid Adaptive",
     honor: "World Cup '22 • Copa x2",
@@ -170,7 +170,7 @@ const COACH_SCOUTING_DATA = {
     countryCode: "ENG",
     fed: "FA",
     confederation: "UEFA",
-    licenseDisplay: "FA-004 (UEFA Pro)",
+    licenseDisplay: "FA-004",
     appointedFormatted: "2016 – 2024",
     isTenure: true,
     tacticalSystem: "4-2-3-1 Solid Mid-Block",
@@ -187,7 +187,7 @@ const COACH_SCOUTING_DATA = {
     countryCode: "ITA",
     fed: "FIGC",
     confederation: "UEFA",
-    licenseDisplay: "FIGC-007 (Coverciano)",
+    licenseDisplay: "FIGC-007",
     appointedFormatted: "04/08/2023",
     tacticalSystem: "3-4-2-1 Vertical Build-Up",
     honor: "Serie A Scudetto Winner",
@@ -354,11 +354,23 @@ export default function Coaches() {
     return [item.first_name, item.last_name].filter(Boolean).join(" ").trim();
   };
 
+  // Helper to get clean license number without extra text
+  const cleanLicense = (val) => {
+    if (!val) return "—";
+    return String(val).split(" (")[0].trim() || "—";
+  };
+
   // Helper to get scouting metadata
   const getScouting = (item) => {
     const fullName = getCoachName(item);
-    if (COACH_SCOUTING_DATA[fullName]) {
-      return COACH_SCOUTING_DATA[fullName];
+    const base = COACH_SCOUTING_DATA[fullName];
+    const licenseNo = cleanLicense(item.license_no || base?.licenseDisplay);
+
+    if (base) {
+      return {
+        ...base,
+        licenseDisplay: licenseNo,
+      };
     }
     // Fallback dynamic generation for newly registered coaches
     const initials = (item.first_name?.[0] || "") + (item.last_name?.[0] || "");
@@ -372,7 +384,7 @@ export default function Coaches() {
         : ["BRA", "ARG", "URU"].includes(code)
           ? "CONMEBOL"
           : "AFC",
-      licenseDisplay: item.license_no ? `${item.license_no} (Pro)` : "FIFA Pro License",
+      licenseDisplay: licenseNo,
       appointedFormatted: formatDate(item.start_date),
       tacticalSystem: "4-3-3 Balanced Positional",
       honor: isAct ? "Active Federation Appointee" : "Past Delegate",
