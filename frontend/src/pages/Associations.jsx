@@ -343,71 +343,73 @@ export default function Associations() {
       {/* ========================================================
           1. HEADER & ACTION CLUSTER
           ======================================================== */}
-      <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 pt-1">
-        <div className="flex flex-col gap-1.5">
-          {/* Micro Telemetry Bar */}
-          <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-slate-400">
-            <span className="font-bold text-sky-400">GOVERNANCE & JURISDICTION HUB</span>
-            <span>•</span>
-            <span className="flex items-center gap-1.5 text-emerald-400 font-semibold">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-              TMS Node V4.2 Connected
-            </span>
+      <div className="flex flex-col gap-3 pt-1">
+        <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4">
+          <div className="flex flex-col gap-1 min-w-0 max-w-xl">
+            {/* Micro Telemetry Bar */}
+            <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-slate-400">
+              <span className="font-bold text-sky-400">GOVERNANCE & JURISDICTION HUB</span>
+              <span>•</span>
+              <span className="flex items-center gap-1.5 text-emerald-400 font-semibold">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                TMS Node V4.2 Connected
+              </span>
+            </div>
+
+            {/* Main Title */}
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight uppercase leading-tight">
+              FOOTBALL ASSOCIATIONS & CONFEDERATIONS
+            </h1>
           </div>
 
-          {/* Main Title */}
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight uppercase">
-            FOOTBALL ASSOCIATIONS & CONFEDERATIONS
-          </h1>
+          {/* Header Action Buttons */}
+          <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap shrink-0">
+            <button
+              onClick={exportRegistry}
+              className="flex items-center gap-1.5 px-3 py-2 bg-[#111622] hover:bg-[#182133] text-slate-300 hover:text-white text-xs font-semibold rounded border border-[#1b2234] transition-colors shadow-sm whitespace-nowrap"
+            >
+              <span className="material-symbols-outlined text-[16px]">verified_user</span>
+              <span>AUDIT REPORTS</span>
+            </button>
 
-          {/* Subtitle */}
-          <p className="text-xs sm:text-sm text-slate-400 max-w-3xl leading-relaxed">
-            Global administrative registry tracking continental confederations and recognized member associations under FIFA Statutes 2026/27.
-          </p>
+            <button
+              onClick={exportRegistry}
+              className="flex items-center gap-1.5 px-3 py-2 bg-[#111622] hover:bg-[#182133] text-slate-300 hover:text-white text-xs font-semibold rounded border border-[#1b2234] transition-colors shadow-sm whitespace-nowrap"
+            >
+              <span className="material-symbols-outlined text-[16px]">file_download</span>
+              <span>EXPORT REGISTRY</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={toggleSelectionMode}
+              className={`flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded border transition-colors shadow-sm tracking-wide cursor-pointer whitespace-nowrap ${
+                isSelectionMode
+                  ? "bg-rose-500/20 text-rose-300 border-rose-500/40"
+                  : "bg-[#111622] hover:bg-[#182133] text-slate-300 border-[#1b2234]"
+              }`}
+              title="Select multiple associations for deletion"
+            >
+              <span className="material-symbols-outlined text-[16px]">
+                {isSelectionMode ? "close" : "checklist"}
+              </span>
+              <span>{isSelectionMode ? "Cancel" : "Multiple Deletion"}</span>
+            </button>
+
+            <button
+              onClick={openCreate}
+              className="flex items-center gap-1.5 px-3.5 py-2 bg-[#00f59b] hover:bg-[#00d685] text-black text-xs font-bold uppercase tracking-wider rounded transition-all shadow-sm whitespace-nowrap"
+            >
+              <span className="material-symbols-outlined text-[16px]">add</span>
+              <span>REGISTER ASSOCIATION</span>
+            </button>
+          </div>
         </div>
 
-        {/* Header Action Buttons */}
-        <div className="flex flex-wrap items-center gap-2.5 shrink-0">
-          <button
-            onClick={exportRegistry}
-            className="flex items-center gap-1.5 px-3.5 py-2 bg-[#111622] hover:bg-[#182133] text-slate-300 hover:text-white text-xs font-semibold rounded border border-[#1b2234] transition-colors shadow-sm"
-          >
-            <span className="material-symbols-outlined text-[16px]">verified_user</span>
-            <span>AUDIT REPORTS</span>
-          </button>
-
-          <button
-            onClick={exportRegistry}
-            className="flex items-center gap-1.5 px-3.5 py-2 bg-[#111622] hover:bg-[#182133] text-slate-300 hover:text-white text-xs font-semibold rounded border border-[#1b2234] transition-colors shadow-sm"
-          >
-            <span className="material-symbols-outlined text-[16px]">file_download</span>
-            <span>EXPORT REGISTRY</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={toggleSelectionMode}
-            className={`flex items-center gap-2 px-3.5 py-2 text-xs font-semibold rounded border transition-colors shadow-sm tracking-wide cursor-pointer ${
-              isSelectionMode
-                ? "bg-rose-500/20 text-rose-300 border-rose-500/40"
-                : "bg-[#111622] hover:bg-[#182133] text-slate-300 border-[#1b2234]"
-            }`}
-            title="Select multiple associations for deletion"
-          >
-            <span className="material-symbols-outlined text-[16px]">
-              {isSelectionMode ? "close" : "checklist"}
-            </span>
-            <span>{isSelectionMode ? "Cancel Selection" : "Multiple Deletion"}</span>
-          </button>
-
-          <button
-            onClick={openCreate}
-            className="flex items-center gap-1.5 px-4 py-2 bg-[#00f59b] hover:bg-[#00d685] text-black text-xs font-bold uppercase tracking-wider rounded transition-all shadow-sm"
-          >
-            <span className="material-symbols-outlined text-[16px]">add</span>
-            <span>+ REGISTER ASSOCIATION</span>
-          </button>
-        </div>
+        {/* Subtitle */}
+        <p className="text-xs sm:text-sm text-slate-400 max-w-3xl leading-relaxed">
+          Global administrative registry tracking continental confederations and recognized member associations under FIFA Statutes 2026/27.
+        </p>
       </div>
 
       {/* ========================================================

@@ -231,64 +231,66 @@ export default function Stadiums() {
   return (
     <div className="flex flex-col w-full pb-14 gap-6 text-on-surface bg-[#0a0d14] min-h-screen">
       {/* Page Header */}
-      <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-4 pt-1">
-        <div>
-          <div className="flex items-center gap-2 mb-1.5 flex-wrap">
-            <span className="material-symbols-outlined text-[15px] text-emerald-400">
-              stadium
-            </span>
-            <span className="text-[11px] font-mono tracking-wider text-slate-400 uppercase font-semibold">
-              VENUES & INFRASTRUCTURE REGISTRY // VENUE OPERATIONS DIVISION - FIFA CAT 4 ELITE
-            </span>
+      <div className="flex flex-col gap-3 pt-1">
+        <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4">
+          <div className="flex flex-col gap-1 min-w-0 max-w-2xl">
+            <div className="flex items-center gap-2 mb-1 flex-wrap">
+              <span className="material-symbols-outlined text-[15px] text-emerald-400">
+                stadium
+              </span>
+              <span className="text-[11px] font-mono tracking-wider text-slate-400 uppercase font-semibold">
+                VENUES & INFRASTRUCTURE REGISTRY // VENUE OPERATIONS DIVISION - FIFA CAT 4 ELITE
+              </span>
+            </div>
+
+            <div className="flex items-center gap-3 flex-wrap">
+              <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight uppercase leading-tight">
+                STADIUMS & HOST VENUES DIRECTORY
+              </h1>
+              <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-400 border border-emerald-500/30 uppercase tracking-wider">
+                2026/27 ACCREDITED
+              </span>
+            </div>
           </div>
 
-          <div className="flex items-center gap-3 flex-wrap">
-            <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight uppercase">
-              STADIUMS & HOST VENUES DIRECTORY
-            </h1>
-            <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-400 border border-emerald-500/30 uppercase tracking-wider">
-              2026/27 ACCREDITED
-            </span>
+          <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap shrink-0">
+            <button
+              onClick={handleExport}
+              className="flex items-center gap-1.5 px-3 py-2 bg-[#121722] hover:bg-[#1b2333] text-slate-200 text-xs font-semibold rounded border border-white/10 transition-colors shadow-sm tracking-wide whitespace-nowrap"
+            >
+              <span className="material-symbols-outlined text-[16px] text-slate-400">download</span>
+              <span>Export Venues</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={toggleSelectionMode}
+              className={`flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded border transition-colors shadow-sm tracking-wide cursor-pointer whitespace-nowrap ${
+                isSelectionMode
+                  ? "bg-rose-500/20 text-rose-300 border-rose-500/40"
+                  : "bg-[#121722] hover:bg-[#1b2333] text-slate-200 border-white/10"
+              }`}
+              title="Select multiple stadiums for deletion"
+            >
+              <span className="material-symbols-outlined text-[16px]">
+                {isSelectionMode ? "close" : "checklist"}
+              </span>
+              <span>{isSelectionMode ? "Cancel" : "Multiple Deletion"}</span>
+            </button>
+
+            <button
+              onClick={openCreate}
+              className="flex items-center gap-1.5 px-3.5 py-2 bg-[#00f59b] hover:bg-[#00d685] text-black font-bold text-xs rounded transition-colors shadow-sm tracking-wide whitespace-nowrap"
+            >
+              <span className="material-symbols-outlined text-[17px] font-bold">add</span>
+              <span>REGISTER STADIUM</span>
+            </button>
           </div>
-
-          <p className="text-xs sm:text-sm text-slate-400 mt-1 max-w-3xl">
-            {items.length} certified international tournament stadiums with verified crowd capacity allocations and match fixture assignments.
-          </p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2.5 shrink-0">
-          <button
-            onClick={handleExport}
-            className="flex items-center gap-2 px-3 py-2 bg-[#121722] hover:bg-[#1b2333] text-slate-200 text-xs font-semibold rounded border border-white/10 transition-colors shadow-sm tracking-wide"
-          >
-            <span className="material-symbols-outlined text-[16px] text-slate-400">download</span>
-            <span>EXPORT VENUE REPORT</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={toggleSelectionMode}
-            className={`flex items-center gap-2 px-3 py-2 text-xs font-semibold rounded border transition-colors shadow-sm tracking-wide cursor-pointer ${
-              isSelectionMode
-                ? "bg-rose-500/20 text-rose-300 border-rose-500/40"
-                : "bg-[#121722] hover:bg-[#1b2333] text-slate-200 border-white/10"
-            }`}
-            title="Select multiple stadiums for deletion"
-          >
-            <span className="material-symbols-outlined text-[16px]">
-              {isSelectionMode ? "close" : "checklist"}
-            </span>
-            <span>{isSelectionMode ? "Cancel Selection" : "Multiple Deletion"}</span>
-          </button>
-
-          <button
-            onClick={openCreate}
-            className="flex items-center gap-1.5 px-3.5 py-2 bg-[#00f59b] hover:bg-[#00d685] text-black font-bold text-xs rounded transition-colors shadow-sm tracking-wide"
-          >
-            <span className="material-symbols-outlined text-[17px] font-bold">add</span>
-            <span>+ REGISTER STADIUM</span>
-          </button>
-        </div>
+        <p className="text-xs sm:text-sm text-slate-400 max-w-3xl">
+          {items.length} certified international tournament stadiums with verified crowd capacity allocations and match fixture assignments.
+        </p>
       </div>
 
       {/* KPI Stats Row (4 compact cards calculated strictly from real data) */}

@@ -407,72 +407,74 @@ export default function Sponsors() {
       {/* ─────────────────────────────────────────────────────────────
           1. PAGE HEADER & PROTOCOL EYEBROW
           ───────────────────────────────────────────────────────────── */}
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-        <div>
-          <div className="flex items-center gap-2 mb-1.5">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span className="text-[11px] font-mono tracking-widest text-emerald-400 font-bold uppercase">
-              COMMERCIAL & ASSET GOVERNANCE // SPONSORSHIP PORTFOLIO // CONTRACT CYCLE 2024-2027
-            </span>
-            <span className="px-1.5 py-0.5 rounded bg-[#1e293b] text-emerald-300 text-[9px] font-mono font-bold tracking-wider uppercase border border-emerald-500/30">
-              CYCLE TIER 1-3
-            </span>
+      <div className="flex flex-col gap-3">
+        <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4">
+          <div className="flex flex-col gap-1 min-w-0 max-w-2xl">
+            <div className="flex items-center gap-2 mb-1 flex-wrap">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span className="text-[11px] font-mono tracking-widest text-emerald-400 font-bold uppercase">
+                COMMERCIAL & ASSET GOVERNANCE // SPONSORSHIP PORTFOLIO // CONTRACT CYCLE 2024-2027
+              </span>
+              <span className="px-1.5 py-0.5 rounded bg-[#1e293b] text-emerald-300 text-[9px] font-mono font-bold tracking-wider uppercase border border-emerald-500/30">
+                CYCLE TIER 1-3
+              </span>
+            </div>
+
+            <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight leading-tight">
+              GLOBAL PARTNERS & COMMERCIAL SPONSORS
+            </h1>
           </div>
 
-          <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight flex items-center gap-3">
-            GLOBAL PARTNERS & COMMERCIAL SPONSORS
-          </h1>
+          {/* Action Buttons */}
+          <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap shrink-0">
+            <button
+              onClick={exportJSON}
+              className="flex items-center gap-1.5 px-3 py-2 bg-[#121722] hover:bg-[#1b2334] text-xs font-semibold text-slate-300 hover:text-white border border-[#1f293d] rounded-lg transition-colors shadow-sm whitespace-nowrap"
+            >
+              <Download size={13} className="text-slate-400" />
+              <span className="font-mono text-[11px] tracking-wider uppercase">Export (JSON)</span>
+            </button>
 
-          <p className="text-xs text-slate-400 max-w-3xl mt-1 leading-relaxed">
-            Centralized commercial rights tracking, broadcast LED allocation, contractual deliverable compliance, and multi-tournament brand valuation for FIFA official partners.
-          </p>
+            <button
+              onClick={() => {
+                const el = document.getElementById('led-telemetry-section');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="flex items-center gap-1.5 px-3 py-2 bg-[#121722] hover:bg-[#1b2334] text-xs font-semibold text-slate-300 hover:text-white border border-[#1f293d] rounded-lg transition-colors shadow-sm whitespace-nowrap"
+            >
+              <Tv size={13} className="text-slate-400" />
+              <span className="font-mono text-[11px] tracking-wider uppercase">LED Matrix</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={toggleSelectionMode}
+              className={`flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-lg border transition-colors shadow-sm cursor-pointer whitespace-nowrap ${
+                isSelectionMode
+                  ? 'bg-rose-500/20 text-rose-300 border-rose-500/40'
+                  : 'bg-[#121722] hover:bg-[#1b2334] text-slate-300 border-[#1f293d]'
+              }`}
+              title="Select multiple sponsors for deletion"
+            >
+              {isSelectionMode ? <X size={13} /> : <CheckSquare size={13} />}
+              <span className="font-mono text-[11px] tracking-wider uppercase">
+                {isSelectionMode ? 'CANCEL' : 'MULTIPLE DELETION'}
+              </span>
+            </button>
+
+            <button
+              onClick={openCreate}
+              className="flex items-center gap-1.5 px-3.5 py-2 bg-[#00f59b] hover:bg-[#00d685] text-black text-xs font-bold rounded-lg transition-all shadow-md shadow-[#00f59b]/15 active:scale-[0.98] whitespace-nowrap"
+            >
+              <Plus size={15} strokeWidth={2.5} />
+              <span className="tracking-wide uppercase font-mono text-[11px]">ONBOARD PARTNER</span>
+            </button>
+          </div>
         </div>
 
-        {/* Action Buttons */}
-        <div className="flex flex-wrap items-center justify-end gap-2 shrink-0 self-end lg:self-center ml-auto">
-          <button
-            onClick={exportJSON}
-            className="flex items-center gap-1.5 px-3 py-2 bg-[#121722] hover:bg-[#1b2234] text-xs font-semibold text-slate-300 hover:text-white border border-[#1f293d] rounded-lg transition-colors shadow-sm"
-          >
-            <Download size={13} className="text-slate-400" />
-            <span className="font-mono text-[11px] tracking-wider uppercase">EXPORT PORTFOLIO (JSON)</span>
-          </button>
-
-          <button
-            onClick={() => {
-              const el = document.getElementById('led-telemetry-section');
-              if (el) el.scrollIntoView({ behavior: 'smooth' });
-            }}
-            className="flex items-center gap-1.5 px-3 py-2 bg-[#121722] hover:bg-[#1b2334] text-xs font-semibold text-slate-300 hover:text-white border border-[#1f293d] rounded-lg transition-colors shadow-sm"
-          >
-            <Tv size={13} className="text-slate-400" />
-            <span className="font-mono text-[11px] tracking-wider uppercase">LED MATRIX AUDIT</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={toggleSelectionMode}
-            className={`flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-lg border transition-colors shadow-sm cursor-pointer ${
-              isSelectionMode
-                ? 'bg-rose-500/20 text-rose-300 border-rose-500/40'
-                : 'bg-[#121722] hover:bg-[#1b2334] text-slate-300 border-[#1f293d]'
-            }`}
-            title="Select multiple sponsors for deletion"
-          >
-            {isSelectionMode ? <X size={13} /> : <CheckSquare size={13} />}
-            <span className="font-mono text-[11px] tracking-wider uppercase">
-              {isSelectionMode ? 'CANCEL SELECTION' : 'MULTIPLE DELETION'}
-            </span>
-          </button>
-
-          <button
-            onClick={openCreate}
-            className="flex items-center gap-1.5 px-3.5 py-2 bg-[#00f59b] hover:bg-[#00d685] text-black text-xs font-bold rounded-lg transition-all shadow-md shadow-[#00f59b]/15 active:scale-[0.98] ml-auto"
-          >
-            <Plus size={15} strokeWidth={2.5} />
-            <span className="tracking-wide uppercase font-mono text-[11px]">+ ONBOARD PARTNER</span>
-          </button>
-        </div>
+        <p className="text-xs text-slate-400 max-w-3xl leading-relaxed">
+          Centralized commercial rights tracking, broadcast LED allocation, contractual deliverable compliance, and multi-tournament brand valuation for FIFA official partners.
+        </p>
       </div>
 
       {/* ─────────────────────────────────────────────────────────────
