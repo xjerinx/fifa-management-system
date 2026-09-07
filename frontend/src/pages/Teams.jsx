@@ -10,6 +10,7 @@ const emptyForm = {
   jersey_color: "#10b981",
   fifa_ranking: "",
   association_id: "",
+  coach_id: "",
 };
 
 // Visual metadata tailored for FIFA National Teams Directory reference
@@ -41,7 +42,6 @@ const TEAM_CONFIG = {
     confed: "UNION OF EUROPEAN FOOTBALL (UEFA)",
     champBadge: null,
     tier: "ELITE",
-    fallbackCoach: "Thomas Tuchel",
   },
   Spain: {
     code: "SP",
@@ -105,6 +105,7 @@ export default function Teams() {
   const toast = useToast();
   const [items, setItems] = useState([]);
   const [associations, setAssociations] = useState([]);
+  const [coaches, setCoaches] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState(null);
@@ -135,12 +136,21 @@ export default function Teams() {
       .catch((err) => console.error("Failed to load associations for teams:", err));
   };
 
+  const loadCoaches = () => {
+    api
+      .get("/coaches")
+      .then((res) => setCoaches(res.data.data || []))
+      .catch((err) => console.error("Failed to load coaches for teams:", err));
+  };
+
   useEffect(() => {
     load();
     loadAssociations();
+    loadCoaches();
   }, []);
 
   const openCreate = () => {
+    loadCoaches();
     setForm(emptyForm);
     setEditingId(null);
     setError("");
@@ -148,6 +158,7 @@ export default function Teams() {
   };
 
   const openEdit = (item) => {
+    loadCoaches();
     setForm({
       name: item.name,
       nickname: item.nickname || "",
@@ -155,6 +166,7 @@ export default function Teams() {
       jersey_color: item.jersey_color || "#10b981",
       fifa_ranking: item.fifa_ranking || "",
       association_id: item.association_id,
+      coach_id: item.coach_id || "",
     });
     setEditingId(item.team_id);
     setError("");
@@ -309,11 +321,10 @@ export default function Teams() {
 
           <button
             onClick={() => setSortBy(sortBy === "ranking" ? "name" : "ranking")}
-            className={`flex items-center gap-2 px-3.5 py-2 bg-[#121722] hover:bg-[#1a2233] text-xs font-semibold uppercase tracking-wider rounded-lg border transition-colors shadow-sm ${
-              sortBy === "ranking"
-                ? "text-emerald-400 border-emerald-500/30"
-                : "text-slate-300 border-[#1e2738]"
-            }`}
+            className={`flex items-center gap-2 px-3.5 py-2 bg-[#121722] hover:bg-[#1a2233] text-xs font-semibold uppercase tracking-wider rounded-lg border transition-colors shadow-sm ${sortBy === "ranking"
+              ? "text-emerald-400 border-emerald-500/30"
+              : "text-slate-300 border-[#1e2738]"
+              }`}
           >
             <span className="material-symbols-outlined text-[16px]">filter_list</span>
             <span>Ranking Filter</span>
@@ -471,11 +482,10 @@ export default function Teams() {
               <button
                 key={confed}
                 onClick={() => setConfedFilter(confed)}
-                className={`px-2.5 py-1 rounded-md text-[11px] font-bold uppercase tracking-wider transition-colors ${
-                  confedFilter === confed
-                    ? "bg-[#00f59b] text-black shadow-sm"
-                    : "text-slate-400 hover:text-white hover:bg-white/5"
-                }`}
+                className={`px-2.5 py-1 rounded-md text-[11px] font-bold uppercase tracking-wider transition-colors ${confedFilter === confed
+                  ? "bg-[#00f59b] text-black shadow-sm"
+                  : "text-slate-400 hover:text-white hover:bg-white/5"
+                  }`}
               >
                 {confed}
               </button>
@@ -490,11 +500,10 @@ export default function Teams() {
               <button
                 key={tier}
                 onClick={() => setTierFilter(tier)}
-                className={`px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider transition-colors ${
-                  tierFilter === tier
-                    ? "bg-[#1f2b3e] text-emerald-400 border border-emerald-500/20"
-                    : "text-slate-400 hover:text-white"
-                }`}
+                className={`px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider transition-colors ${tierFilter === tier
+                  ? "bg-[#1f2b3e] text-emerald-400 border border-emerald-500/20"
+                  : "text-slate-400 hover:text-white"
+                  }`}
               >
                 {tier}
               </button>
@@ -524,22 +533,20 @@ export default function Teams() {
           <div className="flex items-center bg-[#111622] rounded-lg border border-[#1f2738] p-0.5">
             <button
               onClick={() => setViewMode("grid")}
-              className={`p-1.5 rounded transition-colors ${
-                viewMode === "grid"
-                  ? "bg-[#1f2b3e] text-emerald-400"
-                  : "text-slate-400 hover:text-white"
-              }`}
+              className={`p-1.5 rounded transition-colors ${viewMode === "grid"
+                ? "bg-[#1f2b3e] text-emerald-400"
+                : "text-slate-400 hover:text-white"
+                }`}
               title="Grid View"
             >
               <span className="material-symbols-outlined text-[16px]">grid_view</span>
             </button>
             <button
               onClick={() => setViewMode("table")}
-              className={`p-1.5 rounded transition-colors ${
-                viewMode === "table"
-                  ? "bg-[#1f2b3e] text-emerald-400"
-                  : "text-slate-400 hover:text-white"
-              }`}
+              className={`p-1.5 rounded transition-colors ${viewMode === "table"
+                ? "bg-[#1f2b3e] text-emerald-400"
+                : "text-slate-400 hover:text-white"
+                }`}
               title="Table View"
             >
               <span className="material-symbols-outlined text-[16px]">table_rows</span>
@@ -594,7 +601,7 @@ export default function Teams() {
             const rank = Number(item.fifa_ranking) || null;
             const isElite = rank !== null && rank <= 10;
             const headCoach =
-              item.coach_name?.trim() || config.fallbackCoach || "Unassigned";
+              item.coach_name?.trim() || "Unassigned";
 
             return (
               <div
@@ -779,7 +786,7 @@ export default function Teams() {
                         {config.confed || item.association_name || "—"}
                       </td>
                       <td className="py-3 px-4 font-medium text-slate-200">
-                        {item.coach_name || config.fallbackCoach || "Unassigned"}
+                        {item.coach_name || "Unassigned"}
                       </td>
                       <td className="py-3 px-4 font-mono font-bold text-emerald-400">
                         {item.player_count || 0} PL
@@ -847,6 +854,33 @@ export default function Teams() {
               placeholder="e.g. Spain National Team"
               className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
             />
+          </div>
+
+          <div>
+            <label className="block text-xs font-medium text-slate-300 mb-1.5">
+              Head Coach <span className="text-slate-500 font-normal">(Optional)</span>
+            </label>
+            <select
+              value={form.coach_id}
+              onChange={(e) => setForm({ ...form, coach_id: e.target.value })}
+              className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors cursor-pointer"
+            >
+              <option value="">Unassigned Coach</option>
+              {coaches.map((c) => {
+                const fullName = [c.first_name, c.last_name].filter(Boolean).join(" ");
+                const isCurrent = editingId && c.team_id === editingId;
+                const statusText = isCurrent
+                  ? "(Current Coach)"
+                  : c.team_name
+                  ? `(Assigned: ${c.team_name})`
+                  : "(Free Agent)";
+                return (
+                  <option key={c.coach_id} value={c.coach_id}>
+                    {fullName} — {statusText}
+                  </option>
+                );
+              })}
+            </select>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

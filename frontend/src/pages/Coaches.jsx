@@ -291,6 +291,7 @@ export default function Coaches() {
   }, []);
 
   const openCreate = () => {
+    loadTeams();
     setForm(emptyForm);
     setEditingId(null);
     setError("");
@@ -298,6 +299,7 @@ export default function Coaches() {
   };
 
   const openEdit = (item) => {
+    loadTeams();
     setForm({
       first_name: item.first_name || "",
       last_name: item.last_name || "",
@@ -368,8 +370,8 @@ export default function Coaches() {
       confederation: ["ESP", "FRA", "GER", "NED", "POR", "ITA", "ENG"].includes(code)
         ? "UEFA"
         : ["BRA", "ARG", "URU"].includes(code)
-        ? "CONMEBOL"
-        : "AFC",
+          ? "CONMEBOL"
+          : "AFC",
       licenseDisplay: item.license_no ? `${item.license_no} (Pro)` : "FIFA Pro License",
       appointedFormatted: formatDate(item.start_date),
       tacticalSystem: "4-3-3 Balanced Positional",
@@ -713,51 +715,46 @@ export default function Coaches() {
           <div className="flex items-center gap-1 bg-[#0a0d14] p-1 rounded border border-white/10 text-xs font-mono">
             <button
               onClick={() => setActiveFilter("ALL")}
-              className={`px-2.5 py-1 rounded text-[11px] font-bold transition-all ${
-                activeFilter === "ALL"
-                  ? "bg-[#00f59b] text-black"
-                  : "text-slate-400 hover:text-white"
-              }`}
+              className={`px-2.5 py-1 rounded text-[11px] font-bold transition-all ${activeFilter === "ALL"
+                ? "bg-[#00f59b] text-black"
+                : "text-slate-400 hover:text-white"
+                }`}
             >
               ALL ({items.length})
             </button>
             <button
               onClick={() => setActiveFilter("ACTIVE")}
-              className={`px-2.5 py-1 rounded text-[11px] font-bold transition-all ${
-                activeFilter === "ACTIVE"
-                  ? "bg-[#00f59b] text-black"
-                  : "text-slate-400 hover:text-white"
-              }`}
+              className={`px-2.5 py-1 rounded text-[11px] font-bold transition-all ${activeFilter === "ACTIVE"
+                ? "bg-[#00f59b] text-black"
+                : "text-slate-400 hover:text-white"
+                }`}
             >
               ACTIVE
             </button>
             <button
               onClick={() => setActiveFilter("UEFA")}
-              className={`px-2.5 py-1 rounded text-[11px] font-bold transition-all ${
-                activeFilter === "UEFA"
-                  ? "bg-[#00f59b] text-black"
-                  : "text-slate-400 hover:text-white"
-              }`}
+              className={`px-2.5 py-1 rounded text-[11px] font-bold transition-all ${activeFilter === "UEFA"
+                ? "bg-[#00f59b] text-black"
+                : "text-slate-400 hover:text-white"
+                }`}
             >
               UEFA
             </button>
             <button
               onClick={() => setActiveFilter("CONMEBOL")}
-              className={`px-2.5 py-1 rounded text-[11px] font-bold transition-all ${
-                activeFilter === "CONMEBOL"
-                  ? "bg-[#00f59b] text-black"
-                  : "text-slate-400 hover:text-white"
-              }`}
+              className={`px-2.5 py-1 rounded text-[11px] font-bold transition-all ${activeFilter === "CONMEBOL"
+                ? "bg-[#00f59b] text-black"
+                : "text-slate-400 hover:text-white"
+                }`}
             >
               CONMEBOL
             </button>
             <button
               onClick={() => setActiveFilter("AFC")}
-              className={`px-2.5 py-1 rounded text-[11px] font-bold transition-all ${
-                activeFilter === "AFC"
-                  ? "bg-[#00f59b] text-black"
-                  : "text-slate-400 hover:text-white"
-              }`}
+              className={`px-2.5 py-1 rounded text-[11px] font-bold transition-all ${activeFilter === "AFC"
+                ? "bg-[#00f59b] text-black"
+                : "text-slate-400 hover:text-white"
+                }`}
             >
               AFC
             </button>
@@ -782,22 +779,20 @@ export default function Coaches() {
           <div className="flex items-center bg-[#0a0d14] rounded border border-white/10 p-0.5">
             <button
               onClick={() => setViewMode("grid")}
-              className={`p-1.5 rounded transition-colors ${
-                viewMode === "grid"
-                  ? "bg-[#182030] text-emerald-400"
-                  : "text-slate-500 hover:text-slate-300"
-              }`}
+              className={`p-1.5 rounded transition-colors ${viewMode === "grid"
+                ? "bg-[#182030] text-emerald-400"
+                : "text-slate-500 hover:text-slate-300"
+                }`}
               title="Grid View"
             >
               <span className="material-symbols-outlined text-[17px] block">grid_view</span>
             </button>
             <button
               onClick={() => setViewMode("table")}
-              className={`p-1.5 rounded transition-colors ${
-                viewMode === "table"
-                  ? "bg-[#182030] text-emerald-400"
-                  : "text-slate-500 hover:text-slate-300"
-              }`}
+              className={`p-1.5 rounded transition-colors ${viewMode === "table"
+                ? "bg-[#182030] text-emerald-400"
+                : "text-slate-500 hover:text-slate-300"
+                }`}
               title="Table View"
             >
               <span className="material-symbols-outlined text-[17px] block">table_rows</span>
