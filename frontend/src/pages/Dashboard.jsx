@@ -172,58 +172,60 @@ export default function Dashboard() {
       {/* ========================================================
           1. DASHBOARD HERO / EXECUTIVE DASHBOARD HEADER
           ======================================================== */}
-      <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 pt-1">
-        <div className="flex flex-col gap-1.5">
-          {/* Micro Status Bar */}
-          <div className="flex flex-wrap items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-slate-400">
-            <span className="flex items-center gap-1.5 text-emerald-400 font-semibold">
-              <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-              FEDERATION OPERATIONS
-            </span>
-            <span>•</span>
-            <span>SEASON 2026/27</span>
-            <span>•</span>
-            <span className="text-sky-400 font-semibold">TMS VERIFIED</span>
+      <div className="flex flex-col gap-3 pt-1">
+        <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4">
+          <div className="flex flex-col gap-1 min-w-0 max-w-2xl">
+            {/* Micro Status Bar */}
+            <div className="flex flex-wrap items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-slate-400">
+              <span className="flex items-center gap-1.5 text-emerald-400 font-semibold">
+                <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+                FEDERATION OPERATIONS
+              </span>
+              <span>•</span>
+              <span>SEASON 2026/27</span>
+              <span>•</span>
+              <span className="text-sky-400 font-semibold">TMS VERIFIED</span>
+            </div>
+
+            {/* Main Title */}
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight uppercase leading-tight">
+              EXECUTIVE DASHBOARD
+            </h1>
           </div>
 
-          {/* Main Title */}
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight uppercase">
-            EXECUTIVE DASHBOARD
-          </h1>
+          {/* Action Buttons */}
+          <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap shrink-0">
+            <button
+              onClick={exportSummary}
+              className="flex items-center gap-1.5 px-3 py-2 bg-[#111622] hover:bg-[#182133] text-slate-300 hover:text-white text-xs font-semibold rounded border border-[#1b2234] transition-colors shadow-sm whitespace-nowrap"
+            >
+              <span className="material-symbols-outlined text-[16px]">file_download</span>
+              <span>EXPORT REPORT</span>
+            </button>
 
-          {/* Subtitle */}
-          <p className="text-xs sm:text-sm text-slate-400 max-w-3xl leading-relaxed">
-            Centralized administrative overview across {stats?.total_associations ?? 10} member associations,{" "}
-            {stats?.total_teams ?? 12} registered national teams, {totalPlayersCount} squad athletes, and active tournaments.
-          </p>
+            <Link
+              to="/matches"
+              className="flex items-center gap-1.5 px-3 py-2 bg-[#111622] hover:bg-[#182133] text-slate-300 hover:text-white text-xs font-semibold rounded border border-[#1b2234] transition-colors shadow-sm whitespace-nowrap"
+            >
+              <span className="material-symbols-outlined text-[16px]">add_circle</span>
+              <span>NEW FIXTURE</span>
+            </Link>
+
+            <Link
+              to="/teams"
+              className="flex items-center gap-1.5 px-3.5 py-2 bg-[#00f59b] hover:bg-[#00d685] text-black text-xs font-bold uppercase tracking-wider rounded transition-all shadow-sm whitespace-nowrap"
+            >
+              <span className="material-symbols-outlined text-[16px]">app_registration</span>
+              <span>QUICK REGISTER</span>
+            </Link>
+          </div>
         </div>
 
-        {/* Action Buttons */}
-        <div className="flex flex-wrap items-center gap-2.5 shrink-0">
-          <button
-            onClick={exportSummary}
-            className="flex items-center gap-1.5 px-3.5 py-2 bg-[#111622] hover:bg-[#182133] text-slate-300 hover:text-white text-xs font-semibold rounded border border-[#1b2234] transition-colors shadow-sm"
-          >
-            <span className="material-symbols-outlined text-[16px]">file_download</span>
-            <span>EXPORT REPORT</span>
-          </button>
-
-          <Link
-            to="/matches"
-            className="flex items-center gap-1.5 px-3.5 py-2 bg-[#111622] hover:bg-[#182133] text-slate-300 hover:text-white text-xs font-semibold rounded border border-[#1b2234] transition-colors shadow-sm"
-          >
-            <span className="material-symbols-outlined text-[16px]">add_circle</span>
-            <span>NEW FIXTURE</span>
-          </Link>
-
-          <Link
-            to="/teams"
-            className="flex items-center gap-1.5 px-4 py-2 bg-[#00f59b] hover:bg-[#00d685] text-black text-xs font-bold uppercase tracking-wider rounded transition-all shadow-sm"
-          >
-            <span className="material-symbols-outlined text-[16px]">app_registration</span>
-            <span>QUICK REGISTER</span>
-          </Link>
-        </div>
+        {/* Subtitle */}
+        <p className="text-xs sm:text-sm text-slate-400 max-w-3xl leading-relaxed">
+          Centralized administrative overview across {stats?.total_associations ?? 10} member associations,{" "}
+          {stats?.total_teams ?? 12} registered national teams, {totalPlayersCount} squad athletes, and active tournaments.
+        </p>
       </div>
 
       {/* ========================================================

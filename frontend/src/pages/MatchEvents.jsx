@@ -336,70 +336,72 @@ export default function MatchEvents() {
       {/* ─────────────────────────────────────────────────────────────
           1. PAGE HEADER & PROTOCOL EYEBROW
           ───────────────────────────────────────────────────────────── */}
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-        <div>
-          <div className="flex items-center gap-2 mb-1.5">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span className="text-[11px] font-mono tracking-widest text-emerald-400 font-bold uppercase">
-              MATCH EVENTS & INCIDENT FEED // PROTOCOL TMS-VAR v9.8.2
-            </span>
-            <span className="px-1.5 py-0.5 rounded bg-[#1e293b] text-[#38bdf8] text-[9px] font-mono font-bold tracking-wider uppercase border border-[#38bdf8]/30">
-              BROADCAST SYNC
-            </span>
+      <div className="flex flex-col gap-3">
+        <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4">
+          <div className="flex flex-col gap-1 min-w-0 max-w-2xl">
+            <div className="flex items-center gap-2 mb-1 flex-wrap">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span className="text-[11px] font-mono tracking-widest text-emerald-400 font-bold uppercase">
+                MATCH EVENTS & INCIDENT FEED // PROTOCOL TMS-VAR v9.8.2
+              </span>
+              <span className="px-1.5 py-0.5 rounded bg-[#1e293b] text-[#38bdf8] text-[9px] font-mono font-bold tracking-wider uppercase border border-[#38bdf8]/30">
+                BROADCAST SYNC
+              </span>
+            </div>
+
+            <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight leading-tight">
+              MATCH EVENTS & INCIDENT TIMELINE
+            </h1>
           </div>
 
-          <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight flex items-center gap-3">
-            MATCH EVENTS & INCIDENT TIMELINE
-          </h1>
+          {/* Action Buttons */}
+          <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap shrink-0">
+            <button
+              onClick={() => load()}
+              className="flex items-center gap-1.5 px-3 py-2 bg-[#121722] hover:bg-[#1b2234] text-xs font-semibold text-slate-300 hover:text-white border border-[#1f293d] rounded-lg transition-colors shadow-sm whitespace-nowrap"
+              title="Refresh verified timeline feed"
+            >
+              <RefreshCw size={13} className={loading ? 'animate-spin text-emerald-400' : 'text-slate-400'} />
+              <span className="font-mono text-[11px] tracking-wider uppercase">Sync VAR</span>
+            </button>
 
-          <p className="text-xs text-slate-400 max-w-3xl mt-1 leading-relaxed">
-            Real-time chronological telemetry of all verified in-match occurrences across sanctioned FIFA and Continental fixtures. Integrated Hawk-Eye, semi-automated offside (SAOT), and certified VAR audit logs.
-          </p>
+            <button
+              onClick={exportJSON}
+              className="flex items-center gap-1.5 px-3 py-2 bg-[#121722] hover:bg-[#1b2234] text-xs font-semibold text-slate-300 hover:text-white border border-[#1f293d] rounded-lg transition-colors shadow-sm whitespace-nowrap"
+            >
+              <Download size={13} className="text-slate-400" />
+              <span className="font-mono text-[11px] tracking-wider uppercase">Export (JSON)</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={toggleSelectionMode}
+              className={`flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-lg border transition-colors shadow-sm cursor-pointer whitespace-nowrap ${
+                isSelectionMode
+                  ? 'bg-rose-500/20 text-rose-300 border-rose-500/40'
+                  : 'bg-[#121722] hover:bg-[#1b2234] text-slate-300 border-[#1f293d]'
+              }`}
+              title="Select multiple match events for deletion"
+            >
+              {isSelectionMode ? <X size={13} /> : <CheckSquare size={13} />}
+              <span className="font-mono text-[11px] tracking-wider uppercase">
+                {isSelectionMode ? 'CANCEL' : 'MULTIPLE DELETION'}
+              </span>
+            </button>
+
+            <button
+              onClick={openCreate}
+              className="flex items-center gap-1.5 px-3.5 py-2 bg-[#00f59b] hover:bg-[#00d685] text-black text-xs font-bold rounded-lg transition-all shadow-md shadow-[#00f59b]/15 active:scale-[0.98] whitespace-nowrap"
+            >
+              <Plus size={15} strokeWidth={2.5} />
+              <span className="tracking-wide uppercase font-mono text-[11px]">LOG MATCH EVENT</span>
+            </button>
+          </div>
         </div>
 
-        {/* Action Buttons */}
-        <div className="flex flex-wrap items-center justify-end gap-2 shrink-0 self-end lg:self-center ml-auto">
-          <button
-            onClick={() => load()}
-            className="flex items-center gap-1.5 px-3 py-2 bg-[#121722] hover:bg-[#1b2234] text-xs font-semibold text-slate-300 hover:text-white border border-[#1f293d] rounded-lg transition-colors shadow-sm"
-            title="Refresh verified timeline feed"
-          >
-            <RefreshCw size={13} className={loading ? 'animate-spin text-emerald-400' : 'text-slate-400'} />
-            <span className="font-mono text-[11px] tracking-wider uppercase">SYNC VAR TELEMETRY</span>
-          </button>
-
-          <button
-            onClick={exportJSON}
-            className="flex items-center gap-1.5 px-3 py-2 bg-[#121722] hover:bg-[#1b2234] text-xs font-semibold text-slate-300 hover:text-white border border-[#1f293d] rounded-lg transition-colors shadow-sm"
-          >
-            <Download size={13} className="text-slate-400" />
-            <span className="font-mono text-[11px] tracking-wider uppercase">EXPORT FEED (JSON)</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={toggleSelectionMode}
-            className={`flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-lg border transition-colors shadow-sm cursor-pointer ${
-              isSelectionMode
-                ? 'bg-rose-500/20 text-rose-300 border-rose-500/40'
-                : 'bg-[#121722] hover:bg-[#1b2234] text-slate-300 border-[#1f293d]'
-            }`}
-            title="Select multiple match events for deletion"
-          >
-            {isSelectionMode ? <X size={13} /> : <CheckSquare size={13} />}
-            <span className="font-mono text-[11px] tracking-wider uppercase">
-              {isSelectionMode ? 'CANCEL SELECTION' : 'MULTIPLE DELETION'}
-            </span>
-          </button>
-
-          <button
-            onClick={openCreate}
-            className="flex items-center gap-1.5 px-3.5 py-2 bg-[#00f59b] hover:bg-[#00d685] text-black text-xs font-bold rounded-lg transition-all shadow-md shadow-[#00f59b]/15 active:scale-[0.98] ml-auto"
-          >
-            <Plus size={15} strokeWidth={2.5} />
-            <span className="tracking-wide uppercase font-mono text-[11px]">+ LOG MATCH EVENT</span>
-          </button>
-        </div>
+        <p className="text-xs text-slate-400 max-w-3xl leading-relaxed">
+          Real-time chronological telemetry of all verified in-match occurrences across sanctioned FIFA and Continental fixtures. Integrated Hawk-Eye, semi-automated offside (SAOT), and certified VAR audit logs.
+        </p>
       </div>
 
       {/* ─────────────────────────────────────────────────────────────
