@@ -506,10 +506,8 @@ export default function Coaches() {
         country_code: scout.countryCode,
         confederation: scout.confederation,
         license_no: c.license_no,
-        license_type: scout.licenseDisplay,
         appointed: scout.appointedFormatted,
-        tactical_system: scout.tacticalSystem,
-        win_rate: `${scout.winRate}%`,
+        dob: c.dob ? formatDate(c.dob) : "N/A",
         status: c.end_date ? "Inactive" : "Active",
         team: c.team_name || "Unassigned",
       };
