@@ -1,7 +1,10 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useRef } from "react";
 import api from "../api/axios";
 import { useToast } from "../components/Toast";
 import Modal from "../components/Modal";
+import { useBulkSelection } from "../hooks/useBulkSelection";
+import BulkActionBar from "../components/BulkActionBar";
+import BulkDeleteConfirmModal from "../components/BulkDeleteConfirmModal";
 
 const emptyForm = {
   first_name: "",
@@ -49,6 +52,22 @@ export default function Referees() {
   const [roleFilter, setRoleFilter] = useState("ALL");
   const [sortBy, setSortBy] = useState("matches");
   const [viewMode, setViewMode] = useState("grid"); // 'grid' | 'table'
+
+  const {
+    isSelectionMode,
+    toggleSelectionMode,
+    exitSelectionMode,
+    selectedIds,
+    selectedCount,
+    isSelected,
+    toggleSelect,
+    clearSelection,
+    toggleSelectAll,
+    getSelectAllState,
+  } = useBulkSelection("referee_id");
+  const [showBulkModal, setShowBulkModal] = useState(false);
+  const [bulkLoading, setBulkLoading] = useState(false);
+  const tableCheckRef = useRef(null);
 
   const load = () => {
     setLoading(true);
@@ -119,6 +138,21 @@ export default function Referees() {
     }
   };
 
+  const handleBulkDelete = async () => {
+    setBulkLoading(true);
+    try {
+      const res = await api.post("/referees/bulk-delete", { ids: selectedIds });
+      toast?.showToast(res.data?.message || `Successfully deleted ${selectedCount} referees`);
+      clearSelection();
+      setShowBulkModal(false);
+      load();
+    } catch (err) {
+      toast?.showToast(err.response?.data?.message || "Failed to delete selected referees", "error");
+    } finally {
+      setBulkLoading(false);
+    }
+  };
+
   const filtered = useMemo(() => {
     let list = items.filter((item) => {
       const matchesRole = roleFilter === "ALL" || item.role === roleFilter;
@@ -147,6 +181,14 @@ export default function Referees() {
 
     return list;
   }, [items, search, roleFilter, sortBy]);
+
+  const { isAllSelected, isIndeterminate } = getSelectAllState(filtered);
+
+  useEffect(() => {
+    if (tableCheckRef.current) {
+      tableCheckRef.current.indeterminate = isIndeterminate;
+    }
+  }, [isIndeterminate]);
 
   // Derived real counts from active data
   const mainCount = items.filter((i) => i.role === "Main Referee").length;
@@ -210,6 +252,22 @@ export default function Referees() {
           >
             <span className="material-symbols-outlined text-[16px] text-amber-400">tune</span>
             <span>ASSIGNMENTS FILTER</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={toggleSelectionMode}
+            className={`flex items-center gap-2 px-3 py-2 text-xs font-semibold rounded border transition-colors shadow-sm tracking-wide cursor-pointer ${
+              isSelectionMode
+                ? "bg-rose-500/20 text-rose-300 border-rose-500/40"
+                : "bg-[#121722] hover:bg-[#1b2333] text-slate-200 border-white/10"
+            }`}
+            title="Select multiple referees for deletion"
+          >
+            <span className="material-symbols-outlined text-[16px]">
+              {isSelectionMode ? "close" : "checklist"}
+            </span>
+            <span>{isSelectionMode ? "Cancel Selection" : "Multiple Deletion"}</span>
           </button>
 
           <button
@@ -467,8 +525,40 @@ export default function Referees() {
               <span className="material-symbols-outlined text-[17px] block">table_rows</span>
             </button>
           </div>
+
+          {/* Multiple Deletion Mode Button */}
+          <button
+            type="button"
+            onClick={toggleSelectionMode}
+            className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded text-xs font-semibold transition-colors border cursor-pointer ${
+              isSelectionMode
+                ? "bg-rose-500/20 text-rose-300 border-rose-500/40"
+                : "bg-[#0a0d14] hover:bg-[#182030] text-slate-300 hover:text-white border-white/10"
+            }`}
+            title="Toggle Multiple Deletion mode"
+          >
+            <span className="material-symbols-outlined text-[15px]">
+              {isSelectionMode ? "close" : "checklist"}
+            </span>
+            <span className="text-[11px]">{isSelectionMode ? "Cancel" : "Multiple Deletion"}</span>
+          </button>
         </div>
       </div>
+
+      {/* Bulk Actions Toolbar */}
+      {isSelectionMode && !loading && filtered.length > 0 && (
+        <BulkActionBar
+          selectedCount={selectedCount}
+          totalCount={filtered.length}
+          onSelectAll={() => toggleSelectAll(filtered)}
+          onClear={clearSelection}
+          onDeleteClick={() => setShowBulkModal(true)}
+          onExit={exitSelectionMode}
+          entityName="referee"
+          isAllSelected={isAllSelected}
+          isIndeterminate={isIndeterminate}
+        />
+      )}
 
       {/* 4. Content Area: 3-Column Grid / Table View */}
       {loading ? (
@@ -506,12 +596,26 @@ export default function Referees() {
             return (
               <div
                 key={item.referee_id}
-                className="bg-[#10141e] rounded-lg p-4 border border-white/10 hover:border-emerald-500/30 transition-all duration-200 flex flex-col justify-between shadow-sm group"
+                className={`bg-[#10141e] rounded-lg p-4 border transition-all duration-200 flex flex-col justify-between shadow-sm group ${
+                  isSelected(item.referee_id)
+                    ? "border-emerald-500/80 bg-emerald-950/10"
+                    : "border-white/10 hover:border-emerald-500/30"
+                }`}
               >
                 <div>
                   {/* Top Row: Initials Avatar Box + Name & Nationality + Role Badge Pill */}
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex items-center gap-3 min-w-0">
+                      {isSelectionMode && (
+                        <input
+                          type="checkbox"
+                          checked={isSelected(item.referee_id)}
+                          onChange={() => toggleSelect(item.referee_id)}
+                          onClick={(e) => e.stopPropagation()}
+                          className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-emerald-500 focus:ring-emerald-500/20 focus:ring-offset-0 cursor-pointer shrink-0"
+                          aria-label={`Select ${item.first_name} ${item.last_name}`}
+                        />
+                      )}
                       <div className="w-10 h-10 rounded bg-[#0a0d14] border border-white/10 flex items-center justify-center font-bold text-xs text-emerald-400 font-mono shrink-0">
                         {initials}
                       </div>
@@ -597,6 +701,18 @@ export default function Referees() {
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="bg-[#0b0e17] text-[10px] font-mono uppercase text-slate-400 tracking-wider border-b border-white/10">
+                  {isSelectionMode && (
+                    <th className="py-3 px-3 w-10 text-center">
+                      <input
+                        ref={tableCheckRef}
+                        type="checkbox"
+                        checked={isAllSelected}
+                        onChange={() => toggleSelectAll(filtered)}
+                        className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-emerald-500 focus:ring-emerald-500/20 cursor-pointer"
+                        aria-label="Select all referees"
+                      />
+                    </th>
+                  )}
                   <th className="py-3 px-4">Badge ID</th>
                   <th className="py-3 px-4">Official Name</th>
                   <th className="py-3 px-4">Role</th>
@@ -612,7 +728,23 @@ export default function Referees() {
                     color: "bg-[#262a33] text-slate-300 border-white/10",
                   };
                   return (
-                    <tr key={item.referee_id} className="hover:bg-white/[0.02] transition-colors">
+                    <tr
+                      key={item.referee_id}
+                      className={`hover:bg-white/[0.02] transition-colors ${
+                        isSelected(item.referee_id) ? "bg-emerald-950/15" : ""
+                      }`}
+                    >
+                      {isSelectionMode && (
+                        <td className="py-3 px-3 text-center">
+                          <input
+                            type="checkbox"
+                            checked={isSelected(item.referee_id)}
+                            onChange={() => toggleSelect(item.referee_id)}
+                            className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-emerald-500 focus:ring-emerald-500/20 cursor-pointer"
+                            aria-label={`Select ${item.first_name} ${item.last_name}`}
+                          />
+                        </td>
+                      )}
                       <td className="py-3 px-4 font-mono font-semibold text-emerald-400">
                         {item.badge_no || "—"}
                       </td>
@@ -769,6 +901,16 @@ export default function Referees() {
           </div>
         </form>
       </Modal>
+
+      {/* Bulk Delete Confirmation Modal */}
+      <BulkDeleteConfirmModal
+        isOpen={showBulkModal}
+        onClose={() => setShowBulkModal(false)}
+        onConfirm={handleBulkDelete}
+        count={selectedCount}
+        entityName="referee"
+        loading={bulkLoading}
+      />
     </div>
   );
 }

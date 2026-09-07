@@ -3,6 +3,9 @@ import api from "../api/axios";
 import { useToast } from "../components/Toast";
 import Modal from "../components/Modal";
 import PositionBadge from "../components/PositionBadge";
+import { useBulkSelection } from "../hooks/useBulkSelection";
+import BulkActionBar from "../components/BulkActionBar";
+import BulkDeleteConfirmModal from "../components/BulkDeleteConfirmModal";
 
 const emptyForm = {
   first_name: "",
@@ -365,6 +368,22 @@ export default function Players() {
   const [viewMode, setViewMode] = useState("grid"); // 'grid' | 'table'
   const [currentPage, setCurrentPage] = useState(1);
 
+  const {
+    isSelectionMode,
+    toggleSelectionMode,
+    exitSelectionMode,
+    selectedIds,
+    selectedCount,
+    isSelected,
+    toggleSelect,
+    clearSelection,
+    toggleSelectAll,
+    getSelectAllState,
+  } = useBulkSelection("player_id");
+  const [showBulkModal, setShowBulkModal] = useState(false);
+  const [bulkLoading, setBulkLoading] = useState(false);
+  const tableCheckRef = useRef(null);
+
   const load = () => {
     setLoading(true);
     api
@@ -471,6 +490,21 @@ export default function Players() {
       load();
     } catch (err) {
       toast?.showToast(err.response?.data?.message || "Failed to delete player", "error");
+    }
+  };
+
+  const handleBulkDelete = async () => {
+    setBulkLoading(true);
+    try {
+      const res = await api.post("/players/bulk-delete", { ids: selectedIds });
+      toast?.showToast(res.data?.message || `Successfully deleted ${selectedCount} players`);
+      clearSelection();
+      setShowBulkModal(false);
+      load();
+    } catch (err) {
+      toast?.showToast(err.response?.data?.message || "Failed to delete selected players", "error");
+    } finally {
+      setBulkLoading(false);
     }
   };
 
@@ -597,6 +631,14 @@ export default function Players() {
     return filtered.slice(start, start + ITEMS_PER_PAGE);
   }, [filtered, currentPage]);
 
+  const { isAllSelected, isIndeterminate } = getSelectAllState(paginatedItems);
+
+  useEffect(() => {
+    if (tableCheckRef.current) {
+      tableCheckRef.current.indeterminate = isIndeterminate;
+    }
+  }, [isIndeterminate]);
+
   return (
     <div className="flex flex-col w-full pb-14 gap-5 text-on-surface">
       {/* Hidden File Input for Batch Import */}
@@ -650,6 +692,22 @@ export default function Players() {
               download
             </span>
             <span>Export Scouting Sheet</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={toggleSelectionMode}
+            className={`flex items-center gap-2 px-3.5 py-2 text-xs font-semibold uppercase tracking-wider rounded-lg border transition-colors shadow-sm cursor-pointer ${
+              isSelectionMode
+                ? "bg-rose-500/20 text-rose-300 border-rose-500/40"
+                : "bg-[#121722] hover:bg-[#1a2233] text-slate-300 hover:text-white border-[#1e2738]"
+            }`}
+            title="Select multiple players for deletion"
+          >
+            <span className="material-symbols-outlined text-[16px]">
+              {isSelectionMode ? "close" : "checklist"}
+            </span>
+            <span>{isSelectionMode ? "Cancel Selection" : "Multiple Deletion"}</span>
           </button>
 
           <button
@@ -901,8 +959,40 @@ export default function Players() {
               <span className="material-symbols-outlined text-[16px]">table_rows</span>
             </button>
           </div>
+
+          {/* Multiple Deletion Mode Button */}
+          <button
+            type="button"
+            onClick={toggleSelectionMode}
+            className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-colors border cursor-pointer ${
+              isSelectionMode
+                ? "bg-rose-500/20 text-rose-300 border-rose-500/40"
+                : "bg-[#111622] hover:bg-[#1f2b3e] text-slate-300 hover:text-white border-[#1f2738]"
+            }`}
+            title="Toggle Multiple Deletion mode"
+          >
+            <span className="material-symbols-outlined text-[15px]">
+              {isSelectionMode ? "close" : "checklist"}
+            </span>
+            <span className="text-[11px]">{isSelectionMode ? "Cancel" : "Multiple Deletion"}</span>
+          </button>
         </div>
       </div>
+
+      {/* Bulk Actions Toolbar */}
+      {isSelectionMode && !loading && paginatedItems.length > 0 && (
+        <BulkActionBar
+          selectedCount={selectedCount}
+          totalCount={paginatedItems.length}
+          onSelectAll={() => toggleSelectAll(paginatedItems)}
+          onClear={clearSelection}
+          onDeleteClick={() => setShowBulkModal(true)}
+          onExit={exitSelectionMode}
+          entityName="player"
+          isAllSelected={isAllSelected}
+          isIndeterminate={isIndeterminate}
+        />
+      )}
 
       {/* ========================================================
           4. SCOUTING PLAYER DIRECTORY (4-COLUMNS GRID)
@@ -969,9 +1059,20 @@ export default function Players() {
                   <div
                     className={`${theme.headerBg} ${theme.headerBorder} px-3 py-2 flex items-center justify-between`}
                   >
-                    <span className="text-[10px] font-black uppercase tracking-wider text-white">
-                      {posDisplay}
-                    </span>
+                    <div className="flex items-center gap-1.5 min-w-0">
+                      {isSelectionMode && (
+                        <input
+                          type="checkbox"
+                          checked={isSelected(item.player_id)}
+                          onChange={(e) => toggleSelect(item.player_id, e)}
+                          className="w-3.5 h-3.5 rounded border-slate-700 bg-slate-900/90 text-emerald-500 focus:ring-emerald-500/30 accent-emerald-500 cursor-pointer shrink-0 animate-in fade-in duration-100"
+                          title="Select player"
+                        />
+                      )}
+                      <span className="text-[10px] font-black uppercase tracking-wider text-white truncate">
+                        {posDisplay}
+                      </span>
+                    </div>
 
                     <span className="text-[9.5px] font-mono font-bold tracking-wider text-white/90 truncate max-w-[170px]">
                       {playerClub ? `${countryCode} // ${playerClub}` : countryCode}
@@ -1092,6 +1193,17 @@ export default function Players() {
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="bg-[#111622] text-[11px] font-bold text-slate-400 uppercase tracking-wider border-b border-[#192233]">
+                  {isSelectionMode && (
+                    <th className="py-3 px-3 w-10 text-center animate-in fade-in duration-100">
+                      <input
+                        ref={tableCheckRef}
+                        type="checkbox"
+                        checked={isAllSelected}
+                        onChange={() => toggleSelectAll(paginatedItems)}
+                        className="w-4 h-4 rounded border-slate-700 bg-slate-900/90 text-emerald-500 focus:ring-emerald-500/30 accent-emerald-500 cursor-pointer"
+                      />
+                    </th>
+                  )}
                   <th className="py-3 px-4">#</th>
                   <th className="py-3 px-4">Athlete</th>
                   <th className="py-3 px-4">Position</th>
@@ -1111,8 +1223,20 @@ export default function Players() {
                   return (
                     <tr
                       key={item.player_id}
-                      className="hover:bg-white/[0.02] transition-colors"
+                      className={`hover:bg-white/[0.02] transition-colors ${
+                        isSelectionMode && isSelected(item.player_id) ? "bg-emerald-500/5" : ""
+                      }`}
                     >
+                      {isSelectionMode && (
+                        <td className="py-3 px-3 w-10 text-center animate-in fade-in duration-100">
+                          <input
+                            type="checkbox"
+                            checked={isSelected(item.player_id)}
+                            onChange={(e) => toggleSelect(item.player_id, e)}
+                            className="w-4 h-4 rounded border-slate-700 bg-slate-900/90 text-emerald-500 focus:ring-emerald-500/30 accent-emerald-500 cursor-pointer"
+                          />
+                        </td>
+                      )}
                       <td className="py-3 px-4 font-mono font-bold text-slate-400">
                         {item.jersey_number ? `#${item.jersey_number}` : "—"}
                       </td>
@@ -1504,6 +1628,16 @@ export default function Players() {
           </div>
         </form>
       </Modal>
+
+      {/* Bulk Delete Confirmation Modal */}
+      <BulkDeleteConfirmModal
+        isOpen={showBulkModal}
+        onClose={() => setShowBulkModal(false)}
+        onConfirm={handleBulkDelete}
+        count={selectedCount}
+        entityName="player"
+        loading={bulkLoading}
+      />
     </div>
   );
 }

@@ -1,12 +1,16 @@
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo, useRef } from 'react';
 import api from '../api/axios';
 import {
   Plus, Pencil, Trash2, Search, ArrowUpDown, RefreshCw,
   Download, LayoutGrid, List, AlertCircle, Globe2,
-  Building2, Layers, Eye, CheckCircle2, Tv, ShieldCheck
+  Building2, Layers, Eye, CheckCircle2, Tv, ShieldCheck,
+  CheckSquare, X
 } from 'lucide-react';
 import Modal from '../components/Modal';
 import { useToast } from '../components/Toast';
+import { useBulkSelection } from '../hooks/useBulkSelection';
+import BulkActionBar from '../components/BulkActionBar';
+import BulkDeleteConfirmModal from '../components/BulkDeleteConfirmModal';
 
 const emptyForm = { name: '', industry: '', country: '' };
 const industries = [
@@ -229,6 +233,22 @@ export default function Sponsors() {
   const [tierFilter, setTierFilter] = useState('ALL'); // 'ALL', 'FIFA PARTNERS', 'REGIONAL SUPPORTERS', 'AUTOMOTIVE & TECH'
   const [sortBy, setSortBy] = useState('matches');
 
+  const {
+    isSelectionMode,
+    toggleSelectionMode,
+    exitSelectionMode,
+    selectedIds,
+    selectedCount,
+    isSelected,
+    toggleSelect,
+    clearSelection,
+    toggleSelectAll,
+    getSelectAllState,
+  } = useBulkSelection('sponsor_id');
+  const [showBulkModal, setShowBulkModal] = useState(false);
+  const [bulkLoading, setBulkLoading] = useState(false);
+  const tableCheckRef = useRef(null);
+
   // Real sponsored fixtures inspection modal
   const [selectedSponsorForMatches, setSelectedSponsorForMatches] = useState(null);
   const [sponsorMatches, setSponsorMatches] = useState([]);
@@ -293,6 +313,21 @@ export default function Sponsors() {
     }
   };
 
+  const handleBulkDelete = async () => {
+    setBulkLoading(true);
+    try {
+      const res = await api.post('/sponsors/bulk-delete', { ids: selectedIds });
+      toast?.showToast(res.data?.message || `Successfully deleted ${selectedCount} sponsors`);
+      clearSelection();
+      setShowBulkModal(false);
+      load();
+    } catch (err) {
+      toast?.showToast(err.response?.data?.message || 'Failed to delete selected sponsors', 'error');
+    } finally {
+      setBulkLoading(false);
+    }
+  };
+
   // Inspect real sponsored matches from the MySQL database
   const openMatchesRoster = (item) => {
     setSelectedSponsorForMatches(item);
@@ -341,6 +376,14 @@ export default function Sponsors() {
 
     return list;
   }, [items, search, tierFilter, sortBy]);
+
+  const { isAllSelected, isIndeterminate } = getSelectAllState(filtered);
+
+  useEffect(() => {
+    if (tableCheckRef.current) {
+      tableCheckRef.current.indeterminate = isIndeterminate;
+    }
+  }, [isIndeterminate]);
 
   // Real KPIs
   const totalCount = items.length;
@@ -400,10 +443,26 @@ export default function Sponsors() {
               const el = document.getElementById('led-telemetry-section');
               if (el) el.scrollIntoView({ behavior: 'smooth' });
             }}
-            className="flex items-center gap-1.5 px-3 py-2 bg-[#121722] hover:bg-[#1b2234] text-xs font-semibold text-slate-300 hover:text-white border border-[#1f293d] rounded-lg transition-colors shadow-sm"
+            className="flex items-center gap-1.5 px-3 py-2 bg-[#121722] hover:bg-[#1b2334] text-xs font-semibold text-slate-300 hover:text-white border border-[#1f293d] rounded-lg transition-colors shadow-sm"
           >
             <Tv size={13} className="text-slate-400" />
             <span className="font-mono text-[11px] tracking-wider uppercase">LED MATRIX AUDIT</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={toggleSelectionMode}
+            className={`flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-lg border transition-colors shadow-sm cursor-pointer ${
+              isSelectionMode
+                ? 'bg-rose-500/20 text-rose-300 border-rose-500/40'
+                : 'bg-[#121722] hover:bg-[#1b2334] text-slate-300 border-[#1f293d]'
+            }`}
+            title="Select multiple sponsors for deletion"
+          >
+            {isSelectionMode ? <X size={13} /> : <CheckSquare size={13} />}
+            <span className="font-mono text-[11px] tracking-wider uppercase">
+              {isSelectionMode ? 'CANCEL SELECTION' : 'MULTIPLE DELETION'}
+            </span>
           </button>
 
           <button
@@ -631,9 +690,39 @@ export default function Sponsors() {
                 <List size={14} />
               </button>
             </div>
+
+            {/* Multiple Deletion Mode Button */}
+            <button
+              type="button"
+              onClick={toggleSelectionMode}
+              className={`flex items-center gap-1 px-2.5 py-1.5 text-xs font-mono font-bold rounded-lg transition-colors border cursor-pointer ${
+                isSelectionMode
+                  ? 'bg-rose-500/20 text-rose-300 border-rose-500/40'
+                  : 'bg-[#090d16] hover:bg-[#162030] text-slate-300 border-[#1c2436]'
+              }`}
+              title="Toggle Multiple Deletion mode"
+            >
+              {isSelectionMode ? <X size={13} /> : <CheckSquare size={13} />}
+              <span>{isSelectionMode ? 'CANCEL' : 'MULTIPLE DELETION'}</span>
+            </button>
           </div>
         </div>
       </div>
+
+      {/* Bulk Actions Toolbar */}
+      {isSelectionMode && !loading && filtered.length > 0 && (
+        <BulkActionBar
+          selectedCount={selectedCount}
+          totalCount={filtered.length}
+          onSelectAll={() => toggleSelectAll(filtered)}
+          onClear={clearSelection}
+          onDeleteClick={() => setShowBulkModal(true)}
+          onExit={exitSelectionMode}
+          entityName="sponsor"
+          isAllSelected={isAllSelected}
+          isIndeterminate={isIndeterminate}
+        />
+      )}
 
       {/* ─────────────────────────────────────────────────────────────
           4. GLOBAL PARTNER DIRECTORY CARDS (GRID VIEW)
@@ -646,14 +735,30 @@ export default function Sponsors() {
             return (
               <div
                 key={item.sponsor_id}
-                className="bg-[#0e121b] hover:bg-[#121824] rounded-xl border border-[#1b2336] hover:border-[#2b3a55] p-4 flex flex-col justify-between transition-all group shadow-md"
+                className={`bg-[#0e121b] hover:bg-[#121824] rounded-xl border p-4 flex flex-col justify-between transition-all group shadow-md ${
+                  isSelected(item.sponsor_id)
+                    ? 'border-emerald-500/80 bg-emerald-950/10'
+                    : 'border-[#1b2336] hover:border-[#2b3a55]'
+                }`}
               >
                 {/* Card Top: Tier Pill & Match Count */}
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-3">
-                    <span className={`text-[9px] font-mono font-bold px-2 py-0.5 rounded uppercase tracking-wider ${meta.tierBadgeClass}`}>
-                      {meta.tier}
-                    </span>
+                    <div className="flex items-center gap-2">
+                      {isSelectionMode && (
+                        <input
+                          type="checkbox"
+                          checked={isSelected(item.sponsor_id)}
+                          onChange={() => toggleSelect(item.sponsor_id)}
+                          onClick={(e) => e.stopPropagation()}
+                          className="w-4 h-4 rounded border-white/20 bg-[#090d16] text-emerald-500 focus:ring-emerald-500/20 cursor-pointer shrink-0"
+                          aria-label={`Select ${item.name}`}
+                        />
+                      )}
+                      <span className={`text-[9px] font-mono font-bold px-2 py-0.5 rounded uppercase tracking-wider ${meta.tierBadgeClass}`}>
+                        {meta.tier}
+                      </span>
+                    </div>
                     <span className="text-xs font-mono font-black text-emerald-400 tabular-nums">
                       {item.matches_sponsored || 0} matches
                     </span>
@@ -800,6 +905,18 @@ export default function Sponsors() {
             <table className="w-full text-left border-collapse text-xs">
               <thead>
                 <tr className="bg-[#121824] border-b border-[#1b2336] text-[10px] font-mono text-slate-400 font-bold uppercase tracking-wider">
+                  {isSelectionMode && (
+                    <th className="py-3 px-3 w-10 text-center">
+                      <input
+                        ref={tableCheckRef}
+                        type="checkbox"
+                        checked={isAllSelected}
+                        onChange={() => toggleSelectAll(filtered)}
+                        className="w-4 h-4 rounded border-white/20 bg-[#090d16] text-emerald-500 focus:ring-emerald-500/20 cursor-pointer"
+                        aria-label="Select all sponsors"
+                      />
+                    </th>
+                  )}
                   <th className="py-3 px-4">BRAND & PARTNER</th>
                   <th className="py-3 px-4">INDUSTRY SECTOR</th>
                   <th className="py-3 px-4">HEADQUARTERS</th>
@@ -814,7 +931,23 @@ export default function Sponsors() {
                   const meta = getSponsorMeta(item);
 
                   return (
-                    <tr key={item.sponsor_id} className="hover:bg-[#121824] transition-colors">
+                    <tr
+                      key={item.sponsor_id}
+                      className={`hover:bg-[#121824] transition-colors ${
+                        isSelected(item.sponsor_id) ? 'bg-emerald-950/15' : ''
+                      }`}
+                    >
+                      {isSelectionMode && (
+                        <td className="py-3 px-3 text-center">
+                          <input
+                            type="checkbox"
+                            checked={isSelected(item.sponsor_id)}
+                            onChange={() => toggleSelect(item.sponsor_id)}
+                            className="w-4 h-4 rounded border-white/20 bg-[#090d16] text-emerald-500 focus:ring-emerald-500/20 cursor-pointer"
+                            aria-label={`Select ${item.name}`}
+                          />
+                        </td>
+                      )}
                       <td className="py-3 px-4">
                         <div className="flex items-center gap-3">
                           <div className="w-8 h-8 rounded-lg bg-[#141b28] border border-[#232f44] flex items-center justify-center font-black text-white text-xs">
@@ -1159,6 +1292,16 @@ export default function Sponsors() {
           </div>
         </div>
       </Modal>
+
+      {/* Bulk Delete Confirmation Modal */}
+      <BulkDeleteConfirmModal
+        isOpen={showBulkModal}
+        onClose={() => setShowBulkModal(false)}
+        onConfirm={handleBulkDelete}
+        count={selectedCount}
+        entityName="sponsor"
+        loading={bulkLoading}
+      />
     </div>
   );
 }

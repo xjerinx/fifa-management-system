@@ -1,7 +1,10 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useRef } from "react";
 import api from "../api/axios";
 import { useToast } from "../components/Toast";
 import Modal from "../components/Modal";
+import { useBulkSelection } from "../hooks/useBulkSelection";
+import BulkActionBar from "../components/BulkActionBar";
+import BulkDeleteConfirmModal from "../components/BulkDeleteConfirmModal";
 
 const emptyForm = {
   name: "",
@@ -118,6 +121,22 @@ export default function Teams() {
   const [sortBy, setSortBy] = useState("ranking");
   const [viewMode, setViewMode] = useState("grid"); // 'grid' | 'table'
 
+  const {
+    isSelectionMode,
+    toggleSelectionMode,
+    exitSelectionMode,
+    selectedIds,
+    selectedCount,
+    isSelected,
+    toggleSelect,
+    clearSelection,
+    toggleSelectAll,
+    getSelectAllState,
+  } = useBulkSelection("team_id");
+  const [showBulkModal, setShowBulkModal] = useState(false);
+  const [bulkLoading, setBulkLoading] = useState(false);
+  const tableCheckRef = useRef(null);
+
   const load = () => {
     setLoading(true);
     api
@@ -207,6 +226,21 @@ export default function Teams() {
     }
   };
 
+  const handleBulkDelete = async () => {
+    setBulkLoading(true);
+    try {
+      const res = await api.post("/teams/bulk-delete", { ids: selectedIds });
+      toast?.showToast(res.data?.message || `Successfully deleted ${selectedCount} teams`);
+      clearSelection();
+      setShowBulkModal(false);
+      load();
+    } catch (err) {
+      toast?.showToast(err.response?.data?.message || "Failed to delete selected teams", "error");
+    } finally {
+      setBulkLoading(false);
+    }
+  };
+
   const handleExport = () => {
     const dataStr = JSON.stringify(filtered, null, 2);
     const blob = new Blob([dataStr], { type: "application/json" });
@@ -273,6 +307,14 @@ export default function Teams() {
     return list;
   }, [items, search, confedFilter, tierFilter, sortBy]);
 
+  const { isAllSelected, isIndeterminate } = getSelectAllState(filtered);
+
+  useEffect(() => {
+    if (tableCheckRef.current) {
+      tableCheckRef.current.indeterminate = isIndeterminate;
+    }
+  }, [isIndeterminate]);
+
   const totalPlayers = useMemo(
     () => items.reduce((acc, curr) => acc + (Number(curr.player_count) || 0), 0),
     [items]
@@ -328,6 +370,22 @@ export default function Teams() {
           >
             <span className="material-symbols-outlined text-[16px]">filter_list</span>
             <span>Ranking Filter</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={toggleSelectionMode}
+            className={`flex items-center gap-2 px-3.5 py-2 text-xs font-semibold uppercase tracking-wider rounded-lg border transition-colors shadow-sm cursor-pointer ${
+              isSelectionMode
+                ? "bg-rose-500/20 text-rose-300 border-rose-500/40"
+                : "bg-[#121722] hover:bg-[#1a2233] text-slate-300 hover:text-white border-[#1e2738]"
+            }`}
+            title="Select multiple teams for deletion"
+          >
+            <span className="material-symbols-outlined text-[16px]">
+              {isSelectionMode ? "close" : "checklist"}
+            </span>
+            <span>{isSelectionMode ? "Cancel Selection" : "Multiple Deletion"}</span>
           </button>
 
           <button
@@ -552,8 +610,40 @@ export default function Teams() {
               <span className="material-symbols-outlined text-[16px]">table_rows</span>
             </button>
           </div>
+
+          {/* Multiple Deletion Mode Button */}
+          <button
+            type="button"
+            onClick={toggleSelectionMode}
+            className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-colors border cursor-pointer ${
+              isSelectionMode
+                ? "bg-rose-500/20 text-rose-300 border-rose-500/40"
+                : "bg-[#111622] hover:bg-[#1f2b3e] text-slate-300 hover:text-white border-[#1f2738]"
+            }`}
+            title="Toggle Multiple Deletion mode"
+          >
+            <span className="material-symbols-outlined text-[15px]">
+              {isSelectionMode ? "close" : "checklist"}
+            </span>
+            <span className="text-[11px]">{isSelectionMode ? "Cancel" : "Multiple Deletion"}</span>
+          </button>
         </div>
       </div>
+
+      {/* Bulk Actions Toolbar */}
+      {isSelectionMode && !loading && filtered.length > 0 && (
+        <BulkActionBar
+          selectedCount={selectedCount}
+          totalCount={filtered.length}
+          onSelectAll={() => toggleSelectAll(filtered)}
+          onClear={clearSelection}
+          onDeleteClick={() => setShowBulkModal(true)}
+          onExit={exitSelectionMode}
+          entityName="team"
+          isAllSelected={isAllSelected}
+          isIndeterminate={isIndeterminate}
+        />
+      )}
 
       {/* ========================================================
           4. TEAM DIRECTORY GRID (4 COLUMNS DENSE LAYOUT)
@@ -617,9 +707,20 @@ export default function Teams() {
                 <div>
                   {/* Card Header: Initials Badge, Name & Rank */}
                   <div className="flex items-start justify-between gap-2.5">
-                    {/* Initials Badge */}
-                    <div className="w-9 h-9 rounded-lg bg-[#141a26] border border-[#222c3d] flex items-center justify-center font-black text-xs text-white tracking-wider shrink-0 shadow-inner">
-                      {code}
+                    <div className="flex items-center gap-2">
+                      {isSelectionMode && (
+                        <input
+                          type="checkbox"
+                          checked={isSelected(item.team_id)}
+                          onChange={(e) => toggleSelect(item.team_id, e)}
+                          className="w-4 h-4 rounded border-slate-700 bg-slate-900/90 text-emerald-500 focus:ring-emerald-500/30 accent-emerald-500 cursor-pointer shrink-0 animate-in fade-in duration-100"
+                          title="Select team"
+                        />
+                      )}
+                      {/* Initials Badge */}
+                      <div className="w-9 h-9 rounded-lg bg-[#141a26] border border-[#222c3d] flex items-center justify-center font-black text-xs text-white tracking-wider shrink-0 shadow-inner">
+                        {code}
+                      </div>
                     </div>
 
                     {/* Team Name, Nickname & Badges */}
@@ -740,6 +841,17 @@ export default function Teams() {
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="bg-[#111622] text-[11px] font-bold text-slate-400 uppercase tracking-wider border-b border-[#192233]">
+                  {isSelectionMode && (
+                    <th className="py-3 px-3 w-10 text-center animate-in fade-in duration-100">
+                      <input
+                        ref={tableCheckRef}
+                        type="checkbox"
+                        checked={isAllSelected}
+                        onChange={() => toggleSelectAll(filtered)}
+                        className="w-4 h-4 rounded border-slate-700 bg-slate-900/90 text-emerald-500 focus:ring-emerald-500/30 accent-emerald-500 cursor-pointer"
+                      />
+                    </th>
+                  )}
                   <th className="py-3 px-4">Rank</th>
                   <th className="py-3 px-4">Team</th>
                   <th className="py-3 px-4">Nickname</th>
@@ -761,8 +873,20 @@ export default function Teams() {
                   return (
                     <tr
                       key={item.team_id}
-                      className="hover:bg-white/[0.02] transition-colors"
+                      className={`hover:bg-white/[0.02] transition-colors ${
+                        isSelectionMode && isSelected(item.team_id) ? "bg-emerald-500/5" : ""
+                      }`}
                     >
+                      {isSelectionMode && (
+                        <td className="py-3 px-3 w-10 text-center animate-in fade-in duration-100">
+                          <input
+                            type="checkbox"
+                            checked={isSelected(item.team_id)}
+                            onChange={(e) => toggleSelect(item.team_id, e)}
+                            className="w-4 h-4 rounded border-slate-700 bg-slate-900/90 text-emerald-500 focus:ring-emerald-500/30 accent-emerald-500 cursor-pointer"
+                          />
+                        </td>
+                      )}
                       <td className="py-3 px-4 font-mono font-bold text-emerald-400">
                         {item.fifa_ranking ? `#${item.fifa_ranking}` : "—"}
                       </td>
@@ -988,6 +1112,16 @@ export default function Teams() {
           </div>
         </form>
       </Modal>
+
+      {/* Bulk Delete Confirmation Modal */}
+      <BulkDeleteConfirmModal
+        isOpen={showBulkModal}
+        onClose={() => setShowBulkModal(false)}
+        onConfirm={handleBulkDelete}
+        count={selectedCount}
+        entityName="team"
+        loading={bulkLoading}
+      />
     </div>
   );
 }

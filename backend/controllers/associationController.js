@@ -1,4 +1,5 @@
 const db = require('../config/db');
+const { bulkDelete } = require('../utils/bulkDelete');
 
 exports.getAll = async (req, res, next) => {
     try {
@@ -67,6 +68,25 @@ exports.remove = async (req, res, next) => {
         );
         if (!result.affectedRows) return res.status(404).json({ success: false, message: 'Association not found' });
         res.json({ success: true, message: 'Association deleted successfully' });
+    } catch (err) {
+        next(err);
+    }
+};
+
+exports.bulkRemove = async (req, res, next) => {
+    try {
+        const { ids } = req.body;
+        const result = await bulkDelete({
+            tableName: 'association',
+            pkColumn: 'association_id',
+            ids,
+            entityLabel: 'association',
+        });
+        res.json({
+            success: true,
+            message: `Successfully deleted ${result.affectedRows} association(s)`,
+            count: result.affectedRows,
+        });
     } catch (err) {
         next(err);
     }

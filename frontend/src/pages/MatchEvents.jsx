@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import api from '../api/axios';
 import {
@@ -6,10 +6,13 @@ import {
   Download, Filter, CheckCircle2, ShieldAlert,
   SlidersHorizontal, Radio, Activity, Eye, AlertTriangle,
   Clock, ShieldCheck, Award, ChevronDown, Check,
-  Sparkles, Layers
+  Sparkles, Layers, CheckSquare, X
 } from 'lucide-react';
 import Modal from '../components/Modal';
 import { useToast } from '../components/Toast';
+import { useBulkSelection } from '../hooks/useBulkSelection';
+import BulkActionBar from '../components/BulkActionBar';
+import BulkDeleteConfirmModal from '../components/BulkDeleteConfirmModal';
 
 const emptyForm = { match_id: '', event_type: 'Goal', minute: '', player_id: '', description: '' };
 const eventTypes = ['Goal', 'Yellow Card', 'Red Card', 'Substitution', 'Penalty', 'Own Goal'];
@@ -105,6 +108,21 @@ export default function MatchEvents() {
   const [activeTab, setActiveTab] = useState('timeline'); // 'timeline', 'disciplinary', 'goals'
   const [sortBy, setSortBy] = useState('minute');
 
+  const {
+    isSelectionMode,
+    toggleSelectionMode,
+    exitSelectionMode,
+    selectedIds,
+    selectedCount,
+    isSelected,
+    toggleSelect,
+    clearSelection,
+    toggleSelectAll,
+    getSelectAllState,
+  } = useBulkSelection('event_id');
+  const [showBulkModal, setShowBulkModal] = useState(false);
+  const [bulkLoading, setBulkLoading] = useState(false);
+
   const load = () => {
     setLoading(true);
     api.get('/events')
@@ -180,6 +198,21 @@ export default function MatchEvents() {
     }
   };
 
+  const handleBulkDelete = async () => {
+    setBulkLoading(true);
+    try {
+      const res = await api.post('/events/bulk-delete', { ids: selectedIds });
+      toast?.showToast(res.data?.message || `Successfully deleted ${selectedCount} match events`);
+      clearSelection();
+      setShowBulkModal(false);
+      load();
+    } catch (err) {
+      toast?.showToast(err.response?.data?.message || 'Failed to delete selected events', 'error');
+    } finally {
+      setBulkLoading(false);
+    }
+  };
+
   // Active match for the Focus Hero Scoreboard
   const activeFocusMatch = useMemo(() => {
     if (selectedMatchId !== 'All') {
@@ -252,6 +285,8 @@ export default function MatchEvents() {
 
     return list;
   }, [items, selectedMatchId, activeTab, typeFilter, matchPeriod, search, sortBy]);
+
+  const { isAllSelected, isIndeterminate } = getSelectAllState(filteredEvents);
 
   // 5 Top KPI Metrics (strictly real counts)
   const totalVerifiedEvents = items.length;
@@ -339,6 +374,22 @@ export default function MatchEvents() {
           >
             <Download size={13} className="text-slate-400" />
             <span className="font-mono text-[11px] tracking-wider uppercase">EXPORT FEED (JSON)</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={toggleSelectionMode}
+            className={`flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-lg border transition-colors shadow-sm cursor-pointer ${
+              isSelectionMode
+                ? 'bg-rose-500/20 text-rose-300 border-rose-500/40'
+                : 'bg-[#121722] hover:bg-[#1b2234] text-slate-300 border-[#1f293d]'
+            }`}
+            title="Select multiple match events for deletion"
+          >
+            {isSelectionMode ? <X size={13} /> : <CheckSquare size={13} />}
+            <span className="font-mono text-[11px] tracking-wider uppercase">
+              {isSelectionMode ? 'CANCEL SELECTION' : 'MULTIPLE DELETION'}
+            </span>
           </button>
 
           <button
@@ -770,8 +821,38 @@ export default function MatchEvents() {
           >
             SUBSTITUTIONS ({substitutionsCount})
           </button>
+
+          {/* Multiple Deletion Mode Button */}
+          <button
+            type="button"
+            onClick={toggleSelectionMode}
+            className={`flex items-center gap-1 px-2.5 py-1 text-xs font-mono font-bold rounded transition-colors border cursor-pointer ml-auto ${
+              isSelectionMode
+                ? 'bg-rose-500/20 text-rose-300 border-rose-500/40'
+                : 'bg-[#090d16] hover:bg-[#162030] text-slate-300 border-[#1c2436]'
+            }`}
+            title="Toggle Multiple Deletion mode"
+          >
+            {isSelectionMode ? <X size={12} /> : <CheckSquare size={12} />}
+            <span>{isSelectionMode ? 'CANCEL' : 'MULTIPLE DELETION'}</span>
+          </button>
         </div>
       </div>
+
+      {/* Bulk Actions Toolbar */}
+      {isSelectionMode && !loading && filteredEvents.length > 0 && (
+        <BulkActionBar
+          selectedCount={selectedCount}
+          totalCount={filteredEvents.length}
+          onSelectAll={() => toggleSelectAll(filteredEvents)}
+          onClear={clearSelection}
+          onDeleteClick={() => setShowBulkModal(true)}
+          onExit={exitSelectionMode}
+          entityName="match event"
+          isAllSelected={isAllSelected}
+          isIndeterminate={isIndeterminate}
+        />
+      )}
 
       {/* ─────────────────────────────────────────────────────────────
           5. DUAL-SIDED VERTICAL TIMELINE
@@ -814,13 +895,27 @@ export default function MatchEvents() {
                   {/* Left Side Slot */}
                   <div className={`${isHomeTeam ? 'block' : 'hidden md:block'}`}>
                     {isHomeTeam && (
-                      <div className="bg-[#0e121b] hover:bg-[#121824] border border-[#1b2336] hover:border-emerald-500/30 rounded-xl p-4 transition-all group shadow-lg relative">
+                      <div className={`bg-[#0e121b] hover:bg-[#121824] border rounded-xl p-4 transition-all group shadow-lg relative ${
+                        isSelected(item.event_id)
+                          ? 'border-emerald-500/80 bg-emerald-950/10'
+                          : 'border-[#1b2336] hover:border-emerald-500/30'
+                      }`}>
                         {/* Connecting Line to Spine (Desktop only) */}
                         <div className="hidden md:block absolute -right-7 top-1/2 -translate-y-1/2 w-7 h-px bg-[#1f293d]"></div>
 
                         {/* Top Badges */}
                         <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
                           <div className="flex items-center gap-1.5">
+                            {isSelectionMode && (
+                              <input
+                                type="checkbox"
+                                checked={isSelected(item.event_id)}
+                                onChange={() => toggleSelect(item.event_id)}
+                                onClick={(e) => e.stopPropagation()}
+                                className="w-4 h-4 rounded border-white/20 bg-[#090d16] text-emerald-500 focus:ring-emerald-500/20 cursor-pointer shrink-0"
+                                aria-label={`Select event minute ${item.minute}`}
+                              />
+                            )}
                             <span className={`px-2 py-0.5 rounded font-mono text-[9px] font-bold uppercase tracking-wider ${
                               isGoal
                                 ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30'
@@ -908,13 +1003,27 @@ export default function MatchEvents() {
                   {/* Right Side Slot */}
                   <div className={`${!isHomeTeam ? 'block' : 'hidden md:block'}`}>
                     {!isHomeTeam && (
-                      <div className="bg-[#0e121b] hover:bg-[#121824] border border-[#1b2336] hover:border-emerald-500/30 rounded-xl p-4 transition-all group shadow-lg relative">
+                      <div className={`bg-[#0e121b] hover:bg-[#121824] border rounded-xl p-4 transition-all group shadow-lg relative ${
+                        isSelected(item.event_id)
+                          ? 'border-emerald-500/80 bg-emerald-950/10'
+                          : 'border-[#1b2336] hover:border-emerald-500/30'
+                      }`}>
                         {/* Connecting Line to Spine (Desktop only) */}
                         <div className="hidden md:block absolute -left-7 top-1/2 -translate-y-1/2 w-7 h-px bg-[#1f293d]"></div>
 
                         {/* Top Badges */}
                         <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
                           <div className="flex items-center gap-1.5">
+                            {isSelectionMode && (
+                              <input
+                                type="checkbox"
+                                checked={isSelected(item.event_id)}
+                                onChange={() => toggleSelect(item.event_id)}
+                                onClick={(e) => e.stopPropagation()}
+                                className="w-4 h-4 rounded border-white/20 bg-[#090d16] text-emerald-500 focus:ring-emerald-500/20 cursor-pointer shrink-0"
+                                aria-label={`Select event minute ${item.minute}`}
+                              />
+                            )}
                             <span className={`px-2 py-0.5 rounded font-mono text-[9px] font-bold uppercase tracking-wider ${
                               isGoal
                                 ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30'
@@ -1212,6 +1321,16 @@ export default function MatchEvents() {
           </div>
         </form>
       </Modal>
+
+      {/* Bulk Delete Confirmation Modal */}
+      <BulkDeleteConfirmModal
+        isOpen={showBulkModal}
+        onClose={() => setShowBulkModal(false)}
+        onConfirm={handleBulkDelete}
+        count={selectedCount}
+        entityName="match event"
+        loading={bulkLoading}
+      />
     </div>
   );
 }

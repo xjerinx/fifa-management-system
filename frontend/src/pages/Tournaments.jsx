@@ -1,7 +1,10 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useRef } from "react";
 import api from "../api/axios";
 import { useToast } from "../components/Toast";
 import Modal from "../components/Modal";
+import { useBulkSelection } from "../hooks/useBulkSelection";
+import BulkActionBar from "../components/BulkActionBar";
+import BulkDeleteConfirmModal from "../components/BulkDeleteConfirmModal";
 
 const emptyForm = { name: "", type: "World Cup", format: "Group + Knockout", start_date: "", end_date: "" };
 const types = ["World Cup", "Continental", "Regional", "Friendly"];
@@ -98,6 +101,22 @@ export default function Tournaments() {
   const [sortBy, setSortBy] = useState("start");
   const [viewMode, setViewMode] = useState("grid"); // 'grid' | 'table'
 
+  const {
+    isSelectionMode,
+    toggleSelectionMode,
+    exitSelectionMode,
+    selectedIds,
+    selectedCount,
+    isSelected,
+    toggleSelect,
+    clearSelection,
+    toggleSelectAll,
+    getSelectAllState,
+  } = useBulkSelection("tournament_id");
+  const [showBulkModal, setShowBulkModal] = useState(false);
+  const [bulkLoading, setBulkLoading] = useState(false);
+  const tableCheckRef = useRef(null);
+
   const load = () => {
     setLoading(true);
     api
@@ -167,6 +186,21 @@ export default function Tournaments() {
     }
   };
 
+  const handleBulkDelete = async () => {
+    setBulkLoading(true);
+    try {
+      const res = await api.post("/tournaments/bulk-delete", { ids: selectedIds });
+      toast?.showToast(res.data?.message || `Successfully deleted ${selectedCount} tournaments`);
+      clearSelection();
+      setShowBulkModal(false);
+      load();
+    } catch (err) {
+      toast?.showToast(err.response?.data?.message || "Failed to delete selected tournaments", "error");
+    } finally {
+      setBulkLoading(false);
+    }
+  };
+
   // Real Calculated Metrics
   const totalTournaments = items.length;
   const activeCount = items.filter((i) => getStatus(i.start_date, i.end_date).label === "Active").length;
@@ -217,6 +251,14 @@ export default function Tournaments() {
 
     return list;
   }, [items, search, typeFilter, statusFilter, sortBy]);
+
+  const { isAllSelected, isIndeterminate } = getSelectAllState(filtered);
+
+  useEffect(() => {
+    if (tableCheckRef.current) {
+      tableCheckRef.current.indeterminate = isIndeterminate;
+    }
+  }, [isIndeterminate]);
 
   const handleExport = () => {
     const exportData = filtered.map((t) => ({
@@ -281,6 +323,22 @@ export default function Tournaments() {
           >
             <span className="material-symbols-outlined text-[16px] text-slate-400">download</span>
             <span>EXPORT CALENDAR</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={toggleSelectionMode}
+            className={`flex items-center gap-2 px-3 py-2 text-xs font-semibold rounded border transition-colors shadow-sm tracking-wide cursor-pointer ${
+              isSelectionMode
+                ? "bg-rose-500/20 text-rose-300 border-rose-500/40"
+                : "bg-[#121722] hover:bg-[#1b2333] text-slate-200 border-white/10"
+            }`}
+            title="Select multiple tournaments for deletion"
+          >
+            <span className="material-symbols-outlined text-[16px]">
+              {isSelectionMode ? "close" : "checklist"}
+            </span>
+            <span>{isSelectionMode ? "Cancel Selection" : "Multiple Deletion"}</span>
           </button>
 
           <button
@@ -504,8 +562,40 @@ export default function Tournaments() {
               <span className="material-symbols-outlined text-[17px] block">table_rows</span>
             </button>
           </div>
+
+          {/* Multiple Deletion Mode Button */}
+          <button
+            type="button"
+            onClick={toggleSelectionMode}
+            className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded text-xs font-semibold transition-colors border cursor-pointer ${
+              isSelectionMode
+                ? "bg-rose-500/20 text-rose-300 border-rose-500/40"
+                : "bg-[#0a0d14] hover:bg-[#182030] text-slate-300 hover:text-white border-white/10"
+            }`}
+            title="Toggle Multiple Deletion mode"
+          >
+            <span className="material-symbols-outlined text-[15px]">
+              {isSelectionMode ? "close" : "checklist"}
+            </span>
+            <span className="text-[11px]">{isSelectionMode ? "Cancel" : "Multiple Deletion"}</span>
+          </button>
         </div>
       </div>
+
+      {/* Bulk Actions Toolbar */}
+      {isSelectionMode && !loading && filtered.length > 0 && (
+        <BulkActionBar
+          selectedCount={selectedCount}
+          totalCount={filtered.length}
+          onSelectAll={() => toggleSelectAll(filtered)}
+          onClear={clearSelection}
+          onDeleteClick={() => setShowBulkModal(true)}
+          onExit={exitSelectionMode}
+          entityName="tournament"
+          isAllSelected={isAllSelected}
+          isIndeterminate={isIndeterminate}
+        />
+      )}
 
       {/* Content Area */}
       {loading ? (
@@ -534,12 +624,26 @@ export default function Tournaments() {
             return (
               <div
                 key={item.tournament_id}
-                className="bg-[#10141e] rounded-lg p-4 border border-white/10 hover:border-emerald-500/30 transition-all duration-200 flex flex-col justify-between shadow-sm group"
+                className={`bg-[#10141e] rounded-lg p-4 border transition-all duration-200 flex flex-col justify-between shadow-sm group ${
+                  isSelected(item.tournament_id)
+                    ? "border-emerald-500/80 bg-emerald-950/10"
+                    : "border-white/10 hover:border-emerald-500/30"
+                }`}
               >
                 <div>
                   {/* Top Tag Row */}
                   <div className="flex items-center justify-between gap-2">
                     <div className="flex items-center gap-1.5 flex-wrap">
+                      {isSelectionMode && (
+                        <input
+                          type="checkbox"
+                          checked={isSelected(item.tournament_id)}
+                          onChange={() => toggleSelect(item.tournament_id)}
+                          onClick={(e) => e.stopPropagation()}
+                          className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-emerald-500 focus:ring-emerald-500/20 focus:ring-offset-0 cursor-pointer shrink-0"
+                          aria-label={`Select ${item.name}`}
+                        />
+                      )}
                       <span
                         className={`text-[9px] font-mono font-bold px-2 py-0.5 rounded tracking-wider uppercase whitespace-nowrap flex items-center gap-1 ${st.badgeColor}`}
                       >
@@ -676,7 +780,19 @@ export default function Tournaments() {
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="bg-[#0b0e17] text-[10px] font-mono uppercase text-slate-400 tracking-wider border-b border-white/10">
-                  <th className="py-3 px-4">Tournament Name</th>
+                  {isSelectionMode && (
+                    <th className="py-3 px-3 w-10 text-center">
+                      <input
+                        ref={tableCheckRef}
+                        type="checkbox"
+                        checked={isAllSelected}
+                        onChange={() => toggleSelectAll(filtered)}
+                        className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-emerald-500 focus:ring-emerald-500/20 cursor-pointer"
+                        aria-label="Select all tournaments"
+                      />
+                    </th>
+                  )}
+                  <th className="py-3 px-4">Tournament</th>
                   <th className="py-3 px-4">Category</th>
                   <th className="py-3 px-4">Format</th>
                   <th className="py-3 px-4">Start Date</th>
@@ -693,7 +809,23 @@ export default function Tournaments() {
                   const cfg = TYPE_CONFIG[item.type] || TYPE_CONFIG["World Cup"];
 
                   return (
-                    <tr key={item.tournament_id} className="hover:bg-white/[0.02] transition-colors">
+                    <tr
+                      key={item.tournament_id}
+                      className={`hover:bg-white/[0.02] transition-colors ${
+                        isSelected(item.tournament_id) ? "bg-emerald-950/15" : ""
+                      }`}
+                    >
+                      {isSelectionMode && (
+                        <td className="py-3 px-3 text-center">
+                          <input
+                            type="checkbox"
+                            checked={isSelected(item.tournament_id)}
+                            onChange={() => toggleSelect(item.tournament_id)}
+                            className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-emerald-500 focus:ring-emerald-500/20 cursor-pointer"
+                            aria-label={`Select ${item.name}`}
+                          />
+                        </td>
+                      )}
                       <td className="py-3 px-4 font-bold text-white">
                         {item.name}
                       </td>
@@ -885,6 +1017,16 @@ export default function Tournaments() {
           </div>
         </form>
       </Modal>
+
+      {/* Bulk Delete Confirmation Modal */}
+      <BulkDeleteConfirmModal
+        isOpen={showBulkModal}
+        onClose={() => setShowBulkModal(false)}
+        onConfirm={handleBulkDelete}
+        count={selectedCount}
+        entityName="tournament"
+        loading={bulkLoading}
+      />
     </div>
   );
 }

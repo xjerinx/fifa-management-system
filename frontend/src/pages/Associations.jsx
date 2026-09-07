@@ -1,8 +1,11 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useRef } from "react";
 import { Link } from "react-router-dom";
 import api from "../api/axios";
 import { useToast } from "../components/Toast";
 import Modal from "../components/Modal";
+import { useBulkSelection } from "../hooks/useBulkSelection";
+import BulkActionBar from "../components/BulkActionBar";
+import BulkDeleteConfirmModal from "../components/BulkDeleteConfirmModal";
 
 const emptyForm = { name: "", region: "", fifa_code: "", foundation_date: "" };
 
@@ -169,6 +172,22 @@ export default function Associations() {
   const [sortBy, setSortBy] = useState("name");
   const [viewMode, setViewMode] = useState("grid"); // 'grid' | 'table'
 
+  const {
+    isSelectionMode,
+    toggleSelectionMode,
+    exitSelectionMode,
+    selectedIds,
+    selectedCount,
+    isSelected,
+    toggleSelect,
+    clearSelection,
+    toggleSelectAll,
+    getSelectAllState,
+  } = useBulkSelection("association_id");
+  const [showBulkModal, setShowBulkModal] = useState(false);
+  const [bulkLoading, setBulkLoading] = useState(false);
+  const tableCheckRef = useRef(null);
+
   const load = () => {
     setLoading(true);
     api
@@ -243,6 +262,21 @@ export default function Associations() {
     }
   };
 
+  const handleBulkDelete = async () => {
+    setBulkLoading(true);
+    try {
+      const res = await api.post("/associations/bulk-delete", { ids: selectedIds });
+      toast?.showToast(res.data?.message || `Successfully deleted ${selectedCount} associations`);
+      clearSelection();
+      setShowBulkModal(false);
+      load();
+    } catch (err) {
+      toast?.showToast(err.response?.data?.message || "Failed to delete selected associations", "error");
+    } finally {
+      setBulkLoading(false);
+    }
+  };
+
   // Filter logic supporting confederation tab and search
   const filtered = useMemo(() => {
     let list = items.filter((item) => {
@@ -282,6 +316,14 @@ export default function Associations() {
 
     return list;
   }, [items, search, selectedConfed, sortBy]);
+
+  const { isAllSelected, isIndeterminate } = getSelectAllState(filtered);
+
+  useEffect(() => {
+    if (tableCheckRef.current) {
+      tableCheckRef.current.indeterminate = isIndeterminate;
+    }
+  }, [isIndeterminate]);
 
   const totalTeams = items.reduce((acc, curr) => acc + (Number(curr.team_count) || 0), 0);
 
@@ -340,6 +382,22 @@ export default function Associations() {
           >
             <span className="material-symbols-outlined text-[16px]">file_download</span>
             <span>EXPORT REGISTRY</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={toggleSelectionMode}
+            className={`flex items-center gap-2 px-3.5 py-2 text-xs font-semibold rounded border transition-colors shadow-sm tracking-wide cursor-pointer ${
+              isSelectionMode
+                ? "bg-rose-500/20 text-rose-300 border-rose-500/40"
+                : "bg-[#111622] hover:bg-[#182133] text-slate-300 border-[#1b2234]"
+            }`}
+            title="Select multiple associations for deletion"
+          >
+            <span className="material-symbols-outlined text-[16px]">
+              {isSelectionMode ? "close" : "checklist"}
+            </span>
+            <span>{isSelectionMode ? "Cancel Selection" : "Multiple Deletion"}</span>
           </button>
 
           <button
@@ -520,8 +578,40 @@ export default function Associations() {
               <span className="material-symbols-outlined text-[17px]">table_rows</span>
             </button>
           </div>
+
+          {/* Multiple Deletion Mode Button */}
+          <button
+            type="button"
+            onClick={toggleSelectionMode}
+            className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded text-xs font-semibold transition-colors border cursor-pointer ${
+              isSelectionMode
+                ? "bg-rose-500/20 text-rose-300 border-rose-500/40"
+                : "bg-[#0c101a] hover:bg-[#162030] text-slate-300 hover:text-white border-[#1b2234]"
+            }`}
+            title="Toggle Multiple Deletion mode"
+          >
+            <span className="material-symbols-outlined text-[15px]">
+              {isSelectionMode ? "close" : "checklist"}
+            </span>
+            <span className="text-[11px]">{isSelectionMode ? "Cancel" : "Multiple Deletion"}</span>
+          </button>
         </div>
       </div>
+
+      {/* Bulk Actions Toolbar */}
+      {isSelectionMode && !loading && filtered.length > 0 && (
+        <BulkActionBar
+          selectedCount={selectedCount}
+          totalCount={filtered.length}
+          onSelectAll={() => toggleSelectAll(filtered)}
+          onClear={clearSelection}
+          onDeleteClick={() => setShowBulkModal(true)}
+          onExit={exitSelectionMode}
+          entityName="association"
+          isAllSelected={isAllSelected}
+          isIndeterminate={isIndeterminate}
+        />
+      )}
 
       {/* ========================================================
           4. CONTENT AREA: BENTO CARDS GRID OR DATA TABLE
@@ -565,7 +655,11 @@ export default function Associations() {
             return (
               <div
                 key={item.association_id}
-                className="bg-[#111622] rounded-lg border border-[#1b2234] hover:border-slate-600 transition-all p-4 flex flex-col justify-between shadow-sm relative group overflow-hidden"
+                className={`bg-[#111622] rounded-lg border transition-all p-4 flex flex-col justify-between shadow-sm relative group overflow-hidden ${
+                  isSelected(item.association_id)
+                    ? "border-emerald-500/80 bg-emerald-950/10"
+                    : "border-[#1b2234] hover:border-slate-600"
+                }`}
               >
                 {/* Top Accent Color Bar */}
                 <div className={`absolute top-0 left-0 right-0 h-0.5 ${meta.topBar}`}></div>
@@ -574,6 +668,16 @@ export default function Associations() {
                   {/* Top Header of Card */}
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex items-start gap-3 min-w-0">
+                      {isSelectionMode && (
+                        <input
+                          type="checkbox"
+                          checked={isSelected(item.association_id)}
+                          onChange={() => toggleSelect(item.association_id)}
+                          onClick={(e) => e.stopPropagation()}
+                          className="w-4 h-4 rounded border-white/20 bg-[#0c101a] text-emerald-500 focus:ring-emerald-500/20 focus:ring-offset-0 cursor-pointer shrink-0 mt-2.5"
+                          aria-label={`Select ${item.name}`}
+                        />
+                      )}
                       {/* Left Square Code Badge */}
                       <div
                         className={`w-10 h-10 rounded bg-[#161c2b] border border-white/10 font-mono font-bold text-white flex items-center justify-center shrink-0 shadow-inner select-none ${getCodeBadgeStyle(code)}`}
@@ -684,9 +788,21 @@ export default function Associations() {
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-[#0c101a] text-[11px] font-bold text-slate-400 uppercase tracking-wider border-b border-[#1b2234]">
+                <tr className="bg-[#0b0e17] text-[10px] font-mono uppercase text-slate-400 tracking-wider border-b border-[#1b2234]">
+                  {isSelectionMode && (
+                    <th className="py-3 px-3 w-10 text-center">
+                      <input
+                        ref={tableCheckRef}
+                        type="checkbox"
+                        checked={isAllSelected}
+                        onChange={() => toggleSelectAll(filtered)}
+                        className="w-4 h-4 rounded border-white/20 bg-[#0c101a] text-emerald-500 focus:ring-emerald-500/20 cursor-pointer"
+                        aria-label="Select all associations"
+                      />
+                    </th>
+                  )}
                   <th className="py-3 px-4">Code</th>
-                  <th className="py-3 px-4">Association / Confederation</th>
+                  <th className="py-3 px-4">Official Association</th>
                   <th className="py-3 px-4">Classification</th>
                   <th className="py-3 px-4">Headquarters</th>
                   <th className="py-3 px-4">Founded</th>
@@ -709,7 +825,23 @@ export default function Associations() {
                     : "1904";
 
                   return (
-                    <tr key={item.association_id} className="hover:bg-[#162030]/50 transition-colors">
+                    <tr
+                      key={item.association_id}
+                      className={`hover:bg-[#162030]/50 transition-colors ${
+                        isSelected(item.association_id) ? "bg-emerald-950/15" : ""
+                      }`}
+                    >
+                      {isSelectionMode && (
+                        <td className="py-3 px-3 text-center">
+                          <input
+                            type="checkbox"
+                            checked={isSelected(item.association_id)}
+                            onChange={() => toggleSelect(item.association_id)}
+                            className="w-4 h-4 rounded border-white/20 bg-[#0c101a] text-emerald-500 focus:ring-emerald-500/20 cursor-pointer"
+                            aria-label={`Select ${item.name}`}
+                          />
+                        </td>
+                      )}
                       <td className="py-3 px-4 font-bold text-emerald-400">
                         <span className="px-2 py-0.5 rounded bg-[#161c2b] border border-white/10">
                           {code}
@@ -888,6 +1020,16 @@ export default function Associations() {
           </div>
         </form>
       </Modal>
+
+      {/* Bulk Delete Confirmation Modal */}
+      <BulkDeleteConfirmModal
+        isOpen={showBulkModal}
+        onClose={() => setShowBulkModal(false)}
+        onConfirm={handleBulkDelete}
+        count={selectedCount}
+        entityName="association"
+        loading={bulkLoading}
+      />
     </div>
   );
 }

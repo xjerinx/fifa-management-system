@@ -6,6 +6,8 @@ router.get('/', matchController.getAll);
 router.get('/:id', matchController.getOne);
 router.post('/', matchController.create);
 router.put('/:id', matchController.update);
+router.post('/bulk-delete', matchController.bulkRemove);
+router.delete('/bulk', matchController.bulkRemove);
 router.delete('/:id', matchController.remove);
 
 router.get('/:id/events', matchController.getEvents);

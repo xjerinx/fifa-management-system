@@ -1,8 +1,11 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/axios";
 import { useToast } from "../components/Toast";
 import Modal from "../components/Modal";
+import { useBulkSelection } from "../hooks/useBulkSelection";
+import BulkActionBar from "../components/BulkActionBar";
+import BulkDeleteConfirmModal from "../components/BulkDeleteConfirmModal";
 
 const emptyForm = {
   tournament_id: "",
@@ -98,6 +101,22 @@ export default function Matches() {
   const [sortBy, setSortBy] = useState("date_desc");
   const [viewMode, setViewMode] = useState("cards"); // 'cards' | 'table'
 
+  const {
+    isSelectionMode,
+    toggleSelectionMode,
+    exitSelectionMode,
+    selectedIds,
+    selectedCount,
+    isSelected,
+    toggleSelect,
+    clearSelection,
+    toggleSelectAll,
+    getSelectAllState,
+  } = useBulkSelection("match_id");
+  const [showBulkModal, setShowBulkModal] = useState(false);
+  const [bulkLoading, setBulkLoading] = useState(false);
+  const tableCheckRef = useRef(null);
+
   const load = () => {
     setLoading(true);
     api
@@ -178,6 +197,21 @@ export default function Matches() {
     }
   };
 
+  const handleBulkDelete = async () => {
+    setBulkLoading(true);
+    try {
+      const res = await api.post("/matches/bulk-delete", { ids: selectedIds });
+      toast?.showToast(res.data?.message || `Successfully deleted ${selectedCount} matches`);
+      clearSelection();
+      setShowBulkModal(false);
+      load();
+    } catch (err) {
+      toast?.showToast(err.response?.data?.message || "Failed to delete selected matches", "error");
+    } finally {
+      setBulkLoading(false);
+    }
+  };
+
   // Real Calculated Metrics
   const totalMatches = items.length;
   const completedCount = items.filter((i) => i.result).length;
@@ -233,6 +267,14 @@ export default function Matches() {
 
     return list;
   }, [items, search, statusFilter, tournamentFilter, sortBy]);
+
+  const { isAllSelected, isIndeterminate } = getSelectAllState(filtered);
+
+  useEffect(() => {
+    if (tableCheckRef.current) {
+      tableCheckRef.current.indeterminate = isIndeterminate;
+    }
+  }, [isIndeterminate]);
 
   // Next Upcoming Marquee Match
   const upcomingList = useMemo(() => {
@@ -312,6 +354,22 @@ export default function Matches() {
           >
             <span className="material-symbols-outlined text-[16px] text-slate-400">download</span>
             <span>EXPORT (JSON)</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={toggleSelectionMode}
+            className={`flex items-center gap-2 px-3 py-2 text-xs font-semibold rounded border transition-colors shadow-sm tracking-wide cursor-pointer ${
+              isSelectionMode
+                ? "bg-rose-500/20 text-rose-300 border-rose-500/40"
+                : "bg-[#121722] hover:bg-[#1b2333] text-slate-200 border-white/10"
+            }`}
+            title="Select multiple matches for deletion"
+          >
+            <span className="material-symbols-outlined text-[16px]">
+              {isSelectionMode ? "close" : "checklist"}
+            </span>
+            <span>{isSelectionMode ? "Cancel Selection" : "Multiple Deletion"}</span>
           </button>
 
           <button
@@ -544,8 +602,40 @@ export default function Matches() {
               <span className="material-symbols-outlined text-[17px] block">table_rows</span>
             </button>
           </div>
+
+          {/* Multiple Deletion Mode Button */}
+          <button
+            type="button"
+            onClick={toggleSelectionMode}
+            className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded text-xs font-semibold transition-colors border cursor-pointer ${
+              isSelectionMode
+                ? "bg-rose-500/20 text-rose-300 border-rose-500/40"
+                : "bg-[#0a0d14] hover:bg-[#182030] text-slate-300 hover:text-white border-white/10"
+            }`}
+            title="Toggle Multiple Deletion mode"
+          >
+            <span className="material-symbols-outlined text-[15px]">
+              {isSelectionMode ? "close" : "checklist"}
+            </span>
+            <span className="text-[11px]">{isSelectionMode ? "Cancel" : "Multiple Deletion"}</span>
+          </button>
         </div>
       </div>
+
+      {/* Bulk Actions Toolbar */}
+      {isSelectionMode && !loading && filtered.length > 0 && (
+        <BulkActionBar
+          selectedCount={selectedCount}
+          totalCount={filtered.length}
+          onSelectAll={() => toggleSelectAll(filtered)}
+          onClear={clearSelection}
+          onDeleteClick={() => setShowBulkModal(true)}
+          onExit={exitSelectionMode}
+          entityName="match"
+          isAllSelected={isAllSelected}
+          isIndeterminate={isIndeterminate}
+        />
+      )}
 
       {/* Content Area */}
       {loading ? (
@@ -568,6 +658,18 @@ export default function Matches() {
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="bg-[#0b0e17] text-[10px] font-mono uppercase text-slate-400 tracking-wider border-b border-white/10">
+                  {isSelectionMode && (
+                    <th className="py-3 px-3 w-10 text-center">
+                      <input
+                        ref={tableCheckRef}
+                        type="checkbox"
+                        checked={isAllSelected}
+                        onChange={() => toggleSelectAll(filtered)}
+                        className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-emerald-500 focus:ring-emerald-500/20 cursor-pointer"
+                        aria-label="Select all matches"
+                      />
+                    </th>
+                  )}
                   <th className="py-3 px-4">Date & Time</th>
                   <th className="py-3 px-4">Tournament</th>
                   <th className="py-3 px-4">Stage</th>
@@ -583,7 +685,23 @@ export default function Matches() {
                   const score = parseScore(item.result);
 
                   return (
-                    <tr key={item.match_id} className="hover:bg-white/[0.02] transition-colors">
+                    <tr
+                      key={item.match_id}
+                      className={`hover:bg-white/[0.02] transition-colors ${
+                        isSelected(item.match_id) ? "bg-emerald-950/15" : ""
+                      }`}
+                    >
+                      {isSelectionMode && (
+                        <td className="py-3 px-3 text-center">
+                          <input
+                            type="checkbox"
+                            checked={isSelected(item.match_id)}
+                            onChange={() => toggleSelect(item.match_id)}
+                            className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-emerald-500 focus:ring-emerald-500/20 cursor-pointer"
+                            aria-label={`Select match ${item.home_team} vs ${item.away_team}`}
+                          />
+                        </td>
+                      )}
                       <td className="py-3 px-4 font-mono text-slate-300 whitespace-nowrap">
                         <div>{formatMatchDate(item.match_date)}</div>
                         <div className="text-[10px] text-slate-500 font-mono">{item.match_time || "TBD"}</div>
@@ -667,6 +785,15 @@ export default function Matches() {
               {/* Impending Showdown Header Strip */}
               <div className="bg-[#0b0e17] px-4 py-2 border-b border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 text-[10px] font-mono">
                 <div className="flex items-center gap-2">
+                  {isSelectionMode && (
+                    <input
+                      type="checkbox"
+                      checked={isSelected(marqueeMatch.match_id)}
+                      onChange={() => toggleSelect(marqueeMatch.match_id)}
+                      className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-emerald-500 focus:ring-emerald-500/20 cursor-pointer"
+                      aria-label="Select marquee match"
+                    />
+                  )}
                   <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
                   <span className="text-amber-400 font-bold uppercase tracking-wider">
                     IMPENDING MARQUEE SHOWDOWN · MATCH NO. {marqueeMatch.match_id}
@@ -818,14 +945,29 @@ export default function Matches() {
                 {secondaryUpcoming.map((item) => (
                   <div
                     key={item.match_id}
-                    className="bg-[#10141e] rounded-lg p-4 border border-white/10 hover:border-emerald-500/30 transition-all flex flex-col justify-between shadow-sm group"
+                    className={`bg-[#10141e] rounded-lg p-4 border transition-all flex flex-col justify-between shadow-sm group ${
+                      isSelected(item.match_id)
+                        ? "border-emerald-500/80 bg-emerald-950/10"
+                        : "border-white/10 hover:border-emerald-500/30"
+                    }`}
                   >
                     <div>
                       {/* Top Header of Card */}
                       <div className="flex items-center justify-between text-[10px] font-mono border-b border-white/5 pb-2">
-                        <span className="font-bold text-slate-300 uppercase truncate">
-                          {item.tournament_name}
-                        </span>
+                        <div className="flex items-center gap-2 truncate">
+                          {isSelectionMode && (
+                            <input
+                              type="checkbox"
+                              checked={isSelected(item.match_id)}
+                              onChange={() => toggleSelect(item.match_id)}
+                              className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-emerald-500 focus:ring-emerald-500/20 cursor-pointer shrink-0"
+                              aria-label={`Select ${item.home_team} vs ${item.away_team}`}
+                            />
+                          )}
+                          <span className="font-bold text-slate-300 uppercase truncate">
+                            {item.tournament_name}
+                          </span>
+                        </div>
                         <span className="px-1.5 py-0.5 rounded bg-[#161e2c] text-amber-400 border border-amber-500/20 font-bold uppercase shrink-0">
                           {item.stage || "GROUP STAGE"}
                         </span>
@@ -931,23 +1073,38 @@ export default function Matches() {
                   return (
                     <div
                       key={item.match_id}
-                      className="bg-[#10141e] rounded-lg p-3.5 sm:p-4 border border-white/10 hover:border-emerald-500/30 transition-all flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm group"
+                      className={`bg-[#10141e] rounded-lg p-3.5 sm:p-4 border transition-all flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm group ${
+                        isSelected(item.match_id)
+                          ? "border-emerald-500/80 bg-emerald-950/10"
+                          : "border-white/10 hover:border-emerald-500/30"
+                      }`}
                     >
                       {/* Left: Tournament & Venue Info */}
-                      <div className="md:w-64 shrink-0 flex flex-col justify-center">
-                        <div className="flex items-center gap-2 flex-wrap">
-                          <span className="text-[10px] font-mono font-bold text-emerald-400 uppercase">
-                            {item.tournament_name}
-                          </span>
-                          <span className="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-[#161e2c] text-slate-300 border border-white/10 uppercase">
-                            {item.stage || "STAGE"}
-                          </span>
-                        </div>
-                        <div className="text-xs text-slate-300 font-medium mt-1 truncate">
-                          {item.stadium_name}
-                        </div>
-                        <div className="text-[11px] font-mono text-slate-500">
-                          {formatMatchDate(item.match_date)} · {item.stadium_city || ""}
+                      <div className="md:w-64 shrink-0 flex items-start gap-2.5">
+                        {isSelectionMode && (
+                          <input
+                            type="checkbox"
+                            checked={isSelected(item.match_id)}
+                            onChange={() => toggleSelect(item.match_id)}
+                            className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-emerald-500 focus:ring-emerald-500/20 cursor-pointer shrink-0 mt-0.5"
+                            aria-label={`Select ${item.home_team} vs ${item.away_team}`}
+                          />
+                        )}
+                        <div className="flex flex-col justify-center">
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <span className="text-[10px] font-mono font-bold text-emerald-400 uppercase">
+                              {item.tournament_name}
+                            </span>
+                            <span className="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-[#161e2c] text-slate-300 border border-white/10 uppercase">
+                              {item.stage || "STAGE"}
+                            </span>
+                          </div>
+                          <div className="text-xs text-slate-300 font-medium mt-1 truncate">
+                            {item.stadium_name}
+                          </div>
+                          <div className="text-[11px] font-mono text-slate-500">
+                            {formatMatchDate(item.match_date)} · {item.stadium_city || ""}
+                          </div>
                         </div>
                       </div>
 
@@ -1226,6 +1383,16 @@ export default function Matches() {
           </div>
         </form>
       </Modal>
+
+      {/* Bulk Delete Confirmation Modal */}
+      <BulkDeleteConfirmModal
+        isOpen={showBulkModal}
+        onClose={() => setShowBulkModal(false)}
+        onConfirm={handleBulkDelete}
+        count={selectedCount}
+        entityName="match"
+        loading={bulkLoading}
+      />
     </div>
   );
 }
