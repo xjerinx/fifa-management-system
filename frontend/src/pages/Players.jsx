@@ -290,155 +290,6 @@ const getPlayerClub = (item) => {
   return null;
 };
 
-// Rich scouting metadata matching the reference image layout
-const SCOUTING_DATA = {
-  "Kylian Mbappé": {
-    posCode: "FW • ST",
-    countryCode: "FRA",
-    club: "REAL MADRID",
-    ovr: 94,
-    role: "Forward • Contract to 2029",
-    attrs: [["PAC", 97], ["SHO", 90], ["DRI", 92]],
-    tag: "Active Squad",
-  },
-  "Jude Bellingham": {
-    posCode: "MF • CAM",
-    countryCode: "ENG",
-    club: "REAL MADRID",
-    ovr: 93,
-    role: "Midfielder • Contract to 2029",
-    attrs: [["PHY", 88], ["PAS", 87], ["DRI", 90]],
-    tag: "Golden Boy Alum",
-    tagStar: true,
-  },
-  "Vinícius Júnior": {
-    posCode: "FW • LW",
-    countryCode: "BRA",
-    club: "REAL MADRID",
-    ovr: 92,
-    role: "Winger • Contract to 2027",
-    attrs: [["PAC", 96], ["DRI", 93], ["SHO", 85]],
-    tag: "UCL Finalist",
-  },
-  "Lamine Yamal": {
-    posCode: "FW • RW",
-    countryCode: "ESP",
-    club: "FC BARCELONA",
-    ovr: 91,
-    role: "Youngest Euro MVP • 17 Yrs",
-    attrs: [["PAC", 93], ["DRI", 91], ["PAS", 86]],
-    tag: "Kopa Trophy",
-    tagStar: true,
-  },
-  "Rodri Hernandez": {
-    posCode: "MF • CDM",
-    countryCode: "ESP",
-    club: "MAN CITY",
-    ovr: 92,
-    role: "Ballon d'Or Winner 2024",
-    attrs: [["DEF", 90], ["PHY", 89], ["PAS", 91]],
-    tag: "World Best MF",
-  },
-  "Lautaro Martínez": {
-    posCode: "FW • ST",
-    countryCode: "ARG",
-    club: "INTER MILAN",
-    ovr: 89,
-    role: "Captain • Capocannoniere",
-    attrs: [["SHO", 89], ["PHY", 86], ["DRI", 85]],
-    tag: "Copa América MVP",
-  },
-  "Phil Foden": {
-    posCode: "FW • RW/CAM",
-    countryCode: "ENG",
-    club: "MAN CITY",
-    ovr: 90,
-    role: "Playmaker • PL Player of Season",
-    attrs: [["DRI", 91], ["SHO", 88], ["PAS", 87]],
-    tag: "Active Squad",
-  },
-  "Pedri González": {
-    posCode: "MF • CM",
-    countryCode: "ESP",
-    club: "FC BARCELONA",
-    ovr: 89,
-    role: "Midfielder • Contract to 2030",
-    attrs: [["PAS", 91], ["DRI", 90], ["VIS", 93]],
-    tag: "Euro Champion",
-  },
-  "Declan Rice": {
-    posCode: "MF • CDM",
-    countryCode: "ENG",
-    club: "ARSENAL",
-    ovr: 88,
-    role: "Midfielder • Contract to 2028",
-    attrs: [["DEF", 88], ["PHY", 87], ["PAS", 83]],
-    tag: "Active Squad",
-  },
-  "Harry Kane": {
-    posCode: "FW • ST",
-    countryCode: "ENG",
-    club: "BAYERN MUNICH",
-    ovr: 90,
-    role: "Striker • European Golden Shoe",
-    attrs: [["SHO", 95], ["PAS", 84], ["PHY", 83]],
-    tag: "Top Scorer",
-  },
-  "Julián Álvarez": {
-    posCode: "FW • CF",
-    countryCode: "ARG",
-    club: "ATLÉTICO MADRID",
-    ovr: 87,
-    role: "Striker • World Cup Champion",
-    attrs: [["PAC", 87], ["SHO", 86], ["WRK", 94]],
-    tag: "Active Transfer",
-  },
-  "Théo Hernández": {
-    posCode: "DF • LB",
-    countryCode: "FRA",
-    club: "AC MILAN",
-    ovr: 87,
-    role: "Fullback • Sprint 35.7 km/h",
-    attrs: [["PAC", 94], ["DEF", 80], ["PHY", 88]],
-    tag: "Defensive Pillar",
-  },
-  "Rodrygo Silva": {
-    posCode: "FW • RW/LW",
-    countryCode: "BRA",
-    club: "REAL MADRID",
-    ovr: 87,
-    role: "Winger • Contract to 2028",
-    attrs: [["PAC", 89], ["DRI", 88], ["SHO", 82]],
-    tag: "Active Squad",
-  },
-  "Enzo Fernández": {
-    posCode: "MF • CM",
-    countryCode: "ARG",
-    club: "CHELSEA",
-    ovr: 84,
-    role: "Deep-Lying Midfielder • Contract to 2031",
-    attrs: [["PAS", 87], ["DRI", 82], ["DEF", 79]],
-    tag: "World Cup Best Young Player",
-  },
-  "Aurélien Tchouaméni": {
-    posCode: "MF • CDM",
-    countryCode: "FRA",
-    club: "REAL MADRID",
-    ovr: 86,
-    role: "Anchor • Interceptions 2.4/90",
-    attrs: [["DEF", 86], ["PHY", 87], ["PAS", 81]],
-    tag: "Contract Secured",
-  },
-  "Nicolò Barella": {
-    posCode: "MF • CM",
-    countryCode: "ITA",
-    club: "INTER MILAN",
-    ovr: 87,
-    role: "Box-to-Box • Serie A Midfielder of the Year",
-    attrs: [["STA", 93], ["DRI", 86], ["DEF", 81]],
-    tag: "Vice Captain",
-  },
-};
 
 function calculateAgeNumber(dob) {
   if (!dob) return null;
@@ -1089,48 +940,24 @@ export default function Players() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3.5">
           {paginatedItems.map((item) => {
             const fullName = `${item.first_name} ${item.last_name}`.trim();
-            const scouting = SCOUTING_DATA[fullName] || {};
             const theme = getPositionTheme(item.position);
 
             const countryCode =
-              scouting.countryCode ||
               NATION_CODES[item.nationality] ||
               item.nationality?.slice(0, 3).toUpperCase() ||
               "FIFA";
             const playerClub = getPlayerClub(item);
             const jersey = item.jersey_number ? `#${item.jersey_number}` : "—";
-            const posCode =
-              scouting.posCode ||
-              (item.position === "Forward"
-                ? "FW • ST"
+            const posShort =
+              item.position === "Forward"
+                ? "FW"
                 : item.position === "Midfielder"
-                ? "MF • CM"
+                ? "MF"
                 : item.position === "Defender"
-                ? "DF • CB"
-                : "GK");
-
-            const ovr =
-              scouting.ovr ||
-              Math.min(
-                94,
-                Math.max(
-                  76,
-                  Math.round(76 + Math.sqrt(Number(item.market_value_m) || 10) * 1.35)
-                )
-              );
-
-            const roleHighlight =
-              scouting.role ||
-              `${item.position} • ${calculateAge(item.dob)}`;
-
-            const attrs = scouting.attrs || [
-              ["PAC", Math.min(96, Math.max(70, ovr + 2))],
-              ["DRI", Math.min(94, Math.max(68, ovr - 1))],
-              ["PHY", Math.min(92, Math.max(65, ovr - 3))],
-            ];
-
-            const tag = scouting.tag || "Active Squad";
-            const tagStar = scouting.tagStar;
+                ? "DF"
+                : "GK";
+            const posDisplay = `${posShort} • ${item.position.toUpperCase()}`;
+            const age = calculateAge(item.dob);
 
             return (
               <div
@@ -1143,7 +970,7 @@ export default function Players() {
                     className={`${theme.headerBg} ${theme.headerBorder} px-3 py-2 flex items-center justify-between`}
                   >
                     <span className="text-[10px] font-black uppercase tracking-wider text-white">
-                      {posCode}
+                      {posDisplay}
                     </span>
 
                     <span className="text-[9.5px] font-mono font-bold tracking-wider text-white/90 truncate max-w-[170px]">
@@ -1157,20 +984,17 @@ export default function Players() {
 
                   {/* Body Details */}
                   <div className="p-3 pb-2">
-                    {/* Foot / Sub-bar & OVR Rating */}
+                    {/* Foot / Sub-bar */}
                     <div className="flex items-center justify-between pb-1 text-[10px]">
                       <span className="text-slate-400 font-medium">
                         {countryCode} · {item.preferred_foot || "Right"} Foot
                       </span>
 
-                      <div className="flex items-baseline gap-1">
-                        <span className="text-[8px] font-bold text-slate-500 uppercase tracking-tight">
-                          OVR
+                      {item.height_cm ? (
+                        <span className="text-slate-400 font-mono text-[10px]">
+                          {Math.round(item.height_cm)} cm
                         </span>
-                        <span className="text-xs font-black text-emerald-400 font-mono">
-                          {ovr}
-                        </span>
-                      </div>
+                      ) : null}
                     </div>
 
                     {/* Player Name */}
@@ -1178,9 +1002,9 @@ export default function Players() {
                       {fullName}
                     </h3>
 
-                    {/* Role / Highlight / Contract */}
-                    <p className="text-[10.5px] text-slate-400 truncate mt-0.5">
-                      {roleHighlight}
+                    {/* Position & Age */}
+                    <p className="text-[10.5px] text-slate-400 truncate mt-0.5 font-medium">
+                      {item.position} • {age}
                     </p>
 
                     {/* Market Valuation */}
@@ -1193,17 +1017,26 @@ export default function Players() {
                       </span>
                     </div>
 
-                    {/* Attributes Badges */}
+                    {/* Database Attribute Badges */}
                     <div className="mt-2 flex items-center gap-1.5">
-                      {attrs.map(([code, val], idx) => (
-                        <div
-                          key={idx}
-                          className="bg-[#131926] border border-[#1f283a] px-2 py-0.5 rounded text-[9.5px] font-mono font-bold text-slate-300 flex items-center gap-1"
-                        >
-                          <span className="text-slate-500">{code}</span>
-                          <span>{val}</span>
+                      {item.height_cm ? (
+                        <div className="bg-[#131926] border border-[#1f283a] px-2 py-0.5 rounded text-[9.5px] font-mono font-bold text-slate-300 flex items-center gap-1">
+                          <span className="text-slate-500">HT</span>
+                          <span>{Math.round(item.height_cm)} cm</span>
                         </div>
-                      ))}
+                      ) : null}
+                      {item.preferred_foot ? (
+                        <div className="bg-[#131926] border border-[#1f283a] px-2 py-0.5 rounded text-[9.5px] font-mono font-bold text-slate-300 flex items-center gap-1">
+                          <span className="text-slate-500">FOOT</span>
+                          <span>{item.preferred_foot}</span>
+                        </div>
+                      ) : null}
+                      {item.jersey_number ? (
+                        <div className="bg-[#131926] border border-[#1f283a] px-2 py-0.5 rounded text-[9.5px] font-mono font-bold text-slate-300 flex items-center gap-1">
+                          <span className="text-slate-500">NO</span>
+                          <span>#{item.jersey_number}</span>
+                        </div>
+                      ) : null}
                     </div>
                   </div>
                 </div>
@@ -1211,16 +1044,10 @@ export default function Players() {
                 {/* Card Footer: Status Tag & Profile Actions */}
                 <div className="px-3 py-2 border-t border-[#161e2c] flex items-center justify-between gap-1.5 bg-[#0a0f18]/60">
                   {/* Left Status Tag */}
-                  <div className="flex items-center gap-1 min-w-0">
-                    {tagStar ? (
-                      <span className="material-symbols-outlined text-[12px] text-amber-400 shrink-0">
-                        star
-                      </span>
-                    ) : (
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
-                    )}
-                    <span className="text-[9.5px] font-bold text-slate-300 truncate">
-                      {tag}
+                  <div className="flex items-center gap-1.5 min-w-0">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
+                    <span className="text-[9.5px] font-bold text-slate-300 truncate font-mono">
+                      {item.team_name || "Active Squad"}
                     </span>
                   </div>
 
@@ -1279,7 +1106,6 @@ export default function Players() {
               <tbody className="divide-y divide-[#161e2c] text-xs">
                 {paginatedItems.map((item) => {
                   const fullName = `${item.first_name} ${item.last_name}`;
-                  const scouting = SCOUTING_DATA[fullName] || {};
                   const age = calculateAge(item.dob);
 
                   return (
