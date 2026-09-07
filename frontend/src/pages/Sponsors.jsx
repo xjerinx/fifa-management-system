@@ -407,23 +407,23 @@ export default function Sponsors() {
       {/* ─────────────────────────────────────────────────────────────
           1. PAGE HEADER & PROTOCOL EYEBROW
           ───────────────────────────────────────────────────────────── */}
-      <div className="flex flex-col gap-3">
-        <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4">
-          <div className="flex flex-col gap-1 min-w-0 max-w-2xl">
-            <div className="flex items-center gap-2 mb-1 flex-wrap">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-              <span className="text-[11px] font-mono tracking-widest text-emerald-400 font-bold uppercase">
-                COMMERCIAL & ASSET GOVERNANCE // SPONSORSHIP PORTFOLIO // CONTRACT CYCLE 2024-2027
-              </span>
-              <span className="px-1.5 py-0.5 rounded bg-[#1e293b] text-emerald-300 text-[9px] font-mono font-bold tracking-wider uppercase border border-emerald-500/30">
-                CYCLE TIER 1-3
-              </span>
-            </div>
+      <div className="flex flex-col gap-2.5">
+        {/* Eyebrow Protocol Feed */}
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span className="text-[11px] font-mono tracking-widest text-emerald-400 font-bold uppercase">
+            COMMERCIAL & ASSET GOVERNANCE // SPONSORSHIP PORTFOLIO // CONTRACT CYCLE 2024-2027
+          </span>
+          <span className="px-1.5 py-0.5 rounded bg-[#1e293b] text-emerald-300 text-[9px] font-mono font-bold tracking-wider uppercase border border-emerald-500/30">
+            CYCLE TIER 1-3
+          </span>
+        </div>
 
-            <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight leading-tight">
-              GLOBAL PARTNERS & COMMERCIAL SPONSORS
-            </h1>
-          </div>
+        {/* Heading & Actions Row (Dead-center aligned on heading axis) */}
+        <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4">
+          <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight uppercase leading-tight font-display">
+            GLOBAL PARTNERS & COMMERCIAL SPONSORS
+          </h1>
 
           {/* Action Buttons */}
           <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap shrink-0">

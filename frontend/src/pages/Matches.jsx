@@ -318,30 +318,30 @@ export default function Matches() {
   return (
     <div className="flex flex-col w-full pb-14 gap-6 text-on-surface bg-[#0a0d14] min-h-screen">
       {/* Page Header */}
-      <div className="flex flex-col gap-3 pt-1">
-        <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4">
-          <div className="flex flex-col gap-1 min-w-0 max-w-2xl">
-            <div className="flex items-center gap-2 mb-1 flex-wrap">
-              <span className="material-symbols-outlined text-[15px] text-emerald-400">
-                sports_soccer
-              </span>
-              <span className="text-[11px] font-mono tracking-wider text-slate-400 uppercase font-semibold">
-                REGISTRY // INTERNATIONAL MATCH ENGINE // TMS PROTOCOL v9.8.2
-              </span>
-              <span className="text-slate-600 hidden sm:inline">|</span>
-              <span className="text-[10px] font-mono text-emerald-400 font-semibold hidden sm:inline">
-                ● SATCOM FEED 1080:60 · LATENCY 18ms
-              </span>
-            </div>
+      <div className="flex flex-col gap-2.5 pt-1">
+        {/* Eyebrow / Match Engine Registry */}
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="material-symbols-outlined text-[15px] text-emerald-400">
+            sports_soccer
+          </span>
+          <span className="text-[11px] font-mono tracking-wider text-slate-400 uppercase font-semibold">
+            REGISTRY // INTERNATIONAL MATCH ENGINE // TMS PROTOCOL v9.8.2
+          </span>
+          <span className="text-slate-600 hidden sm:inline">|</span>
+          <span className="text-[10px] font-mono text-emerald-400 font-semibold hidden sm:inline">
+            ● SATCOM FEED 1080:60 · LATENCY 18ms
+          </span>
+        </div>
 
-            <div className="flex items-center gap-3 flex-wrap">
-              <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight uppercase leading-tight">
-                MATCHES & SCOREBOARDS
-              </h1>
-              <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-400 border border-emerald-500/30 uppercase tracking-wider">
-                {totalMatches} FIXTURES LOGGED
-              </span>
-            </div>
+        {/* Main Heading & Actions Row (Dead-center aligned on heading axis) */}
+        <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4">
+          <div className="flex items-center gap-3 flex-wrap">
+            <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight uppercase leading-tight font-display">
+              MATCHES & SCOREBOARDS
+            </h1>
+            <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-400 border border-emerald-500/30 uppercase tracking-wider">
+              {totalMatches} FIXTURES LOGGED
+            </span>
           </div>
 
           <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap shrink-0">

@@ -569,23 +569,22 @@ export default function Coaches() {
   return (
     <div className="flex flex-col w-full pb-14 gap-6 text-on-surface bg-[#0a0d14] min-h-screen">
       {/* 1. Header Section */}
-      <div className="flex flex-col gap-3 pt-1">
-        <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4">
-          <div className="min-w-0 max-w-xl">
-            {/* Eyebrow badge */}
-            <div className="flex items-center gap-2 mb-1.5">
-              <span className="material-symbols-outlined text-[16px] text-sky-400">
-                verified
-              </span>
-              <span className="text-[11px] font-mono tracking-wider text-sky-400 uppercase font-semibold">
-                TECHNICAL STAFF DIRECTORY // LICENSING HUB • FIFA PRO ACCREDITED
-              </span>
-            </div>
+      <div className="flex flex-col gap-2.5 pt-1">
+        {/* Eyebrow badge */}
+        <div className="flex items-center gap-2">
+          <span className="material-symbols-outlined text-[16px] text-sky-400">
+            verified
+          </span>
+          <span className="text-[11px] font-mono tracking-wider text-sky-400 uppercase font-semibold">
+            TECHNICAL STAFF DIRECTORY // LICENSING HUB • FIFA PRO ACCREDITED
+          </span>
+        </div>
 
-            <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight uppercase leading-tight">
-              HEAD COACHES & TACTICAL DIRECTORS
-            </h1>
-          </div>
+        {/* Heading & Actions Row (Dead-center aligned on heading axis) */}
+        <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4">
+          <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight uppercase leading-tight font-display">
+            HEAD COACHES & TACTICAL DIRECTORS
+          </h1>
 
           {/* Action Buttons */}
           <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap shrink-0">

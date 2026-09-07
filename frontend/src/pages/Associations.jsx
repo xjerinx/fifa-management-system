@@ -343,24 +343,22 @@ export default function Associations() {
       {/* ========================================================
           1. HEADER & ACTION CLUSTER
           ======================================================== */}
-      <div className="flex flex-col gap-3 pt-1">
-        <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4">
-          <div className="flex flex-col gap-1 min-w-0 max-w-xl">
-            {/* Micro Telemetry Bar */}
-            <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-slate-400">
-              <span className="font-bold text-sky-400">GOVERNANCE & JURISDICTION HUB</span>
-              <span>•</span>
-              <span className="flex items-center gap-1.5 text-emerald-400 font-semibold">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                TMS Node V4.2 Connected
-              </span>
-            </div>
+      <div className="flex flex-col gap-2.5 pt-1">
+        {/* Micro Telemetry Bar */}
+        <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-slate-400">
+          <span className="font-bold text-sky-400">GOVERNANCE & JURISDICTION HUB</span>
+          <span>•</span>
+          <span className="flex items-center gap-1.5 text-emerald-400 font-semibold">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            TMS Node V4.2 Connected
+          </span>
+        </div>
 
-            {/* Main Title */}
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight uppercase leading-tight">
-              FOOTBALL ASSOCIATIONS & CONFEDERATIONS
-            </h1>
-          </div>
+        {/* Main Heading & Actions Row (Dead-center aligned on heading axis) */}
+        <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4">
+          <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight uppercase leading-tight font-display">
+            FOOTBALL ASSOCIATIONS & CONFEDERATIONS
+          </h1>
 
           {/* Header Action Buttons */}
           <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap shrink-0">

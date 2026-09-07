@@ -329,19 +329,19 @@ export default function Teams() {
       {/* ========================================================
           1. EDITORIAL PAGE HEADER
           ======================================================== */}
-      <div className="flex flex-col gap-3 pt-1">
-        <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4">
-          <div className="min-w-0 max-w-xl">
-            <div className="flex items-center gap-2 text-[11px] font-mono tracking-wider text-emerald-400 font-semibold mb-1">
-              <span>FEDERATION CONSOLE // REGISTRY</span>
-              <span className="text-slate-600">•</span>
-              <span className="text-slate-400">SYNC: ACTIVE (TMS 2026.4)</span>
-            </div>
+      <div className="flex flex-col gap-2.5 pt-1">
+        {/* Eyebrow / Telemetry */}
+        <div className="flex items-center gap-2 text-[11px] font-mono tracking-wider text-emerald-400 font-semibold">
+          <span>FEDERATION CONSOLE // REGISTRY</span>
+          <span className="text-slate-600">•</span>
+          <span className="text-slate-400">SYNC: ACTIVE (TMS 2026.4)</span>
+        </div>
 
-            <h1 className="text-3xl sm:text-4xl font-black text-white tracking-tight uppercase leading-tight font-display">
-              NATIONAL TEAMS DIRECTORY
-            </h1>
-          </div>
+        {/* Heading & Actions Row (Dead-center aligned on the heading axis) */}
+        <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight uppercase leading-tight font-display">
+            NATIONAL TEAMS DIRECTORY
+          </h1>
 
           {/* Right Header Actions */}
           <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap shrink-0">

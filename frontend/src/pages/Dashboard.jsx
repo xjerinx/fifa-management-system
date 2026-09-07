@@ -172,26 +172,24 @@ export default function Dashboard() {
       {/* ========================================================
           1. DASHBOARD HERO / EXECUTIVE DASHBOARD HEADER
           ======================================================== */}
-      <div className="flex flex-col gap-3 pt-1">
-        <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4">
-          <div className="flex flex-col gap-1 min-w-0 max-w-2xl">
-            {/* Micro Status Bar */}
-            <div className="flex flex-wrap items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-slate-400">
-              <span className="flex items-center gap-1.5 text-emerald-400 font-semibold">
-                <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-                FEDERATION OPERATIONS
-              </span>
-              <span>•</span>
-              <span>SEASON 2026/27</span>
-              <span>•</span>
-              <span className="text-sky-400 font-semibold">TMS VERIFIED</span>
-            </div>
+      <div className="flex flex-col gap-2.5 pt-1">
+        {/* Micro Status Bar */}
+        <div className="flex flex-wrap items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-slate-400">
+          <span className="flex items-center gap-1.5 text-emerald-400 font-semibold">
+            <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+            FEDERATION OPERATIONS
+          </span>
+          <span>•</span>
+          <span>SEASON 2026/27</span>
+          <span>•</span>
+          <span className="text-sky-400 font-semibold">TMS VERIFIED</span>
+        </div>
 
-            {/* Main Title */}
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight uppercase leading-tight">
-              EXECUTIVE DASHBOARD
-            </h1>
-          </div>
+        {/* Main Heading & Actions Row (Dead-center aligned on heading axis) */}
+        <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4">
+          <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight uppercase leading-tight font-display">
+            EXECUTIVE DASHBOARD
+          </h1>
 
           {/* Action Buttons */}
           <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap shrink-0">
