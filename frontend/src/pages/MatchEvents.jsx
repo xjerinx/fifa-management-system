@@ -337,14 +337,11 @@ export default function MatchEvents() {
           1. PAGE HEADER & PROTOCOL EYEBROW
           ───────────────────────────────────────────────────────────── */}
       <div className="flex flex-col gap-2.5">
-        {/* Eyebrow Protocol Feed */}
+        {/* Eyebrow */}
         <div className="flex items-center gap-2 flex-wrap">
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
           <span className="text-[11px] font-mono tracking-widest text-emerald-400 font-bold uppercase">
-            MATCH EVENTS & INCIDENT FEED // PROTOCOL TMS-VAR v9.8.2
-          </span>
-          <span className="px-1.5 py-0.5 rounded bg-[#1e293b] text-[#38bdf8] text-[9px] font-mono font-bold tracking-wider uppercase border border-[#38bdf8]/30">
-            BROADCAST SYNC
+            MATCH EVENTS & INCIDENT FEED
           </span>
         </div>
 
@@ -400,7 +397,7 @@ export default function MatchEvents() {
         </div>
 
         <p className="text-xs text-slate-400 max-w-3xl leading-relaxed">
-          Real-time chronological telemetry of all verified in-match occurrences across sanctioned FIFA and Continental fixtures. Integrated Hawk-Eye, semi-automated offside (SAOT), and certified VAR audit logs.
+          Chronological log of all in-match events across international fixtures and continental tournaments.
         </p>
       </div>
 
@@ -938,9 +935,6 @@ export default function MatchEvents() {
                           </div>
 
                           <div className="flex items-center gap-1.5">
-                            <span className="text-[10px] font-mono text-slate-400 uppercase hidden sm:inline">
-                              HAWK-EYE CERTIFIED
-                            </span>
                             {/* Actions: Edit & Delete */}
                             <button
                               onClick={() => openEdit(item)}
@@ -1046,9 +1040,6 @@ export default function MatchEvents() {
                           </div>
 
                           <div className="flex items-center gap-1.5">
-                            <span className="text-[10px] font-mono text-slate-400 uppercase hidden sm:inline">
-                              HAWK-EYE CERTIFIED
-                            </span>
                             {/* Actions: Edit & Delete */}
                             <button
                               onClick={() => openEdit(item)}
@@ -1132,73 +1123,7 @@ export default function MatchEvents() {
         </div>
       </div>
 
-      {/* ─────────────────────────────────────────────────────────────
-          6. VAR AUDIT & INTERVENTION LOGS (SANCTIONED TMS)
-          ───────────────────────────────────────────────────────────── */}
-      <div className="bg-[#0e121b] border border-[#1b2336] rounded-xl p-4 space-y-3.5 shadow-lg">
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <div className="flex items-center gap-2">
-            <span className="text-emerald-400 font-bold">›</span>
-            <span className="text-xs font-mono font-black text-white tracking-wider uppercase">
-              VAR AUDIT & INTERVENTION LOGS (SANCTIONED TMS)
-            </span>
-          </div>
-          <span className="px-2 py-0.5 rounded bg-[#15202e] text-[#38bdf8] font-mono text-[10px] font-bold uppercase border border-[#38bdf8]/20">
-            4 INTERVENTIONS LOGGED
-          </span>
-        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
-          {/* Audit Box 1 */}
-          <div className="bg-[#0a0e16] border border-[#182030] rounded-lg p-3.5 space-y-1.5">
-            <div className="flex items-center justify-between text-[10px] font-mono">
-              <span className="text-slate-400">VAR REV #108 · MINUTE 68'</span>
-              <span className="text-emerald-400 font-bold">DECISION OVERTURNED (SAOT)</span>
-            </div>
-            <h4 className="text-xs font-bold text-white tracking-wide">
-              Semi-Automated Offside Check
-            </h4>
-            <p className="text-[11px] text-slate-400 leading-relaxed">
-              Initial on-field decision of goal held set for offside. SAOT optical skeletal tracking confirmed attacker 14.2cm beyond penultimate defender at pass launch.
-            </p>
-            <div className="flex items-center justify-between text-[10px] font-mono text-slate-500 pt-1">
-              <span>Review Time: 34s</span>
-              <span>Lead VAR: Massimiliano Irrati (ITA)</span>
-            </div>
-          </div>
-
-          {/* Audit Box 2 */}
-          <div className="bg-[#0a0e16] border border-[#182030] rounded-lg p-3.5 space-y-1.5">
-            <div className="flex items-center justify-between text-[10px] font-mono">
-              <span className="text-slate-400">VAR REV #109 · MINUTE 89'</span>
-              <span className="text-sky-400 font-bold">DECISION CONFIRMED (GOAL-LINE)</span>
-            </div>
-            <h4 className="text-xs font-bold text-white tracking-wide">
-              Goal-Line Technology & Foul Check
-            </h4>
-            <p className="text-[11px] text-slate-400 leading-relaxed">
-              Hawk-Eye goal-line review checked for ball across goal-line and potential attacking foul. GLT confirmed ball 4.8cm on line. No goal.
-            </p>
-            <div className="flex items-center justify-between text-[10px] font-mono text-slate-500 pt-1">
-              <span>Review Time: 21s</span>
-              <span>Referee Match Sign-Off: Complete</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Certificate Verification Footer */}
-        <div className="pt-3 border-t border-[#182030] flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-[10px] font-mono text-slate-400">
-          <div className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-            <span className="text-slate-300 font-bold">TMS & LAUSANNE MATCH EVENT CERTIFIED</span>
-            <span className="text-slate-600">•</span>
-            <span className="truncate">Cryptographic Hash: 8cf9db3...e1920</span>
-          </div>
-          <div className="text-slate-400 sm:text-right">
-            FIFA General Game Repository Zürich · Lead Commissioner Sign-Off
-          </div>
-        </div>
-      </div>
 
       {/* ─────────────────────────────────────────────────────────────
           7. ADD / EDIT EVENT MODAL (CLEAN & PROFESSIONAL)

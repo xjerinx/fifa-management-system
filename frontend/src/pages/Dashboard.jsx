@@ -89,7 +89,6 @@ export default function Dashboard() {
   const exportSummary = () => {
     const summaryData = {
       timestamp: new Date().toISOString(),
-      cycleId: "WC-2026-OPS-09",
       stats,
       upcomingMatchesCount: upcoming.length,
       recentMatchesCount: recent.length,
@@ -118,28 +117,24 @@ export default function Dashboard() {
         name: "Union of European Football Associations",
         dotColor: "bg-[#00f59b]",
         barColor: "bg-[#00f59b]",
-        readiness: "96% Ready",
       },
       {
         code: "CONMEBOL",
         name: "Confederación Sudamericana de Fútbol",
         dotColor: "bg-[#38bdf8]",
         barColor: "bg-[#38bdf8]",
-        readiness: "92% Ready",
       },
       {
         code: "AFC",
         name: "Asian Football Confederation",
         dotColor: "bg-[#f59e0b]",
         barColor: "bg-[#f59e0b]",
-        readiness: "88% Ready",
       },
       {
         code: "CAF",
         name: "Confederation of African Football",
         dotColor: "bg-[#fb923c]",
         barColor: "bg-[#fb923c]",
-        readiness: "84% Ready",
       },
     ];
 
@@ -181,8 +176,6 @@ export default function Dashboard() {
           </span>
           <span>•</span>
           <span>SEASON 2026/27</span>
-          <span>•</span>
-          <span className="text-sky-400 font-semibold">TMS VERIFIED</span>
         </div>
 
         {/* Main Heading & Actions Row (Dead-center aligned on heading axis) */}
@@ -245,10 +238,10 @@ export default function Dashboard() {
             <span className="text-2xl font-black text-white font-mono tracking-tight tabular-nums">
               {stats?.total_associations ?? 10}
             </span>
-            <span className="text-[10px] font-mono text-sky-400 font-semibold">6 Confeds</span>
+            <span className="text-[10px] font-mono text-sky-400 font-semibold">{byAssociation.length} Confeds</span>
           </div>
           <div className="mt-2 flex items-center justify-between text-[10px] text-slate-500">
-            <span className="truncate">UEFA • CONMEBOL +4</span>
+            <span className="truncate">Continental Bodies</span>
             <svg className="w-10 h-3 text-sky-400/70 shrink-0" viewBox="0 0 40 12" fill="none">
               <path d="M1 9 Q 10 1, 20 6 T 39 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
             </svg>
@@ -270,10 +263,10 @@ export default function Dashboard() {
             <span className="text-2xl font-black text-white font-mono tracking-tight tabular-nums">
               {stats?.total_teams ?? 12}
             </span>
-            <span className="text-[10px] font-mono text-emerald-400 font-semibold">100% Active</span>
+            <span className="text-[10px] font-mono text-emerald-400 font-semibold">Active</span>
           </div>
           <div className="mt-2 flex items-center justify-between text-[10px] text-slate-500">
-            <span className="truncate">2026 Elite Roster</span>
+            <span className="truncate">Registered Roster</span>
             <svg className="w-10 h-3 text-emerald-400/70 shrink-0" viewBox="0 0 40 12" fill="none">
               <path d="M1 10 Q 12 3, 22 7 T 39 2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
             </svg>
@@ -295,10 +288,10 @@ export default function Dashboard() {
             <span className="text-2xl font-black text-white font-mono tracking-tight tabular-nums">
               {totalPlayersCount}
             </span>
-            <span className="text-[10px] font-mono text-amber-400 font-semibold">€3.45B Val</span>
+            <span className="text-[10px] font-mono text-amber-400 font-semibold">Registered</span>
           </div>
           <div className="mt-2 flex items-center justify-between text-[10px] text-slate-500">
-            <span className="truncate">Top 5 Elite Tier</span>
+            <span className="truncate">Squad Roster</span>
             <svg className="w-10 h-3 text-amber-400/70 shrink-0" viewBox="0 0 40 12" fill="none">
               <path d="M1 8 Q 10 11, 20 4 T 39 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
             </svg>
@@ -320,10 +313,10 @@ export default function Dashboard() {
             <span className="text-2xl font-black text-white font-mono tracking-tight tabular-nums">
               {stats?.total_stadiums ?? 10}
             </span>
-            <span className="text-[10px] font-mono text-cyan-400 font-semibold">806k Seats</span>
+            <span className="text-[10px] font-mono text-cyan-400 font-semibold">Venues</span>
           </div>
           <div className="mt-2 flex items-center justify-between text-[10px] text-slate-500">
-            <span className="truncate">Lusail, Wembley +8</span>
+            <span className="truncate">Host Venues</span>
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0"></span>
           </div>
         </Link>
@@ -343,10 +336,10 @@ export default function Dashboard() {
             <span className="text-2xl font-black text-white font-mono tracking-tight tabular-nums">
               {stats?.total_matches ?? 22}
             </span>
-            <span className="text-[10px] font-mono text-emerald-400 font-semibold">4 Pending</span>
+            <span className="text-[10px] font-mono text-emerald-400 font-semibold">Fixtures</span>
           </div>
           <div className="mt-2 flex items-center justify-between text-[10px] text-slate-500">
-            <span className="truncate">18 Finalized</span>
+            <span className="truncate">Match Calendar</span>
             <svg className="w-10 h-3 text-emerald-400/70 shrink-0" viewBox="0 0 40 12" fill="none">
               <path d="M1 9 Q 10 2, 20 6 T 39 2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
             </svg>
@@ -399,7 +392,7 @@ export default function Dashboard() {
                 </h2>
               </div>
               <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shrink-0">
-                Real-Time TMS
+                Live Data
               </span>
             </div>
 
@@ -421,8 +414,6 @@ export default function Dashboard() {
                       <span className="text-emerald-400 font-bold">
                         {item.count} {item.count === 1 ? "Team" : "Teams"} ({item.pct}%)
                       </span>
-                      <span className="text-slate-500">•</span>
-                      <span className="text-slate-300">{item.readiness}</span>
                     </div>
                   </div>
 
@@ -436,11 +427,7 @@ export default function Dashboard() {
                 </div>
               ))}
 
-              {/* Muted Footer Row */}
-              <div className="pt-2 mt-1 border-t border-[#1b2234] text-[10px] font-mono text-slate-500 flex flex-wrap items-center justify-between gap-2">
-                <span>CONCACAF: 0 Registered (Pending Stage 3 Qualifiers)</span>
-                <span>OFC: 0 Registered (Playoff Phase)</span>
-              </div>
+
             </div>
           </div>
 
@@ -456,7 +443,7 @@ export default function Dashboard() {
                 </h2>
               </div>
               <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#161d2d] text-slate-300 border border-[#1b2234] shrink-0">
-                Matchday 01 • Group Phase
+                Upcoming Fixtures
               </span>
             </div>
 
@@ -469,23 +456,16 @@ export default function Dashboard() {
                     idx === 0
                       ? "COUNTDOWN 4D"
                       : idx === 1
-                      ? "CONFIRMED"
-                      : "SCHEDULED";
+                        ? "CONFIRMED"
+                        : "SCHEDULED";
                   const statusStyle =
                     idx === 0
                       ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
                       : idx === 1
-                      ? "bg-sky-500/10 text-sky-400 border-sky-500/20"
-                      : "bg-slate-500/10 text-slate-300 border-slate-500/20";
+                        ? "bg-sky-500/10 text-sky-400 border-sky-500/20"
+                        : "bg-slate-500/10 text-slate-300 border-slate-500/20";
 
-                  const refText =
-                    idx === 0
-                      ? "Ref: S. Marciniak (POL)"
-                      : idx === 1
-                      ? "4K HDR Live Broadcast"
-                      : idx === 2
-                      ? "Pitch Rating: 99.4%"
-                      : "Security Tier 1";
+                  const refText = `${m.stadium_name || 'Venue'} · ${m.stage || 'Group Stage'}`;
 
                   return (
                     <div
@@ -505,7 +485,7 @@ export default function Dashboard() {
                           </div>
                           <div className="text-[11px] text-slate-400 truncate flex items-center gap-1 mt-0.5">
                             <span className="material-symbols-outlined text-[13px] text-slate-500">stadium</span>
-                            <span>{m.stadium_name || "Lusail Iconic Stadium"}</span>
+                            <span>{m.stadium_name || "Stadium"}</span>
                             <span>•</span>
                             <span>{m.stage || "Group Stage"}</span>
                           </div>
@@ -520,8 +500,8 @@ export default function Dashboard() {
                               day: "2-digit",
                               month: "2-digit",
                               year: "numeric",
-                            })}{" "}
-                            • 20:00 UTC
+                            })}
+                            {m.match_time ? ` • ${m.match_time}` : ""}
                           </span>
                           <span className="text-[10px] text-slate-500">{refText}</span>
                         </div>
@@ -614,10 +594,10 @@ export default function Dashboard() {
                   item.position === "Forward"
                     ? "FW"
                     : item.position === "Midfielder"
-                    ? "MF"
-                    : item.position === "Defender"
-                    ? "DF"
-                    : "GK";
+                      ? "MF"
+                      : item.position === "Defender"
+                        ? "DF"
+                        : "GK";
 
                 return (
                   <div
@@ -651,7 +631,7 @@ export default function Dashboard() {
                 </h2>
               </div>
               <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shrink-0">
-                Indexed Live
+                Live Data
               </span>
             </div>
 
@@ -660,7 +640,7 @@ export default function Dashboard() {
               {elitePlayers.map((p, idx) => {
                 const badgeColor = PLAYER_BADGE_COLORS[idx % PLAYER_BADGE_COLORS.length];
                 const initials = getPlayerInitials(p.full_name || p.name);
-                const formRating = (9.8 - idx * 0.1).toFixed(1);
+                const formRating = '';
 
                 return (
                   <div
@@ -683,12 +663,9 @@ export default function Dashboard() {
                       </div>
                     </div>
 
-                    <div className="flex flex-col text-right font-mono shrink-0 pl-2">
                       <span className="text-xs font-bold text-emerald-400">
-                        €{Number(p.market_value_m || 150).toFixed(2)}M
+                        €{Number(p.market_value_m || 0).toFixed(2)}M
                       </span>
-                      <span className="text-[9px] text-slate-500">FORM {formRating}</span>
-                    </div>
                   </div>
                 );
               })}
@@ -717,8 +694,8 @@ export default function Dashboard() {
                     idx === 0
                       ? "bg-[#00f59b] text-black font-black"
                       : idx === 1
-                      ? "bg-[#38bdf8] text-black font-black"
-                      : "bg-[#182334] text-white font-bold border border-white/10";
+                        ? "bg-[#38bdf8] text-black font-black"
+                        : "bg-[#182334] text-white font-bold border border-white/10";
 
                   const stageLabel =
                     m.stage === "Final"

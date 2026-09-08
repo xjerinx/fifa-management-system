@@ -449,11 +449,10 @@ export default function Sponsors() {
             <button
               type="button"
               onClick={toggleSelectionMode}
-              className={`flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-lg border transition-colors shadow-sm cursor-pointer whitespace-nowrap ${
-                isSelectionMode
+              className={`flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-lg border transition-colors shadow-sm cursor-pointer whitespace-nowrap ${isSelectionMode
                   ? 'bg-rose-500/20 text-rose-300 border-rose-500/40'
                   : 'bg-[#121722] hover:bg-[#1b2334] text-slate-300 border-[#1f293d]'
-              }`}
+                }`}
               title="Select multiple sponsors for deletion"
             >
               {isSelectionMode ? <X size={13} /> : <CheckSquare size={13} />}
@@ -613,44 +612,40 @@ export default function Sponsors() {
           <div className="flex flex-wrap items-center gap-1.5">
             <button
               onClick={() => setTierFilter('ALL')}
-              className={`px-3 py-1.5 text-xs font-mono font-bold rounded transition-colors ${
-                tierFilter === 'ALL'
+              className={`px-3 py-1.5 text-xs font-mono font-bold rounded transition-colors ${tierFilter === 'ALL'
                   ? 'bg-[#00f59b] text-black shadow-sm'
                   : 'bg-[#090d16] text-slate-400 hover:text-white border border-[#1c2436]'
-              }`}
+                }`}
             >
               ALL ({items.length})
             </button>
 
             <button
               onClick={() => setTierFilter('FIFA PARTNERS')}
-              className={`px-3 py-1.5 text-xs font-mono font-bold rounded transition-colors ${
-                tierFilter === 'FIFA PARTNERS'
+              className={`px-3 py-1.5 text-xs font-mono font-bold rounded transition-colors ${tierFilter === 'FIFA PARTNERS'
                   ? 'bg-[#00f59b] text-black shadow-sm'
                   : 'bg-[#090d16] text-slate-400 hover:text-white border border-[#1c2436]'
-              }`}
+                }`}
             >
               FIFA PARTNERS ({globalPartnersCount})
             </button>
 
             <button
               onClick={() => setTierFilter('REGIONAL SUPPORTERS')}
-              className={`px-3 py-1.5 text-xs font-mono font-bold rounded transition-colors ${
-                tierFilter === 'REGIONAL SUPPORTERS'
+              className={`px-3 py-1.5 text-xs font-mono font-bold rounded transition-colors ${tierFilter === 'REGIONAL SUPPORTERS'
                   ? 'bg-[#00f59b] text-black shadow-sm'
                   : 'bg-[#090d16] text-slate-400 hover:text-white border border-[#1c2436]'
-              }`}
+                }`}
             >
               REGIONAL SUPPORTERS ({supportersCount})
             </button>
 
             <button
               onClick={() => setTierFilter('AUTOMOTIVE & TECH')}
-              className={`px-3 py-1.5 text-xs font-mono font-bold rounded transition-colors ${
-                tierFilter === 'AUTOMOTIVE & TECH'
+              className={`px-3 py-1.5 text-xs font-mono font-bold rounded transition-colors ${tierFilter === 'AUTOMOTIVE & TECH'
                   ? 'bg-[#00f59b] text-black shadow-sm'
                   : 'bg-[#090d16] text-slate-400 hover:text-white border border-[#1c2436]'
-              }`}
+                }`}
             >
               AUTOMOTIVE & TECH
             </button>
@@ -675,18 +670,16 @@ export default function Sponsors() {
             <div className="flex items-center bg-[#090d16] p-0.5 rounded-lg border border-[#1c2436]">
               <button
                 onClick={() => setViewMode('grid')}
-                className={`p-1.5 rounded-md transition-colors ${
-                  viewMode === 'grid' ? 'bg-[#1e293d] text-emerald-400' : 'text-slate-400 hover:text-white'
-                }`}
+                className={`p-1.5 rounded-md transition-colors ${viewMode === 'grid' ? 'bg-[#1e293d] text-emerald-400' : 'text-slate-400 hover:text-white'
+                  }`}
                 title="Card Grid View"
               >
                 <LayoutGrid size={14} />
               </button>
               <button
                 onClick={() => setViewMode('table')}
-                className={`p-1.5 rounded-md transition-colors ${
-                  viewMode === 'table' ? 'bg-[#1e293d] text-emerald-400' : 'text-slate-400 hover:text-white'
-                }`}
+                className={`p-1.5 rounded-md transition-colors ${viewMode === 'table' ? 'bg-[#1e293d] text-emerald-400' : 'text-slate-400 hover:text-white'
+                  }`}
                 title="LED Telemetry Table View"
               >
                 <List size={14} />
@@ -697,11 +690,10 @@ export default function Sponsors() {
             <button
               type="button"
               onClick={toggleSelectionMode}
-              className={`flex items-center gap-1 px-2.5 py-1.5 text-xs font-mono font-bold rounded-lg transition-colors border cursor-pointer ${
-                isSelectionMode
+              className={`flex items-center gap-1 px-2.5 py-1.5 text-xs font-mono font-bold rounded-lg transition-colors border cursor-pointer ${isSelectionMode
                   ? 'bg-rose-500/20 text-rose-300 border-rose-500/40'
                   : 'bg-[#090d16] hover:bg-[#162030] text-slate-300 border-[#1c2436]'
-              }`}
+                }`}
               title="Toggle Multiple Deletion mode"
             >
               {isSelectionMode ? <X size={13} /> : <CheckSquare size={13} />}
@@ -737,11 +729,10 @@ export default function Sponsors() {
             return (
               <div
                 key={item.sponsor_id}
-                className={`bg-[#0e121b] hover:bg-[#121824] rounded-xl border p-4 flex flex-col justify-between transition-all group shadow-md ${
-                  isSelected(item.sponsor_id)
+                className={`bg-[#0e121b] hover:bg-[#121824] rounded-xl border p-4 flex flex-col justify-between transition-all group shadow-md ${isSelected(item.sponsor_id)
                     ? 'border-emerald-500/80 bg-emerald-950/10'
                     : 'border-[#1b2336] hover:border-[#2b3a55]'
-                }`}
+                  }`}
               >
                 {/* Card Top: Tier Pill & Match Count */}
                 <div>
@@ -935,9 +926,8 @@ export default function Sponsors() {
                   return (
                     <tr
                       key={item.sponsor_id}
-                      className={`hover:bg-[#121824] transition-colors ${
-                        isSelected(item.sponsor_id) ? 'bg-emerald-950/15' : ''
-                      }`}
+                      className={`hover:bg-[#121824] transition-colors ${isSelected(item.sponsor_id) ? 'bg-emerald-950/15' : ''
+                        }`}
                     >
                       {isSelectionMode && (
                         <td className="py-3 px-3 text-center">
@@ -1018,133 +1008,7 @@ export default function Sponsors() {
         </div>
       )}
 
-      {/* ─────────────────────────────────────────────────────────────
-          5. MATCHDAY LED INGRESS & VIRTUAL BOARD TELEMETRY (BROADCAST CYCLE 2026)
-          ───────────────────────────────────────────────────────────── */}
-      <div id="led-telemetry-section" className="bg-[#0e121b] border border-[#1b2336] rounded-xl p-4 space-y-3.5 shadow-lg">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-3 border-b border-[#182030]">
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="text-emerald-400 font-bold">›</span>
-              <h3 className="text-xs font-mono font-black text-white tracking-wider uppercase">
-                MATCHDAY LED INGRESS & VIRTUAL BOARD TELEMETRY (BROADCAST CYCLE 2026)
-              </h3>
-            </div>
-            <p className="text-[11px] text-slate-400 mt-0.5 leading-relaxed">
-              Real-time verification of dynamic dual-feed digiboard rotation, regional geo-targeted replacement feeds, and tier time allocations.
-            </p>
-          </div>
 
-          <div className="flex items-center gap-2.5 shrink-0">
-            <span className="px-2 py-0.5 rounded bg-[#162030] text-emerald-400 font-mono text-[10px] font-bold uppercase border border-emerald-500/20">
-              ● LED FEED: 59.94 FPS / 4K HDR
-            </span>
-          </div>
-        </div>
-
-        {/* Telemetry Table */}
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse text-xs">
-            <thead>
-              <tr className="bg-[#121824] border-b border-[#1b2336] text-[10px] font-mono text-slate-400 font-bold uppercase tracking-wider">
-                <th className="py-2.5 px-3">PARTNER & TIER</th>
-                <th className="py-2.5 px-3">ALLOCATED MATCHES / VENUES</th>
-                <th className="py-2.5 px-3">DUAL-FEED LED ROTATION</th>
-                <th className="py-2.5 px-3">VIRTUAL AD TARGETING FEEDS</th>
-                <th className="py-2.5 px-3">ASSET AUDIT STATUS</th>
-                <th className="py-2.5 px-3 text-right">ACTIONS</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-[#182030] text-slate-300">
-              {items.slice(0, 5).map(item => {
-                const meta = getSponsorMeta(item);
-
-                return (
-                  <tr key={item.sponsor_id} className="hover:bg-[#121824] transition-colors">
-                    <td className="py-3 px-3">
-                      <div className="flex items-center gap-2.5">
-                        <div className="w-7 h-7 rounded-md bg-[#141b28] border border-[#232f44] flex items-center justify-center font-black text-white text-[11px]">
-                          <span className="material-symbols-outlined text-[15px] text-emerald-400">
-                            {meta.icon}
-                          </span>
-                        </div>
-                        <div>
-                          <span className="font-black text-white uppercase tracking-wide block text-xs">
-                            {item.name}
-                          </span>
-                          <span className="text-[9px] font-mono text-emerald-400">
-                            {meta.tier}
-                          </span>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="py-3 px-3 text-slate-300 font-medium text-[11px] max-w-xs truncate">
-                      {meta.venueAlloc}
-                    </td>
-                    <td className="py-3 px-3 font-mono text-[11px]">
-                      <span className="text-white font-bold">{meta.ledSecs}</span> / 90 min{' '}
-                      <span className="text-sky-400 font-semibold">({meta.ledRotation})</span>
-                    </td>
-                    <td className="py-3 px-3 font-mono text-[11px] text-sky-400">
-                      {meta.virtualFeeds}
-                    </td>
-                    <td className="py-3 px-3">
-                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/25 font-mono text-[9px] font-bold uppercase">
-                        <CheckCircle2 size={10} />
-                        <span>{meta.complianceStatus}</span>
-                      </span>
-                    </td>
-                    <td className="py-3 px-3 text-right">
-                      <div className="flex items-center justify-end gap-1.5">
-                        <button
-                          onClick={() => openMatchesRoster(item)}
-                          className="p-1 rounded bg-[#090d16] hover:bg-[#1e273a] text-slate-400 hover:text-white border border-white/5 transition-colors"
-                          title="Inspect fixtures"
-                        >
-                          <Eye size={12} />
-                        </button>
-                        <button
-                          onClick={() => openEdit(item)}
-                          className="p-1 rounded bg-[#090d16] hover:bg-[#1e273a] text-slate-400 hover:text-white border border-white/5 transition-colors"
-                          title="Edit"
-                        >
-                          <Pencil size={12} />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      {/* ─────────────────────────────────────────────────────────────
-          6. PROTOCOL & COMPLIANCE FOOTER
-          ───────────────────────────────────────────────────────────── */}
-      <div className="bg-[#0e121b] border border-[#1b2336] rounded-xl p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs shadow-md">
-        <div className="flex items-center gap-2.5">
-          <div className="w-7 h-7 rounded-lg bg-emerald-500/15 text-emerald-400 flex items-center justify-center border border-emerald-500/25 shrink-0">
-            <ShieldCheck size={14} />
-          </div>
-          <div>
-            <h4 className="text-[11px] font-mono font-black text-white uppercase tracking-wider">
-              FIFA COMMERCIAL RIGHTS PROTECTION & ANTI-AMBUSH PROTOCOL REV 3.8
-            </h4>
-            <p className="text-[10px] text-slate-400 mt-0.5">
-              Cryptographic TMS synchronization active · Verified by Zurich Commercial Rights Division · Zero rights breaches recorded cycle-to-date.
-            </p>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-3 shrink-0 font-mono text-[10px] text-slate-400 sm:text-right">
-          <div>
-            <span className="block text-slate-400">Ledger Hash: 8f4a9b2c-2026-crd</span>
-            <span className="block text-emerald-400 font-bold">AUDITED: 2026-06-18 14:32:09 UTC</span>
-          </div>
-        </div>
-      </div>
 
       {/* ─────────────────────────────────────────────────────────────
           7. ADD / EDIT SPONSOR MODAL (100% REAL FIELDS & BACKEND CRUD)

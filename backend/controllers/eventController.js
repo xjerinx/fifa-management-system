@@ -55,7 +55,7 @@ exports.update = async (req, res, next) => {
         const minVal = parseInt(minute, 10);
         if (isNaN(minVal) || minVal < 1 || minVal > 120)
             return res.status(400).json({ success: false, message: 'Minute must be between 1 and 120' });
-        
+
         let query, params;
         if (match_id) {
             query = 'UPDATE match_event SET match_id=?, event_type=?, minute=?, player_id=?, description=? WHERE event_id=?';

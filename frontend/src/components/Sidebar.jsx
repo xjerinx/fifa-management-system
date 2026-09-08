@@ -45,9 +45,8 @@ export default function Sidebar() {
 
   return (
     <aside
-      className={`h-screen sticky top-0 flex flex-col justify-between bg-[#070a12] border-r border-[#151b29] py-3.5 z-40 transition-all duration-200 select-none ${
-        collapsed ? "w-16" : "w-60"
-      }`}
+      className={`h-screen sticky top-0 flex flex-col justify-between bg-[#070a12] border-r border-[#151b29] py-3.5 z-40 transition-all duration-200 select-none ${collapsed ? "w-16" : "w-60"
+        }`}
     >
       <div className="flex flex-col gap-3.5 min-h-0 flex-1">
         {/* Header / Brand */}
@@ -119,10 +118,9 @@ export default function Sidebar() {
                   end={item.end}
                   title={collapsed ? item.label : undefined}
                   className={({ isActive }) =>
-                    `flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs transition-colors ${
-                      isActive
-                        ? "bg-[#00f59b] text-black font-bold shadow-sm"
-                        : "text-slate-400 hover:text-white hover:bg-white/[0.04] font-medium"
+                    `flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs transition-colors ${isActive
+                      ? "bg-[#00f59b] text-black font-bold shadow-sm"
+                      : "text-slate-400 hover:text-white hover:bg-white/[0.04] font-medium"
                     } ${collapsed ? "justify-center px-0" : ""}`
                   }
                 >

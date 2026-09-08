@@ -325,11 +325,7 @@ export default function Matches() {
             sports_soccer
           </span>
           <span className="text-[11px] font-mono tracking-wider text-slate-400 uppercase font-semibold">
-            REGISTRY // INTERNATIONAL MATCH ENGINE // TMS PROTOCOL v9.8.2
-          </span>
-          <span className="text-slate-600 hidden sm:inline">|</span>
-          <span className="text-[10px] font-mono text-emerald-400 font-semibold hidden sm:inline">
-            ● SATCOM FEED 1080:60 · LATENCY 18ms
+            REGISTRY // INTERNATIONAL MATCH ENGINE
           </span>
         </div>
 
@@ -802,7 +798,7 @@ export default function Matches() {
                   </span>
                 </div>
                 <div className="text-slate-400 tracking-wider">
-                  BROADCAST SPEC: UHD-HDR · 48 CAMERAS · SEMI-AUTOMATED OFFSIDE READY
+                  {marqueeMatch.tournament_name || 'INTERNATIONAL FIXTURE'}
                 </div>
               </div>
 
@@ -848,9 +844,7 @@ export default function Matches() {
                       <span className="text-xs text-slate-400 mt-1">
                         Coach: {TEAM_META[marqueeMatch.home_team]?.coach || "Official Head Coach"}
                       </span>
-                      <span className="text-[10px] font-mono text-emerald-400 mt-0.5 font-bold">
-                        STATUS: SQUAD ACCREDITED
-                      </span>
+
                     </div>
                     <div className="w-14 h-14 rounded-lg bg-gradient-to-br from-emerald-500/20 to-emerald-900/40 border border-emerald-500/30 flex items-center justify-center text-white font-mono font-black text-xl shrink-0">
                       {getTeamCode(marqueeMatch.home_team)}
@@ -885,9 +879,7 @@ export default function Matches() {
                       <span className="text-xs text-slate-400 mt-1">
                         Coach: {TEAM_META[marqueeMatch.away_team]?.coach || "Official Head Coach"}
                       </span>
-                      <span className="text-[10px] font-mono text-sky-400 mt-0.5 font-bold">
-                        STATUS: ROSTER VERIFIED
-                      </span>
+
                     </div>
                   </div>
                 </div>
@@ -1190,27 +1182,7 @@ export default function Matches() {
         </div>
       )}
 
-      {/* Compliance / Status Footer Banner */}
-      <div className="bg-[#10141e] border border-white/10 rounded-lg p-3.5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs shadow-sm">
-        <div className="flex items-center gap-2.5 text-slate-300">
-          <span className="material-symbols-outlined text-[18px] text-emerald-400">verified_user</span>
-          <div>
-            <span className="font-mono text-[11px] font-bold text-white uppercase tracking-wider block">
-              LIVE MATCH INTEGRITY & DATA BUS (DDP-09)
-            </span>
-            <span className="text-[10px] font-mono text-slate-400">
-              All scoreboards, VAR audit logs, and electronic match reports synchronized with Zürich Head Office.
-            </span>
-          </div>
-        </div>
-        <div className="flex items-center gap-4 text-[10px] font-mono text-slate-400 shrink-0">
-          <span>ENCRYPTED AES-256</span>
-          <span className="text-emerald-400 font-bold flex items-center gap-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-            LIVE FEED OPERATIONAL
-          </span>
-        </div>
-      </div>
+
 
       {/* Add / Edit Match Modal */}
       <Modal
