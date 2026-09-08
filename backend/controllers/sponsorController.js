@@ -4,9 +4,12 @@ const { bulkDelete } = require('../utils/bulkDelete');
 exports.getAll = async (req, res, next) => {
     try {
         const [rows] = await db.query(`
-            SELECT s.*, COUNT(ms.match_id) AS matches_sponsored
+            SELECT s.*,
+                COUNT(DISTINCT ts.tournament_id) AS tournaments_sponsored,
+                COALESCE(SUM(ts.contract_value), 0) AS total_contract_value,
+                GROUP_CONCAT(DISTINCT ts.term_cycle ORDER BY ts.term_cycle SEPARATOR ', ') AS term_cycles
             FROM sponsor s
-            LEFT JOIN match_sponsor ms ON ms.sponsor_id = s.sponsor_id
+            LEFT JOIN tournament_sponsor ts ON ts.sponsor_id = s.sponsor_id
             GROUP BY s.sponsor_id
             ORDER BY s.name
         `);
@@ -77,19 +80,70 @@ exports.bulkRemove = async (req, res, next) => {
     } catch (err) { next(err); }
 };
 
-exports.getMatches = async (req, res, next) => {
+exports.getTournaments = async (req, res, next) => {
     try {
         const [rows] = await db.query(`
-            SELECT m.*, ht.name AS home_team, at.name AS away_team,
-                tr.name AS tournament_name
-            FROM \`match\` m
-            INNER JOIN match_sponsor ms ON ms.match_id = m.match_id
-            INNER JOIN team ht ON ht.team_id = m.home_team_id
-            INNER JOIN team at ON at.team_id = m.away_team_id
-            INNER JOIN tournament tr ON tr.tournament_id = m.tournament_id
-            WHERE ms.sponsor_id = ?
-            ORDER BY m.match_date DESC
+            SELECT t.*, ts.term_cycle, ts.contract_value, ts.created_at AS partnership_since
+            FROM tournament t
+            INNER JOIN tournament_sponsor ts ON ts.tournament_id = t.tournament_id
+            WHERE ts.sponsor_id = ?
+            ORDER BY t.start_date DESC
         `, [req.params.id]);
         res.json({ success: true, data: rows });
     } catch (err) { next(err); }
 };
+
+exports.addTournament = async (req, res, next) => {
+    try {
+        const { tournament_id, term_cycle, contract_value } = req.body;
+        if (!tournament_id) {
+            return res.status(400).json({ success: false, message: 'Tournament is required' });
+        }
+        await db.query(`
+            INSERT INTO tournament_sponsor (tournament_id, sponsor_id, term_cycle, contract_value)
+            VALUES (?, ?, ?, ?)
+            ON DUPLICATE KEY UPDATE
+                term_cycle = VALUES(term_cycle),
+                contract_value = VALUES(contract_value)
+        `, [
+            tournament_id,
+            req.params.id,
+            term_cycle || '2024–2026',
+            contract_value !== undefined && contract_value !== '' ? Number(contract_value) : 5000000.00
+        ]);
+        res.json({ success: true, message: 'Tournament partnership assigned successfully' });
+    } catch (err) { next(err); }
+};
+
+exports.updateTournament = async (req, res, next) => {
+    try {
+        const { term_cycle, contract_value } = req.body;
+        const [result] = await db.query(`
+            UPDATE tournament_sponsor
+            SET term_cycle = ?, contract_value = ?
+            WHERE sponsor_id = ? AND tournament_id = ?
+        `, [
+            term_cycle || '2024–2026',
+            contract_value !== undefined && contract_value !== '' ? Number(contract_value) : 0,
+            req.params.id,
+            req.params.tournamentId
+        ]);
+        if (!result.affectedRows) {
+            return res.status(404).json({ success: false, message: 'Tournament sponsorship record not found' });
+        }
+        res.json({ success: true, message: 'Partnership contract updated successfully' });
+    } catch (err) { next(err); }
+};
+
+exports.removeTournament = async (req, res, next) => {
+    try {
+        const [result] = await db.query(
+            'DELETE FROM tournament_sponsor WHERE sponsor_id = ? AND tournament_id = ?',
+            [req.params.id, req.params.tournamentId]
+        );
+        if (!result.affectedRows) {
+            return res.status(404).json({ success: false, message: 'Tournament sponsorship record not found' });
+        }
+        res.json({ success: true, message: 'Tournament partnership removed successfully' });
+    } catch (err) { next(err); }
+};

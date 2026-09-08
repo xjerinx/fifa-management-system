@@ -5,12 +5,28 @@ exports.getAll = async (req, res, next) => {
     try {
         const [rows] = await db.query(`
             SELECT t.*,
-                COUNT(DISTINCT tt.team_id) AS team_count,
-                COUNT(DISTINCT m.match_id) AS match_count
+                COALESCE(tt.team_count, 0) AS team_count,
+                COALESCE(m.match_count, 0) AS match_count,
+                COALESCE(ts.sponsor_count, 0) AS sponsor_count,
+                COALESCE(ts.total_sponsorship_value, 0) AS total_sponsorship_value
             FROM tournament t
-            LEFT JOIN team_tournament tt ON tt.tournament_id = t.tournament_id
-            LEFT JOIN \`match\` m ON m.tournament_id = t.tournament_id
-            GROUP BY t.tournament_id
+            LEFT JOIN (
+                SELECT tournament_id, COUNT(DISTINCT team_id) AS team_count
+                FROM team_tournament
+                GROUP BY tournament_id
+            ) tt ON tt.tournament_id = t.tournament_id
+            LEFT JOIN (
+                SELECT tournament_id, COUNT(DISTINCT match_id) AS match_count
+                FROM \`match\`
+                GROUP BY tournament_id
+            ) m ON m.tournament_id = t.tournament_id
+            LEFT JOIN (
+                SELECT tournament_id,
+                       COUNT(DISTINCT sponsor_id) AS sponsor_count,
+                       SUM(contract_value) AS total_sponsorship_value
+                FROM tournament_sponsor
+                GROUP BY tournament_id
+            ) ts ON ts.tournament_id = t.tournament_id
             ORDER BY t.start_date DESC
         `);
         res.json({ success: true, data: rows });
@@ -135,3 +151,72 @@ exports.removeTeam = async (req, res, next) => {
         res.json({ success: true, message: 'Team removed from tournament' });
     } catch (err) { next(err); }
 };
+
+exports.getSponsors = async (req, res, next) => {
+    try {
+        const [rows] = await db.query(`
+            SELECT ts.tournament_id, ts.sponsor_id, ts.term_cycle, ts.contract_value, ts.created_at,
+                   s.name AS sponsor_name, s.industry, s.country
+            FROM tournament_sponsor ts
+            INNER JOIN sponsor s ON s.sponsor_id = ts.sponsor_id
+            WHERE ts.tournament_id = ?
+            ORDER BY ts.contract_value DESC, s.name ASC
+        `, [req.params.id]);
+        res.json({ success: true, data: rows });
+    } catch (err) { next(err); }
+};
+
+exports.addSponsor = async (req, res, next) => {
+    try {
+        const { sponsor_id, term_cycle, contract_value } = req.body;
+        if (!sponsor_id) {
+            return res.status(400).json({ success: false, message: 'Sponsor is required' });
+        }
+        await db.query(`
+            INSERT INTO tournament_sponsor (tournament_id, sponsor_id, term_cycle, contract_value)
+            VALUES (?, ?, ?, ?)
+            ON DUPLICATE KEY UPDATE
+                term_cycle = VALUES(term_cycle),
+                contract_value = VALUES(contract_value)
+        `, [
+            req.params.id,
+            sponsor_id,
+            term_cycle || '2024–2026',
+            contract_value !== undefined && contract_value !== '' ? Number(contract_value) : 5000000.00
+        ]);
+        res.json({ success: true, message: 'Sponsor assigned to tournament successfully' });
+    } catch (err) { next(err); }
+};
+
+exports.updateSponsor = async (req, res, next) => {
+    try {
+        const { term_cycle, contract_value } = req.body;
+        const [result] = await db.query(`
+            UPDATE tournament_sponsor
+            SET term_cycle = ?, contract_value = ?
+            WHERE tournament_id = ? AND sponsor_id = ?
+        `, [
+            term_cycle || '2024–2026',
+            contract_value !== undefined && contract_value !== '' ? Number(contract_value) : 0,
+            req.params.id,
+            req.params.sponsorId
+        ]);
+        if (!result.affectedRows) {
+            return res.status(404).json({ success: false, message: 'Tournament sponsorship record not found' });
+        }
+        res.json({ success: true, message: 'Sponsorship contract updated successfully' });
+    } catch (err) { next(err); }
+};
+
+exports.removeSponsor = async (req, res, next) => {
+    try {
+        const [result] = await db.query(
+            'DELETE FROM tournament_sponsor WHERE tournament_id = ? AND sponsor_id = ?',
+            [req.params.id, req.params.sponsorId]
+        );
+        if (!result.affectedRows) {
+            return res.status(404).json({ success: false, message: 'Tournament sponsorship record not found' });
+        }
+        res.json({ success: true, message: 'Sponsor removed from tournament successfully' });
+    } catch (err) { next(err); }
+};

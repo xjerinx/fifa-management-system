@@ -23,6 +23,33 @@ promisePool.query('SELECT 1')
                 await promisePool.query('ALTER TABLE player ADD COLUMN club VARCHAR(100) DEFAULT NULL AFTER team_id');
                 console.log('[DB] Added missing "club" column to player table');
             }
+
+            // Ensure tournament_sponsor table and columns exist
+            await promisePool.query(`
+                CREATE TABLE IF NOT EXISTS tournament_sponsor (
+                    tournament_id INT(11) NOT NULL,
+                    sponsor_id INT(11) NOT NULL,
+                    term_cycle VARCHAR(100) DEFAULT '2024–2026',
+                    contract_value DECIMAL(15,2) DEFAULT 5000000.00,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    PRIMARY KEY (tournament_id, sponsor_id),
+                    KEY fk_tsponsor_sponsor (sponsor_id),
+                    CONSTRAINT fk_tsponsor_tournament FOREIGN KEY (tournament_id) REFERENCES tournament (tournament_id) ON DELETE CASCADE ON UPDATE CASCADE,
+                    CONSTRAINT fk_tsponsor_sponsor FOREIGN KEY (sponsor_id) REFERENCES sponsor (sponsor_id) ON DELETE CASCADE ON UPDATE CASCADE
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+            `);
+
+            const [tsCols] = await promisePool.query("SHOW COLUMNS FROM tournament_sponsor LIKE 'term_cycle'");
+            if (tsCols.length === 0) {
+                await promisePool.query("ALTER TABLE tournament_sponsor ADD COLUMN term_cycle VARCHAR(100) DEFAULT '2024–2026' AFTER sponsor_id");
+            }
+            const [valCols] = await promisePool.query("SHOW COLUMNS FROM tournament_sponsor LIKE 'contract_value'");
+            if (valCols.length === 0) {
+                await promisePool.query("ALTER TABLE tournament_sponsor ADD COLUMN contract_value DECIMAL(15,2) DEFAULT 5000000.00 AFTER term_cycle");
+            }
+
+            // Clean up any deprecated match_sponsor table
+            await promisePool.query("DROP TABLE IF EXISTS match_sponsor");
         } catch (e) {
             console.warn('[DB] Schema check warning:', e.message);
         }

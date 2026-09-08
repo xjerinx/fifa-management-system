@@ -10,6 +10,9 @@ router.post('/bulk-delete', sponsorController.bulkRemove);
 router.delete('/bulk', sponsorController.bulkRemove);
 router.delete('/:id', sponsorController.remove);
 
-router.get('/:id/matches', sponsorController.getMatches);
+router.get('/:id/tournaments', sponsorController.getTournaments);
+router.post('/:id/tournaments', sponsorController.addTournament);
+router.put('/:id/tournaments/:tournamentId', sponsorController.updateTournament);
+router.delete('/:id/tournaments/:tournamentId', sponsorController.removeTournament);
 
 module.exports = router;

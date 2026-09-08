@@ -139,36 +139,4 @@ exports.removeReferee = async (req, res, next) => {
         );
         res.json({ success: true, message: 'Referee removed from match' });
     } catch (err) { next(err); }
-};
-
-exports.getSponsors = async (req, res, next) => {
-    try {
-        const [rows] = await db.query(`
-            SELECT sp.* FROM sponsor sp
-            INNER JOIN match_sponsor ms ON ms.sponsor_id = sp.sponsor_id
-            WHERE ms.match_id = ?
-        `, [req.params.id]);
-        res.json({ success: true, data: rows });
-    } catch (err) { next(err); }
-};
-
-exports.addSponsor = async (req, res, next) => {
-    try {
-        const { sponsor_id } = req.body;
-        await db.query(
-            'INSERT IGNORE INTO match_sponsor (match_id, sponsor_id) VALUES (?,?)',
-            [req.params.id, sponsor_id]
-        );
-        res.json({ success: true, message: 'Sponsor assigned to match' });
-    } catch (err) { next(err); }
-};
-
-exports.removeSponsor = async (req, res, next) => {
-    try {
-        await db.query(
-            'DELETE FROM match_sponsor WHERE match_id=? AND sponsor_id=?',
-            [req.params.id, req.params.sponsorId]
-        );
-        res.json({ success: true, message: 'Sponsor removed from match' });
-    } catch (err) { next(err); }
-};
+};

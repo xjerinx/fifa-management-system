@@ -16,8 +16,4 @@ router.get('/:id/referees', matchController.getReferees);
 router.post('/:id/referees', matchController.addReferee);
 router.delete('/:id/referees/:refereeId', matchController.removeReferee);
 
-router.get('/:id/sponsors', matchController.getSponsors);
-router.post('/:id/sponsors', matchController.addSponsor);
-router.delete('/:id/sponsors/:sponsorId', matchController.removeSponsor);
-
-module.exports = router;
+module.exports = router;

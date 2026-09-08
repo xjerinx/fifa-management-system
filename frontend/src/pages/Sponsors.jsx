@@ -186,17 +186,38 @@ function getIndustryIcon(industry = '') {
   return 'domain';
 }
 
+function formatCurrency(val) {
+  if (val === null || val === undefined || val === "") return "—";
+  const num = Number(val);
+  if (isNaN(num)) return String(val);
+  return "$" + num.toLocaleString("en-US", { maximumFractionDigits: 0 });
+}
+
+function formatDate(d) {
+  if (!d) return "—";
+  try {
+    const dt = new Date(d);
+    return dt.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+  } catch {
+    return d;
+  }
+}
+
 function getSponsorMeta(item) {
+  const isGlobal = (item.tournaments_sponsored || 0) >= 2;
+  const totalVal = Number(item.total_contract_value || 0);
+  const formattedVal = totalVal > 0 ? formatCurrency(totalVal) : (isGlobal ? '$250M' : '$100M');
+
   if (SPONSOR_META[item.name]) {
     return {
       ...SPONSOR_META[item.name],
       name: item.name,
       country: item.country,
-      industry: item.industry
+      industry: item.industry,
+      value: totalVal > 0 ? formatCurrency(totalVal) : SPONSOR_META[item.name].value,
     };
   }
   const code = item.name.slice(0, 3).toUpperCase();
-  const isGlobal = (item.matches_sponsored || 0) >= 3;
   const icon = getIndustryIcon(item.industry);
   return {
     code,
@@ -207,10 +228,10 @@ function getSponsorMeta(item) {
       ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30'
       : 'bg-amber-500/15 text-amber-400 border border-amber-500/30',
     cycle: '2024 — 2028',
-    value: isGlobal ? '$250M' : '$100M',
+    value: formattedVal,
     deliverables: 'Tournament Commercial Rights & Matchday Digital Concessions Package',
-    ledRotation: `${Math.min(20, Math.max(5, (item.matches_sponsored || 1) * 4))}%`,
-    ledSecs: `${(item.matches_sponsored || 1) * 120}s`,
+    ledRotation: `${Math.min(20, Math.max(5, (item.tournaments_sponsored || 1) * 5))}%`,
+    ledSecs: `${(item.tournaments_sponsored || 1) * 150}s`,
     clearance: '100% Cleared',
     complianceStatus: '100% DELIVERED',
     refId: `FIFA-24-${code}-01`,
@@ -231,7 +252,7 @@ export default function Sponsors() {
   const [error, setError] = useState('');
   const [search, setSearch] = useState('');
   const [tierFilter, setTierFilter] = useState('ALL'); // 'ALL', 'FIFA PARTNERS', 'REGIONAL SUPPORTERS', 'AUTOMOTIVE & TECH'
-  const [sortBy, setSortBy] = useState('matches');
+  const [sortBy, setSortBy] = useState('tournaments');
 
   const {
     isSelectionMode,
@@ -249,10 +270,22 @@ export default function Sponsors() {
   const [bulkLoading, setBulkLoading] = useState(false);
   const tableCheckRef = useRef(null);
 
-  // Real sponsored fixtures inspection modal
-  const [selectedSponsorForMatches, setSelectedSponsorForMatches] = useState(null);
-  const [sponsorMatches, setSponsorMatches] = useState([]);
-  const [loadingMatches, setLoadingMatches] = useState(false);
+  // Real sponsored tournaments inspection & assignment modal
+  const [selectedSponsorForTournaments, setSelectedSponsorForTournaments] = useState(null);
+  const [sponsorTournaments, setSponsorTournaments] = useState([]);
+  const [loadingTournaments, setLoadingTournaments] = useState(false);
+  const [allTournaments, setAllTournaments] = useState([]);
+  const [assignTournamentForm, setAssignTournamentForm] = useState({
+    tournament_id: '',
+    term_cycle: '2024–2026',
+    contract_value: '5000000',
+  });
+  const [editingTournamentContractId, setEditingTournamentContractId] = useState(null);
+  const [editingTournamentContractForm, setEditingTournamentContractForm] = useState({
+    term_cycle: '',
+    contract_value: '',
+  });
+  const [submittingTournamentContract, setSubmittingTournamentContract] = useState(false);
 
   const load = () => {
     setLoading(true);
@@ -262,7 +295,10 @@ export default function Sponsors() {
       .finally(() => setLoading(false));
   };
 
-  useEffect(() => { load(); }, []);
+  useEffect(() => {
+    load();
+    api.get('/tournaments').then(res => setAllTournaments(res.data.data || [])).catch(() => {});
+  }, []);
 
   const openCreate = () => {
     setForm(emptyForm);
@@ -328,15 +364,97 @@ export default function Sponsors() {
     }
   };
 
-  // Inspect real sponsored matches from the MySQL database
-  const openMatchesRoster = (item) => {
-    setSelectedSponsorForMatches(item);
-    setLoadingMatches(true);
-    setSponsorMatches([]);
-    api.get(`/sponsors/${item.sponsor_id}/matches`)
-      .then(res => setSponsorMatches(res.data.data || []))
-      .catch(() => toast?.showToast('Failed to load sponsored match fixtures', 'error'))
-      .finally(() => setLoadingMatches(false));
+  const loadSponsorTournaments = async (sponsorId) => {
+    setLoadingTournaments(true);
+    try {
+      const res = await api.get(`/sponsors/${sponsorId}/tournaments`);
+      setSponsorTournaments(res.data.data || []);
+    } catch {
+      toast?.showToast('Failed to load sponsored tournaments', 'error');
+    } finally {
+      setLoadingTournaments(false);
+    }
+  };
+
+  // Inspect real sponsored tournaments from the MySQL database
+  const openTournamentsRoster = (item) => {
+    setSelectedSponsorForTournaments(item);
+    setEditingTournamentContractId(null);
+    setAssignTournamentForm({
+      tournament_id: '',
+      term_cycle: item.term_cycles?.split(',')[0]?.trim() || getSponsorMeta(item).cycle || '2024–2026',
+      contract_value: '5000000',
+    });
+    loadSponsorTournaments(item.sponsor_id);
+    if (allTournaments.length === 0) {
+      api.get('/tournaments').then(res => setAllTournaments(res.data.data || [])).catch(() => {});
+    }
+  };
+
+  const handleAssignTournament = async (e) => {
+    e.preventDefault();
+    if (!assignTournamentForm.tournament_id) {
+      toast?.showToast('Please select a tournament', 'error');
+      return;
+    }
+    setSubmittingTournamentContract(true);
+    try {
+      await api.post(`/sponsors/${selectedSponsorForTournaments.sponsor_id}/tournaments`, {
+        tournament_id: Number(assignTournamentForm.tournament_id),
+        term_cycle: assignTournamentForm.term_cycle || '2024–2026',
+        contract_value: Number(assignTournamentForm.contract_value) || 0,
+      });
+      toast?.showToast(`Assigned ${selectedSponsorForTournaments.name} to tournament successfully`);
+      setAssignTournamentForm({
+        tournament_id: '',
+        term_cycle: assignTournamentForm.term_cycle,
+        contract_value: '5000000',
+      });
+      await loadSponsorTournaments(selectedSponsorForTournaments.sponsor_id);
+      load();
+    } catch (err) {
+      toast?.showToast(err.response?.data?.message || 'Failed to assign tournament partnership', 'error');
+    } finally {
+      setSubmittingTournamentContract(false);
+    }
+  };
+
+  const startEditTournamentContract = (t) => {
+    setEditingTournamentContractId(t.tournament_id);
+    setEditingTournamentContractForm({
+      term_cycle: t.term_cycle || '',
+      contract_value: t.contract_value || '',
+    });
+  };
+
+  const handleSaveEditTournamentContract = async (tournamentId) => {
+    setSubmittingTournamentContract(true);
+    try {
+      await api.put(`/sponsors/${selectedSponsorForTournaments.sponsor_id}/tournaments/${tournamentId}`, {
+        term_cycle: editingTournamentContractForm.term_cycle,
+        contract_value: Number(editingTournamentContractForm.contract_value) || 0,
+      });
+      toast?.showToast('Tournament contract terms updated successfully');
+      setEditingTournamentContractId(null);
+      await loadSponsorTournaments(selectedSponsorForTournaments.sponsor_id);
+      load();
+    } catch (err) {
+      toast?.showToast(err.response?.data?.message || 'Failed to update tournament contract terms', 'error');
+    } finally {
+      setSubmittingTournamentContract(false);
+    }
+  };
+
+  const handleRemoveTournamentContract = async (tournamentId, tournamentName) => {
+    if (!confirm(`Remove ${selectedSponsorForTournaments.name} from ${tournamentName}?`)) return;
+    try {
+      await api.delete(`/sponsors/${selectedSponsorForTournaments.sponsor_id}/tournaments/${tournamentId}`);
+      toast?.showToast('Tournament partnership removed successfully');
+      await loadSponsorTournaments(selectedSponsorForTournaments.sponsor_id);
+      load();
+    } catch (err) {
+      toast?.showToast(err.response?.data?.message || 'Failed to remove tournament partnership', 'error');
+    }
   };
 
   const filtered = useMemo(() => {
@@ -368,7 +486,8 @@ export default function Sponsors() {
 
     // Sort
     list = [...list].sort((a, b) => {
-      if (sortBy === 'matches') return (b.matches_sponsored || 0) - (a.matches_sponsored || 0);
+      if (sortBy === 'tournaments') return (Number(b.tournaments_sponsored) || 0) - (Number(a.tournaments_sponsored) || 0);
+      if (sortBy === 'value') return (Number(b.total_contract_value) || 0) - (Number(a.total_contract_value) || 0);
       if (sortBy === 'name') return a.name.localeCompare(b.name);
       if (sortBy === 'industry') return (a.industry || '').localeCompare(b.industry || '');
       return 0;
@@ -389,7 +508,8 @@ export default function Sponsors() {
   const totalCount = items.length;
   const globalPartnersCount = items.filter(i => getSponsorMeta(i).tierType === 'global').length;
   const supportersCount = totalCount - globalPartnersCount;
-  const totalMatchesSponsored = items.reduce((acc, i) => acc + (i.matches_sponsored || 0), 0);
+  const totalTournamentsSponsored = items.reduce((acc, i) => acc + (Number(i.tournaments_sponsored) || 0), 0);
+  const totalContractVal = items.reduce((acc, i) => acc + (Number(i.total_contract_value) || 0), 0);
 
   const exportJSON = () => {
     const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(items, null, 2));
@@ -522,24 +642,24 @@ export default function Sponsors() {
           </p>
         </div>
 
-        {/* KPI 3: Matches Sponsored */}
+        {/* KPI 3: Tournaments Sponsored */}
         <div className="bg-[#10141d] p-3.5 rounded-xl border border-[#1a2233] relative overflow-hidden group hover:border-[#243048] transition-colors">
           <div className="flex items-center justify-between">
             <span className="text-[10px] font-mono font-bold text-slate-400 tracking-wider uppercase">
-              MATCHES SPONSORED
+              TOURNAMENTS SPONSORED
             </span>
-            <span className="material-symbols-outlined text-[14px] text-amber-400">sports</span>
+            <span className="material-symbols-outlined text-[14px] text-amber-400">emoji_events</span>
           </div>
           <div className="flex items-baseline gap-2 mt-1.5">
             <span className="text-2xl font-black text-white tracking-tight tabular-nums">
-              22 / 22
+              {totalTournamentsSponsored} Active
             </span>
             <span className="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-500/25 uppercase">
-              100% INGRESS
+              CONTRACTED
             </span>
           </div>
           <p className="text-[10px] text-slate-400 mt-1 truncate">
-            Activated Roster: All Venues
+            Activated Roster: Sanctioned Tournaments
           </p>
         </div>
 
@@ -660,7 +780,8 @@ export default function Sponsors() {
                 value={sortBy}
                 onChange={e => setSortBy(e.target.value)}
               >
-                <option value="matches" className="bg-[#10141d] text-white">Matches Sponsored / Tier</option>
+                <option value="tournaments" className="bg-[#10141d] text-white">Tournaments Sponsored</option>
+                <option value="value" className="bg-[#10141d] text-white">Contract Value</option>
                 <option value="name" className="bg-[#10141d] text-white">Brand Name (A-Z)</option>
                 <option value="industry" className="bg-[#10141d] text-white">Industry Sector</option>
               </select>
@@ -753,7 +874,7 @@ export default function Sponsors() {
                       </span>
                     </div>
                     <span className="text-xs font-mono font-black text-emerald-400 tabular-nums">
-                      {item.matches_sponsored || 0} matches
+                      {item.tournaments_sponsored || 0} {item.tournaments_sponsored === 1 ? 'Tournament' : 'Tournaments'}
                     </span>
                   </div>
 
@@ -785,8 +906,8 @@ export default function Sponsors() {
                       <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">
                         TERM CYCLE
                       </span>
-                      <span className="font-mono text-white text-xs font-semibold mt-0.5 block">
-                        {meta.cycle}
+                      <span className="font-mono text-white text-xs font-semibold mt-0.5 block truncate" title={item.term_cycles || meta.cycle}>
+                        {item.term_cycles || meta.cycle}
                       </span>
                     </div>
 
@@ -795,7 +916,7 @@ export default function Sponsors() {
                         CONTRACT VALUE
                       </span>
                       <span className="font-mono text-emerald-400 text-sm font-black mt-0.5 block">
-                        {meta.value}
+                        {Number(item.total_contract_value) > 0 ? formatCurrency(item.total_contract_value) : meta.value}
                       </span>
                     </div>
                   </div>
@@ -817,12 +938,12 @@ export default function Sponsors() {
                 <div className="mt-4 pt-3 border-t border-[#182030] flex items-center justify-between gap-2">
                   <div className="flex items-center gap-1.5 flex-1">
                     <button
-                      onClick={() => openMatchesRoster(item)}
-                      className="flex-1 py-1.5 px-2 bg-[#121722] hover:bg-[#1a2335] text-slate-300 hover:text-white text-[11px] font-mono font-bold rounded-lg border border-[#1e273a] transition-colors flex items-center justify-center gap-1 uppercase tracking-wider"
-                      title="Inspect sponsored match fixtures"
+                      onClick={() => openTournamentsRoster(item)}
+                      className="flex-1 py-1.5 px-2 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 hover:text-emerald-300 text-[11px] font-mono font-bold rounded-lg border border-emerald-500/30 transition-colors flex items-center justify-center gap-1.5 uppercase tracking-wider"
+                      title="Manage tournament partnerships, term cycles & contract values"
                     >
-                      <Eye size={12} className="text-emerald-400" />
-                      <span>ASSET ROSTER</span>
+                      <Eye size={12} />
+                      <span>TOURNAMENTS & ROSTER ({item.tournaments_sponsored || 0})</span>
                     </button>
 
                     <button
@@ -885,7 +1006,7 @@ export default function Sponsors() {
                   <th className="py-3 px-4">BRAND & PARTNER</th>
                   <th className="py-3 px-4">INDUSTRY SECTOR</th>
                   <th className="py-3 px-4">HEADQUARTERS</th>
-                  <th className="py-3 px-4">MATCHES</th>
+                  <th className="py-3 px-4">TOURNAMENTS</th>
                   <th className="py-3 px-4">TIER CATEGORY</th>
                   <th className="py-3 px-4">CONTRACT VALUE</th>
                   <th className="py-3 px-4 text-right">ACTIONS</th>
@@ -936,7 +1057,7 @@ export default function Sponsors() {
                         {meta.headquarters || item.country || 'Global'}
                       </td>
                       <td className="py-3 px-4 font-mono font-bold text-emerald-400 tabular-nums">
-                        {item.matches_sponsored || 0} matches
+                        {item.tournaments_sponsored || 0} {item.tournaments_sponsored === 1 ? 'Tournament' : 'Tournaments'}
                       </td>
                       <td className="py-3 px-4">
                         <span className={`text-[9px] font-mono font-bold px-2 py-0.5 rounded uppercase tracking-wider ${meta.tierBadgeClass}`}>
@@ -944,14 +1065,14 @@ export default function Sponsors() {
                         </span>
                       </td>
                       <td className="py-3 px-4 font-mono font-black text-emerald-400 text-xs">
-                        {meta.value}
+                        {Number(item.total_contract_value) > 0 ? formatCurrency(item.total_contract_value) : meta.value}
                       </td>
                       <td className="py-3 px-4 text-right">
                         <div className="flex items-center justify-end gap-1.5">
                           <button
-                            onClick={() => openMatchesRoster(item)}
+                            onClick={() => openTournamentsRoster(item)}
                             className="p-1.5 rounded-lg bg-[#121722] hover:bg-[#1e273a] text-slate-400 hover:text-emerald-400 border border-[#1e273a] transition-colors"
-                            title="Inspect Fixtures"
+                            title="Inspect Tournaments & Asset Roster"
                           >
                             <Eye size={13} />
                           </button>
@@ -1067,65 +1188,271 @@ export default function Sponsors() {
       </Modal>
 
       {/* ─────────────────────────────────────────────────────────────
-          8. SPONSORED FIXTURES / ASSET ROSTER MODAL
+          8. SPONSORED TOURNAMENTS / ASSET ROSTER MODAL
+          ───────────────────────────────────────────────────────────── */}
+      {/* ─────────────────────────────────────────────────────────────
+          8. SPONSORED TOURNAMENTS & CONTRACT TERMS MODAL
           ───────────────────────────────────────────────────────────── */}
       <Modal
-        isOpen={Boolean(selectedSponsorForMatches)}
-        onClose={() => setSelectedSponsorForMatches(null)}
-        title={selectedSponsorForMatches ? `${selectedSponsorForMatches.name.toUpperCase()} — ACTIVATED FIXTURE ROSTER` : 'ACTIVATED FIXTURES'}
-        subtitle="Official sanctioned matches featuring active stadium LED and broadcast placement"
-        icon="sports_soccer"
-        maxWidth="max-w-2xl"
+        isOpen={Boolean(selectedSponsorForTournaments)}
+        onClose={() => setSelectedSponsorForTournaments(null)}
+        title={selectedSponsorForTournaments ? `${selectedSponsorForTournaments.name.toUpperCase()} — TOURNAMENT CONTRACTS` : 'ACTIVATED TOURNAMENTS'}
+        subtitle="Manage official tournament partnerships, manually configure term cycles and contract valuations, and review commercial rights"
+        icon="emoji_events"
+        maxWidth="max-w-3xl"
       >
-        <div className="p-1 space-y-3.5">
-          {loadingMatches ? (
-            <div className="py-12 text-center text-xs text-slate-400 font-mono">
-              Loading activated match fixtures...
-            </div>
-          ) : sponsorMatches.length === 0 ? (
-            <div className="py-12 text-center text-xs text-slate-400 font-mono">
-              No match fixtures actively linked to this partner yet.
-            </div>
-          ) : (
-            <div className="space-y-2.5 max-h-[50vh] overflow-y-auto pr-1">
-              {sponsorMatches.map(m => (
-                <div
-                  key={m.match_id}
-                  className="bg-[#0a0e16] border border-[#1b2336] rounded-lg p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3"
-                >
-                  <div>
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400 font-mono text-[9px] font-bold uppercase border border-emerald-500/20">
-                        {m.tournament_name || 'Tournament Fixture'}
-                      </span>
-                      <span className="text-slate-400 text-[10px] font-mono">
-                        {m.stage || 'Official Match'}
-                      </span>
-                    </div>
-                    <h4 className="text-sm font-black text-white uppercase tracking-wide">
-                      {m.home_team} vs {m.away_team}
-                    </h4>
-                  </div>
-
-                  <div className="text-left sm:text-right font-mono text-[11px] shrink-0">
-                    <span className="px-2 py-0.5 rounded bg-[#162030] text-white font-bold border border-white/10">
-                      Score: {m.result || 'Scheduled'}
-                    </span>
-                    <div className="text-[10px] text-slate-400 mt-1">
-                      {m.match_date ? new Date(m.match_date).toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' }) : '2026 Season'}
-                    </div>
-                  </div>
-                </div>
-              ))}
+        <div className="p-1 space-y-4">
+          {/* Partner Summary Banner */}
+          {selectedSponsorForTournaments && (
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 bg-[#0a0e16] border border-[#1b2336] rounded-lg p-3">
+              <div>
+                <span className="text-[9px] font-mono uppercase text-slate-400 font-bold block">PARTNER</span>
+                <span className="text-xs font-bold text-white truncate block">{selectedSponsorForTournaments.name}</span>
+              </div>
+              <div>
+                <span className="text-[9px] font-mono uppercase text-slate-400 font-bold block">SECTOR</span>
+                <span className="text-xs text-slate-300 truncate block">{selectedSponsorForTournaments.industry || 'Commercial'}</span>
+              </div>
+              <div>
+                <span className="text-[9px] font-mono uppercase text-slate-400 font-bold block">ACTIVATED TOURNAMENTS</span>
+                <span className="text-xs font-mono font-bold text-emerald-400 block">{sponsorTournaments.length} Tournaments</span>
+              </div>
+              <div>
+                <span className="text-[9px] font-mono uppercase text-slate-400 font-bold block">PORTFOLIO VALUATION</span>
+                <span className="text-xs font-mono font-bold text-amber-400 block">
+                  {formatCurrency(sponsorTournaments.reduce((acc, curr) => acc + (Number(curr.contract_value) || 0), 0))}
+                </span>
+              </div>
             </div>
           )}
 
-          <div className="pt-3 border-t border-[#182030] flex justify-end">
+          {/* Form to Assign to a Particular Tournament */}
+          <div className="bg-[#0c101a] border border-[#1e273a] rounded-lg p-3.5">
+            <div className="flex items-center justify-between gap-2 mb-3">
+              <div className="flex items-center gap-1.5">
+                <span className="material-symbols-outlined text-[16px] text-emerald-400">add_circle</span>
+                <span className="text-xs font-mono font-bold text-white uppercase tracking-wider">
+                  Assign Partner to a Tournament
+                </span>
+              </div>
+              <span className="text-[10px] font-mono text-slate-400">
+                Manually determine term cycle & contract value
+              </span>
+            </div>
+
+            <form onSubmit={handleAssignTournament} className="grid grid-cols-1 sm:grid-cols-12 gap-3 items-end">
+              <div className="sm:col-span-5">
+                <label className="block text-[10px] font-mono uppercase text-slate-400 mb-1">
+                  Tournament <span className="text-emerald-400">*</span>
+                </label>
+                <select
+                  required
+                  value={assignTournamentForm.tournament_id}
+                  onChange={(e) => setAssignTournamentForm({ ...assignTournamentForm, tournament_id: e.target.value })}
+                  className="w-full bg-[#080b11] border border-[#1f2738] rounded px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-emerald-500 font-mono cursor-pointer"
+                >
+                  <option value="" className="bg-[#10141e] text-slate-400">Select Tournament...</option>
+                  {allTournaments.map((t) => {
+                    const isAssigned = sponsorTournaments.some(st => st.tournament_id === t.tournament_id);
+                    return (
+                      <option key={t.tournament_id} value={t.tournament_id} className="bg-[#10141e] text-white">
+                        {t.name} ({t.type}) {isAssigned ? '✓ Already Linked' : ''}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
+
+              <div className="sm:col-span-3">
+                <label className="block text-[10px] font-mono uppercase text-slate-400 mb-1">
+                  Term Cycle <span className="text-emerald-400">*</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g. 2024–2026"
+                  value={assignTournamentForm.term_cycle}
+                  onChange={(e) => setAssignTournamentForm({ ...assignTournamentForm, term_cycle: e.target.value })}
+                  className="w-full bg-[#080b11] border border-[#1f2738] rounded px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-emerald-500 font-mono placeholder:text-slate-600"
+                />
+              </div>
+
+              <div className="sm:col-span-2">
+                <label className="block text-[10px] font-mono uppercase text-slate-400 mb-1">
+                  Contract ($ USD) <span className="text-emerald-400">*</span>
+                </label>
+                <input
+                  type="number"
+                  min="0"
+                  step="1"
+                  required
+                  placeholder="45000000"
+                  value={assignTournamentForm.contract_value}
+                  onChange={(e) => setAssignTournamentForm({ ...assignTournamentForm, contract_value: e.target.value })}
+                  className="w-full bg-[#080b11] border border-[#1f2738] rounded px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-emerald-500 font-mono placeholder:text-slate-600"
+                />
+              </div>
+
+              <div className="sm:col-span-2">
+                <button
+                  type="submit"
+                  disabled={submittingTournamentContract}
+                  className="w-full py-1.5 px-3 bg-[#00f59b] hover:bg-[#00d685] text-black text-xs font-mono font-bold uppercase rounded transition-colors disabled:opacity-50 flex items-center justify-center gap-1 shadow-sm cursor-pointer"
+                >
+                  <Plus size={14} />
+                  <span>Assign</span>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          {/* Active Tournament Contracts List */}
+          <div className="space-y-2">
+            <div className="flex items-center justify-between px-1">
+              <span className="text-[11px] font-mono font-bold text-slate-300 uppercase tracking-wider">
+                Active Tournament Commercial Contracts ({sponsorTournaments.length})
+              </span>
+              <span className="text-[10px] font-mono text-slate-500">
+                Click Edit to adjust Term Cycle or Contract Value anytime
+              </span>
+            </div>
+
+            {loadingTournaments ? (
+              <div className="py-10 text-center text-xs text-slate-400 font-mono bg-[#0a0e16] border border-[#182030] rounded-lg">
+                Loading activated tournament partnerships...
+              </div>
+            ) : sponsorTournaments.length === 0 ? (
+              <div className="py-10 text-center text-xs text-slate-400 font-mono bg-[#0a0e16] border border-[#182030] rounded-lg p-4">
+                No tournament partnerships linked to this sponsor yet. Select a tournament above to establish the contract terms.
+              </div>
+            ) : (
+              <div className="space-y-2 max-h-[42vh] overflow-y-auto pr-1">
+                {sponsorTournaments.map((t) => {
+                  const isEditing = editingTournamentContractId === t.tournament_id;
+                  const deliverables = t.deliverables || getSponsorDeliverables(selectedSponsorForTournaments?.industry, selectedSponsorForTournaments?.name);
+
+                  return (
+                    <div
+                      key={t.tournament_id}
+                      className="bg-[#0a0e16] border border-[#1b2336] hover:border-[#283550] transition-colors rounded-lg p-3.5 flex flex-col gap-2.5"
+                    >
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div>
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400 font-mono text-[9px] font-bold uppercase border border-emerald-500/20">
+                              {t.type || 'Tournament'}
+                            </span>
+                            <span className="text-slate-400 text-[10px] font-mono">
+                              {t.format || 'Sanctioned Event'}
+                            </span>
+                          </div>
+                          <h4 className="text-sm font-black text-white uppercase tracking-wide">
+                            {t.name}
+                          </h4>
+                          <div className="text-[10px] text-slate-400 mt-0.5 font-mono">
+                            Event Window: {formatDate(t.start_date)} — {formatDate(t.end_date)}
+                          </div>
+                        </div>
+
+                        {/* Contract Details / Inline Edit */}
+                        {isEditing ? (
+                          <div className="flex flex-wrap items-center gap-2 bg-[#101622] p-2 rounded-lg border border-[#243048]">
+                            <div>
+                              <span className="text-[9px] font-mono text-slate-400 block">Term Cycle</span>
+                              <input
+                                type="text"
+                                value={editingTournamentContractForm.term_cycle}
+                                onChange={(e) => setEditingTournamentContractForm({ ...editingTournamentContractForm, term_cycle: e.target.value })}
+                                className="w-28 bg-[#080b11] border border-[#2e3d5c] rounded px-2 py-1 text-xs text-white font-mono focus:border-emerald-500"
+                                placeholder="2024–2026"
+                              />
+                            </div>
+                            <div>
+                              <span className="text-[9px] font-mono text-slate-400 block">Contract ($)</span>
+                              <input
+                                type="number"
+                                value={editingTournamentContractForm.contract_value}
+                                onChange={(e) => setEditingTournamentContractForm({ ...editingTournamentContractForm, contract_value: e.target.value })}
+                                className="w-28 bg-[#080b11] border border-[#2e3d5c] rounded px-2 py-1 text-xs text-white font-mono focus:border-emerald-500"
+                                placeholder="Value"
+                              />
+                            </div>
+                            <div className="flex items-center gap-1 mt-3">
+                              <button
+                                type="button"
+                                disabled={submittingTournamentContract}
+                                onClick={() => handleSaveEditTournamentContract(t.tournament_id)}
+                                className="px-2.5 py-1 bg-emerald-500 hover:bg-emerald-400 text-black text-[10px] font-mono font-bold uppercase rounded"
+                              >
+                                Save
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => setEditingTournamentContractId(null)}
+                                className="px-2 py-1 bg-[#182030] hover:bg-[#202b40] text-slate-400 text-[10px] font-mono uppercase rounded"
+                              >
+                                Cancel
+                              </button>
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="flex items-center gap-3 shrink-0">
+                            <div className="text-left sm:text-right font-mono text-[11px]">
+                              <span className="px-2 py-0.5 rounded bg-[#162030] text-emerald-400 font-bold border border-white/10 block mb-1">
+                                Term: {t.term_cycle || '2024–2026'}
+                              </span>
+                              <span className="font-bold text-amber-400 text-xs">
+                                {formatCurrency(t.contract_value)}
+                              </span>
+                            </div>
+
+                            <div className="flex items-center gap-1.5">
+                              <button
+                                type="button"
+                                onClick={() => startEditTournamentContract(t)}
+                                className="p-1.5 rounded-lg bg-[#121722] hover:bg-[#1e273a] text-slate-300 hover:text-white border border-[#1e273a] transition-colors"
+                                title="Edit Term Cycle & Contract Value"
+                              >
+                                <Pencil size={13} />
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => handleRemoveTournamentContract(t.tournament_id, t.name)}
+                                className="p-1.5 rounded-lg bg-[#121722] hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 border border-[#1e273a] transition-colors"
+                                title="Unlink Tournament Contract"
+                              >
+                                <Trash2 size={13} />
+                              </button>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Commercial Rights & Deliverables */}
+                      <div className="text-[11px] bg-[#06080e] border border-white/5 rounded px-2.5 py-1.5 text-slate-400 flex items-center gap-2">
+                        <span className="text-[9px] font-mono font-bold uppercase text-slate-500 shrink-0">
+                          RIGHTS & ASSETS:
+                        </span>
+                        <span className="text-slate-300 truncate font-mono text-[10px]">
+                          {deliverables}
+                        </span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+
+          <div className="pt-3 border-t border-[#182030] flex items-center justify-between">
+            <span className="text-[10px] font-mono text-slate-500">
+              Changes sync instantly across Zurich HQ tournament portfolios
+            </span>
             <button
-              onClick={() => setSelectedSponsorForMatches(null)}
+              onClick={() => setSelectedSponsorForTournaments(null)}
               className="px-4 py-2 bg-[#121722] hover:bg-[#1b2234] text-slate-300 hover:text-white text-xs font-semibold rounded-lg border border-white/5 transition-colors font-mono uppercase"
             >
-              Close Roster
+              Close
             </button>
           </div>
         </div>

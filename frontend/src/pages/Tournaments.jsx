@@ -86,6 +86,40 @@ function formatDate(d) {
   }
 }
 
+function formatCurrency(val) {
+  if (val === null || val === undefined || val === "") return "—";
+  const num = Number(val);
+  if (isNaN(num)) return String(val);
+  return "$" + num.toLocaleString("en-US", { maximumFractionDigits: 0 });
+}
+
+function getSponsorDeliverables(industry = "", sponsorName = "") {
+  const ind = (industry || "").toLowerCase();
+  const name = (sponsorName || "").toLowerCase();
+  if (name.includes("adidas") || ind.includes("sport") || ind.includes("apparel")) {
+    return "Official Match Ball Provider, Technical Referee Apparel, Ball Crew Kits & Pitchside Footwear Rights";
+  }
+  if (name.includes("coca") || name.includes("budweiser") || ind.includes("beverag") || ind.includes("drink")) {
+    return "Exclusive In-Stadium Pouring Rights, Trophy Tour Title Presentation & Fan Festival Beverage Activation";
+  }
+  if (name.includes("qatar") || ind.includes("aviat") || ind.includes("flight")) {
+    return "Official Airline Carrier, Team Charters, VIP Delegations & Halftime Broadcast Showcase Corridor";
+  }
+  if (name.includes("visa") || ind.includes("financ") || ind.includes("pay") || ind.includes("bank")) {
+    return "Exclusive Cashless Stadium Turnstiles, Official Player of the Match Award & Ticketing Presale";
+  }
+  if (name.includes("hyundai") || ind.includes("auto") || ind.includes("car")) {
+    return "Official Delegations EV Shuttle Fleet, Stadium Mobility Hubs & Eco-Transit Corridors";
+  }
+  if (name.includes("mcdonald") || ind.includes("food") || ind.includes("restaur")) {
+    return "Player Escort Program (Youth Mascots), Volunteer Hospitality & Concessions Access";
+  }
+  if (name.includes("wanda") || ind.includes("conglom") || ind.includes("media")) {
+    return "Youth Football Development Program, International LED Board Rotations & Virtual Feeds";
+  }
+  return "Sanctioned Stadium LED Board Rotations, Dynamic Broadcast Overlays & Digital Brand Placement";
+}
+
 export default function Tournaments() {
   const toast = useToast();
   const [items, setItems] = useState([]);
@@ -100,6 +134,17 @@ export default function Tournaments() {
   const [statusFilter, setStatusFilter] = useState("ALL");
   const [sortBy, setSortBy] = useState("start");
   const [viewMode, setViewMode] = useState("grid"); // 'grid' | 'table'
+
+  // Tournament Commercial Partners & Asset Roster State
+  const [selectedTournamentForSponsors, setSelectedTournamentForSponsors] = useState(null);
+  const [tournamentSponsors, setTournamentSponsors] = useState([]);
+  const [loadingSponsors, setLoadingSponsors] = useState(false);
+  const [allSponsors, setAllSponsors] = useState([]);
+  const [sponsorForm, setSponsorForm] = useState({ sponsor_id: "", term_cycle: "", contract_value: "" });
+  const [editingSponsorId, setEditingSponsorId] = useState(null);
+  const [editingSponsorForm, setEditingSponsorForm] = useState({ term_cycle: "", contract_value: "" });
+  const [activeSponsorTab, setActiveSponsorTab] = useState("contracts"); // 'contracts' | 'assets'
+  const [submittingSponsor, setSubmittingSponsor] = useState(false);
 
   const {
     isSelectionMode,
@@ -130,7 +175,103 @@ export default function Tournaments() {
 
   useEffect(() => {
     load();
+    api.get("/sponsors").then((res) => setAllSponsors(res.data?.data || [])).catch(() => {});
   }, []);
+
+  const loadTournamentSponsors = async (tournamentId) => {
+    setLoadingSponsors(true);
+    try {
+      const res = await api.get(`/tournaments/${tournamentId}/sponsors`);
+      setTournamentSponsors(res.data?.data || []);
+    } catch (err) {
+      toast?.showToast(err.response?.data?.message || "Failed to load tournament sponsors", "error");
+    } finally {
+      setLoadingSponsors(false);
+    }
+  };
+
+  const openSponsorsModal = (item) => {
+    setSelectedTournamentForSponsors(item);
+    setActiveSponsorTab("contracts");
+    setEditingSponsorId(null);
+    const startYear = item.start_date ? new Date(item.start_date).getFullYear() : 2026;
+    const endYear = item.end_date ? new Date(item.end_date).getFullYear() : startYear + 2;
+    setSponsorForm({
+      sponsor_id: "",
+      term_cycle: `${startYear}–${endYear}`,
+      contract_value: "5000000",
+    });
+    loadTournamentSponsors(item.tournament_id);
+    if (allSponsors.length === 0) {
+      api.get("/sponsors").then((res) => setAllSponsors(res.data?.data || [])).catch(() => {});
+    }
+  };
+
+  const handleAddSponsor = async (e) => {
+    e.preventDefault();
+    if (!sponsorForm.sponsor_id) {
+      toast?.showToast("Please select a commercial sponsor", "error");
+      return;
+    }
+    setSubmittingSponsor(true);
+    try {
+      await api.post(`/tournaments/${selectedTournamentForSponsors.tournament_id}/sponsors`, {
+        sponsor_id: Number(sponsorForm.sponsor_id),
+        term_cycle: sponsorForm.term_cycle || "2024–2026",
+        contract_value: Number(sponsorForm.contract_value) || 0,
+      });
+      toast?.showToast("Sponsor assigned to tournament successfully");
+      setSponsorForm({
+        sponsor_id: "",
+        term_cycle: sponsorForm.term_cycle,
+        contract_value: "5000000",
+      });
+      await loadTournamentSponsors(selectedTournamentForSponsors.tournament_id);
+      load();
+    } catch (err) {
+      toast?.showToast(err.response?.data?.message || "Failed to assign sponsor", "error");
+    } finally {
+      setSubmittingSponsor(false);
+    }
+  };
+
+  const startEditSponsor = (sp) => {
+    setEditingSponsorId(sp.sponsor_id);
+    setEditingSponsorForm({
+      term_cycle: sp.term_cycle || "",
+      contract_value: sp.contract_value || "",
+    });
+  };
+
+  const handleSaveEditSponsor = async (sponsorId) => {
+    setSubmittingSponsor(true);
+    try {
+      await api.put(`/tournaments/${selectedTournamentForSponsors.tournament_id}/sponsors/${sponsorId}`, {
+        term_cycle: editingSponsorForm.term_cycle,
+        contract_value: Number(editingSponsorForm.contract_value) || 0,
+      });
+      toast?.showToast("Sponsorship contract updated successfully");
+      setEditingSponsorId(null);
+      await loadTournamentSponsors(selectedTournamentForSponsors.tournament_id);
+      load();
+    } catch (err) {
+      toast?.showToast(err.response?.data?.message || "Failed to update sponsorship contract", "error");
+    } finally {
+      setSubmittingSponsor(false);
+    }
+  };
+
+  const handleRemoveSponsor = async (sponsorId, sponsorName) => {
+    if (!confirm(`Remove ${sponsorName || "this sponsor"} from ${selectedTournamentForSponsors.name}?`)) return;
+    try {
+      await api.delete(`/tournaments/${selectedTournamentForSponsors.tournament_id}/sponsors/${sponsorId}`);
+      toast?.showToast("Sponsor removed from tournament");
+      await loadTournamentSponsors(selectedTournamentForSponsors.tournament_id);
+      load();
+    } catch (err) {
+      toast?.showToast(err.response?.data?.message || "Failed to remove sponsor", "error");
+    }
+  };
 
   const openCreate = () => {
     setForm(emptyForm);
@@ -215,6 +356,14 @@ export default function Tournaments() {
     () => items.reduce((acc, curr) => acc + (Number(curr.match_count) || 0), 0),
     [items]
   );
+  const totalSponsorsAssigned = useMemo(
+    () => items.reduce((acc, curr) => acc + (Number(curr.sponsor_count) || 0), 0),
+    [items]
+  );
+  const totalSponsorshipValue = useMemo(
+    () => items.reduce((acc, curr) => acc + (Number(curr.total_sponsorship_value) || 0), 0),
+    [items]
+  );
 
   const worldCupCount = items.filter((i) => i.type === "World Cup").length;
   const continentalCount = items.filter((i) => i.type === "Continental").length;
@@ -246,6 +395,7 @@ export default function Tournaments() {
       if (sortBy === "name") return (a.name || "").localeCompare(b.name || "");
       if (sortBy === "teams") return (Number(b.team_count) || 0) - (Number(a.team_count) || 0);
       if (sortBy === "matches") return (Number(b.match_count) || 0) - (Number(a.match_count) || 0);
+      if (sortBy === "sponsors") return (Number(b.sponsor_count) || 0) - (Number(a.sponsor_count) || 0);
       return 0;
     });
 
@@ -537,6 +687,7 @@ export default function Tournaments() {
               <option value="name" className="bg-[#10141e] text-white">Name: A to Z</option>
               <option value="teams" className="bg-[#10141e] text-white">Most Teams</option>
               <option value="matches" className="bg-[#10141e] text-white">Most Matches</option>
+              <option value="sponsors" className="bg-[#10141e] text-white">Most Sponsors</option>
             </select>
           </div>
 
@@ -708,8 +859,8 @@ export default function Tournaments() {
                     </div>
                   </div>
 
-                  {/* 2x2 Details Grid */}
-                  <div className="grid grid-cols-2 gap-2 text-xs py-1 border-t border-b border-white/5 my-2">
+                  {/* 3x2 Details Grid */}
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs py-1 border-t border-b border-white/5 my-2">
                     <div>
                       <span className="text-[9px] font-mono uppercase text-slate-400 tracking-wider font-semibold block">
                         REGISTERED TEAMS
@@ -727,6 +878,22 @@ export default function Tournaments() {
                       </span>
                     </div>
                     <div>
+                      <button
+                        type="button"
+                        onClick={() => openSponsorsModal(item)}
+                        className="text-left group/sp hover:opacity-90 transition-opacity"
+                        title="Click to view & add commercial sponsors for this tournament"
+                      >
+                        <span className="text-[9px] font-mono uppercase text-slate-400 tracking-wider font-semibold block flex items-center gap-1">
+                          <span>COMMERCIAL PARTNERS</span>
+                          <span className="material-symbols-outlined text-[11px] text-emerald-400 group-hover/sp:translate-x-0.5 transition-transform">arrow_forward</span>
+                        </span>
+                        <span className="font-mono text-xs font-bold text-amber-400 mt-0.5 block truncate">
+                          {item.sponsor_count || 0} Sponsors Logged
+                        </span>
+                      </button>
+                    </div>
+                    <div>
                       <span className="text-[9px] font-mono uppercase text-slate-400 tracking-wider font-semibold block">
                         COMPETITION FORMAT
                       </span>
@@ -742,6 +909,14 @@ export default function Tournaments() {
                         {item.type}
                       </span>
                     </div>
+                    <div>
+                      <span className="text-[9px] font-mono uppercase text-slate-400 tracking-wider font-semibold block">
+                        PORTFOLIO VALUE
+                      </span>
+                      <span className="font-mono text-xs font-bold text-emerald-400 mt-0.5 block truncate">
+                        {formatCurrency(item.total_sponsorship_value)}
+                      </span>
+                    </div>
                   </div>
                 </div>
 
@@ -753,6 +928,14 @@ export default function Tournaments() {
                   </div>
 
                   <div className="flex items-center gap-1.5">
+                    <button
+                      onClick={() => openSponsorsModal(item)}
+                      className="px-2.5 py-1 bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-400 hover:text-emerald-300 border border-emerald-500/35 rounded text-[10px] font-mono font-bold uppercase transition-colors flex items-center gap-1 shadow-sm"
+                      title="Add or Manage Commercial Sponsors, Term Cycles & Contract Values"
+                    >
+                      <span className="material-symbols-outlined text-[13px]">handshake</span>
+                      <span>+ SPONSORS ({item.sponsor_count || 0})</span>
+                    </button>
                     <button
                       onClick={() => openEdit(item)}
                       className="px-2.5 py-1 bg-[#121824] hover:bg-[#1a2335] text-slate-300 hover:text-white border border-white/10 rounded text-[10px] font-mono font-bold uppercase transition-colors flex items-center gap-1"
@@ -856,6 +1039,14 @@ export default function Tournaments() {
                       </td>
                       <td className="py-3 px-4 text-right">
                         <div className="flex items-center justify-end gap-1.5">
+                          <button
+                            onClick={() => openSponsorsModal(item)}
+                            className="px-2.5 py-1 bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-400 hover:text-emerald-300 border border-emerald-500/35 rounded text-[10px] font-mono font-bold uppercase transition-colors flex items-center gap-1 shadow-sm"
+                            title="Add or Manage Commercial Sponsors, Term Cycles & Contract Values"
+                          >
+                            <span className="material-symbols-outlined text-[13px]">handshake</span>
+                            <span>+ SPONSORS ({item.sponsor_count || 0})</span>
+                          </button>
                           <button
                             onClick={() => openEdit(item)}
                             className="px-2.5 py-1 bg-[#121824] hover:bg-[#1a2335] text-slate-300 hover:text-white border border-white/10 rounded text-[10px] font-mono font-bold uppercase transition-colors flex items-center gap-1"
@@ -1018,6 +1209,388 @@ export default function Tournaments() {
             </button>
           </div>
         </form>
+      </Modal>
+
+      {/* ─────────────────────────────────────────────────────────────
+          TOURNAMENT SPONSORS & ASSET ROSTER MODAL
+          ───────────────────────────────────────────────────────────── */}
+      <Modal
+        isOpen={Boolean(selectedTournamentForSponsors)}
+        onClose={() => setSelectedTournamentForSponsors(null)}
+        title={selectedTournamentForSponsors ? `${selectedTournamentForSponsors.name.toUpperCase()} — SPONSORS & ASSET ROSTER` : 'TOURNAMENT SPONSORS'}
+        subtitle="Official tournament-level commercial partnerships, contract cycles, financial valuations, and asset rosters"
+        icon="handshake"
+        maxWidth="max-w-4xl"
+      >
+        <div className="p-1 space-y-4">
+          {/* Header Stats Bar */}
+          {selectedTournamentForSponsors && (
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 bg-[#0a0e16] border border-[#1b2336] rounded-lg p-3">
+              <div>
+                <span className="text-[9px] font-mono uppercase text-slate-400 font-bold block">TOURNAMENT</span>
+                <span className="text-xs font-bold text-white truncate block">{selectedTournamentForSponsors.name}</span>
+              </div>
+              <div>
+                <span className="text-[9px] font-mono uppercase text-slate-400 font-bold block">ACTIVE SPONSORS</span>
+                <span className="text-xs font-mono font-bold text-emerald-400 block">{tournamentSponsors.length} Partners</span>
+              </div>
+              <div>
+                <span className="text-[9px] font-mono uppercase text-slate-400 font-bold block">TOTAL SPONSORSHIP</span>
+                <span className="text-xs font-mono font-bold text-amber-400 block">
+                  {formatCurrency(tournamentSponsors.reduce((acc, curr) => acc + (Number(curr.contract_value) || 0), 0))}
+                </span>
+              </div>
+              <div>
+                <span className="text-[9px] font-mono uppercase text-slate-400 font-bold block">WINDOW</span>
+                <span className="text-[11px] font-mono text-slate-300 block truncate">
+                  {formatDate(selectedTournamentForSponsors.start_date)} — {formatDate(selectedTournamentForSponsors.end_date)}
+                </span>
+              </div>
+            </div>
+          )}
+
+          {/* Navigation Tabs */}
+          <div className="flex items-center gap-2 border-b border-[#1b2336] pb-2">
+            <button
+              type="button"
+              onClick={() => setActiveSponsorTab('contracts')}
+              className={`px-3 py-1.5 text-xs font-mono font-bold uppercase rounded-lg transition-colors flex items-center gap-1.5 ${
+                activeSponsorTab === 'contracts'
+                  ? 'bg-[#00f59b] text-black shadow-sm'
+                  : 'bg-[#10141e] text-slate-400 hover:text-white border border-white/5'
+              }`}
+            >
+              <span className="material-symbols-outlined text-[15px]">contract</span>
+              <span>Commercial Contracts ({tournamentSponsors.length})</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveSponsorTab('assets')}
+              className={`px-3 py-1.5 text-xs font-mono font-bold uppercase rounded-lg transition-colors flex items-center gap-1.5 ${
+                activeSponsorTab === 'assets'
+                  ? 'bg-[#00f59b] text-black shadow-sm'
+                  : 'bg-[#10141e] text-slate-400 hover:text-white border border-white/5'
+              }`}
+            >
+              <span className="material-symbols-outlined text-[15px]">inventory_2</span>
+              <span>Activated Asset Roster</span>
+            </button>
+          </div>
+
+          {activeSponsorTab === 'contracts' ? (
+            <div className="space-y-4">
+              {/* Add Sponsor Form Section */}
+              <div className="bg-[#0c101a] border border-[#1e273a] rounded-lg p-3.5">
+                <div className="flex items-center gap-1.5 mb-3">
+                  <span className="material-symbols-outlined text-[15px] text-emerald-400">add_circle</span>
+                  <span className="text-xs font-mono font-bold text-white uppercase tracking-wider">
+                    Assign Sponsor to Tournament
+                  </span>
+                </div>
+
+                <form onSubmit={handleAddSponsor} className="grid grid-cols-1 sm:grid-cols-12 gap-3 items-end">
+                  <div className="sm:col-span-5">
+                    <label className="block text-[10px] font-mono uppercase text-slate-400 mb-1">
+                      Sponsor <span className="text-emerald-400">*</span>
+                    </label>
+                    <select
+                      required
+                      value={sponsorForm.sponsor_id}
+                      onChange={(e) => setSponsorForm({ ...sponsorForm, sponsor_id: e.target.value })}
+                      className="w-full bg-[#080b11] border border-[#1f2738] rounded px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-emerald-500 font-mono"
+                    >
+                      <option value="" className="bg-[#10141e] text-slate-400">Select Sponsor...</option>
+                      {allSponsors.map((sp) => {
+                        const isAssigned = tournamentSponsors.some(ts => ts.sponsor_id === sp.sponsor_id);
+                        return (
+                          <option key={sp.sponsor_id} value={sp.sponsor_id} className="bg-[#10141e] text-white">
+                            {sp.name} ({sp.industry}) {isAssigned ? '✓ Already Assigned' : ''}
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </div>
+
+                  <div className="sm:col-span-3">
+                    <label className="block text-[10px] font-mono uppercase text-slate-400 mb-1">
+                      Term Cycle <span className="text-emerald-400">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="e.g. 2026–2028"
+                      value={sponsorForm.term_cycle}
+                      onChange={(e) => setSponsorForm({ ...sponsorForm, term_cycle: e.target.value })}
+                      className="w-full bg-[#080b11] border border-[#1f2738] rounded px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-emerald-500 font-mono"
+                    />
+                  </div>
+
+                  <div className="sm:col-span-2">
+                    <label className="block text-[10px] font-mono uppercase text-slate-400 mb-1">
+                      Contract Value <span className="text-emerald-400">*</span>
+                    </label>
+                    <input
+                      type="number"
+                      min="0"
+                      step="1"
+                      required
+                      placeholder="5000000"
+                      value={sponsorForm.contract_value}
+                      onChange={(e) => setSponsorForm({ ...sponsorForm, contract_value: e.target.value })}
+                      className="w-full bg-[#080b11] border border-[#1f2738] rounded px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-emerald-500 font-mono"
+                    />
+                  </div>
+
+                  <div className="sm:col-span-2">
+                    <button
+                      type="submit"
+                      disabled={submittingSponsor}
+                      className="w-full py-1.5 px-3 bg-[#00f59b] hover:bg-[#00d685] text-black text-xs font-mono font-bold uppercase rounded transition-colors disabled:opacity-50 flex items-center justify-center gap-1 shadow-sm cursor-pointer"
+                    >
+                      <span className="material-symbols-outlined text-[14px]">add</span>
+                      <span>Add</span>
+                    </button>
+                  </div>
+                </form>
+              </div>
+
+              {/* Table of Sponsors */}
+              <div className="bg-[#0a0e16] border border-[#1b2336] rounded-lg overflow-hidden">
+                <div className="p-2.5 border-b border-[#1b2336] bg-[#0c111c] flex items-center justify-between">
+                  <span className="text-[11px] font-mono font-bold uppercase text-slate-300">
+                    Contracted Tournament Partners ({tournamentSponsors.length})
+                  </span>
+                  <span className="text-[10px] font-mono text-slate-400">
+                    Live database synchronization
+                  </span>
+                </div>
+
+                {loadingSponsors ? (
+                  <div className="py-12 text-center text-xs text-slate-400 font-mono">
+                    Loading tournament commercial partners...
+                  </div>
+                ) : tournamentSponsors.length === 0 ? (
+                  <div className="py-12 text-center text-xs text-slate-400 font-mono">
+                    No sponsors assigned to this tournament yet. Use the form above to assign commercial partners.
+                  </div>
+                ) : (
+                  <div className="overflow-x-auto max-h-[42vh] overflow-y-auto">
+                    <table className="w-full text-left border-collapse">
+                      <thead>
+                        <tr className="bg-[#0d121e] text-[10px] font-mono uppercase text-slate-400 tracking-wider border-b border-white/5 sticky top-0">
+                          <th className="py-2.5 px-3.5">Sponsor</th>
+                          <th className="py-2.5 px-3.5">Term Cycle</th>
+                          <th className="py-2.5 px-3.5">Contract Value</th>
+                          <th className="py-2.5 px-3.5 text-right">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-white/5 text-xs font-mono">
+                        {tournamentSponsors.map((sp) => {
+                          const isEditing = editingSponsorId === sp.sponsor_id;
+                          return (
+                            <tr key={sp.sponsor_id} className="hover:bg-white/[0.02] transition-colors">
+                              <td className="py-2.5 px-3.5">
+                                <div className="flex items-center gap-2">
+                                  <div className="w-6 h-6 rounded bg-[#162030] border border-white/10 flex items-center justify-center text-[10px] font-bold text-white shrink-0">
+                                    {sp.sponsor_name?.slice(0, 2).toUpperCase()}
+                                  </div>
+                                  <div>
+                                    <div className="font-bold text-white uppercase text-xs">
+                                      {sp.sponsor_name}
+                                    </div>
+                                    <div className="text-[10px] text-slate-400 flex items-center gap-1.5">
+                                      <span>{sp.industry}</span>
+                                      <span>·</span>
+                                      <span>{sp.country}</span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </td>
+
+                              <td className="py-2.5 px-3.5 text-slate-300">
+                                {isEditing ? (
+                                  <input
+                                    type="text"
+                                    value={editingSponsorForm.term_cycle}
+                                    onChange={(e) => setEditingSponsorForm({ ...editingSponsorForm, term_cycle: e.target.value })}
+                                    className="bg-[#080b11] border border-emerald-500 rounded px-2 py-1 text-xs text-white font-mono w-28 focus:outline-none"
+                                  />
+                                ) : (
+                                  <span className="px-2 py-0.5 rounded bg-[#121824] border border-white/10 text-emerald-400 text-[11px] font-bold">
+                                    {sp.term_cycle || '2024–2026'}
+                                  </span>
+                                )}
+                              </td>
+
+                              <td className="py-2.5 px-3.5">
+                                {isEditing ? (
+                                  <input
+                                    type="number"
+                                    min="0"
+                                    step="1"
+                                    value={editingSponsorForm.contract_value}
+                                    onChange={(e) => setEditingSponsorForm({ ...editingSponsorForm, contract_value: e.target.value })}
+                                    className="bg-[#080b11] border border-emerald-500 rounded px-2 py-1 text-xs text-white font-mono w-32 focus:outline-none"
+                                  />
+                                ) : (
+                                  <span className="font-bold text-amber-400 text-xs">
+                                    {formatCurrency(sp.contract_value)}
+                                  </span>
+                                )}
+                              </td>
+
+                              <td className="py-2.5 px-3.5 text-right">
+                                <div className="flex items-center justify-end gap-1.5">
+                                  {isEditing ? (
+                                    <>
+                                      <button
+                                        type="button"
+                                        onClick={() => handleSaveEditSponsor(sp.sponsor_id)}
+                                        disabled={submittingSponsor}
+                                        className="px-2 py-1 bg-emerald-500 hover:bg-emerald-400 text-black rounded text-[10px] font-mono font-bold uppercase transition-colors"
+                                      >
+                                        Save
+                                      </button>
+                                      <button
+                                        type="button"
+                                        onClick={() => setEditingSponsorId(null)}
+                                        className="px-2 py-1 bg-[#162030] hover:bg-[#202c40] text-slate-300 rounded text-[10px] font-mono font-bold uppercase transition-colors"
+                                      >
+                                        Cancel
+                                      </button>
+                                    </>
+                                  ) : (
+                                    <>
+                                      <button
+                                        type="button"
+                                        onClick={() => startEditSponsor(sp)}
+                                        className="px-2 py-1 bg-[#121824] hover:bg-[#1c2638] text-slate-300 hover:text-white border border-white/10 rounded text-[10px] font-mono font-bold uppercase transition-colors flex items-center gap-1"
+                                        title="Edit term cycle and value"
+                                      >
+                                        <span className="material-symbols-outlined text-[12px]">edit</span>
+                                        <span>Edit</span>
+                                      </button>
+                                      <button
+                                        type="button"
+                                        onClick={() => handleRemoveSponsor(sp.sponsor_id, sp.sponsor_name)}
+                                        className="px-2 py-1 bg-[#121824] hover:bg-rose-950/40 text-slate-400 hover:text-rose-400 border border-white/10 hover:border-rose-500/30 rounded text-[10px] font-mono font-bold uppercase transition-colors flex items-center gap-1"
+                                        title="Remove sponsor from tournament"
+                                      >
+                                        <span className="material-symbols-outlined text-[12px]">delete</span>
+                                        <span>Remove</span>
+                                      </button>
+                                    </>
+                                  )}
+                                </div>
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </div>
+            </div>
+          ) : (
+            /* Activated Asset Roster Tab */
+            <div className="space-y-3">
+              <div className="bg-[#0a0e16] border border-[#1b2336] rounded-lg p-3 flex items-center justify-between">
+                <div>
+                  <h4 className="text-xs font-mono font-bold text-white uppercase tracking-wider">
+                    Official Tournament Asset Inventory & Deliverables
+                  </h4>
+                  <p className="text-[11px] text-slate-400 mt-0.5">
+                    Marketing assets, brand placements, and commercial inventory sanctioned for {selectedTournamentForSponsors?.name}
+                  </p>
+                </div>
+                <span className="px-2 py-1 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono text-[10px] font-bold uppercase">
+                  {tournamentSponsors.length} Active Allocations
+                </span>
+              </div>
+
+              {tournamentSponsors.length === 0 ? (
+                <div className="py-12 text-center text-xs text-slate-400 font-mono bg-[#0c101a] border border-[#1e273a] rounded-lg">
+                  No commercial assets allocated yet. Switch to "Commercial Contracts" to assign tournament partners.
+                </div>
+              ) : (
+                <div className="space-y-2.5 max-h-[46vh] overflow-y-auto pr-1">
+                  {tournamentSponsors.map((sp) => (
+                    <div
+                      key={sp.sponsor_id}
+                      className="bg-[#0b0f19] border border-[#1b253b] hover:border-emerald-500/30 transition-colors rounded-lg p-3.5 space-y-2.5"
+                    >
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/5 pb-2">
+                        <div className="flex items-center gap-2.5">
+                          <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center font-black text-emerald-400 text-xs font-mono">
+                            {sp.sponsor_name?.slice(0, 2).toUpperCase()}
+                          </div>
+                          <div>
+                            <div className="flex items-center gap-2">
+                              <h4 className="text-sm font-black text-white uppercase tracking-wide">
+                                {sp.sponsor_name}
+                              </h4>
+                              <span className="px-1.5 py-0.2 rounded bg-[#162030] text-slate-300 font-mono text-[9px] font-semibold border border-white/10">
+                                {sp.industry}
+                              </span>
+                            </div>
+                            <span className="text-[10px] font-mono text-slate-400">
+                              HQ: {sp.country} · Partnership Active
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-2 font-mono text-xs">
+                          <span className="px-2 py-0.5 rounded bg-emerald-950/40 text-emerald-400 border border-emerald-500/30 text-[11px] font-bold">
+                            Cycle: {sp.term_cycle || '2024–2026'}
+                          </span>
+                          <span className="px-2 py-0.5 rounded bg-amber-950/40 text-amber-400 border border-amber-500/30 text-[11px] font-bold">
+                            {formatCurrency(sp.contract_value)}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-12 gap-2 text-[11px]">
+                        <div className="md:col-span-8 bg-[#070a10] rounded p-2.5 border border-white/5">
+                          <span className="text-[9px] font-mono uppercase text-slate-400 font-bold block mb-1">
+                            CONTRACTUAL ASSET DELIVERABLES
+                          </span>
+                          <p className="text-slate-200 font-medium text-xs leading-relaxed">
+                            {getSponsorDeliverables(sp.industry, sp.sponsor_name)}
+                          </p>
+                        </div>
+                        <div className="md:col-span-4 bg-[#070a10] rounded p-2.5 border border-white/5 flex flex-col justify-between">
+                          <div>
+                            <span className="text-[9px] font-mono uppercase text-slate-400 font-bold block mb-1">
+                              ACTIVATION STATUS
+                            </span>
+                            <div className="flex items-center gap-1 text-emerald-400 font-mono font-bold text-xs">
+                              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                              <span>100% Cleared · Sanctioned</span>
+                            </div>
+                          </div>
+                          <div className="text-[10px] font-mono text-slate-400 mt-2">
+                            LED Rotation: Active Broadcast
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          <div className="pt-3 border-t border-[#182030] flex justify-end">
+            <button
+              type="button"
+              onClick={() => setSelectedTournamentForSponsors(null)}
+              className="px-4 py-2 bg-[#121722] hover:bg-[#1b2234] text-slate-300 hover:text-white text-xs font-semibold rounded-lg border border-white/5 transition-colors font-mono uppercase"
+            >
+              Close Window
+            </button>
+          </div>
+        </div>
       </Modal>
 
       {/* Bulk Delete Confirmation Modal */}

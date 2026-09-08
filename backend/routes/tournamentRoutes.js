@@ -15,4 +15,9 @@ router.post('/:id/teams', tournamentController.addTeam);
 router.delete('/:id/teams/:teamId', tournamentController.removeTeam);
 router.get('/:id/matches', tournamentController.getMatches);
 
+router.get('/:id/sponsors', tournamentController.getSponsors);
+router.post('/:id/sponsors', tournamentController.addSponsor);
+router.put('/:id/sponsors/:sponsorId', tournamentController.updateSponsor);
+router.delete('/:id/sponsors/:sponsorId', tournamentController.removeSponsor);
+
 module.exports = router;
