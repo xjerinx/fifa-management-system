@@ -109,6 +109,13 @@ function formatMatchDate(dateStr) {
   }
 }
 
+function getStatus(itemOrDate, maybeResult) {
+  if (itemOrDate && typeof itemOrDate === "object") {
+    return getMatchTemporalStatus(itemOrDate);
+  }
+  return getMatchTemporalStatus({ match_date: itemOrDate, result: maybeResult });
+}
+
 export default function Matches() {
   const toast = useToast();
   const navigate = useNavigate();
@@ -246,6 +253,7 @@ export default function Matches() {
   const completedCount = items.filter((i) => !!i.result).length;
   const pendingScoreCount = items.filter((i) => !i.result && getMatchTemporalStatus(i).isPast).length;
   const trueUpcomingCount = items.filter((i) => !i.result && !getMatchTemporalStatus(i).isPast).length;
+  const upcomingCount = trueUpcomingCount;
 
   let totalGoals = 0;
   items.forEach((i) => {
@@ -435,7 +443,7 @@ export default function Matches() {
               <span className="text-xs font-mono font-normal text-slate-400">FIXTURES</span>
             </div>
             <div className="text-[10px] font-mono text-cyan-400 mt-1.5 font-semibold truncate">
-              {completedCount} FINALIZED · {upcomingCount} PENDING
+              {completedCount} FINALIZED · {upcomingCount} UPCOMING{pendingScoreCount > 0 ? ` · ${pendingScoreCount} PENDING SCORE` : ""}
             </div>
             <div className="w-full h-1 bg-slate-800 rounded-full overflow-hidden mt-3">
               <div className="h-full bg-cyan-400 rounded-full w-full"></div>
@@ -718,7 +726,7 @@ export default function Matches() {
               </thead>
               <tbody className="divide-y divide-white/5 text-xs">
                 {filtered.map((item) => {
-                  const status = getStatus(item.match_date, item.result);
+                  const status = getMatchTemporalStatus(item);
                   const score = parseScore(item.result);
 
                   return (

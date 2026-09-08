@@ -3,6 +3,7 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import api from "../api/axios";
 import { useAuth } from "../context/AuthContext";
+import ErrorBoundary from "./ErrorBoundary";
 
 export default function Layout() {
   const { user, logout } = useAuth();
@@ -133,7 +134,9 @@ export default function Layout() {
 
         {/* Main Content */}
         <main className="flex-1 p-6 max-w-[1520px] w-full mx-auto">
-          <Outlet />
+          <ErrorBoundary>
+            <Outlet />
+          </ErrorBoundary>
         </main>
       </div>
     </div>
