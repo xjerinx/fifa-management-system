@@ -7,9 +7,11 @@ exports.getAll = async (req, res, next) => {
             SELECT s.*,
                 COUNT(DISTINCT ts.tournament_id) AS tournaments_sponsored,
                 COALESCE(SUM(ts.contract_value), 0) AS total_contract_value,
-                GROUP_CONCAT(DISTINCT ts.term_cycle ORDER BY ts.term_cycle SEPARATOR ', ') AS term_cycles
+                GROUP_CONCAT(DISTINCT ts.term_cycle ORDER BY ts.term_cycle SEPARATOR ', ') AS term_cycles,
+                GROUP_CONCAT(DISTINCT t.name ORDER BY t.tournament_id SEPARATOR ', ') AS tournament_names
             FROM sponsor s
             LEFT JOIN tournament_sponsor ts ON ts.sponsor_id = s.sponsor_id
+            LEFT JOIN tournament t ON t.tournament_id = ts.tournament_id
             GROUP BY s.sponsor_id
             ORDER BY s.name
         `);
