@@ -272,128 +272,6 @@ function getSponsorMeta(item) {
   };
 }
 
-// Complete realistic portfolio dataset fallback matching the 3, 2, 1, 0 tournament distribution
-const DEFAULT_SPONSORS = [
-  {
-    sponsor_id: 1,
-    name: 'Adidas',
-    industry: 'Sportswear & Equipment',
-    country: 'Germany',
-    tournaments_sponsored: 3,
-    total_contract_value: '280000000.00',
-    term_cycles: '2022–2026, 2024–2026, 2026–2030',
-    tournament_names: 'FIFA World Cup 2022, UEFA Euro 2024, FIFA World Cup 2026'
-  },
-  {
-    sponsor_id: 2,
-    name: 'Coca-Cola',
-    industry: 'Beverages',
-    country: 'United States',
-    tournaments_sponsored: 3,
-    total_contract_value: '260000000.00',
-    term_cycles: '2022–2030, 2024–2028, 2026–2030',
-    tournament_names: 'FIFA World Cup 2022, Copa América 2024, FIFA World Cup 2026'
-  },
-  {
-    sponsor_id: 3,
-    name: 'Visa',
-    industry: 'Financial Services',
-    country: 'United States',
-    tournaments_sponsored: 2,
-    total_contract_value: '180000000.00',
-    term_cycles: '2021–2026, 2024–2028',
-    tournament_names: 'FIFA World Cup 2022, FIFA World Cup 2026'
-  },
-  {
-    sponsor_id: 4,
-    name: 'Hyundai',
-    industry: 'Automotive',
-    country: 'South Korea',
-    tournaments_sponsored: 0,
-    total_contract_value: '0.00',
-    term_cycles: null,
-    tournament_names: null
-  },
-  {
-    sponsor_id: 5,
-    name: 'Qatar Airways',
-    industry: 'Aviation',
-    country: 'Qatar',
-    tournaments_sponsored: 2,
-    total_contract_value: '155000000.00',
-    term_cycles: '2023–2027, 2024–2027',
-    tournament_names: 'FIFA World Cup 2022, UEFA Euro 2024'
-  },
-  {
-    sponsor_id: 6,
-    name: 'Budweiser',
-    industry: 'Beverages & Hospitality',
-    country: 'United States',
-    tournaments_sponsored: 2,
-    total_contract_value: '105000000.00',
-    term_cycles: '2022–2026, 2024–2026',
-    tournament_names: 'FIFA World Cup 2022, Copa América 2024'
-  },
-  {
-    sponsor_id: 7,
-    name: "McDonald's",
-    industry: 'Food & Beverage',
-    country: 'United States',
-    tournaments_sponsored: 1,
-    total_contract_value: '45000000.00',
-    term_cycles: '2024–2026',
-    tournament_names: 'UEFA Euro 2024'
-  },
-  {
-    sponsor_id: 8,
-    name: 'Wanda Group',
-    industry: 'Conglomerate & Entertainment',
-    country: 'China',
-    tournaments_sponsored: 0,
-    total_contract_value: '0.00',
-    term_cycles: null,
-    tournament_names: null
-  }
-];
-
-const DEFAULT_SPONSOR_TOURNAMENTS = {
-  1: [
-    { tournament_id: 4, name: 'FIFA World Cup 2026', type: 'World Cup', term_cycle: '2026–2030', contract_value: '120000000.00' },
-    { tournament_id: 2, name: 'UEFA Euro 2024', type: 'Continental', term_cycle: '2024–2026', contract_value: '75000000.00' },
-    { tournament_id: 1, name: 'FIFA World Cup 2022', type: 'World Cup', term_cycle: '2022–2026', contract_value: '85000000.00' }
-  ],
-  2: [
-    { tournament_id: 4, name: 'FIFA World Cup 2026', type: 'World Cup', term_cycle: '2026–2030', contract_value: '110000000.00' },
-    { tournament_id: 3, name: 'Copa América 2024', type: 'Continental', term_cycle: '2024–2028', contract_value: '60000000.00' },
-    { tournament_id: 1, name: 'FIFA World Cup 2022', type: 'World Cup', term_cycle: '2022–2030', contract_value: '90000000.00' }
-  ],
-  3: [
-    { tournament_id: 4, name: 'FIFA World Cup 2026', type: 'World Cup', term_cycle: '2024–2028', contract_value: '100000000.00' },
-    { tournament_id: 1, name: 'FIFA World Cup 2022', type: 'World Cup', term_cycle: '2021–2026', contract_value: '80000000.00' }
-  ],
-  4: [],
-  5: [
-    { tournament_id: 2, name: 'UEFA Euro 2024', type: 'Continental', term_cycle: '2024–2027', contract_value: '65000000.00' },
-    { tournament_id: 1, name: 'FIFA World Cup 2022', type: 'World Cup', term_cycle: '2023–2027', contract_value: '90000000.00' }
-  ],
-  6: [
-    { tournament_id: 3, name: 'Copa América 2024', type: 'Continental', term_cycle: '2024–2026', contract_value: '45000000.00' },
-    { tournament_id: 1, name: 'FIFA World Cup 2022', type: 'World Cup', term_cycle: '2022–2026', contract_value: '60000000.00' }
-  ],
-  7: [
-    { tournament_id: 2, name: 'UEFA Euro 2024', type: 'Continental', term_cycle: '2024–2026', contract_value: '45000000.00' }
-  ],
-  8: []
-};
-
-const DEFAULT_TOURNAMENTS = [
-  { tournament_id: 1, name: 'FIFA World Cup 2022', type: 'World Cup' },
-  { tournament_id: 2, name: 'UEFA Euro 2024', type: 'Continental' },
-  { tournament_id: 3, name: 'Copa América 2024', type: 'Continental' },
-  { tournament_id: 4, name: 'FIFA World Cup 2026', type: 'World Cup' },
-  { tournament_id: 5, name: 'UEFA Nations League 2024-25', type: 'League' }
-];
-
 export default function Sponsors() {
   const toast = useToast();
   const [items, setItems] = useState([]);
@@ -443,28 +321,16 @@ export default function Sponsors() {
   const load = () => {
     setLoading(true);
     api.get('/sponsors')
-      .then(res => {
-        const data = res.data?.data;
-        if (Array.isArray(data) && data.length > 0) {
-          setItems(data);
-        } else {
-          setItems(DEFAULT_SPONSORS);
-        }
-      })
-      .catch(() => {
-        setItems(DEFAULT_SPONSORS);
-      })
+      .then(res => setItems(res.data?.data || []))
+      .catch(err => toast?.showToast(err.response?.data?.message || 'Failed to load sponsors from database', 'error'))
       .finally(() => setLoading(false));
   };
 
   useEffect(() => {
     load();
     api.get('/tournaments')
-      .then(res => {
-        const data = res.data?.data;
-        setAllTournaments(Array.isArray(data) && data.length > 0 ? data : DEFAULT_TOURNAMENTS);
-      })
-      .catch(() => setAllTournaments(DEFAULT_TOURNAMENTS));
+      .then(res => setAllTournaments(res.data?.data || []))
+      .catch(() => {});
   }, []);
 
   const openCreate = () => {
@@ -535,20 +401,9 @@ export default function Sponsors() {
     setLoadingTournaments(true);
     try {
       const res = await api.get(`/sponsors/${sponsorId}/tournaments`);
-      const data = res.data?.data;
-      if (Array.isArray(data) && data.length > 0) {
-        setSponsorTournaments(data);
-      } else if (DEFAULT_SPONSOR_TOURNAMENTS[sponsorId]) {
-        setSponsorTournaments(DEFAULT_SPONSOR_TOURNAMENTS[sponsorId]);
-      } else {
-        setSponsorTournaments([]);
-      }
+      setSponsorTournaments(res.data?.data || []);
     } catch {
-      if (DEFAULT_SPONSOR_TOURNAMENTS[sponsorId]) {
-        setSponsorTournaments(DEFAULT_SPONSOR_TOURNAMENTS[sponsorId]);
-      } else {
-        setSponsorTournaments([]);
-      }
+      toast?.showToast('Failed to load sponsored tournaments from database', 'error');
     } finally {
       setLoadingTournaments(false);
     }
