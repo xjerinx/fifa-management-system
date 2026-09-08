@@ -810,35 +810,7 @@ export default function Sponsors() {
                     </p>
                   </div>
 
-                  {/* LED Pitch Perimeter Share & Clearance */}
-                  <div className="mt-3.5 pt-3 border-t border-[#182030]">
-                    <div className="flex items-center justify-between text-xs mb-1">
-                      <span className="text-[10px] font-mono text-slate-400">
-                        LED Pitch Perimeter Share
-                      </span>
-                      <span className="text-[10px] font-mono font-bold text-sky-400">
-                        {meta.ledRotation} rotation
-                      </span>
-                    </div>
 
-                    {/* Progress Track */}
-                    <div className="w-full h-1.5 bg-[#090d16] rounded-full overflow-hidden border border-[#1b2336]">
-                      <div
-                        className="h-full bg-emerald-400 rounded-full"
-                        style={{ width: meta.ledRotation }}
-                      ></div>
-                    </div>
-
-                    <div className="flex items-center justify-between mt-2 text-[10px] font-mono">
-                      <div className="flex items-center gap-1 text-emerald-400 font-bold">
-                        <CheckCircle2 size={10} />
-                        <span>{meta.clearance}</span>
-                      </div>
-                      <span className="text-slate-400">
-                        Ref ID: {meta.refId}
-                      </span>
-                    </div>
-                  </div>
                 </div>
 
                 {/* Card Actions Footer */}
