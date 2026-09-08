@@ -203,6 +203,33 @@ function formatDate(d) {
   }
 }
 
+function getSponsorDeliverables(industry = "", sponsorName = "") {
+  const ind = (industry || "").toLowerCase();
+  const name = (sponsorName || "").toLowerCase();
+  if (name.includes("adidas") || ind.includes("sport") || ind.includes("apparel")) {
+    return "Official Match Ball Provider, Technical Referee Apparel, Ball Crew Kits & Pitchside Footwear Rights";
+  }
+  if (name.includes("coca") || name.includes("budweiser") || ind.includes("beverag") || ind.includes("drink")) {
+    return "Exclusive In-Stadium Pouring Rights, Trophy Tour Title Presentation & Fan Festival Beverage Activation";
+  }
+  if (name.includes("qatar") || ind.includes("aviat") || ind.includes("flight")) {
+    return "Official Airline Carrier, Team Charters, VIP Delegations & Halftime Broadcast Showcase Corridor";
+  }
+  if (name.includes("visa") || ind.includes("financ") || ind.includes("pay") || ind.includes("bank")) {
+    return "Exclusive Cashless Stadium Turnstiles, Official Player of the Match Award & Ticketing Presale";
+  }
+  if (name.includes("hyundai") || ind.includes("auto") || ind.includes("car")) {
+    return "Official Delegations EV Shuttle Fleet, Stadium Mobility Hubs & Eco-Transit Corridors";
+  }
+  if (name.includes("mcdonald") || ind.includes("food") || ind.includes("restaur")) {
+    return "Player Escort Program (Youth Mascots), Volunteer Hospitality & Concessions Access";
+  }
+  if (name.includes("wanda") || ind.includes("conglom") || ind.includes("media")) {
+    return "Youth Football Development Program, International LED Board Rotations & Virtual Feeds";
+  }
+  return "Sanctioned Stadium LED Board Rotations, Dynamic Broadcast Overlays & Digital Brand Placement";
+}
+
 function getSponsorMeta(item) {
   const isGlobal = (item.tournaments_sponsored || 0) >= 2;
   const totalVal = Number(item.total_contract_value || 0);
