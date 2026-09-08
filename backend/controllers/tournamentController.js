@@ -8,7 +8,8 @@ exports.getAll = async (req, res, next) => {
                 COALESCE(tt.team_count, 0) AS team_count,
                 COALESCE(m.match_count, 0) AS match_count,
                 COALESCE(ts.sponsor_count, 0) AS sponsor_count,
-                COALESCE(ts.total_sponsorship_value, 0) AS total_sponsorship_value
+                COALESCE(ts.total_sponsorship_value, 0) AS total_sponsorship_value,
+                COALESCE(ts.sponsor_names, '') AS sponsor_names
             FROM tournament t
             LEFT JOIN (
                 SELECT tournament_id, COUNT(DISTINCT team_id) AS team_count
@@ -21,11 +22,13 @@ exports.getAll = async (req, res, next) => {
                 GROUP BY tournament_id
             ) m ON m.tournament_id = t.tournament_id
             LEFT JOIN (
-                SELECT tournament_id,
-                       COUNT(DISTINCT sponsor_id) AS sponsor_count,
-                       SUM(contract_value) AS total_sponsorship_value
-                FROM tournament_sponsor
-                GROUP BY tournament_id
+                SELECT ts.tournament_id,
+                       COUNT(DISTINCT ts.sponsor_id) AS sponsor_count,
+                       SUM(ts.contract_value) AS total_sponsorship_value,
+                       GROUP_CONCAT(DISTINCT s.name ORDER BY s.name SEPARATOR ', ') AS sponsor_names
+                FROM tournament_sponsor ts
+                INNER JOIN sponsor s ON s.sponsor_id = ts.sponsor_id
+                GROUP BY ts.tournament_id
             ) ts ON ts.tournament_id = t.tournament_id
             ORDER BY t.start_date DESC
         `);
