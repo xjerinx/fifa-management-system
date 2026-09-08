@@ -231,9 +231,12 @@ function getSponsorDeliverables(industry = "", sponsorName = "") {
 }
 
 function getSponsorMeta(item) {
-  const isGlobal = (item.tournaments_sponsored || 0) >= 2;
+  const count = Number(item.tournaments_sponsored || 0);
+  const hasTournaments = count > 0;
+  const isGlobal = count >= 2;
   const totalVal = Number(item.total_contract_value || 0);
-  const formattedVal = totalVal > 0 ? formatCurrency(totalVal) : (isGlobal ? '$250M' : '$100M');
+  const formattedVal = hasTournaments ? (totalVal > 0 ? formatCurrency(totalVal) : '$0') : '—';
+  const cycleVal = item.term_cycles || (hasTournaments ? (SPONSOR_META[item.name]?.cycle || '2024 — 2028') : '—');
 
   if (SPONSOR_META[item.name]) {
     return {
@@ -241,7 +244,8 @@ function getSponsorMeta(item) {
       name: item.name,
       country: item.country,
       industry: item.industry,
-      value: totalVal > 0 ? formatCurrency(totalVal) : SPONSOR_META[item.name].value,
+      value: formattedVal,
+      cycle: cycleVal,
     };
   }
   const code = item.name.slice(0, 3).toUpperCase();
@@ -254,17 +258,17 @@ function getSponsorMeta(item) {
     tierBadgeClass: isGlobal
       ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30'
       : 'bg-amber-500/15 text-amber-400 border border-amber-500/30',
-    cycle: '2024 — 2028',
+    cycle: cycleVal,
     value: formattedVal,
-    deliverables: 'Tournament Commercial Rights & Matchday Digital Concessions Package',
-    ledRotation: `${Math.min(20, Math.max(5, (item.tournaments_sponsored || 1) * 5))}%`,
-    ledSecs: `${(item.tournaments_sponsored || 1) * 150}s`,
-    clearance: '100% Cleared',
-    complianceStatus: '100% DELIVERED',
+    deliverables: getSponsorDeliverables(item.industry, item.name),
+    ledRotation: hasTournaments ? `${Math.min(20, Math.max(5, count * 5))}%` : '0%',
+    ledSecs: hasTournaments ? `${count * 150}s` : '0s',
+    clearance: hasTournaments ? '100% Cleared' : 'Pending Activation',
+    complianceStatus: hasTournaments ? '100% DELIVERED' : 'UNASSIGNED',
     refId: `FIFA-24-${code}-01`,
-    virtualFeeds: 'Global Unicast · International Dynamic',
+    virtualFeeds: hasTournaments ? 'Global Unicast · International Dynamic' : 'No Active Feed',
     headquarters: `${item.country || 'Global HQ'}`,
-    venueAlloc: 'Sanctioned Tournament Venues'
+    venueAlloc: hasTournaments ? 'Sanctioned Tournament Venues' : 'Unallocated'
   };
 }
 
@@ -658,14 +662,14 @@ export default function Sponsors() {
           </div>
           <div className="flex items-baseline gap-2 mt-1.5">
             <span className="text-2xl font-black text-emerald-400 tracking-tight tabular-nums">
-              $1.84B
+              {totalContractVal > 0 ? formatCurrency(totalContractVal) : '$0'}
             </span>
             <span className="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 uppercase">
-              +18.4% YoY
+              {totalContractVal > 0 ? 'CONTRACTED' : 'NO CONTRACTS'}
             </span>
           </div>
           <p className="text-[10px] text-slate-400 mt-1 truncate">
-            Annualized Run Rate: $460M / YR
+            {totalTournamentsSponsored} Active Tournament Partnerships
           </p>
         </div>
 
@@ -933,8 +937,8 @@ export default function Sponsors() {
                       <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">
                         TERM CYCLE
                       </span>
-                      <span className="font-mono text-white text-xs font-semibold mt-0.5 block truncate" title={item.term_cycles || meta.cycle}>
-                        {item.term_cycles || meta.cycle}
+                      <span className="font-mono text-white text-xs font-semibold mt-0.5 block truncate" title={meta.cycle}>
+                        {meta.cycle}
                       </span>
                     </div>
 
@@ -942,8 +946,8 @@ export default function Sponsors() {
                       <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">
                         CONTRACT VALUE
                       </span>
-                      <span className="font-mono text-emerald-400 text-sm font-black mt-0.5 block">
-                        {Number(item.total_contract_value) > 0 ? formatCurrency(item.total_contract_value) : meta.value}
+                      <span className={`font-mono text-sm font-black mt-0.5 block ${meta.value !== '—' ? 'text-emerald-400' : 'text-slate-500'}`}>
+                        {meta.value}
                       </span>
                     </div>
                   </div>
@@ -1091,8 +1095,10 @@ export default function Sponsors() {
                           {meta.tier}
                         </span>
                       </td>
-                      <td className="py-3 px-4 font-mono font-black text-emerald-400 text-xs">
-                        {Number(item.total_contract_value) > 0 ? formatCurrency(item.total_contract_value) : meta.value}
+                      <td className="py-3 px-4 font-mono font-black text-xs">
+                        <span className={meta.value !== '—' ? 'text-emerald-400' : 'text-slate-500'}>
+                          {meta.value}
+                        </span>
                       </td>
                       <td className="py-3 px-4 text-right">
                         <div className="flex items-center justify-end gap-1.5">
