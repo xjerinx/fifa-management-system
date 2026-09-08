@@ -198,14 +198,6 @@ export default function FanExperience() {
 
           {/* Right Controls: User Profile & Exit */}
           <div className="flex items-center gap-3">
-            {/* Switch to Organization link */}
-            <Link
-              to="/dashboard"
-              className="hidden md:flex items-center gap-1.5 text-xs font-mono text-slate-400 hover:text-sky-400 transition-colors px-2.5 py-1 rounded-lg hover:bg-white/5"
-            >
-              <span className="material-symbols-outlined text-[16px]">admin_panel_settings</span>
-              <span>Federation Ops</span>
-            </Link>
 
             {/* User Pill */}
             <div className="flex items-center gap-2.5 bg-[#0e1628] pl-2 pr-3 py-1 rounded-full border border-white/10">

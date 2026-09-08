@@ -135,25 +135,6 @@ export default function Sidebar() {
         </nav>
       </div>
 
-      {/* Portal Quick Links */}
-      <div className="px-2 pt-2 border-t border-[#131d30] flex flex-col gap-1">
-        <NavLink
-          to="/fan"
-          title={collapsed ? "Fan Portal" : undefined}
-          className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-xs font-medium text-cyan-400 hover:bg-cyan-500/10 transition-colors"
-        >
-          <span className="material-symbols-outlined text-[17px] shrink-0">sports_soccer</span>
-          {!collapsed && <span>Fan Portal</span>}
-        </NavLink>
-        <NavLink
-          to="/"
-          title={collapsed ? "Exit to Main Portal" : undefined}
-          className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-xs font-medium text-slate-400 hover:text-white hover:bg-white/[0.04] transition-colors"
-        >
-          <span className="material-symbols-outlined text-[17px] shrink-0">door_open</span>
-          {!collapsed && <span>Exit to Portal</span>}
-        </NavLink>
-      </div>
 
       {/* Footer / Status Indicator */}
       <div className="px-3.5 pt-2.5 border-t border-[#131d30]">
