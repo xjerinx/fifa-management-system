@@ -201,7 +201,8 @@ export default function Teams() {
         await api.put(`/teams/${editingId}`, form);
         toast?.showToast("Team updated successfully");
       } else {
-        await api.post("/teams", form);
+        const { coach_id, ...createPayload } = form;
+        await api.post("/teams", createPayload);
         toast?.showToast("Team registered successfully");
       }
       setShowForm(false);
@@ -979,32 +980,35 @@ export default function Teams() {
             />
           </div>
 
-          <div>
-            <label className="block text-xs font-medium text-slate-300 mb-1.5">
-              Head Coach <span className="text-slate-500 font-normal">(Optional)</span>
-            </label>
-            <select
-              value={form.coach_id}
-              onChange={(e) => setForm({ ...form, coach_id: e.target.value })}
-              className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors cursor-pointer"
-            >
-              <option value="">Unassigned Coach</option>
-              {coaches.map((c) => {
-                const fullName = [c.first_name, c.last_name].filter(Boolean).join(" ");
-                const isCurrent = editingId && c.team_id === editingId;
-                const statusText = isCurrent
-                  ? "(Current Coach)"
-                  : c.team_name
-                  ? `(Assigned: ${c.team_name})`
-                  : "(Free Agent)";
-                return (
-                  <option key={c.coach_id} value={c.coach_id}>
-                    {fullName} — {statusText}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
+          {/* Head Coach assignment - available only when editing an existing team */}
+          {editingId && (
+            <div>
+              <label className="block text-xs font-medium text-slate-300 mb-1.5">
+                Head Coach <span className="text-slate-500 font-normal">(Optional)</span>
+              </label>
+              <select
+                value={form.coach_id}
+                onChange={(e) => setForm({ ...form, coach_id: e.target.value })}
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors cursor-pointer"
+              >
+                <option value="">Unassigned Coach</option>
+                {coaches.map((c) => {
+                  const fullName = [c.first_name, c.last_name].filter(Boolean).join(" ");
+                  const isCurrent = editingId && c.team_id === editingId;
+                  const statusText = isCurrent
+                    ? "(Current Coach)"
+                    : c.team_name
+                    ? `(Assigned: ${c.team_name})`
+                    : "(Free Agent)";
+                  return (
+                    <option key={c.coach_id} value={c.coach_id}>
+                      {fullName} — {statusText}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+          )}
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
