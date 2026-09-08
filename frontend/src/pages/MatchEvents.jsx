@@ -883,8 +883,11 @@ export default function MatchEvents() {
             return (
               <div key={item.event_id} className="relative flex items-center">
                 {/* Center Minute Node (Pinned to the Vertical Spine) */}
-                <div className="absolute left-6 md:left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-[#0a0e16] border-2 border-emerald-500/60 text-emerald-400 flex items-center justify-center font-mono font-bold text-xs shadow-lg shadow-emerald-500/10 z-20">
-                  {item.minute}'
+                <div className="absolute left-6 md:left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 min-w-[38px] h-[38px] px-1.5 rounded-full bg-[#0a0e16] border-2 border-emerald-500/60 text-emerald-400 flex items-center justify-center shadow-lg shadow-emerald-500/10 z-20">
+                  <span className="font-mono font-bold text-[11px] leading-none tracking-tight flex items-baseline justify-center">
+                    <span>{item.minute}</span>
+                    <span className="text-[9px] text-emerald-400/80 font-sans ml-0.5">'</span>
+                  </span>
                 </div>
 
                 {/* Desktop Dual-Sided Grid Wrapper:
