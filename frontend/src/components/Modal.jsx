@@ -31,13 +31,13 @@ export default function Modal({
 
       {/* Modal Dialog Box */}
       <div
-        className={`relative w-full ${maxWidth} bg-[#111622] border border-[#1f2738] rounded-xl shadow-2xl shadow-black/70 overflow-hidden z-10 my-auto flex flex-col max-h-[88vh] animate-in fade-in zoom-in-95 duration-150`}
+        className={`relative w-full ${maxWidth} bg-[#0b1222] border border-cyan-500/30 rounded-xl shadow-2xl shadow-black/70 overflow-hidden z-10 my-auto flex flex-col max-h-[88vh] animate-in fade-in zoom-in-95 duration-150`}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Header */}
-        <div className="flex items-center justify-between px-5 py-3.5 bg-[#141b2a] border-b border-[#1b2234] shrink-0">
+        <div className="flex items-center justify-between px-5 py-3.5 bg-[#0e162a] border-b border-white/10 shrink-0">
           <div className="flex items-center gap-2.5 min-w-0">
-            <div className="w-7 h-7 rounded-lg bg-emerald-500/15 text-emerald-400 border border-emerald-500/25 flex items-center justify-center shrink-0">
+            <div className="w-7 h-7 rounded-lg bg-cyan-500/15 text-cyan-400 border border-cyan-500/25 flex items-center justify-center shrink-0">
               <span className="material-symbols-outlined text-[16px]">{icon}</span>
             </div>
             <div className="flex flex-col min-w-0">

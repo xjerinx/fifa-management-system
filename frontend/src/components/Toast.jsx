@@ -29,8 +29,8 @@ export function ToastProvider({ children }) {
             key={t.id}
             className={`flex items-center gap-2 px-4 py-3 rounded-lg border shadow-lg text-sm min-w-[240px] animate-[fadeIn_0.2s_ease-out] ${
               t.type === 'success'
-                ? 'bg-[#0d1420] border-emerald-500/30 text-emerald-300'
-                : 'bg-[#0d1420] border-red-500/30 text-red-300'
+                ? 'bg-[#0b1222] border-cyan-500/40 text-cyan-300'
+                : 'bg-[#0b1222] border-red-500/30 text-red-300'
             }`}
           >
             {t.type === 'success' ? <CheckCircle2 size={16} /> : <XCircle size={16} />}

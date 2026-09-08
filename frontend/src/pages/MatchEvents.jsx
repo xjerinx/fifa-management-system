@@ -339,8 +339,8 @@ export default function MatchEvents() {
       <div className="flex flex-col gap-2.5">
         {/* Eyebrow */}
         <div className="flex items-center gap-2 flex-wrap">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span className="text-[11px] font-mono tracking-widest text-emerald-400 font-bold uppercase">
+          <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+          <span className="text-[11px] font-mono tracking-widest text-cyan-400 font-bold uppercase">
             MATCH EVENTS & INCIDENT FEED
           </span>
         </div>
@@ -358,7 +358,7 @@ export default function MatchEvents() {
               className="flex items-center gap-1.5 px-3 py-2 bg-[#121722] hover:bg-[#1b2234] text-xs font-semibold text-slate-300 hover:text-white border border-[#1f293d] rounded-lg transition-colors shadow-sm whitespace-nowrap"
               title="Refresh verified timeline feed"
             >
-              <RefreshCw size={13} className={loading ? 'animate-spin text-emerald-400' : 'text-slate-400'} />
+              <RefreshCw size={13} className={loading ? 'animate-spin text-cyan-400' : 'text-slate-400'} />
               <span className="font-mono text-[11px] tracking-wider uppercase">Sync VAR</span>
             </button>
 
@@ -388,7 +388,7 @@ export default function MatchEvents() {
 
             <button
               onClick={openCreate}
-              className="flex items-center gap-1.5 px-3.5 py-2 bg-[#00f59b] hover:bg-[#00d685] text-black text-xs font-bold rounded-lg transition-all shadow-md shadow-[#00f59b]/15 active:scale-[0.98] whitespace-nowrap"
+              className="flex items-center gap-1.5 px-3.5 py-2 bg-[#00e5ff] hover:bg-[#00c5de] text-black text-xs font-bold rounded-lg transition-all shadow-md shadow-[#00e5ff]/15 active:scale-[0.98] whitespace-nowrap"
             >
               <Plus size={15} strokeWidth={2.5} />
               <span className="tracking-wide uppercase font-mono text-[11px]">LOG MATCH EVENT</span>
@@ -411,13 +411,13 @@ export default function MatchEvents() {
             <span className="text-[10px] font-mono font-bold text-slate-400 tracking-wider uppercase">
               TOTAL VERIFIED EVENTS
             </span>
-            <CheckCircle2 size={13} className="text-emerald-400" />
+            <CheckCircle2 size={13} className="text-cyan-400" />
           </div>
           <div className="flex items-baseline gap-2 mt-1.5">
             <span className="text-2xl font-black text-white tracking-tight tabular-nums">
               {totalVerifiedEvents}
             </span>
-            <span className="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/20 uppercase">
+            <span className="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-cyan-500/15 text-cyan-400 border border-cyan-500/20 uppercase">
               100% RATIFIED
             </span>
           </div>
@@ -432,13 +432,13 @@ export default function MatchEvents() {
             <span className="text-[10px] font-mono font-bold text-slate-400 tracking-wider uppercase">
               GOALS & PENALTIES
             </span>
-            <span className="material-symbols-outlined text-[14px] text-emerald-400">sports_soccer</span>
+            <span className="material-symbols-outlined text-[14px] text-cyan-400">sports_soccer</span>
           </div>
           <div className="flex items-baseline gap-2 mt-1.5">
-            <span className="text-2xl font-black text-emerald-400 tracking-tight tabular-nums">
+            <span className="text-2xl font-black text-cyan-400 tracking-tight tabular-nums">
               {totalGoalsPenalties}
             </span>
-            <span className="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 uppercase">
+            <span className="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 uppercase">
               {goalsCount} OPEN · {penaltiesCount} PEN
             </span>
           </div>
@@ -519,7 +519,7 @@ export default function MatchEvents() {
           {/* Top Focus Meta Bar */}
           <div className="px-4 py-2.5 bg-[#121824] border-b border-[#1b2336] flex flex-wrap items-center justify-between gap-3 text-xs">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/25 font-mono text-[10px] font-bold uppercase tracking-wider">
+              <span className="px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/25 font-mono text-[10px] font-bold uppercase tracking-wider">
                 MATCHDAY FOCUS // {activeFocusMatch.stage || 'FINAL'}
               </span>
               <span className="text-slate-400 font-medium">
@@ -556,7 +556,7 @@ export default function MatchEvents() {
                 </select>
               </div>
 
-              <div className="hidden md:flex items-center gap-1.5 px-2 py-1 rounded bg-[#162030] text-[10px] font-mono text-emerald-400 font-bold border border-emerald-500/20">
+              <div className="hidden md:flex items-center gap-1.5 px-2 py-1 rounded bg-[#162030] text-[10px] font-mono text-cyan-400 font-bold border border-cyan-500/20">
                 <span>FULL TIME AUDIT</span>
               </div>
             </div>
@@ -588,7 +588,7 @@ export default function MatchEvents() {
                   <span className="tabular-nums">{focusAwayScore}</span>
                 </div>
                 <div className="mt-1 flex items-center gap-2">
-                  <span className="px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 text-[10px] font-mono font-bold uppercase tracking-wider">
+                  <span className="px-2 py-0.5 rounded bg-cyan-500/15 text-cyan-400 border border-cyan-500/30 text-[10px] font-mono font-bold uppercase tracking-wider">
                     FULL TIME 90'+4
                   </span>
                 </div>
@@ -615,7 +615,7 @@ export default function MatchEvents() {
 
             {/* Horizontal Pitch Timeline Track Bar */}
             <div className="mt-6 pt-5 border-t border-[#1b2336]">
-              <div className="relative w-full bg-[#0a0e16] h-8 rounded-lg border border-[#1e2738] flex items-center px-4 overflow-hidden select-none">
+              <div className="relative w-full bg-[#070c17] h-8 rounded-lg border border-[#1e2738] flex items-center px-4 overflow-hidden select-none">
                 {/* Minute Ticks */}
                 <div className="absolute inset-0 flex justify-between items-center px-4 text-[9px] font-mono text-slate-500 pointer-events-none">
                   <span>00' KICK-OFF</span>
@@ -641,7 +641,7 @@ export default function MatchEvents() {
                       title={`${e.minute}' - ${e.event_type}: ${getEffectivePlayerName(e)}`}
                     >
                       <div className={`w-3 h-3 rounded-full flex items-center justify-center shadow-lg transition-transform group-hover:scale-125 ${
-                        isGoal ? 'bg-emerald-400 text-black' : isCard ? 'bg-amber-400 text-black' : 'bg-blue-400 text-white'
+                        isGoal ? 'bg-cyan-400 text-black' : isCard ? 'bg-amber-400 text-black' : 'bg-blue-400 text-white'
                       }`}>
                         <span className="text-[7px] font-bold">
                           {isGoal ? '⚽' : isCard ? '🟨' : '•'}
@@ -658,7 +658,7 @@ export default function MatchEvents() {
               {/* Sub-Telemetry Footnote */}
               <div className="flex flex-wrap items-center justify-between gap-2 mt-2.5 text-[10px] font-mono text-slate-400">
                 <span>First Half Duration: 46:42</span>
-                <span className="text-emerald-400 font-bold">
+                <span className="text-cyan-400 font-bold">
                   MATCH RECORD: {focusMatchEvents.length} VERIFIED INCIDENTS LOGGED
                 </span>
                 <span>Second Half Stoppage: +4:15</span>
@@ -724,7 +724,7 @@ export default function MatchEvents() {
               <button
                 onClick={() => setActiveTab('timeline')}
                 className={`px-2.5 py-1 text-[11px] font-mono uppercase font-bold rounded transition-colors ${
-                  activeTab === 'timeline' ? 'bg-[#1e293d] text-emerald-400 shadow-sm' : 'text-slate-400 hover:text-white'
+                  activeTab === 'timeline' ? 'bg-[#1e293d] text-cyan-400 shadow-sm' : 'text-slate-400 hover:text-white'
                 }`}
               >
                 TIMELINE FEED
@@ -740,7 +740,7 @@ export default function MatchEvents() {
               <button
                 onClick={() => setActiveTab('goals')}
                 className={`px-2.5 py-1 text-[11px] font-mono uppercase font-bold rounded transition-colors ${
-                  activeTab === 'goals' ? 'bg-[#1e293d] text-emerald-400 shadow-sm' : 'text-slate-400 hover:text-white'
+                  activeTab === 'goals' ? 'bg-[#1e293d] text-cyan-400 shadow-sm' : 'text-slate-400 hover:text-white'
                 }`}
               >
                 GOALS & OFFENSE
@@ -759,7 +759,7 @@ export default function MatchEvents() {
             onClick={() => setTypeFilter('All')}
             className={`px-2.5 py-1 text-xs font-mono font-bold rounded transition-colors ${
               typeFilter === 'All'
-                ? 'bg-[#00f59b] text-black shadow-sm'
+                ? 'bg-[#00e5ff] text-black shadow-sm'
                 : 'bg-[#090d16] text-slate-400 hover:text-white border border-[#1c2436]'
             }`}
           >
@@ -770,7 +770,7 @@ export default function MatchEvents() {
             onClick={() => setTypeFilter('Goal')}
             className={`px-2.5 py-1 text-xs font-mono font-bold rounded transition-colors ${
               typeFilter === 'Goal'
-                ? 'bg-[#00f59b] text-black shadow-sm'
+                ? 'bg-[#00e5ff] text-black shadow-sm'
                 : 'bg-[#090d16] text-slate-400 hover:text-white border border-[#1c2436]'
             }`}
           >
@@ -781,7 +781,7 @@ export default function MatchEvents() {
             onClick={() => setTypeFilter('Penalty')}
             className={`px-2.5 py-1 text-xs font-mono font-bold rounded transition-colors ${
               typeFilter === 'Penalty'
-                ? 'bg-[#00f59b] text-black shadow-sm'
+                ? 'bg-[#00e5ff] text-black shadow-sm'
                 : 'bg-[#090d16] text-slate-400 hover:text-white border border-[#1c2436]'
             }`}
           >
@@ -792,7 +792,7 @@ export default function MatchEvents() {
             onClick={() => setTypeFilter('Yellow Card')}
             className={`px-2.5 py-1 text-xs font-mono font-bold rounded transition-colors ${
               typeFilter === 'Yellow Card'
-                ? 'bg-[#00f59b] text-black shadow-sm'
+                ? 'bg-[#00e5ff] text-black shadow-sm'
                 : 'bg-[#090d16] text-slate-400 hover:text-white border border-[#1c2436]'
             }`}
           >
@@ -803,7 +803,7 @@ export default function MatchEvents() {
             onClick={() => setTypeFilter('Red Card')}
             className={`px-2.5 py-1 text-xs font-mono font-bold rounded transition-colors ${
               typeFilter === 'Red Card'
-                ? 'bg-[#00f59b] text-black shadow-sm'
+                ? 'bg-[#00e5ff] text-black shadow-sm'
                 : 'bg-[#090d16] text-slate-400 hover:text-white border border-[#1c2436]'
             }`}
           >
@@ -814,7 +814,7 @@ export default function MatchEvents() {
             onClick={() => setTypeFilter('Substitution')}
             className={`px-2.5 py-1 text-xs font-mono font-bold rounded transition-colors ${
               typeFilter === 'Substitution'
-                ? 'bg-[#00f59b] text-black shadow-sm'
+                ? 'bg-[#00e5ff] text-black shadow-sm'
                 : 'bg-[#090d16] text-slate-400 hover:text-white border border-[#1c2436]'
             }`}
           >
@@ -883,10 +883,10 @@ export default function MatchEvents() {
             return (
               <div key={item.event_id} className="relative flex items-center">
                 {/* Center Minute Node (Pinned to the Vertical Spine) */}
-                <div className="absolute left-6 md:left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 min-w-[38px] h-[38px] px-1.5 rounded-full bg-[#0a0e16] border-2 border-emerald-500/60 text-emerald-400 flex items-center justify-center shadow-lg shadow-emerald-500/10 z-20">
+                <div className="absolute left-6 md:left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 min-w-[38px] h-[38px] px-1.5 rounded-full bg-[#070c17] border-2 border-cyan-500/60 text-cyan-400 flex items-center justify-center shadow-lg shadow-emerald-500/10 z-20">
                   <span className="font-mono font-bold text-[11px] leading-none tracking-tight flex items-baseline justify-center">
                     <span>{item.minute}</span>
-                    <span className="text-[9px] text-emerald-400/80 font-sans ml-0.5">'</span>
+                    <span className="text-[9px] text-cyan-400/80 font-sans ml-0.5">'</span>
                   </span>
                 </div>
 
@@ -899,8 +899,8 @@ export default function MatchEvents() {
                     {isHomeTeam && (
                       <div className={`bg-[#0e121b] hover:bg-[#121824] border rounded-xl p-4 transition-all group shadow-lg relative ${
                         isSelected(item.event_id)
-                          ? 'border-emerald-500/80 bg-emerald-950/10'
-                          : 'border-[#1b2336] hover:border-emerald-500/30'
+                          ? 'border-cyan-500/80 bg-cyan-950/10'
+                          : 'border-[#1b2336] hover:border-cyan-500/30'
                       }`}>
                         {/* Connecting Line to Spine (Desktop only) */}
                         <div className="hidden md:block absolute -right-7 top-1/2 -translate-y-1/2 w-7 h-px bg-[#1f293d]"></div>
@@ -914,13 +914,13 @@ export default function MatchEvents() {
                                 checked={isSelected(item.event_id)}
                                 onChange={() => toggleSelect(item.event_id)}
                                 onClick={(e) => e.stopPropagation()}
-                                className="w-4 h-4 rounded border-white/20 bg-[#090d16] text-emerald-500 focus:ring-emerald-500/20 cursor-pointer shrink-0"
+                                className="w-4 h-4 rounded border-white/20 bg-[#090d16] text-cyan-400 focus:ring-cyan-500/20 cursor-pointer shrink-0"
                                 aria-label={`Select event minute ${item.minute}`}
                               />
                             )}
                             <span className={`px-2 py-0.5 rounded font-mono text-[9px] font-bold uppercase tracking-wider ${
                               isGoal
-                                ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30'
+                                ? 'bg-cyan-500/15 text-cyan-400 border border-cyan-500/30'
                                 : isPenalty
                                 ? 'bg-amber-500/15 text-amber-300 border border-amber-500/30'
                                 : isYellow
@@ -941,7 +941,7 @@ export default function MatchEvents() {
                             {/* Actions: Edit & Delete */}
                             <button
                               onClick={() => openEdit(item)}
-                              className="p-1 rounded bg-[#090d16] hover:bg-[#1e293d] text-slate-400 hover:text-emerald-400 border border-white/5 transition-colors"
+                              className="p-1 rounded bg-[#090d16] hover:bg-[#1e293d] text-slate-400 hover:text-cyan-400 border border-white/5 transition-colors"
                               title="Edit match event"
                             >
                               <Pencil size={11} />
@@ -960,7 +960,7 @@ export default function MatchEvents() {
                         <div className="flex items-start justify-between gap-3">
                           <div className="flex items-center gap-2.5 min-w-0 flex-1">
                             <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${
-                              isGoal ? 'bg-emerald-500/15 text-emerald-400' : isPenalty ? 'bg-amber-500/15 text-amber-400' : isYellow ? 'bg-yellow-500/15 text-yellow-400' : 'bg-blue-500/15 text-blue-400'
+                              isGoal ? 'bg-cyan-500/15 text-cyan-400' : isPenalty ? 'bg-amber-500/15 text-amber-400' : isYellow ? 'bg-yellow-500/15 text-yellow-400' : 'bg-blue-500/15 text-blue-400'
                             }`}>
                               <span className="material-symbols-outlined text-[18px]">
                                 {isGoal ? 'sports_soccer' : isPenalty ? 'sports' : isYellow ? 'style' : 'sync_alt'}
@@ -982,7 +982,7 @@ export default function MatchEvents() {
                               <span className="px-2 py-0.5 rounded bg-[#090d16] text-white font-mono font-bold text-xs border border-[#1f293d]">
                                 {runningScore}
                               </span>
-                              <div className="text-[9px] font-mono text-emerald-400 mt-0.5">
+                              <div className="text-[9px] font-mono text-cyan-400 mt-0.5">
                                 xG 0.42
                               </div>
                             </div>
@@ -1004,8 +1004,8 @@ export default function MatchEvents() {
                     {!isHomeTeam && (
                       <div className={`bg-[#0e121b] hover:bg-[#121824] border rounded-xl p-4 transition-all group shadow-lg relative ${
                         isSelected(item.event_id)
-                          ? 'border-emerald-500/80 bg-emerald-950/10'
-                          : 'border-[#1b2336] hover:border-emerald-500/30'
+                          ? 'border-cyan-500/80 bg-cyan-950/10'
+                          : 'border-[#1b2336] hover:border-cyan-500/30'
                       }`}>
                         {/* Connecting Line to Spine (Desktop only) */}
                         <div className="hidden md:block absolute -left-7 top-1/2 -translate-y-1/2 w-7 h-px bg-[#1f293d]"></div>
@@ -1019,13 +1019,13 @@ export default function MatchEvents() {
                                 checked={isSelected(item.event_id)}
                                 onChange={() => toggleSelect(item.event_id)}
                                 onClick={(e) => e.stopPropagation()}
-                                className="w-4 h-4 rounded border-white/20 bg-[#090d16] text-emerald-500 focus:ring-emerald-500/20 cursor-pointer shrink-0"
+                                className="w-4 h-4 rounded border-white/20 bg-[#090d16] text-cyan-400 focus:ring-cyan-500/20 cursor-pointer shrink-0"
                                 aria-label={`Select event minute ${item.minute}`}
                               />
                             )}
                             <span className={`px-2 py-0.5 rounded font-mono text-[9px] font-bold uppercase tracking-wider ${
                               isGoal
-                                ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30'
+                                ? 'bg-cyan-500/15 text-cyan-400 border border-cyan-500/30'
                                 : isPenalty
                                 ? 'bg-amber-500/15 text-amber-300 border border-amber-500/30'
                                 : isYellow
@@ -1046,7 +1046,7 @@ export default function MatchEvents() {
                             {/* Actions: Edit & Delete */}
                             <button
                               onClick={() => openEdit(item)}
-                              className="p-1 rounded bg-[#090d16] hover:bg-[#1e293d] text-slate-400 hover:text-emerald-400 border border-white/5 transition-colors"
+                              className="p-1 rounded bg-[#090d16] hover:bg-[#1e293d] text-slate-400 hover:text-cyan-400 border border-white/5 transition-colors"
                               title="Edit match event"
                             >
                               <Pencil size={11} />
@@ -1065,7 +1065,7 @@ export default function MatchEvents() {
                         <div className="flex items-start justify-between gap-3">
                           <div className="flex items-center gap-2.5 min-w-0 flex-1">
                             <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${
-                              isGoal ? 'bg-emerald-500/15 text-emerald-400' : isPenalty ? 'bg-amber-500/15 text-amber-400' : isYellow ? 'bg-yellow-500/15 text-yellow-400' : 'bg-blue-500/15 text-blue-400'
+                              isGoal ? 'bg-cyan-500/15 text-cyan-400' : isPenalty ? 'bg-amber-500/15 text-amber-400' : isYellow ? 'bg-yellow-500/15 text-yellow-400' : 'bg-blue-500/15 text-blue-400'
                             }`}>
                               <span className="material-symbols-outlined text-[18px]">
                                 {isGoal ? 'sports_soccer' : isPenalty ? 'sports' : isYellow ? 'style' : 'sync_alt'}
@@ -1087,7 +1087,7 @@ export default function MatchEvents() {
                               <span className="px-2 py-0.5 rounded bg-[#090d16] text-white font-mono font-bold text-xs border border-[#1f293d]">
                                 {runningScore}
                               </span>
-                              <div className="text-[9px] font-mono text-emerald-400 mt-0.5">
+                              <div className="text-[9px] font-mono text-cyan-400 mt-0.5">
                                 xG 0.38
                               </div>
                             </div>
@@ -1117,7 +1117,7 @@ export default function MatchEvents() {
               </p>
               <button
                 onClick={openCreate}
-                className="mt-4 px-3.5 py-1.5 bg-[#00f59b] hover:bg-[#00d685] text-black text-xs font-bold rounded-lg transition-colors"
+                className="mt-4 px-3.5 py-1.5 bg-[#00e5ff] hover:bg-[#00c5de] text-black text-xs font-bold rounded-lg transition-colors"
               >
                 + Log First Event
               </button>
@@ -1150,11 +1150,11 @@ export default function MatchEvents() {
           {/* Match selection */}
           <div>
             <label className="block text-xs font-mono font-bold text-slate-300 mb-1.5 uppercase">
-              Match Fixture <span className="text-emerald-400">*</span>
+              Match Fixture <span className="text-cyan-400">*</span>
             </label>
             <select
               required
-              className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors cursor-pointer"
+              className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors cursor-pointer"
               value={form.match_id}
               onChange={e => setForm({ ...form, match_id: e.target.value })}
             >
@@ -1171,11 +1171,11 @@ export default function MatchEvents() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
             <div>
               <label className="block text-xs font-mono font-bold text-slate-300 mb-1.5 uppercase">
-                Event Type <span className="text-emerald-400">*</span>
+                Event Type <span className="text-cyan-400">*</span>
               </label>
               <select
                 required
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors cursor-pointer"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors cursor-pointer"
                 value={form.event_type}
                 onChange={e => setForm({ ...form, event_type: e.target.value })}
               >
@@ -1185,7 +1185,7 @@ export default function MatchEvents() {
 
             <div>
               <label className="block text-xs font-mono font-bold text-slate-300 mb-1.5 uppercase">
-                Match Minute (0 - 120) <span className="text-emerald-400">*</span>
+                Match Minute (0 - 120) <span className="text-cyan-400">*</span>
               </label>
               <input
                 type="number"
@@ -1193,7 +1193,7 @@ export default function MatchEvents() {
                 max="130"
                 required
                 placeholder="e.g. 67"
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white font-mono focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white font-mono focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
                 value={form.minute}
                 onChange={e => setForm({ ...form, minute: e.target.value })}
               />
@@ -1206,7 +1206,7 @@ export default function MatchEvents() {
               Player Involved
             </label>
             <select
-              className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors cursor-pointer"
+              className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors cursor-pointer"
               value={form.player_id}
               onChange={e => setForm({ ...form, player_id: e.target.value })}
             >
@@ -1227,7 +1227,7 @@ export default function MatchEvents() {
             <textarea
               rows={3}
               placeholder="e.g. Clinical left-foot strike into bottom corner following through ball"
-              className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors resize-none leading-relaxed"
+              className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors resize-none leading-relaxed"
               value={form.description}
               onChange={e => setForm({ ...form, description: e.target.value })}
             />
@@ -1244,7 +1244,7 @@ export default function MatchEvents() {
             </button>
             <button
               type="submit"
-              className="px-4 py-2 bg-[#00f59b] hover:bg-[#00d685] text-black text-xs font-bold rounded-lg transition-all shadow-md shadow-[#00f59b]/20 active:scale-[0.98] uppercase font-mono"
+              className="px-4 py-2 bg-[#00e5ff] hover:bg-[#00c5de] text-black text-xs font-bold rounded-lg transition-all shadow-md shadow-[#00e5ff]/20 active:scale-[0.98] uppercase font-mono"
             >
               {editingId ? 'Save Changes' : 'Confirm Event'}
             </button>

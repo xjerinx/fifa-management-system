@@ -28,9 +28,9 @@ const TYPE_CONFIG = {
   Regional: {
     badgeLabel: "REGIONAL",
     icon: "flag",
-    badge: "bg-emerald-950/50 text-emerald-400 border border-emerald-500/30",
-    accentGlow: "group-hover:border-emerald-500/40",
-    iconBg: "bg-emerald-950/30 text-emerald-400 border-emerald-500/20",
+    badge: "bg-cyan-950/50 text-cyan-400 border border-cyan-500/30",
+    accentGlow: "group-hover:border-cyan-500/40",
+    iconBg: "bg-cyan-950/30 text-cyan-400 border-cyan-500/20",
   },
   Friendly: {
     badgeLabel: "INVITATIONAL",
@@ -61,9 +61,9 @@ function getStatus(start, end) {
     };
   return {
     label: "Active",
-    badgeColor: "bg-emerald-950/60 text-emerald-400 border border-emerald-500/30",
-    dotColor: "bg-emerald-400",
-    barColor: "bg-[#00f59b]",
+    badgeColor: "bg-cyan-950/60 text-cyan-400 border border-cyan-500/30",
+    dotColor: "bg-cyan-400",
+    barColor: "bg-[#00e5ff]",
   };
 }
 
@@ -401,14 +401,14 @@ export default function Tournaments() {
       <div className="flex flex-col gap-2.5 pt-1">
         {/* Eyebrow / Competitions Registry */}
         <div className="flex items-center gap-2 flex-wrap">
-          <span className="material-symbols-outlined text-[15px] text-emerald-400">
+          <span className="material-symbols-outlined text-[15px] text-cyan-400">
             emoji_events
           </span>
           <span className="text-[11px] font-mono tracking-wider text-slate-400 uppercase font-semibold">
             TOURNAMENTS & COMPETITIONS REGISTRY // GLOBAL CALENDAR - FIFA STATUTES 2026/27
           </span>
           <span className="text-slate-600 hidden sm:inline">|</span>
-          <span className="text-[10px] font-mono text-emerald-400 font-semibold hidden sm:inline">
+          <span className="text-[10px] font-mono text-cyan-400 font-semibold hidden sm:inline">
             ● TMS PROTOCOL v9.8.2 ACTIVE
           </span>
         </div>
@@ -419,7 +419,7 @@ export default function Tournaments() {
             <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight uppercase leading-tight font-display">
               INTERNATIONAL TOURNAMENTS & CUPS
             </h1>
-            <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-400 border border-emerald-500/30 uppercase tracking-wider">
+            <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-cyan-950/60 text-cyan-400 border border-cyan-500/30 uppercase tracking-wider">
               {totalTournaments} REGISTERED EDITIONS
             </span>
           </div>
@@ -451,7 +451,7 @@ export default function Tournaments() {
 
             <button
               onClick={openCreate}
-              className="flex items-center gap-1.5 px-3.5 py-2 bg-[#00f59b] hover:bg-[#00d685] text-black font-bold text-xs rounded transition-colors shadow-sm tracking-wide whitespace-nowrap"
+              className="flex items-center gap-1.5 px-3.5 py-2 bg-[#00e5ff] hover:bg-[#00c5de] text-black font-bold text-xs rounded transition-colors shadow-sm tracking-wide whitespace-nowrap"
             >
               <span className="material-symbols-outlined text-[17px] font-bold">add</span>
               <span>REGISTER TOURNAMENT</span>
@@ -517,7 +517,7 @@ export default function Tournaments() {
             <span className="text-[10px] font-mono uppercase text-slate-400 tracking-wider font-semibold">
               SCHEDULED MATCHES
             </span>
-            <span className="material-symbols-outlined text-[18px] text-emerald-400">
+            <span className="material-symbols-outlined text-[18px] text-cyan-400">
               sports_soccer
             </span>
           </div>
@@ -526,11 +526,11 @@ export default function Tournaments() {
               <span>{totalMatches}</span>
               <span className="text-xs font-mono font-normal text-slate-400">FIXTURES</span>
             </div>
-            <div className="text-[10px] font-mono text-emerald-400 mt-1.5 font-semibold">
+            <div className="text-[10px] font-mono text-cyan-400 mt-1.5 font-semibold">
               Tournament Fixture Allocations
             </div>
             <div className="w-full h-1 bg-slate-800 rounded-full overflow-hidden mt-3">
-              <div className="h-full bg-emerald-400 rounded-full w-[70%]"></div>
+              <div className="h-full bg-cyan-400 rounded-full w-[70%]"></div>
             </div>
           </div>
         </div>
@@ -571,7 +571,7 @@ export default function Tournaments() {
               onClick={() => setTypeFilter("ALL")}
               className={`px-2.5 py-1 rounded text-[11px] font-bold whitespace-nowrap transition-all ${
                 typeFilter === "ALL"
-                  ? "bg-[#00f59b] text-black shadow-sm"
+                  ? "bg-[#00e5ff] text-black shadow-sm"
                   : "text-slate-400 hover:text-white"
               }`}
             >
@@ -581,7 +581,7 @@ export default function Tournaments() {
               onClick={() => setTypeFilter("World Cup")}
               className={`px-2.5 py-1 rounded text-[11px] font-bold whitespace-nowrap transition-all ${
                 typeFilter === "World Cup"
-                  ? "bg-[#00f59b] text-black shadow-sm"
+                  ? "bg-[#00e5ff] text-black shadow-sm"
                   : "text-slate-400 hover:text-white"
               }`}
             >
@@ -591,7 +591,7 @@ export default function Tournaments() {
               onClick={() => setTypeFilter("Continental")}
               className={`px-2.5 py-1 rounded text-[11px] font-bold whitespace-nowrap transition-all ${
                 typeFilter === "Continental"
-                  ? "bg-[#00f59b] text-black shadow-sm"
+                  ? "bg-[#00e5ff] text-black shadow-sm"
                   : "text-slate-400 hover:text-white"
               }`}
             >
@@ -606,7 +606,7 @@ export default function Tournaments() {
                 onClick={() => setStatusFilter(st)}
                 className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase transition-colors ${
                   statusFilter === st
-                    ? "bg-[#1f283a] text-[#00f59b] border border-emerald-500/30"
+                    ? "bg-[#1f283a] text-[#00e5ff] border border-cyan-500/30"
                     : "text-slate-400 hover:text-white"
                 }`}
               >
@@ -657,7 +657,7 @@ export default function Tournaments() {
               onClick={() => setViewMode("grid")}
               className={`p-1.5 rounded transition-colors ${
                 viewMode === "grid"
-                  ? "bg-[#182030] text-emerald-400"
+                  ? "bg-[#182030] text-cyan-400"
                   : "text-slate-500 hover:text-slate-300"
               }`}
               title="Grid View"
@@ -668,7 +668,7 @@ export default function Tournaments() {
               onClick={() => setViewMode("table")}
               className={`p-1.5 rounded transition-colors ${
                 viewMode === "table"
-                  ? "bg-[#182030] text-emerald-400"
+                  ? "bg-[#182030] text-cyan-400"
                   : "text-slate-500 hover:text-slate-300"
               }`}
               title="Table View"
@@ -714,7 +714,7 @@ export default function Tournaments() {
       {/* Content Area */}
       {loading ? (
         <div className="py-24 text-center flex flex-col items-center justify-center gap-3">
-          <span className="w-8 h-8 rounded-full border-2 border-[#00f59b] border-t-transparent animate-spin"></span>
+          <span className="w-8 h-8 rounded-full border-2 border-[#00e5ff] border-t-transparent animate-spin"></span>
           <span className="text-xs font-mono text-slate-400 tracking-wider">
             SYNCHRONIZING TOURNAMENTS DIRECTORY...
           </span>
@@ -740,8 +740,8 @@ export default function Tournaments() {
                 key={item.tournament_id}
                 className={`bg-[#10141e] rounded-lg p-4 border transition-all duration-200 flex flex-col justify-between shadow-sm group ${
                   isSelected(item.tournament_id)
-                    ? "border-emerald-500/80 bg-emerald-950/10"
-                    : "border-white/10 hover:border-emerald-500/30"
+                    ? "border-cyan-500/80 bg-cyan-950/10"
+                    : "border-white/10 hover:border-cyan-500/30"
                 }`}
               >
                 <div>
@@ -754,7 +754,7 @@ export default function Tournaments() {
                           checked={isSelected(item.tournament_id)}
                           onChange={() => toggleSelect(item.tournament_id)}
                           onClick={(e) => e.stopPropagation()}
-                          className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-emerald-500 focus:ring-emerald-500/20 focus:ring-offset-0 cursor-pointer shrink-0"
+                          className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-cyan-400 focus:ring-cyan-500/20 focus:ring-offset-0 cursor-pointer shrink-0"
                           aria-label={`Select ${item.name}`}
                         />
                       )}
@@ -778,7 +778,7 @@ export default function Tournaments() {
 
                   {/* Tournament Name & Format */}
                   <div className="mt-2.5">
-                    <h2 className="text-lg font-black text-white group-hover:text-emerald-400 transition-colors break-words leading-tight uppercase">
+                    <h2 className="text-lg font-black text-white group-hover:text-cyan-400 transition-colors break-words leading-tight uppercase">
                       {item.name}
                     </h2>
                     <div className="flex items-center gap-1.5 text-xs text-slate-400 mt-1.5">
@@ -834,7 +834,7 @@ export default function Tournaments() {
                       <span className="text-[9px] font-mono uppercase text-slate-400 tracking-wider font-semibold block">
                         SCHEDULED MATCHES
                       </span>
-                      <span className="font-mono text-xs font-bold text-emerald-400 mt-0.5 block truncate">
+                      <span className="font-mono text-xs font-bold text-cyan-400 mt-0.5 block truncate">
                         {item.match_count || 0} Fixtures Logged
                       </span>
                     </div>
@@ -848,7 +848,7 @@ export default function Tournaments() {
                         <span className="text-[9px] font-mono uppercase text-slate-400 tracking-wider font-semibold block flex items-center gap-1">
                           <span>COMMERCIAL PARTNERS</span>
                           {item.sponsor_count > 0 && (
-                            <span className="material-symbols-outlined text-[11px] text-emerald-400 group-hover/sp:translate-x-0.5 transition-transform">arrow_forward</span>
+                            <span className="material-symbols-outlined text-[11px] text-cyan-400 group-hover/sp:translate-x-0.5 transition-transform">arrow_forward</span>
                           )}
                         </span>
                         {item.sponsor_count > 0 ? (
@@ -887,7 +887,7 @@ export default function Tournaments() {
                       <span className="text-[9px] font-mono uppercase text-slate-400 tracking-wider font-semibold block">
                         PORTFOLIO VALUE
                       </span>
-                      <span className="font-mono text-xs font-bold text-emerald-400 mt-0.5 block truncate">
+                      <span className="font-mono text-xs font-bold text-cyan-400 mt-0.5 block truncate">
                         {formatCurrency(item.total_sponsorship_value)}
                       </span>
                     </div>
@@ -938,7 +938,7 @@ export default function Tournaments() {
                         type="checkbox"
                         checked={isAllSelected}
                         onChange={() => toggleSelectAll(filtered)}
-                        className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-emerald-500 focus:ring-emerald-500/20 cursor-pointer"
+                        className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-cyan-400 focus:ring-cyan-500/20 cursor-pointer"
                         aria-label="Select all tournaments"
                       />
                     </th>
@@ -964,7 +964,7 @@ export default function Tournaments() {
                     <tr
                       key={item.tournament_id}
                       className={`hover:bg-white/[0.02] transition-colors ${
-                        isSelected(item.tournament_id) ? "bg-emerald-950/15" : ""
+                        isSelected(item.tournament_id) ? "bg-cyan-950/15" : ""
                       }`}
                     >
                       {isSelectionMode && (
@@ -973,7 +973,7 @@ export default function Tournaments() {
                             type="checkbox"
                             checked={isSelected(item.tournament_id)}
                             onChange={() => toggleSelect(item.tournament_id)}
-                            className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-emerald-500 focus:ring-emerald-500/20 cursor-pointer"
+                            className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-cyan-400 focus:ring-cyan-500/20 cursor-pointer"
                             aria-label={`Select ${item.name}`}
                           />
                         </td>
@@ -996,7 +996,7 @@ export default function Tournaments() {
                       <td className="py-3 px-4 font-mono font-bold text-white">
                         {item.team_count || 0} Teams
                       </td>
-                      <td className="py-3 px-4 font-mono font-bold text-emerald-400">
+                      <td className="py-3 px-4 font-mono font-bold text-cyan-400">
                         {item.match_count || 0} Matches
                       </td>
                       <td className="py-3 px-4">
@@ -1051,7 +1051,7 @@ export default function Tournaments() {
       {/* Compliance / Status Footer Banner */}
       <div className="bg-[#10141e] border border-white/10 rounded-lg p-3.5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs shadow-sm">
         <div className="flex items-center gap-2.5 text-slate-300">
-          <span className="material-symbols-outlined text-[18px] text-emerald-400">verified_user</span>
+          <span className="material-symbols-outlined text-[18px] text-cyan-400">verified_user</span>
           <div>
             <span className="font-mono text-[11px] font-bold text-white uppercase tracking-wider block">
               FIFA COMPETITION REGULATIONS 2026/27 COMPLIANT
@@ -1063,8 +1063,8 @@ export default function Tournaments() {
         </div>
         <div className="flex items-center gap-4 text-[10px] font-mono text-slate-400 shrink-0">
           <span>ALL CALENDARS VERIFIED</span>
-          <span className="text-emerald-400 font-bold flex items-center gap-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+          <span className="text-cyan-400 font-bold flex items-center gap-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
             TMS SYNCED
           </span>
         </div>
@@ -1088,7 +1088,7 @@ export default function Tournaments() {
 
           <div>
             <label className="block text-xs font-medium text-slate-300 mb-1.5">
-              Tournament Name <span className="text-emerald-400">*</span>
+              Tournament Name <span className="text-cyan-400">*</span>
             </label>
             <input
               type="text"
@@ -1096,20 +1096,20 @@ export default function Tournaments() {
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
               placeholder="e.g. FIFA World Cup 2026"
-              className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+              className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
             />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
             <div>
               <label className="block text-xs font-medium text-slate-300 mb-1.5">
-                Tournament Type <span className="text-emerald-400">*</span>
+                Tournament Type <span className="text-cyan-400">*</span>
               </label>
               <select
                 required
                 value={form.type}
                 onChange={(e) => setForm({ ...form, type: e.target.value })}
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors cursor-pointer"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors cursor-pointer"
               >
                 {types.map((t) => (
                   <option key={t} value={t} className="bg-[#10141e] text-white">
@@ -1121,13 +1121,13 @@ export default function Tournaments() {
 
             <div>
               <label className="block text-xs font-medium text-slate-300 mb-1.5">
-                Format <span className="text-emerald-400">*</span>
+                Format <span className="text-cyan-400">*</span>
               </label>
               <select
                 required
                 value={form.format}
                 onChange={(e) => setForm({ ...form, format: e.target.value })}
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors cursor-pointer"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors cursor-pointer"
               >
                 {formats.map((f) => (
                   <option key={f} value={f} className="bg-[#10141e] text-white">
@@ -1141,27 +1141,27 @@ export default function Tournaments() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
             <div>
               <label className="block text-xs font-medium text-slate-300 mb-1.5">
-                Start Date <span className="text-emerald-400">*</span>
+                Start Date <span className="text-cyan-400">*</span>
               </label>
               <input
                 type="date"
                 required
                 value={form.start_date}
                 onChange={(e) => setForm({ ...form, start_date: e.target.value })}
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
               />
             </div>
 
             <div>
               <label className="block text-xs font-medium text-slate-300 mb-1.5">
-                End Date <span className="text-emerald-400">*</span>
+                End Date <span className="text-cyan-400">*</span>
               </label>
               <input
                 type="date"
                 required
                 value={form.end_date}
                 onChange={(e) => setForm({ ...form, end_date: e.target.value })}
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
               />
             </div>
           </div>
@@ -1177,7 +1177,7 @@ export default function Tournaments() {
             <button
               type="submit"
               disabled={loadingAction}
-              className="px-4 py-2 bg-[#00f59b] hover:bg-[#00d685] text-black text-xs font-bold rounded-lg transition-colors shadow-sm disabled:opacity-50"
+              className="px-4 py-2 bg-[#00e5ff] hover:bg-[#00c5de] text-black text-xs font-bold rounded-lg transition-colors shadow-sm disabled:opacity-50"
             >
               {loadingAction ? "Saving..." : editingId ? "Save Changes" : "Register Tournament"}
             </button>
@@ -1199,14 +1199,14 @@ export default function Tournaments() {
         <div className="p-1 space-y-4">
           {/* Header Stats Bar */}
           {selectedTournamentForSponsors && (
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 bg-[#0a0e16] border border-[#1b2336] rounded-lg p-3">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 bg-[#070c17] border border-[#1b2336] rounded-lg p-3">
               <div>
                 <span className="text-[9px] font-mono uppercase text-slate-400 font-bold block">TOURNAMENT</span>
                 <span className="text-xs font-bold text-white truncate block">{selectedTournamentForSponsors.name}</span>
               </div>
               <div>
                 <span className="text-[9px] font-mono uppercase text-slate-400 font-bold block">ACTIVE SPONSORS</span>
-                <span className="text-xs font-mono font-bold text-emerald-400 block">{tournamentSponsors.length} Partners</span>
+                <span className="text-xs font-mono font-bold text-cyan-400 block">{tournamentSponsors.length} Partners</span>
               </div>
               <div>
                 <span className="text-[9px] font-mono uppercase text-slate-400 font-bold block">TOTAL SPONSORSHIP</span>
@@ -1230,7 +1230,7 @@ export default function Tournaments() {
               onClick={() => setActiveSponsorTab('contracts')}
               className={`px-3 py-1.5 text-xs font-mono font-bold uppercase rounded-lg transition-colors flex items-center gap-1.5 ${
                 activeSponsorTab === 'contracts'
-                  ? 'bg-[#00f59b] text-black shadow-sm'
+                  ? 'bg-[#00e5ff] text-black shadow-sm'
                   : 'bg-[#10141e] text-slate-400 hover:text-white border border-white/5'
               }`}
             >
@@ -1242,7 +1242,7 @@ export default function Tournaments() {
               onClick={() => setActiveSponsorTab('assets')}
               className={`px-3 py-1.5 text-xs font-mono font-bold uppercase rounded-lg transition-colors flex items-center gap-1.5 ${
                 activeSponsorTab === 'assets'
-                  ? 'bg-[#00f59b] text-black shadow-sm'
+                  ? 'bg-[#00e5ff] text-black shadow-sm'
                   : 'bg-[#10141e] text-slate-400 hover:text-white border border-white/5'
               }`}
             >
@@ -1256,7 +1256,7 @@ export default function Tournaments() {
               {/* Tournament Sponsor Portfolio Banner */}
               <div className="bg-[#0c101a] border border-[#1e273a] rounded-lg p-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-7 h-7 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
+                  <div className="w-7 h-7 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 shrink-0">
                     <span className="material-symbols-outlined text-[16px]">verified</span>
                   </div>
                   <div>
@@ -1268,13 +1268,13 @@ export default function Tournaments() {
                     </span>
                   </div>
                 </div>
-                <div className="text-[10px] font-mono text-emerald-400 font-bold px-2.5 py-1 rounded bg-emerald-500/10 border border-emerald-500/20 shrink-0">
+                <div className="text-[10px] font-mono text-cyan-400 font-bold px-2.5 py-1 rounded bg-cyan-500/10 border border-cyan-500/20 shrink-0">
                   TMS SYNCHRONIZED
                 </div>
               </div>
 
               {/* Table of Sponsors */}
-              <div className="bg-[#0a0e16] border border-[#1b2336] rounded-lg overflow-hidden">
+              <div className="bg-[#070c17] border border-[#1b2336] rounded-lg overflow-hidden">
                 <div className="p-2.5 border-b border-[#1b2336] bg-[#0c111c] flex items-center justify-between">
                   <span className="text-[11px] font-mono font-bold uppercase text-slate-300">
                     Contracted Tournament Partners ({tournamentSponsors.length})
@@ -1332,10 +1332,10 @@ export default function Tournaments() {
                                     type="text"
                                     value={editingSponsorForm.term_cycle}
                                     onChange={(e) => setEditingSponsorForm({ ...editingSponsorForm, term_cycle: e.target.value })}
-                                    className="bg-[#080b11] border border-emerald-500 rounded px-2 py-1 text-xs text-white font-mono w-28 focus:outline-none"
+                                    className="bg-[#080b11] border border-cyan-500 rounded px-2 py-1 text-xs text-white font-mono w-28 focus:outline-none"
                                   />
                                 ) : (
-                                  <span className="px-2 py-0.5 rounded bg-[#121824] border border-white/10 text-emerald-400 text-[11px] font-bold">
+                                  <span className="px-2 py-0.5 rounded bg-[#121824] border border-white/10 text-cyan-400 text-[11px] font-bold">
                                     {sp.term_cycle || '2024–2026'}
                                   </span>
                                 )}
@@ -1349,7 +1349,7 @@ export default function Tournaments() {
                                     step="1"
                                     value={editingSponsorForm.contract_value}
                                     onChange={(e) => setEditingSponsorForm({ ...editingSponsorForm, contract_value: e.target.value })}
-                                    className="bg-[#080b11] border border-emerald-500 rounded px-2 py-1 text-xs text-white font-mono w-32 focus:outline-none"
+                                    className="bg-[#080b11] border border-cyan-500 rounded px-2 py-1 text-xs text-white font-mono w-32 focus:outline-none"
                                   />
                                 ) : (
                                   <span className="font-bold text-amber-400 text-xs">
@@ -1366,7 +1366,7 @@ export default function Tournaments() {
                                         type="button"
                                         onClick={() => handleSaveEditSponsor(sp.sponsor_id)}
                                         disabled={submittingSponsor}
-                                        className="px-2 py-1 bg-emerald-500 hover:bg-emerald-400 text-black rounded text-[10px] font-mono font-bold uppercase transition-colors"
+                                        className="px-2 py-1 bg-emerald-500 hover:bg-cyan-400 text-black rounded text-[10px] font-mono font-bold uppercase transition-colors"
                                       >
                                         Save
                                       </button>
@@ -1414,7 +1414,7 @@ export default function Tournaments() {
           ) : (
             /* Activated Asset Roster Tab */
             <div className="space-y-3">
-              <div className="bg-[#0a0e16] border border-[#1b2336] rounded-lg p-3 flex items-center justify-between">
+              <div className="bg-[#070c17] border border-[#1b2336] rounded-lg p-3 flex items-center justify-between">
                 <div>
                   <h4 className="text-xs font-mono font-bold text-white uppercase tracking-wider">
                     Official Tournament Asset Inventory & Deliverables
@@ -1423,7 +1423,7 @@ export default function Tournaments() {
                     Marketing assets, brand placements, and commercial inventory sanctioned for {selectedTournamentForSponsors?.name}
                   </p>
                 </div>
-                <span className="px-2 py-1 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono text-[10px] font-bold uppercase">
+                <span className="px-2 py-1 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 font-mono text-[10px] font-bold uppercase">
                   {tournamentSponsors.length} Active Allocations
                 </span>
               </div>
@@ -1437,11 +1437,11 @@ export default function Tournaments() {
                   {tournamentSponsors.map((sp) => (
                     <div
                       key={sp.sponsor_id}
-                      className="bg-[#0b0f19] border border-[#1b253b] hover:border-emerald-500/30 transition-colors rounded-lg p-3.5 space-y-2.5"
+                      className="bg-[#0b0f19] border border-[#1b253b] hover:border-cyan-500/30 transition-colors rounded-lg p-3.5 space-y-2.5"
                     >
                       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/5 pb-2">
                         <div className="flex items-center gap-2.5">
-                          <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center font-black text-emerald-400 text-xs font-mono">
+                          <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center font-black text-cyan-400 text-xs font-mono">
                             {sp.sponsor_name?.slice(0, 2).toUpperCase()}
                           </div>
                           <div>
@@ -1460,7 +1460,7 @@ export default function Tournaments() {
                         </div>
 
                         <div className="flex items-center gap-2 font-mono text-xs">
-                          <span className="px-2 py-0.5 rounded bg-emerald-950/40 text-emerald-400 border border-emerald-500/30 text-[11px] font-bold">
+                          <span className="px-2 py-0.5 rounded bg-cyan-950/40 text-cyan-400 border border-cyan-500/30 text-[11px] font-bold">
                             Cycle: {sp.term_cycle || '2024–2026'}
                           </span>
                           <span className="px-2 py-0.5 rounded bg-amber-950/40 text-amber-400 border border-amber-500/30 text-[11px] font-bold">
@@ -1483,8 +1483,8 @@ export default function Tournaments() {
                             <span className="text-[9px] font-mono uppercase text-slate-400 font-bold block mb-1">
                               ACTIVATION STATUS
                             </span>
-                            <div className="flex items-center gap-1 text-emerald-400 font-mono font-bold text-xs">
-                              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                            <div className="flex items-center gap-1 text-cyan-400 font-mono font-bold text-xs">
+                              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
                               <span>100% Cleared · Sanctioned</span>
                             </div>
                           </div>

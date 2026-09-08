@@ -31,7 +31,7 @@ const COACH_SCOUTING_DATA = {
     squadCount: 26,
     contract: "'26",
     avatarInitials: "L",
-    avatarBg: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30",
+    avatarBg: "bg-cyan-500/20 text-cyan-400 border-cyan-500/30",
     licenseColor: "text-sky-400",
   },
   "Marcelo Bielsa": {
@@ -151,7 +151,7 @@ const COACH_SCOUTING_DATA = {
     squadCount: 26,
     contract: "'26",
     avatarInitials: "JN",
-    avatarBg: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30",
+    avatarBg: "bg-cyan-500/20 text-cyan-400 border-cyan-500/30",
     licenseColor: "text-sky-400",
   },
   "Lionel Scaloni": {
@@ -603,7 +603,7 @@ export default function Coaches() {
               }}
               className="flex items-center gap-1.5 px-3 py-2 bg-[#121722] hover:bg-[#1b2333] text-slate-200 text-xs font-semibold rounded border border-white/10 transition-colors shadow-sm tracking-wide whitespace-nowrap"
             >
-              <span className="material-symbols-outlined text-[16px] text-emerald-400">tune</span>
+              <span className="material-symbols-outlined text-[16px] text-cyan-400">tune</span>
               <span>Accreditation</span>
             </button>
 
@@ -625,7 +625,7 @@ export default function Coaches() {
 
             <button
               onClick={openCreate}
-              className="flex items-center gap-1.5 px-3.5 py-2 bg-[#00f59b] hover:bg-[#00d685] text-black font-bold text-xs rounded transition-colors shadow-sm tracking-wide whitespace-nowrap"
+              className="flex items-center gap-1.5 px-3.5 py-2 bg-[#00e5ff] hover:bg-[#00c5de] text-black font-bold text-xs rounded transition-colors shadow-sm tracking-wide whitespace-nowrap"
             >
               <span className="material-symbols-outlined text-[17px] font-bold">add</span>
               <span>Register Head Coach</span>
@@ -646,7 +646,7 @@ export default function Coaches() {
             <span className="text-[10px] font-mono uppercase text-slate-400 tracking-wider font-semibold">
               TOTAL COACHES
             </span>
-            <span className="material-symbols-outlined text-[15px] text-emerald-400">
+            <span className="material-symbols-outlined text-[15px] text-cyan-400">
               shield
             </span>
           </div>
@@ -654,8 +654,8 @@ export default function Coaches() {
             <div className="text-2xl font-black text-white font-mono leading-none">
               {stats.total}
             </div>
-            <div className="flex items-center gap-1.5 mt-1.5 text-[10px] font-mono text-emerald-400 font-semibold">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+            <div className="flex items-center gap-1.5 mt-1.5 text-[10px] font-mono text-cyan-400 font-semibold">
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
               <span>100% Pro Licensed</span>
             </div>
           </div>
@@ -748,12 +748,12 @@ export default function Coaches() {
             <span className="text-[10px] font-mono uppercase text-slate-400 tracking-wider font-semibold">
               AVG WIN RATE
             </span>
-            <span className="material-symbols-outlined text-[15px] text-emerald-400">
+            <span className="material-symbols-outlined text-[15px] text-cyan-400">
               trending_up
             </span>
           </div>
           <div className="mt-2.5">
-            <div className="text-2xl font-black text-emerald-400 font-mono leading-none">
+            <div className="text-2xl font-black text-cyan-400 font-mono leading-none">
               {stats.avgWinRate}%
             </div>
             <div className="text-[10px] font-mono text-slate-400 mt-1.5">
@@ -794,7 +794,7 @@ export default function Coaches() {
             <button
               onClick={() => setActiveFilter("ALL")}
               className={`px-2.5 py-1 rounded text-[11px] font-bold transition-all ${activeFilter === "ALL"
-                ? "bg-[#00f59b] text-black"
+                ? "bg-[#00e5ff] text-black"
                 : "text-slate-400 hover:text-white"
                 }`}
             >
@@ -803,7 +803,7 @@ export default function Coaches() {
             <button
               onClick={() => setActiveFilter("ACTIVE")}
               className={`px-2.5 py-1 rounded text-[11px] font-bold transition-all ${activeFilter === "ACTIVE"
-                ? "bg-[#00f59b] text-black"
+                ? "bg-[#00e5ff] text-black"
                 : "text-slate-400 hover:text-white"
                 }`}
             >
@@ -812,7 +812,7 @@ export default function Coaches() {
             <button
               onClick={() => setActiveFilter("UEFA")}
               className={`px-2.5 py-1 rounded text-[11px] font-bold transition-all ${activeFilter === "UEFA"
-                ? "bg-[#00f59b] text-black"
+                ? "bg-[#00e5ff] text-black"
                 : "text-slate-400 hover:text-white"
                 }`}
             >
@@ -821,7 +821,7 @@ export default function Coaches() {
             <button
               onClick={() => setActiveFilter("CONMEBOL")}
               className={`px-2.5 py-1 rounded text-[11px] font-bold transition-all ${activeFilter === "CONMEBOL"
-                ? "bg-[#00f59b] text-black"
+                ? "bg-[#00e5ff] text-black"
                 : "text-slate-400 hover:text-white"
                 }`}
             >
@@ -830,7 +830,7 @@ export default function Coaches() {
             <button
               onClick={() => setActiveFilter("AFC")}
               className={`px-2.5 py-1 rounded text-[11px] font-bold transition-all ${activeFilter === "AFC"
-                ? "bg-[#00f59b] text-black"
+                ? "bg-[#00e5ff] text-black"
                 : "text-slate-400 hover:text-white"
                 }`}
             >
@@ -858,7 +858,7 @@ export default function Coaches() {
             <button
               onClick={() => setViewMode("grid")}
               className={`p-1.5 rounded transition-colors ${viewMode === "grid"
-                ? "bg-[#182030] text-emerald-400"
+                ? "bg-[#182030] text-cyan-400"
                 : "text-slate-500 hover:text-slate-300"
                 }`}
               title="Grid View"
@@ -868,7 +868,7 @@ export default function Coaches() {
             <button
               onClick={() => setViewMode("table")}
               className={`p-1.5 rounded transition-colors ${viewMode === "table"
-                ? "bg-[#182030] text-emerald-400"
+                ? "bg-[#182030] text-cyan-400"
                 : "text-slate-500 hover:text-slate-300"
                 }`}
               title="Table View"
@@ -914,7 +914,7 @@ export default function Coaches() {
       {/* 4. Coach Card Grid / Table Content */}
       {loading ? (
         <div className="py-24 text-center flex flex-col items-center justify-center gap-3">
-          <span className="w-8 h-8 rounded-full border-2 border-[#00f59b] border-t-transparent animate-spin"></span>
+          <span className="w-8 h-8 rounded-full border-2 border-[#00e5ff] border-t-transparent animate-spin"></span>
           <span className="text-xs font-mono text-slate-400 tracking-wider">
             SYNCHRONIZING TECHNICAL LICENSES...
           </span>
@@ -944,8 +944,8 @@ export default function Coaches() {
                 key={item.coach_id}
                 className={`bg-[#10141e] rounded-lg p-3.5 border transition-all duration-200 flex flex-col justify-between shadow-sm group relative ${
                   isSelected(item.coach_id)
-                    ? "border-emerald-500/80 bg-emerald-950/10"
-                    : "border-white/10 hover:border-emerald-500/40"
+                    ? "border-cyan-500/80 bg-cyan-950/10"
+                    : "border-white/10 hover:border-cyan-500/40"
                 }`}
               >
                 <div>
@@ -958,7 +958,7 @@ export default function Coaches() {
                           checked={isSelected(item.coach_id)}
                           onChange={() => toggleSelect(item.coach_id)}
                           onClick={(e) => e.stopPropagation()}
-                          className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-emerald-500 focus:ring-emerald-500/20 focus:ring-offset-0 cursor-pointer shrink-0"
+                          className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-cyan-400 focus:ring-cyan-500/20 focus:ring-offset-0 cursor-pointer shrink-0"
                           aria-label={`Select ${fullName}`}
                         />
                       )}
@@ -968,7 +968,7 @@ export default function Coaches() {
                         {scout.avatarInitials}
                       </div>
                       <div className="min-w-0">
-                        <h2 className="text-[13px] font-bold text-white group-hover:text-emerald-400 transition-colors truncate leading-tight">
+                        <h2 className="text-[13px] font-bold text-white group-hover:text-cyan-400 transition-colors truncate leading-tight">
                           {fullName}
                         </h2>
                         {/* Nationality + Country Code */}
@@ -989,8 +989,8 @@ export default function Coaches() {
                     {/* Status Pill */}
                     <div className="shrink-0">
                       {isActive ? (
-                        <span className="bg-emerald-950/80 border border-emerald-500/30 text-emerald-400 text-[9px] font-mono font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                        <span className="bg-cyan-950/80 border border-cyan-500/30 text-cyan-400 text-[9px] font-mono font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
+                          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
                           <span>ACTIVE</span>
                         </span>
                       ) : (
@@ -1046,7 +1046,7 @@ export default function Coaches() {
                 {/* Footer Row: Contract & Quick Actions */}
                 <div className="flex items-center justify-between pt-2.5 mt-2 border-t border-white/5 text-[11px] font-mono">
                   <div className="flex items-center gap-1.5 text-slate-400 text-[10px]">
-                    <span className="material-symbols-outlined text-[13px] text-emerald-400">
+                    <span className="material-symbols-outlined text-[13px] text-cyan-400">
                       calendar_month
                     </span>
                     <span>
@@ -1090,7 +1090,7 @@ export default function Coaches() {
                         type="checkbox"
                         checked={isAllSelected}
                         onChange={() => toggleSelectAll(filtered)}
-                        className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-emerald-500 focus:ring-emerald-500/20 cursor-pointer"
+                        className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-cyan-400 focus:ring-cyan-500/20 cursor-pointer"
                         aria-label="Select all coaches"
                       />
                     </th>
@@ -1114,7 +1114,7 @@ export default function Coaches() {
                     <tr
                       key={item.coach_id}
                       className={`hover:bg-white/[0.02] transition-colors ${
-                        isSelected(item.coach_id) ? "bg-emerald-950/15" : ""
+                        isSelected(item.coach_id) ? "bg-cyan-950/15" : ""
                       }`}
                     >
                       {isSelectionMode && (
@@ -1123,7 +1123,7 @@ export default function Coaches() {
                             type="checkbox"
                             checked={isSelected(item.coach_id)}
                             onChange={() => toggleSelect(item.coach_id)}
-                            className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-emerald-500 focus:ring-emerald-500/20 cursor-pointer"
+                            className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-cyan-400 focus:ring-cyan-500/20 cursor-pointer"
                             aria-label={`Select ${fullName}`}
                           />
                         </td>
@@ -1164,8 +1164,8 @@ export default function Coaches() {
                       </td>
                       <td className="py-3 px-4">
                         {isActive ? (
-                          <span className="bg-emerald-950/80 border border-emerald-500/30 text-emerald-400 text-[9px] font-mono font-bold px-2 py-0.5 rounded-full inline-flex items-center gap-1">
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                          <span className="bg-cyan-950/80 border border-cyan-500/30 text-cyan-400 text-[9px] font-mono font-bold px-2 py-0.5 rounded-full inline-flex items-center gap-1">
+                            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
                             <span>ACTIVE</span>
                           </span>
                         ) : (
@@ -1204,7 +1204,7 @@ export default function Coaches() {
       {/* 5. Bottom Regulatory Compliance Box (matching reference) */}
       <div className="bg-[#0e131d] border border-white/10 rounded-lg p-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mt-4 shadow-sm">
         <div className="flex items-start gap-3.5">
-          <span className="material-symbols-outlined text-emerald-400 text-[24px] mt-0.5">
+          <span className="material-symbols-outlined text-cyan-400 text-[24px] mt-0.5">
             verified_user
           </span>
           <div>
@@ -1249,7 +1249,7 @@ export default function Coaches() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
             <div>
               <label className="block text-xs font-medium text-slate-300 mb-1.5">
-                First Name <span className="text-emerald-400">*</span>
+                First Name <span className="text-cyan-400">*</span>
               </label>
               <input
                 type="text"
@@ -1257,7 +1257,7 @@ export default function Coaches() {
                 value={form.first_name}
                 onChange={(e) => setForm({ ...form, first_name: e.target.value })}
                 placeholder="e.g. Luis"
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
               />
             </div>
 
@@ -1270,7 +1270,7 @@ export default function Coaches() {
                 value={form.last_name}
                 onChange={(e) => setForm({ ...form, last_name: e.target.value })}
                 placeholder="e.g. de la Fuente"
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
               />
             </div>
           </div>
@@ -1278,7 +1278,7 @@ export default function Coaches() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
             <div>
               <label className="block text-xs font-medium text-slate-300 mb-1.5">
-                Nationality <span className="text-emerald-400">*</span>
+                Nationality <span className="text-cyan-400">*</span>
               </label>
               <input
                 type="text"
@@ -1286,7 +1286,7 @@ export default function Coaches() {
                 value={form.nationality}
                 onChange={(e) => setForm({ ...form, nationality: e.target.value })}
                 placeholder="e.g. Spanish"
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
               />
             </div>
 
@@ -1299,7 +1299,7 @@ export default function Coaches() {
                 value={form.license_no}
                 onChange={(e) => setForm({ ...form, license_no: e.target.value })}
                 placeholder="e.g. RFEF-005"
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white font-mono placeholder:text-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white font-mono placeholder:text-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
               />
             </div>
           </div>
@@ -1313,7 +1313,7 @@ export default function Coaches() {
                 type="date"
                 value={form.dob}
                 onChange={(e) => setForm({ ...form, dob: e.target.value })}
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
               />
             </div>
 
@@ -1325,7 +1325,7 @@ export default function Coaches() {
                 type="date"
                 value={form.start_date}
                 onChange={(e) => setForm({ ...form, start_date: e.target.value })}
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
               />
             </div>
 
@@ -1337,7 +1337,7 @@ export default function Coaches() {
                 type="date"
                 value={form.end_date}
                 onChange={(e) => setForm({ ...form, end_date: e.target.value })}
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
               />
             </div>
           </div>
@@ -1349,7 +1349,7 @@ export default function Coaches() {
             <select
               value={form.team_id}
               onChange={(e) => setForm({ ...form, team_id: e.target.value })}
-              className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors cursor-pointer"
+              className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors cursor-pointer"
             >
               <option value="">No delegation assigned (Free Agent)</option>
               {teams.map((t) => (
@@ -1371,7 +1371,7 @@ export default function Coaches() {
             <button
               type="submit"
               disabled={loadingAction}
-              className="px-4 py-2 bg-[#00f59b] hover:bg-[#00d685] text-black text-xs font-bold rounded-lg transition-colors shadow-sm disabled:opacity-50"
+              className="px-4 py-2 bg-[#00e5ff] hover:bg-[#00c5de] text-black text-xs font-bold rounded-lg transition-colors shadow-sm disabled:opacity-50"
             >
               {loadingAction ? "Saving..." : editingId ? "Save Changes" : "Register Coach"}
             </button>

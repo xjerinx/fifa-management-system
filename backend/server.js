@@ -15,6 +15,7 @@ const matchRoutes = require('./routes/matchRoutes');
 const eventRoutes = require('./routes/eventRoutes');
 const sponsorRoutes = require('./routes/sponsorRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes');
+const ticketRoutes = require('./routes/ticketRoutes');
 
 const app = express();
 
@@ -38,6 +39,7 @@ app.get('/', (req, res) => {
             events: '/api/events',
             sponsors: '/api/sponsors',
             dashboard: '/api/dashboard/stats',
+            tickets: '/api/tickets',
         }
     });
 });
@@ -57,6 +59,7 @@ app.use('/api/matches', matchRoutes);
 app.use('/api/events', eventRoutes);
 app.use('/api/sponsors', sponsorRoutes);
 app.use('/api/dashboard', dashboardRoutes);
+app.use('/api/tickets', ticketRoutes);
 
 app.use((req, res, next) => {
     res.status(404).json({ success: false, message: `Route ${req.method} ${req.originalUrl} not found` });

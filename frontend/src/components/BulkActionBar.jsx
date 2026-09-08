@@ -20,7 +20,7 @@ export default function BulkActionBar({
   }, [isIndeterminate]);
 
   return (
-    <div className="flex items-center justify-between gap-3 bg-[#0d121c] border border-emerald-500/30 rounded-xl px-3.5 py-2 text-xs font-mono transition-all shadow-md shadow-emerald-950/20 animate-in fade-in duration-150">
+    <div className="flex items-center justify-between gap-3 bg-[#0b1222] border border-cyan-500/30 rounded-xl px-3.5 py-2 text-xs font-mono transition-all shadow-md shadow-cyan-950/20 animate-in fade-in duration-150">
       <div className="flex items-center gap-2.5">
         <label className="flex items-center gap-2 cursor-pointer select-none text-slate-200 hover:text-white">
           <input
@@ -28,7 +28,7 @@ export default function BulkActionBar({
             type="checkbox"
             checked={isAllSelected}
             onChange={onSelectAll}
-            className="w-4 h-4 rounded border-slate-700 bg-slate-900/90 text-emerald-500 focus:ring-emerald-500/30 accent-emerald-500 cursor-pointer"
+            className="w-4 h-4 rounded border-slate-700 bg-slate-900/90 text-cyan-400 focus:ring-cyan-500/30 accent-cyan-400 cursor-pointer"
           />
           <span className="text-[11px] font-medium tracking-wide">
             {isAllSelected ? "Deselect All" : "Select All"}
@@ -37,7 +37,7 @@ export default function BulkActionBar({
         </label>
 
         {selectedCount > 0 ? (
-          <span className="text-[10px] bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded-full font-bold">
+          <span className="text-[10px] bg-cyan-500/15 text-cyan-400 border border-cyan-500/30 px-2 py-0.5 rounded-full font-bold">
             {selectedCount} selected
           </span>
         ) : (

@@ -13,7 +13,7 @@ function getCapacityTier(cap) {
   if (c >= 80000) {
     return {
       label: "MEGA VENUE",
-      color: "bg-emerald-950/40 text-emerald-400 border border-emerald-500/40",
+      color: "bg-cyan-950/40 text-cyan-400 border border-cyan-500/40",
     };
   }
   if (c >= 50000) {
@@ -234,7 +234,7 @@ export default function Stadiums() {
       <div className="flex flex-col gap-2.5 pt-1">
         {/* Eyebrow / Infrastructure Registry */}
         <div className="flex items-center gap-2 flex-wrap">
-          <span className="material-symbols-outlined text-[15px] text-emerald-400">
+          <span className="material-symbols-outlined text-[15px] text-cyan-400">
             stadium
           </span>
           <span className="text-[11px] font-mono tracking-wider text-slate-400 uppercase font-semibold">
@@ -248,7 +248,7 @@ export default function Stadiums() {
             <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight uppercase leading-tight font-display">
               STADIUMS & HOST VENUES DIRECTORY
             </h1>
-            <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-400 border border-emerald-500/30 uppercase tracking-wider">
+            <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-cyan-950/60 text-cyan-400 border border-cyan-500/30 uppercase tracking-wider">
               2026/27 ACCREDITED
             </span>
           </div>
@@ -280,7 +280,7 @@ export default function Stadiums() {
 
             <button
               onClick={openCreate}
-              className="flex items-center gap-1.5 px-3.5 py-2 bg-[#00f59b] hover:bg-[#00d685] text-black font-bold text-xs rounded transition-colors shadow-sm tracking-wide whitespace-nowrap"
+              className="flex items-center gap-1.5 px-3.5 py-2 bg-[#00e5ff] hover:bg-[#00c5de] text-black font-bold text-xs rounded transition-colors shadow-sm tracking-wide whitespace-nowrap"
             >
               <span className="material-symbols-outlined text-[17px] font-bold">add</span>
               <span>REGISTER STADIUM</span>
@@ -300,20 +300,20 @@ export default function Stadiums() {
             <span className="text-[10px] font-mono uppercase text-slate-400 tracking-wider font-semibold">
               TOTAL CAPACITY
             </span>
-            <span className="material-symbols-outlined text-[18px] text-emerald-400">
+            <span className="material-symbols-outlined text-[18px] text-cyan-400">
               groups
             </span>
           </div>
           <div className="mt-3">
             <div className="text-2xl font-black text-white font-mono leading-none flex items-baseline gap-1.5">
               <span>{totalCapacity.toLocaleString()}</span>
-              <span className="text-xs font-mono font-bold text-emerald-400">SEATS</span>
+              <span className="text-xs font-mono font-bold text-cyan-400">SEATS</span>
             </div>
             <div className="text-[10px] font-mono text-slate-400 mt-1.5 truncate">
               Avg: {avgCapacity.toLocaleString()} / Venue
             </div>
             <div className="w-full h-1 bg-slate-800 rounded-full overflow-hidden mt-3">
-              <div className="h-full bg-emerald-400 rounded-full w-full"></div>
+              <div className="h-full bg-cyan-400 rounded-full w-full"></div>
             </div>
           </div>
         </div>
@@ -332,8 +332,8 @@ export default function Stadiums() {
               <span>{items.length}</span>
               <span className="text-xs font-mono font-normal text-slate-400">/ {items.length} AUDITED</span>
             </div>
-            <div className="text-[10px] font-mono text-emerald-400 font-semibold mt-1.5 flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+            <div className="text-[10px] font-mono text-cyan-400 font-semibold mt-1.5 flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
               <span>100% FIFA Category 4 Elite</span>
             </div>
             <div className="w-full h-1 bg-slate-800 rounded-full overflow-hidden mt-3">
@@ -401,7 +401,7 @@ export default function Stadiums() {
               onClick={() => setTierFilter("ALL")}
               className={`px-2.5 py-1 rounded text-[11px] font-bold whitespace-nowrap transition-all ${
                 tierFilter === "ALL"
-                  ? "bg-[#00f59b] text-black shadow-sm"
+                  ? "bg-[#00e5ff] text-black shadow-sm"
                   : "text-slate-400 hover:text-white"
               }`}
             >
@@ -411,7 +411,7 @@ export default function Stadiums() {
               onClick={() => setTierFilter("MEGA")}
               className={`px-2.5 py-1 rounded text-[11px] font-bold whitespace-nowrap transition-all ${
                 tierFilter === "MEGA"
-                  ? "bg-[#00f59b] text-black shadow-sm"
+                  ? "bg-[#00e5ff] text-black shadow-sm"
                   : "text-slate-400 hover:text-white"
               }`}
             >
@@ -421,7 +421,7 @@ export default function Stadiums() {
               onClick={() => setTierFilter("MAJOR")}
               className={`px-2.5 py-1 rounded text-[11px] font-bold whitespace-nowrap transition-all ${
                 tierFilter === "MAJOR"
-                  ? "bg-[#00f59b] text-black shadow-sm"
+                  ? "bg-[#00e5ff] text-black shadow-sm"
                   : "text-slate-400 hover:text-white"
               }`}
             >
@@ -431,7 +431,7 @@ export default function Stadiums() {
               onClick={() => setTierFilter("STANDARD")}
               className={`px-2.5 py-1 rounded text-[11px] font-bold whitespace-nowrap transition-all ${
                 tierFilter === "STANDARD"
-                  ? "bg-[#00f59b] text-black shadow-sm"
+                  ? "bg-[#00e5ff] text-black shadow-sm"
                   : "text-slate-400 hover:text-white"
               }`}
             >
@@ -439,7 +439,7 @@ export default function Stadiums() {
             </button>
           </div>
 
-          <span className="text-[10px] font-mono font-bold px-2 py-1 rounded bg-[#0a0d14] text-emerald-400 border border-emerald-500/20 uppercase tracking-wider hidden sm:inline-block">
+          <span className="text-[10px] font-mono font-bold px-2 py-1 rounded bg-[#0a0d14] text-cyan-400 border border-cyan-500/20 uppercase tracking-wider hidden sm:inline-block">
             ACTIVE HOSTS ({filtered.length})
           </span>
         </div>
@@ -498,7 +498,7 @@ export default function Stadiums() {
               onClick={() => setViewMode("grid")}
               className={`p-1.5 rounded transition-colors ${
                 viewMode === "grid"
-                  ? "bg-[#182030] text-emerald-400"
+                  ? "bg-[#182030] text-cyan-400"
                   : "text-slate-500 hover:text-slate-300"
               }`}
               title="Grid View"
@@ -509,7 +509,7 @@ export default function Stadiums() {
               onClick={() => setViewMode("table")}
               className={`p-1.5 rounded transition-colors ${
                 viewMode === "table"
-                  ? "bg-[#182030] text-emerald-400"
+                  ? "bg-[#182030] text-cyan-400"
                   : "text-slate-500 hover:text-slate-300"
               }`}
               title="Table View"
@@ -554,7 +554,7 @@ export default function Stadiums() {
 
       {loading ? (
         <div className="py-24 text-center flex flex-col items-center justify-center gap-3">
-          <span className="w-8 h-8 rounded-full border-2 border-[#00f59b] border-t-transparent animate-spin"></span>
+          <span className="w-8 h-8 rounded-full border-2 border-[#00e5ff] border-t-transparent animate-spin"></span>
           <span className="text-xs font-mono text-slate-400 tracking-wider">
             SYNCHRONIZING STADIUM DIRECTORY...
           </span>
@@ -577,8 +577,8 @@ export default function Stadiums() {
                 key={item.stadium_id}
                 className={`bg-[#10141e] rounded-lg p-4 border transition-all duration-200 flex flex-col justify-between shadow-sm group ${
                   isSelected(item.stadium_id)
-                    ? "border-emerald-500/80 bg-emerald-950/10"
-                    : "border-white/10 hover:border-emerald-500/30"
+                    ? "border-cyan-500/80 bg-cyan-950/10"
+                    : "border-white/10 hover:border-cyan-500/30"
                 }`}
               >
                 <div>
@@ -591,11 +591,11 @@ export default function Stadiums() {
                           checked={isSelected(item.stadium_id)}
                           onChange={() => toggleSelect(item.stadium_id)}
                           onClick={(e) => e.stopPropagation()}
-                          className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-emerald-500 focus:ring-emerald-500/20 focus:ring-offset-0 cursor-pointer shrink-0"
+                          className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-cyan-400 focus:ring-cyan-500/20 focus:ring-offset-0 cursor-pointer shrink-0"
                           aria-label={`Select ${item.name}`}
                         />
                       )}
-                      <span className="text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-400 border border-emerald-500/30 uppercase tracking-wider">
+                      <span className="text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-cyan-950/60 text-cyan-400 border border-cyan-500/30 uppercase tracking-wider">
                         CAT 4 ELITE
                       </span>
                       <span
@@ -610,14 +610,14 @@ export default function Stadiums() {
                       )}
                     </div>
 
-                    <div className="w-7 h-7 rounded bg-[#0a0d14] border border-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
+                    <div className="w-7 h-7 rounded bg-[#0a0d14] border border-cyan-500/20 flex items-center justify-center text-cyan-400 shrink-0">
                       <span className="material-symbols-outlined text-[15px]">stadium</span>
                     </div>
                   </div>
 
                   {/* Stadium Name & Location */}
                   <div className="mt-2.5">
-                    <h2 className="text-lg font-black text-white group-hover:text-emerald-400 transition-colors break-words leading-tight">
+                    <h2 className="text-lg font-black text-white group-hover:text-cyan-400 transition-colors break-words leading-tight">
                       {item.name}
                     </h2>
                     <div className="flex items-center gap-1.5 text-xs text-slate-400 mt-1.5">
@@ -653,7 +653,7 @@ export default function Stadiums() {
 
                     <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden mt-2.5">
                       <div
-                        className="h-full bg-emerald-400 rounded-full transition-all duration-500"
+                        className="h-full bg-cyan-400 rounded-full transition-all duration-500"
                         style={{ width: `${fillPct}%` }}
                       />
                     </div>
@@ -673,7 +673,7 @@ export default function Stadiums() {
                       <span className="text-[9px] font-mono uppercase text-slate-400 tracking-wider font-semibold block">
                         OPERATIONAL STATUS
                       </span>
-                      <span className="font-mono text-xs font-bold text-emerald-400 mt-0.5 block truncate">
+                      <span className="font-mono text-xs font-bold text-cyan-400 mt-0.5 block truncate">
                         CERTIFIED VENUE
                       </span>
                     </div>
@@ -698,8 +698,8 @@ export default function Stadiums() {
 
                 {/* Card Footer with Status & Actions */}
                 <div className="flex items-center justify-between pt-2.5 mt-2 border-t border-white/5 text-xs text-slate-400">
-                  <div className="flex items-center gap-1.5 text-[10px] font-mono font-bold text-emerald-400 uppercase tracking-wider">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                  <div className="flex items-center gap-1.5 text-[10px] font-mono font-bold text-cyan-400 uppercase tracking-wider">
+                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
                     <span>ACTIVE HOST</span>
                   </div>
 
@@ -739,7 +739,7 @@ export default function Stadiums() {
                         type="checkbox"
                         checked={isAllSelected}
                         onChange={() => toggleSelectAll(filtered)}
-                        className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-emerald-500 focus:ring-emerald-500/20 cursor-pointer"
+                        className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-cyan-400 focus:ring-cyan-500/20 cursor-pointer"
                         aria-label="Select all stadiums"
                       />
                     </th>
@@ -762,7 +762,7 @@ export default function Stadiums() {
                     <tr
                       key={item.stadium_id}
                       className={`hover:bg-white/[0.02] transition-colors ${
-                        isSelected(item.stadium_id) ? "bg-emerald-950/15" : ""
+                        isSelected(item.stadium_id) ? "bg-cyan-950/15" : ""
                       }`}
                     >
                       {isSelectionMode && (
@@ -771,7 +771,7 @@ export default function Stadiums() {
                             type="checkbox"
                             checked={isSelected(item.stadium_id)}
                             onChange={() => toggleSelect(item.stadium_id)}
-                            className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-emerald-500 focus:ring-emerald-500/20 cursor-pointer"
+                            className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-cyan-400 focus:ring-cyan-500/20 cursor-pointer"
                             aria-label={`Select ${item.name}`}
                           />
                         </td>
@@ -791,7 +791,7 @@ export default function Stadiums() {
                           {tier.label}
                         </span>
                       </td>
-                      <td className="py-3 px-4 font-mono font-bold text-emerald-400">
+                      <td className="py-3 px-4 font-mono font-bold text-cyan-400">
                         {item.matches_hosted || 0} Matches
                       </td>
                       <td className="py-3 px-4 text-right">
@@ -826,7 +826,7 @@ export default function Stadiums() {
       {/* Compliance / Status Footer Banner */}
       <div className="bg-[#10141e] border border-white/10 rounded-lg p-3.5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs shadow-sm">
         <div className="flex items-center gap-2.5 text-slate-300">
-          <span className="material-symbols-outlined text-[18px] text-emerald-400">verified_user</span>
+          <span className="material-symbols-outlined text-[18px] text-cyan-400">verified_user</span>
           <div>
             <span className="font-mono text-[11px] font-bold text-white uppercase tracking-wider block">
               FIFA STADIUM SAFETY & INFRASTRUCTURE COMPLIANT
@@ -838,8 +838,8 @@ export default function Stadiums() {
         </div>
         <div className="flex items-center gap-4 text-[10px] font-mono text-slate-400 shrink-0">
           <span>TMS PROTOCOL v9.8.2</span>
-          <span className="text-emerald-400 font-bold flex items-center gap-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+          <span className="text-cyan-400 font-bold flex items-center gap-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
             ALL VENUES CERTIFIED
           </span>
         </div>
@@ -862,7 +862,7 @@ export default function Stadiums() {
 
           <div>
             <label className="block text-xs font-medium text-slate-300 mb-1.5">
-              Stadium Name <span className="text-emerald-400">*</span>
+              Stadium Name <span className="text-cyan-400">*</span>
             </label>
             <input
               type="text"
@@ -870,14 +870,14 @@ export default function Stadiums() {
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
               placeholder="e.g. Santiago Bernabéu"
-              className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+              className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
             />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
             <div>
               <label className="block text-xs font-medium text-slate-300 mb-1.5">
-                City <span className="text-emerald-400">*</span>
+                City <span className="text-cyan-400">*</span>
               </label>
               <input
                 type="text"
@@ -885,12 +885,12 @@ export default function Stadiums() {
                 value={form.city}
                 onChange={(e) => setForm({ ...form, city: e.target.value })}
                 placeholder="e.g. Madrid"
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
               />
             </div>
             <div>
               <label className="block text-xs font-medium text-slate-300 mb-1.5">
-                Country <span className="text-emerald-400">*</span>
+                Country <span className="text-cyan-400">*</span>
               </label>
               <input
                 type="text"
@@ -898,14 +898,14 @@ export default function Stadiums() {
                 value={form.country}
                 onChange={(e) => setForm({ ...form, country: e.target.value })}
                 placeholder="e.g. Spain"
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
               />
             </div>
           </div>
 
           <div>
             <label className="block text-xs font-medium text-slate-300 mb-1.5">
-              Certified Capacity <span className="text-emerald-400">*</span>
+              Certified Capacity <span className="text-cyan-400">*</span>
             </label>
             <input
               type="number"
@@ -915,7 +915,7 @@ export default function Stadiums() {
               value={form.capacity}
               onChange={(e) => setForm({ ...form, capacity: e.target.value })}
               placeholder="e.g. 81044"
-              className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white font-mono placeholder:text-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+              className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white font-mono placeholder:text-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
             />
           </div>
 
@@ -928,7 +928,7 @@ export default function Stadiums() {
               value={form.location}
               onChange={(e) => setForm({ ...form, location: e.target.value })}
               placeholder="e.g. Chamartín District"
-              className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+              className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
             />
           </div>
 
@@ -943,7 +943,7 @@ export default function Stadiums() {
             <button
               type="submit"
               disabled={loadingAction}
-              className="px-4 py-2 bg-[#00f59b] hover:bg-[#00d685] text-black text-xs font-bold rounded-lg transition-colors shadow-sm disabled:opacity-50"
+              className="px-4 py-2 bg-[#00e5ff] hover:bg-[#00c5de] text-black text-xs font-bold rounded-lg transition-colors shadow-sm disabled:opacity-50"
             >
               {loadingAction ? "Saving..." : editingId ? "Save Changes" : "Add Stadium"}
             </button>

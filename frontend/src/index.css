@@ -6,7 +6,7 @@
   html, body {
     margin: 0;
     padding: 0;
-    background-color: #090d16;
+    background-color: #060a14;
     color: #dfe2ee;
     font-family: 'Hanken Grotesk', sans-serif;
   }
@@ -17,14 +17,14 @@
     height: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: #0a0e16;
+    background: #060a14;
   }
   ::-webkit-scrollbar-thumb {
-    background: #262a33;
+    background: #17233c;
     border-radius: 3px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #3c4a42;
+    background: #233457;
   }
 }
 

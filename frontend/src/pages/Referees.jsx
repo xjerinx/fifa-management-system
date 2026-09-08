@@ -19,7 +19,7 @@ const roles = ["Main Referee", "Assistant Referee", "Fourth Official", "VAR Offi
 const ROLE_STYLE = {
   "Main Referee": {
     label: "MAIN REFEREE",
-    color: "bg-emerald-950/40 text-emerald-400 border border-emerald-500/40",
+    color: "bg-cyan-950/40 text-cyan-400 border border-cyan-500/40",
     icon: "sports",
   },
   "Assistant Referee": {
@@ -271,7 +271,7 @@ export default function Referees() {
 
             <button
               onClick={openCreate}
-              className="flex items-center gap-1.5 px-3.5 py-2 bg-[#00f59b] hover:bg-[#00d685] text-black font-bold text-xs rounded transition-colors shadow-sm tracking-wide whitespace-nowrap"
+              className="flex items-center gap-1.5 px-3.5 py-2 bg-[#00e5ff] hover:bg-[#00c5de] text-black font-bold text-xs rounded transition-colors shadow-sm tracking-wide whitespace-nowrap"
             >
               <span className="material-symbols-outlined text-[17px] font-bold">add</span>
               <span>Add Referee</span>
@@ -292,7 +292,7 @@ export default function Referees() {
             <span className="text-[10px] font-mono uppercase text-slate-400 tracking-wider font-semibold">
               CERTIFIED OFFICIALS
             </span>
-            <span className="material-symbols-outlined text-[16px] text-emerald-400">
+            <span className="material-symbols-outlined text-[16px] text-cyan-400">
               badge
             </span>
           </div>
@@ -300,12 +300,12 @@ export default function Referees() {
             <div className="text-2xl font-black text-white font-mono leading-none">
               {items.length}
             </div>
-            <div className="text-[10px] font-mono text-emerald-400 font-bold mt-1.5">
+            <div className="text-[10px] font-mono text-cyan-400 font-bold mt-1.5">
               FIFA Int'l
             </div>
             {/* Progress sliver */}
             <div className="w-full h-1 bg-slate-800 rounded-full overflow-hidden mt-2.5">
-              <div className="h-full bg-emerald-400 rounded-full w-full"></div>
+              <div className="h-full bg-cyan-400 rounded-full w-full"></div>
             </div>
           </div>
         </div>
@@ -316,7 +316,7 @@ export default function Referees() {
             <span className="text-[10px] font-mono uppercase text-slate-400 tracking-wider font-semibold">
               MAIN REFEREES
             </span>
-            <span className="material-symbols-outlined text-[16px] text-emerald-400">
+            <span className="material-symbols-outlined text-[16px] text-cyan-400">
               sports
             </span>
           </div>
@@ -388,7 +388,7 @@ export default function Referees() {
             <span className="text-[10px] font-mono uppercase text-slate-400 tracking-wider font-semibold">
               TOTAL MATCHES
             </span>
-            <span className="material-symbols-outlined text-[16px] text-emerald-400">
+            <span className="material-symbols-outlined text-[16px] text-cyan-400">
               calendar_month
             </span>
           </div>
@@ -401,7 +401,7 @@ export default function Referees() {
             </div>
             {/* Progress sliver */}
             <div className="w-full h-1 bg-slate-800 rounded-full overflow-hidden mt-2.5">
-              <div className="h-full bg-emerald-400 rounded-full w-full"></div>
+              <div className="h-full bg-cyan-400 rounded-full w-full"></div>
             </div>
           </div>
         </div>
@@ -439,7 +439,7 @@ export default function Referees() {
               onClick={() => setRoleFilter("ALL")}
               className={`px-2.5 py-1 rounded text-[11px] font-bold whitespace-nowrap transition-all ${
                 roleFilter === "ALL"
-                  ? "bg-[#00f59b] text-black"
+                  ? "bg-[#00e5ff] text-black"
                   : "text-slate-400 hover:text-white"
               }`}
             >
@@ -449,7 +449,7 @@ export default function Referees() {
               onClick={() => setRoleFilter("Main Referee")}
               className={`px-2.5 py-1 rounded text-[11px] font-bold whitespace-nowrap transition-all ${
                 roleFilter === "Main Referee"
-                  ? "bg-[#00f59b] text-black"
+                  ? "bg-[#00e5ff] text-black"
                   : "text-slate-400 hover:text-white"
               }`}
             >
@@ -459,7 +459,7 @@ export default function Referees() {
               onClick={() => setRoleFilter("VAR Official")}
               className={`px-2.5 py-1 rounded text-[11px] font-bold whitespace-nowrap transition-all ${
                 roleFilter === "VAR Official"
-                  ? "bg-[#00f59b] text-black"
+                  ? "bg-[#00e5ff] text-black"
                   : "text-slate-400 hover:text-white"
               }`}
             >
@@ -469,7 +469,7 @@ export default function Referees() {
               onClick={() => setRoleFilter("Assistant Referee")}
               className={`px-2.5 py-1 rounded text-[11px] font-bold whitespace-nowrap transition-all ${
                 roleFilter === "Assistant Referee"
-                  ? "bg-[#00f59b] text-black"
+                  ? "bg-[#00e5ff] text-black"
                   : "text-slate-400 hover:text-white"
               }`}
             >
@@ -480,7 +480,7 @@ export default function Referees() {
                 onClick={() => setRoleFilter("Fourth Official")}
                 className={`px-2.5 py-1 rounded text-[11px] font-bold whitespace-nowrap transition-all ${
                   roleFilter === "Fourth Official"
-                    ? "bg-[#00f59b] text-black"
+                    ? "bg-[#00e5ff] text-black"
                     : "text-slate-400 hover:text-white"
                 }`}
               >
@@ -510,7 +510,7 @@ export default function Referees() {
               onClick={() => setViewMode("grid")}
               className={`p-1.5 rounded transition-colors ${
                 viewMode === "grid"
-                  ? "bg-[#182030] text-emerald-400"
+                  ? "bg-[#182030] text-cyan-400"
                   : "text-slate-500 hover:text-slate-300"
               }`}
               title="Grid View"
@@ -521,7 +521,7 @@ export default function Referees() {
               onClick={() => setViewMode("table")}
               className={`p-1.5 rounded transition-colors ${
                 viewMode === "table"
-                  ? "bg-[#182030] text-emerald-400"
+                  ? "bg-[#182030] text-cyan-400"
                   : "text-slate-500 hover:text-slate-300"
               }`}
               title="Table View"
@@ -567,7 +567,7 @@ export default function Referees() {
       {/* 4. Content Area: 3-Column Grid / Table View */}
       {loading ? (
         <div className="py-24 text-center flex flex-col items-center justify-center gap-3">
-          <span className="w-8 h-8 rounded-full border-2 border-[#00f59b] border-t-transparent animate-spin"></span>
+          <span className="w-8 h-8 rounded-full border-2 border-[#00e5ff] border-t-transparent animate-spin"></span>
           <span className="text-xs font-mono text-slate-400 tracking-wider">
             SYNCHRONIZING ARBITRATION REGISTRY...
           </span>
@@ -602,8 +602,8 @@ export default function Referees() {
                 key={item.referee_id}
                 className={`bg-[#10141e] rounded-lg p-4 border transition-all duration-200 flex flex-col justify-between shadow-sm group ${
                   isSelected(item.referee_id)
-                    ? "border-emerald-500/80 bg-emerald-950/10"
-                    : "border-white/10 hover:border-emerald-500/30"
+                    ? "border-cyan-500/80 bg-cyan-950/10"
+                    : "border-white/10 hover:border-cyan-500/30"
                 }`}
               >
                 <div>
@@ -616,20 +616,20 @@ export default function Referees() {
                           checked={isSelected(item.referee_id)}
                           onChange={() => toggleSelect(item.referee_id)}
                           onClick={(e) => e.stopPropagation()}
-                          className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-emerald-500 focus:ring-emerald-500/20 focus:ring-offset-0 cursor-pointer shrink-0"
+                          className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-cyan-400 focus:ring-cyan-500/20 focus:ring-offset-0 cursor-pointer shrink-0"
                           aria-label={`Select ${item.first_name} ${item.last_name}`}
                         />
                       )}
-                      <div className="w-10 h-10 rounded bg-[#0a0d14] border border-white/10 flex items-center justify-center font-bold text-xs text-emerald-400 font-mono shrink-0">
+                      <div className="w-10 h-10 rounded bg-[#0a0d14] border border-white/10 flex items-center justify-center font-bold text-xs text-cyan-400 font-mono shrink-0">
                         {initials}
                       </div>
                       <div className="min-w-0">
                         <div className="flex items-center gap-1.5">
-                          <h2 className="text-sm font-bold text-white group-hover:text-emerald-400 transition-colors truncate">
+                          <h2 className="text-sm font-bold text-white group-hover:text-cyan-400 transition-colors truncate">
                             {item.first_name} {item.last_name}
                           </h2>
                           <span
-                            className="material-symbols-outlined text-[15px] text-emerald-400 shrink-0"
+                            className="material-symbols-outlined text-[15px] text-cyan-400 shrink-0"
                             title="Certified FIFA Official"
                           >
                             check_circle
@@ -664,7 +664,7 @@ export default function Referees() {
                         <span className="text-[9px] font-mono uppercase text-slate-500 tracking-wider font-semibold block">
                           ASSIGNMENTS
                         </span>
-                        <span className="font-mono text-xs font-bold text-emerald-400 mt-0.5 block">
+                        <span className="font-mono text-xs font-bold text-cyan-400 mt-0.5 block">
                           {item.matches_officiated || 0} Matches
                         </span>
                       </div>
@@ -712,7 +712,7 @@ export default function Referees() {
                         type="checkbox"
                         checked={isAllSelected}
                         onChange={() => toggleSelectAll(filtered)}
-                        className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-emerald-500 focus:ring-emerald-500/20 cursor-pointer"
+                        className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-cyan-400 focus:ring-cyan-500/20 cursor-pointer"
                         aria-label="Select all referees"
                       />
                     </th>
@@ -735,7 +735,7 @@ export default function Referees() {
                     <tr
                       key={item.referee_id}
                       className={`hover:bg-white/[0.02] transition-colors ${
-                        isSelected(item.referee_id) ? "bg-emerald-950/15" : ""
+                        isSelected(item.referee_id) ? "bg-cyan-950/15" : ""
                       }`}
                     >
                       {isSelectionMode && (
@@ -744,12 +744,12 @@ export default function Referees() {
                             type="checkbox"
                             checked={isSelected(item.referee_id)}
                             onChange={() => toggleSelect(item.referee_id)}
-                            className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-emerald-500 focus:ring-emerald-500/20 cursor-pointer"
+                            className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-cyan-400 focus:ring-cyan-500/20 cursor-pointer"
                             aria-label={`Select ${item.first_name} ${item.last_name}`}
                           />
                         </td>
                       )}
-                      <td className="py-3 px-4 font-mono font-semibold text-emerald-400">
+                      <td className="py-3 px-4 font-mono font-semibold text-cyan-400">
                         {item.badge_no || "—"}
                       </td>
                       <td className="py-3 px-4 font-semibold text-white">
@@ -812,7 +812,7 @@ export default function Referees() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
             <div>
               <label className="block text-xs font-medium text-slate-300 mb-1.5">
-                First Name <span className="text-emerald-400">*</span>
+                First Name <span className="text-cyan-400">*</span>
               </label>
               <input
                 type="text"
@@ -820,13 +820,13 @@ export default function Referees() {
                 value={form.first_name}
                 onChange={(e) => setForm({ ...form, first_name: e.target.value })}
                 placeholder="e.g. Szymon"
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
               />
             </div>
 
             <div>
               <label className="block text-xs font-medium text-slate-300 mb-1.5">
-                Last Name <span className="text-emerald-400">*</span>
+                Last Name <span className="text-cyan-400">*</span>
               </label>
               <input
                 type="text"
@@ -834,7 +834,7 @@ export default function Referees() {
                 value={form.last_name}
                 onChange={(e) => setForm({ ...form, last_name: e.target.value })}
                 placeholder="e.g. Marciniak"
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
               />
             </div>
           </div>
@@ -842,7 +842,7 @@ export default function Referees() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
             <div>
               <label className="block text-xs font-medium text-slate-300 mb-1.5">
-                Badge Number <span className="text-emerald-400">*</span>
+                Badge Number <span className="text-cyan-400">*</span>
               </label>
               <input
                 type="text"
@@ -850,13 +850,13 @@ export default function Referees() {
                 value={form.badge_no}
                 onChange={(e) => setForm({ ...form, badge_no: e.target.value })}
                 placeholder="e.g. FIFA-REF-001"
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white font-mono placeholder:text-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white font-mono placeholder:text-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
               />
             </div>
 
             <div>
               <label className="block text-xs font-medium text-slate-300 mb-1.5">
-                Nationality <span className="text-emerald-400">*</span>
+                Nationality <span className="text-cyan-400">*</span>
               </label>
               <input
                 type="text"
@@ -864,20 +864,20 @@ export default function Referees() {
                 value={form.nationality}
                 onChange={(e) => setForm({ ...form, nationality: e.target.value })}
                 placeholder="e.g. Poland"
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
               />
             </div>
           </div>
 
           <div>
             <label className="block text-xs font-medium text-slate-300 mb-1.5">
-              Arbitration Role <span className="text-emerald-400">*</span>
+              Arbitration Role <span className="text-cyan-400">*</span>
             </label>
             <select
               required
               value={form.role}
               onChange={(e) => setForm({ ...form, role: e.target.value })}
-              className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors cursor-pointer"
+              className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors cursor-pointer"
             >
               {roles.map((r) => (
                 <option key={r} value={r}>
@@ -898,7 +898,7 @@ export default function Referees() {
             <button
               type="submit"
               disabled={loadingAction}
-              className="px-4 py-2 bg-[#00f59b] hover:bg-[#00d685] text-black text-xs font-bold rounded-lg transition-colors shadow-sm disabled:opacity-50"
+              className="px-4 py-2 bg-[#00e5ff] hover:bg-[#00c5de] text-black text-xs font-bold rounded-lg transition-colors shadow-sm disabled:opacity-50"
             >
               {loadingAction ? "Saving..." : editingId ? "Update Referee" : "Save Referee"}
             </button>

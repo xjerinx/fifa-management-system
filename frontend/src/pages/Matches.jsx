@@ -52,8 +52,8 @@ function getStatus(dateStr, result) {
   if (result)
     return {
       label: "Final",
-      badgeColor: "bg-emerald-950/60 text-emerald-400 border border-emerald-500/30",
-      dotColor: "bg-emerald-400",
+      badgeColor: "bg-cyan-950/60 text-cyan-400 border border-cyan-500/30",
+      dotColor: "bg-cyan-400",
     };
   const now = new Date();
   const d = new Date(dateStr);
@@ -321,7 +321,7 @@ export default function Matches() {
       <div className="flex flex-col gap-2.5 pt-1">
         {/* Eyebrow / Match Engine Registry */}
         <div className="flex items-center gap-2 flex-wrap">
-          <span className="material-symbols-outlined text-[15px] text-emerald-400">
+          <span className="material-symbols-outlined text-[15px] text-cyan-400">
             sports_soccer
           </span>
           <span className="text-[11px] font-mono tracking-wider text-slate-400 uppercase font-semibold">
@@ -335,7 +335,7 @@ export default function Matches() {
             <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight uppercase leading-tight font-display">
               MATCHES & SCOREBOARDS
             </h1>
-            <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-400 border border-emerald-500/30 uppercase tracking-wider">
+            <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-cyan-950/60 text-cyan-400 border border-cyan-500/30 uppercase tracking-wider">
               {totalMatches} FIXTURES LOGGED
             </span>
           </div>
@@ -367,7 +367,7 @@ export default function Matches() {
 
             <button
               onClick={openCreate}
-              className="flex items-center gap-1.5 px-3.5 py-2 bg-[#00f59b] hover:bg-[#00d685] text-black font-bold text-xs rounded transition-colors shadow-sm tracking-wide whitespace-nowrap"
+              className="flex items-center gap-1.5 px-3.5 py-2 bg-[#00e5ff] hover:bg-[#00c5de] text-black font-bold text-xs rounded transition-colors shadow-sm tracking-wide whitespace-nowrap"
             >
               <span className="material-symbols-outlined text-[17px] font-bold">add</span>
               <span>SCHEDULE FIXTURE</span>
@@ -387,7 +387,7 @@ export default function Matches() {
             <span className="text-[10px] font-mono uppercase text-slate-400 tracking-wider font-semibold">
               TOTAL MATCH REGISTRY
             </span>
-            <span className="material-symbols-outlined text-[18px] text-emerald-400">
+            <span className="material-symbols-outlined text-[18px] text-cyan-400">
               sports
             </span>
           </div>
@@ -396,11 +396,11 @@ export default function Matches() {
               <span>{totalMatches}</span>
               <span className="text-xs font-mono font-normal text-slate-400">FIXTURES</span>
             </div>
-            <div className="text-[10px] font-mono text-emerald-400 mt-1.5 font-semibold truncate">
+            <div className="text-[10px] font-mono text-cyan-400 mt-1.5 font-semibold truncate">
               {completedCount} FINALIZED · {upcomingCount} PENDING
             </div>
             <div className="w-full h-1 bg-slate-800 rounded-full overflow-hidden mt-3">
-              <div className="h-full bg-emerald-400 rounded-full w-full"></div>
+              <div className="h-full bg-cyan-400 rounded-full w-full"></div>
             </div>
           </div>
         </div>
@@ -517,7 +517,7 @@ export default function Matches() {
                 onClick={() => setStatusFilter(st.id)}
                 className={`px-2.5 py-1 rounded text-[11px] font-bold whitespace-nowrap transition-all ${
                   statusFilter === st.id
-                    ? "bg-[#00f59b] text-black shadow-sm"
+                    ? "bg-[#00e5ff] text-black shadow-sm"
                     : "text-slate-400 hover:text-white"
                 }`}
               >
@@ -581,7 +581,7 @@ export default function Matches() {
               onClick={() => setViewMode("cards")}
               className={`p-1.5 rounded transition-colors ${
                 viewMode === "cards"
-                  ? "bg-[#182030] text-emerald-400"
+                  ? "bg-[#182030] text-cyan-400"
                   : "text-slate-500 hover:text-slate-300"
               }`}
               title="Cards / Fixtures View"
@@ -592,7 +592,7 @@ export default function Matches() {
               onClick={() => setViewMode("table")}
               className={`p-1.5 rounded transition-colors ${
                 viewMode === "table"
-                  ? "bg-[#182030] text-emerald-400"
+                  ? "bg-[#182030] text-cyan-400"
                   : "text-slate-500 hover:text-slate-300"
               }`}
               title="Table View"
@@ -638,7 +638,7 @@ export default function Matches() {
       {/* Content Area */}
       {loading ? (
         <div className="py-24 text-center flex flex-col items-center justify-center gap-3">
-          <span className="w-8 h-8 rounded-full border-2 border-[#00f59b] border-t-transparent animate-spin"></span>
+          <span className="w-8 h-8 rounded-full border-2 border-[#00e5ff] border-t-transparent animate-spin"></span>
           <span className="text-xs font-mono text-slate-400 tracking-wider">
             SYNCHRONIZING SCOREBOARDS & FIXTURES...
           </span>
@@ -663,7 +663,7 @@ export default function Matches() {
                         type="checkbox"
                         checked={isAllSelected}
                         onChange={() => toggleSelectAll(filtered)}
-                        className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-emerald-500 focus:ring-emerald-500/20 cursor-pointer"
+                        className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-cyan-400 focus:ring-cyan-500/20 cursor-pointer"
                         aria-label="Select all matches"
                       />
                     </th>
@@ -686,7 +686,7 @@ export default function Matches() {
                     <tr
                       key={item.match_id}
                       className={`hover:bg-white/[0.02] transition-colors ${
-                        isSelected(item.match_id) ? "bg-emerald-950/15" : ""
+                        isSelected(item.match_id) ? "bg-cyan-950/15" : ""
                       }`}
                     >
                       {isSelectionMode && (
@@ -695,7 +695,7 @@ export default function Matches() {
                             type="checkbox"
                             checked={isSelected(item.match_id)}
                             onChange={() => toggleSelect(item.match_id)}
-                            className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-emerald-500 focus:ring-emerald-500/20 cursor-pointer"
+                            className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-cyan-400 focus:ring-cyan-500/20 cursor-pointer"
                             aria-label={`Select match ${item.home_team} vs ${item.away_team}`}
                           />
                         </td>
@@ -711,7 +711,7 @@ export default function Matches() {
                         {item.stage || "Group Stage"}
                       </td>
                       <td className="py-3 px-4 font-bold text-white">
-                        <span className="text-emerald-400 font-mono font-bold mr-1">
+                        <span className="text-cyan-400 font-mono font-bold mr-1">
                           [{getTeamCode(item.home_team)}]
                         </span>
                         {item.home_team}
@@ -727,7 +727,7 @@ export default function Matches() {
                             <span className="font-bold text-white text-sm bg-[#0a0d14] px-2 py-0.5 rounded border border-white/10">
                               {score.home} - {score.away}
                             </span>
-                            <span className="text-[9px] text-emerald-400 uppercase font-bold">
+                            <span className="text-[9px] text-cyan-400 uppercase font-bold">
                               {score.isPens ? "PEN" : score.isAet ? "AET" : "FT"}
                             </span>
                           </div>
@@ -745,7 +745,7 @@ export default function Matches() {
                         <div className="flex items-center justify-end gap-1.5">
                           <button
                             onClick={() => navigate(`/events?matchId=${item.match_id}`)}
-                            className="px-2 py-1 bg-[#121824] hover:bg-[#1a2335] text-emerald-400 hover:text-emerald-300 border border-emerald-500/20 rounded text-[10px] font-mono font-bold uppercase transition-colors flex items-center gap-1"
+                            className="px-2 py-1 bg-[#121824] hover:bg-[#1a2335] text-cyan-400 hover:text-cyan-300 border border-cyan-500/20 rounded text-[10px] font-mono font-bold uppercase transition-colors flex items-center gap-1"
                             title="View Match Events Timeline"
                           >
                             <span className="material-symbols-outlined text-[13px]">timeline</span>
@@ -788,7 +788,7 @@ export default function Matches() {
                       type="checkbox"
                       checked={isSelected(marqueeMatch.match_id)}
                       onChange={() => toggleSelect(marqueeMatch.match_id)}
-                      className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-emerald-500 focus:ring-emerald-500/20 cursor-pointer"
+                      className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-cyan-400 focus:ring-cyan-500/20 cursor-pointer"
                       aria-label="Select marquee match"
                     />
                   )}
@@ -807,7 +807,7 @@ export default function Matches() {
                 {/* Meta details bar */}
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded bg-emerald-950/60 text-emerald-400 border border-emerald-500/30 uppercase tracking-wider">
+                    <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded bg-cyan-950/60 text-cyan-400 border border-cyan-500/30 uppercase tracking-wider">
                       {marqueeMatch.tournament_name || "FIFA WORLD CUP 2026"}
                     </span>
                     <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-[#161d2b] text-slate-300 border border-white/10 uppercase tracking-wider">
@@ -820,7 +820,7 @@ export default function Matches() {
 
                   <div className="flex items-center gap-4 text-xs font-mono text-slate-400">
                     <span className="flex items-center gap-1.5">
-                      <span className="material-symbols-outlined text-[15px] text-emerald-400">stadium</span>
+                      <span className="material-symbols-outlined text-[15px] text-cyan-400">stadium</span>
                       <span>{marqueeMatch.stadium_name || "Official Venue"}</span>
                     </span>
                     <span className="flex items-center gap-1.5">
@@ -835,7 +835,7 @@ export default function Matches() {
                   {/* Home Team */}
                   <div className="md:col-span-4 flex items-center justify-between md:justify-end gap-4 p-4 rounded-lg bg-[#0a0d14] border border-white/5">
                     <div className="flex flex-col text-left md:text-right">
-                      <span className="text-[10px] font-mono text-emerald-400 font-bold uppercase tracking-wider">
+                      <span className="text-[10px] font-mono text-cyan-400 font-bold uppercase tracking-wider">
                         FIFA {TEAM_META[marqueeMatch.home_team]?.rank || "#1"} · {TEAM_META[marqueeMatch.home_team]?.confed || "CONMEBOL"}
                       </span>
                       <h2 className="text-xl sm:text-2xl font-black text-white uppercase tracking-tight mt-0.5">
@@ -846,7 +846,7 @@ export default function Matches() {
                       </span>
 
                     </div>
-                    <div className="w-14 h-14 rounded-lg bg-gradient-to-br from-emerald-500/20 to-emerald-900/40 border border-emerald-500/30 flex items-center justify-center text-white font-mono font-black text-xl shrink-0">
+                    <div className="w-14 h-14 rounded-lg bg-gradient-to-br from-emerald-500/20 to-emerald-900/40 border border-cyan-500/30 flex items-center justify-center text-white font-mono font-black text-xl shrink-0">
                       {getTeamCode(marqueeMatch.home_team)}
                     </div>
                   </div>
@@ -889,7 +889,7 @@ export default function Matches() {
                   <div className="flex items-center gap-2 flex-wrap">
                     <button
                       onClick={() => navigate(`/events?matchId=${marqueeMatch.match_id}`)}
-                      className="flex items-center gap-1.5 px-3 py-1.5 bg-[#00f59b] hover:bg-[#00d685] text-black font-bold text-xs rounded transition-colors"
+                      className="flex items-center gap-1.5 px-3 py-1.5 bg-[#00e5ff] hover:bg-[#00c5de] text-black font-bold text-xs rounded transition-colors"
                     >
                       <span className="material-symbols-outlined text-[16px]">timeline</span>
                       <span>MATCH TIMELINE & EVENTS</span>
@@ -923,7 +923,7 @@ export default function Matches() {
             <div className="flex flex-col gap-3">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-[18px] text-emerald-400">
+                  <span className="material-symbols-outlined text-[18px] text-cyan-400">
                     event_upcoming
                   </span>
                   <h2 className="text-sm font-bold text-white uppercase tracking-wider">
@@ -941,8 +941,8 @@ export default function Matches() {
                     key={item.match_id}
                     className={`bg-[#10141e] rounded-lg p-4 border transition-all flex flex-col justify-between shadow-sm group ${
                       isSelected(item.match_id)
-                        ? "border-emerald-500/80 bg-emerald-950/10"
-                        : "border-white/10 hover:border-emerald-500/30"
+                        ? "border-cyan-500/80 bg-cyan-950/10"
+                        : "border-white/10 hover:border-cyan-500/30"
                     }`}
                   >
                     <div>
@@ -954,7 +954,7 @@ export default function Matches() {
                               type="checkbox"
                               checked={isSelected(item.match_id)}
                               onChange={() => toggleSelect(item.match_id)}
-                              className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-emerald-500 focus:ring-emerald-500/20 cursor-pointer shrink-0"
+                              className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-cyan-400 focus:ring-cyan-500/20 cursor-pointer shrink-0"
                               aria-label={`Select ${item.home_team} vs ${item.away_team}`}
                             />
                           )}
@@ -999,7 +999,7 @@ export default function Matches() {
                             <span className="material-symbols-outlined text-[14px] text-slate-500">calendar_month</span>
                             <span>{formatMatchDate(item.match_date)}</span>
                           </span>
-                          <span className="text-emerald-400 font-bold">{item.match_time || "20:00 UTC"}</span>
+                          <span className="text-cyan-400 font-bold">{item.match_time || "20:00 UTC"}</span>
                         </div>
                         <div className="flex items-center gap-1.5 text-[11px] truncate">
                           <span className="material-symbols-outlined text-[14px] text-slate-500">location_on</span>
@@ -1069,8 +1069,8 @@ export default function Matches() {
                       key={item.match_id}
                       className={`bg-[#10141e] rounded-lg p-3.5 sm:p-4 border transition-all flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm group ${
                         isSelected(item.match_id)
-                          ? "border-emerald-500/80 bg-emerald-950/10"
-                          : "border-white/10 hover:border-emerald-500/30"
+                          ? "border-cyan-500/80 bg-cyan-950/10"
+                          : "border-white/10 hover:border-cyan-500/30"
                       }`}
                     >
                       {/* Left: Tournament & Venue Info */}
@@ -1080,13 +1080,13 @@ export default function Matches() {
                             type="checkbox"
                             checked={isSelected(item.match_id)}
                             onChange={() => toggleSelect(item.match_id)}
-                            className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-emerald-500 focus:ring-emerald-500/20 cursor-pointer shrink-0 mt-0.5"
+                            className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-cyan-400 focus:ring-cyan-500/20 cursor-pointer shrink-0 mt-0.5"
                             aria-label={`Select ${item.home_team} vs ${item.away_team}`}
                           />
                         )}
                         <div className="flex flex-col justify-center">
                           <div className="flex items-center gap-2 flex-wrap">
-                            <span className="text-[10px] font-mono font-bold text-emerald-400 uppercase">
+                            <span className="text-[10px] font-mono font-bold text-cyan-400 uppercase">
                               {item.tournament_name}
                             </span>
                             <span className="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-[#161e2c] text-slate-300 border border-white/10 uppercase">
@@ -1107,7 +1107,7 @@ export default function Matches() {
                         <div className="flex items-center justify-center gap-3 sm:gap-6 w-full max-w-md">
                           {/* Home Team */}
                           <div className="flex-1 text-right flex items-center justify-end gap-2">
-                            <span className="font-bold text-white text-sm sm:text-base group-hover:text-emerald-400 transition-colors truncate">
+                            <span className="font-bold text-white text-sm sm:text-base group-hover:text-cyan-400 transition-colors truncate">
                               {item.home_team}
                             </span>
                             <span className="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-[#0a0d14] text-slate-400 border border-white/10 shrink-0">
@@ -1120,7 +1120,7 @@ export default function Matches() {
                             <span className="font-mono text-lg sm:text-xl font-black text-white">
                               {score ? `${score.home} - ${score.away}` : item.result || "0 - 0"}
                             </span>
-                            <span className="text-[9px] font-mono text-emerald-400 font-bold ml-1">
+                            <span className="text-[9px] font-mono text-cyan-400 font-bold ml-1">
                               {score?.isPens ? "PEN" : score?.isAet ? "AET" : "FT"}
                             </span>
                           </div>
@@ -1130,7 +1130,7 @@ export default function Matches() {
                             <span className="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-[#0a0d14] text-slate-400 border border-white/10 shrink-0">
                               {getTeamCode(item.away_team)}
                             </span>
-                            <span className="font-bold text-white text-sm sm:text-base group-hover:text-emerald-400 transition-colors truncate">
+                            <span className="font-bold text-white text-sm sm:text-base group-hover:text-cyan-400 transition-colors truncate">
                               {item.away_team}
                             </span>
                           </div>
@@ -1139,7 +1139,7 @@ export default function Matches() {
                         {/* Goalscorers / Events line if available */}
                         {goalEvents.length > 0 && (
                           <div className="text-[10px] font-mono text-slate-400 mt-2 flex items-center gap-1.5 flex-wrap justify-center text-center">
-                            <span className="material-symbols-outlined text-[13px] text-emerald-400">sports_soccer</span>
+                            <span className="material-symbols-outlined text-[13px] text-cyan-400">sports_soccer</span>
                             <span>
                               {goalEvents.map((g) => `${g.player_name || "Goal"} ${g.minute}'`).join(", ")}
                             </span>
@@ -1151,7 +1151,7 @@ export default function Matches() {
                       <div className="md:w-56 shrink-0 flex items-center justify-end gap-2 border-t md:border-t-0 border-white/5 pt-2.5 md:pt-0">
                         <button
                           onClick={() => navigate(`/events?matchId=${item.match_id}`)}
-                          className="px-2.5 py-1.5 bg-[#121824] hover:bg-[#1a2335] text-emerald-400 hover:text-emerald-300 border border-emerald-500/20 rounded text-[10px] font-mono font-bold uppercase transition-colors flex items-center gap-1"
+                          className="px-2.5 py-1.5 bg-[#121824] hover:bg-[#1a2335] text-cyan-400 hover:text-cyan-300 border border-cyan-500/20 rounded text-[10px] font-mono font-bold uppercase transition-colors flex items-center gap-1"
                           title="View Events Timeline"
                         >
                           <span className="material-symbols-outlined text-[14px]">timeline</span>
@@ -1204,13 +1204,13 @@ export default function Matches() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
             <div>
               <label className="block text-xs font-medium text-slate-300 mb-1.5">
-                Tournament <span className="text-emerald-400">*</span>
+                Tournament <span className="text-cyan-400">*</span>
               </label>
               <select
                 required
                 value={form.tournament_id}
                 onChange={(e) => setForm({ ...form, tournament_id: e.target.value })}
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors cursor-pointer"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors cursor-pointer"
               >
                 <option value="">Select Tournament</option>
                 {tournaments.map((t) => (
@@ -1223,13 +1223,13 @@ export default function Matches() {
 
             <div>
               <label className="block text-xs font-medium text-slate-300 mb-1.5">
-                Stadium / Host Venue <span className="text-emerald-400">*</span>
+                Stadium / Host Venue <span className="text-cyan-400">*</span>
               </label>
               <select
                 required
                 value={form.stadium_id}
                 onChange={(e) => setForm({ ...form, stadium_id: e.target.value })}
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors cursor-pointer"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors cursor-pointer"
               >
                 <option value="">Select Stadium</option>
                 {stadiums.map((s) => (
@@ -1245,13 +1245,13 @@ export default function Matches() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
             <div>
               <label className="block text-xs font-medium text-slate-300 mb-1.5">
-                Home Team <span className="text-emerald-400">*</span>
+                Home Team <span className="text-cyan-400">*</span>
               </label>
               <select
                 required
                 value={form.home_team_id}
                 onChange={(e) => setForm({ ...form, home_team_id: e.target.value })}
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors cursor-pointer"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors cursor-pointer"
               >
                 <option value="">Select Home Team</option>
                 {teams.map((t) => (
@@ -1264,13 +1264,13 @@ export default function Matches() {
 
             <div>
               <label className="block text-xs font-medium text-slate-300 mb-1.5">
-                Away Team <span className="text-emerald-400">*</span>
+                Away Team <span className="text-cyan-400">*</span>
               </label>
               <select
                 required
                 value={form.away_team_id}
                 onChange={(e) => setForm({ ...form, away_team_id: e.target.value })}
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors cursor-pointer"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors cursor-pointer"
               >
                 <option value="">Select Away Team</option>
                 {teams.map((t) => (
@@ -1286,33 +1286,33 @@ export default function Matches() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
             <div>
               <label className="block text-xs font-medium text-slate-300 mb-1.5">
-                Match Date <span className="text-emerald-400">*</span>
+                Match Date <span className="text-cyan-400">*</span>
               </label>
               <input
                 type="date"
                 required
                 value={form.match_date}
                 onChange={(e) => setForm({ ...form, match_date: e.target.value })}
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
               />
             </div>
 
             <div>
               <label className="block text-xs font-medium text-slate-300 mb-1.5">
-                Match Time <span className="text-emerald-400">*</span>
+                Match Time <span className="text-cyan-400">*</span>
               </label>
               <input
                 type="time"
                 required
                 value={form.match_time}
                 onChange={(e) => setForm({ ...form, match_time: e.target.value })}
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
               />
             </div>
 
             <div>
               <label className="block text-xs font-medium text-slate-300 mb-1.5">
-                Stage <span className="text-emerald-400">*</span>
+                Stage <span className="text-cyan-400">*</span>
               </label>
               <input
                 type="text"
@@ -1320,7 +1320,7 @@ export default function Matches() {
                 value={form.stage}
                 onChange={(e) => setForm({ ...form, stage: e.target.value })}
                 placeholder="e.g. Group A, Semi-Final"
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
               />
             </div>
           </div>
@@ -1335,7 +1335,7 @@ export default function Matches() {
               value={form.result}
               onChange={(e) => setForm({ ...form, result: e.target.value })}
               placeholder="e.g. 2 - 1 or 3 - 3 (4-2 pens)"
-              className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white font-mono placeholder:text-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+              className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white font-mono placeholder:text-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
             />
           </div>
 
@@ -1350,7 +1350,7 @@ export default function Matches() {
             <button
               type="submit"
               disabled={loadingAction}
-              className="px-4 py-2 bg-[#00f59b] hover:bg-[#00d685] text-black text-xs font-bold rounded-lg transition-colors shadow-sm disabled:opacity-50"
+              className="px-4 py-2 bg-[#00e5ff] hover:bg-[#00c5de] text-black text-xs font-bold rounded-lg transition-colors shadow-sm disabled:opacity-50"
             >
               {loadingAction ? "Saving..." : editingId ? "Update Fixture" : "Schedule Match"}
             </button>

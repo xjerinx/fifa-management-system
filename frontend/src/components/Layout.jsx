@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import api from "../api/axios";
+import { useAuth } from "../context/AuthContext";
 
 export default function Layout() {
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
   const [backendStatus, setBackendStatus] = useState("checking");
   const [retrying, setRetrying] = useState(false);
   const [search, setSearch] = useState("");
@@ -31,14 +34,14 @@ export default function Layout() {
   }, []);
 
   return (
-    <div className="flex min-h-screen bg-[#090d16] text-slate-200 antialiased font-body">
+    <div className="flex min-h-screen bg-[#060a14] text-slate-200 antialiased font-body">
       {/* Sidebar */}
       <Sidebar />
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Top Header Bar */}
-        <header className="sticky top-0 h-14 bg-[#090d16]/95 backdrop-blur-md z-30 flex items-center justify-between px-6 border-b border-[#151b29]">
+        <header className="sticky top-0 h-14 bg-[#060a14]/95 backdrop-blur-md z-30 flex items-center justify-between px-6 border-b border-[#131d30]">
           {/* Left: Search Input */}
           <div className="flex items-center gap-3 flex-1 max-w-lg">
             <img
@@ -49,7 +52,7 @@ export default function Layout() {
                 e.target.style.display = "none";
               }}
             />
-            <div className="flex items-center gap-2 bg-[#111622] px-3 py-1.5 rounded-lg border border-[#1b2234] w-full max-w-sm focus-within:border-emerald-500/50 transition-colors">
+            <div className="flex items-center gap-2 bg-[#0b1222] px-3 py-1.5 rounded-lg border border-[#17233c] w-full max-w-sm focus-within:border-cyan-400/60 transition-colors">
               <span className="material-symbols-outlined text-slate-400 text-[16px]">
                 search
               </span>
@@ -60,7 +63,7 @@ export default function Layout() {
                 className="bg-transparent text-slate-200 placeholder:text-slate-500 text-xs focus:outline-none w-full"
                 type="text"
               />
-              <kbd className="hidden md:inline-block text-[10px] bg-[#1a2233] text-slate-400 px-1.5 py-0.5 rounded border border-white/5 font-mono">
+              <kbd className="hidden md:inline-block text-[10px] bg-[#141f36] text-slate-400 px-1.5 py-0.5 rounded border border-white/5 font-mono">
                 Ctrl+K
               </kbd>
             </div>
@@ -69,8 +72,8 @@ export default function Layout() {
           {/* Right: Live Feed Indicator, Notifications & Profile */}
           <div className="flex items-center gap-4 shrink-0">
             {/* Live Feed Pill */}
-            <div className="hidden sm:flex items-center gap-2 px-2.5 py-1 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[11px] font-mono font-semibold">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <div className="hidden sm:flex items-center gap-2 px-2.5 py-1 rounded bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-[11px] font-mono font-semibold">
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
               <span>LIVE FEED 2026/27 ACTIVE</span>
             </div>
 
@@ -98,18 +101,32 @@ export default function Layout() {
               className="p-1.5 text-slate-400 hover:text-white hover:bg-white/5 transition-colors rounded-lg relative"
             >
               <span className="material-symbols-outlined text-[19px]">notifications</span>
-              <span className="absolute top-1 right-1 w-1.5 h-1.5 bg-emerald-400 rounded-full"></span>
+              <span className="absolute top-1 right-1 w-1.5 h-1.5 bg-cyan-400 rounded-full"></span>
             </button>
 
             {/* User Profile Pill */}
-            <div className="flex items-center gap-2 pl-3 border-l border-[#1b2234]">
-              <div className="w-7 h-7 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center shrink-0">
-                <span className="material-symbols-outlined text-[16px]">person</span>
+            <div className="flex items-center gap-2.5 pl-3 border-l border-[#17233c]">
+              <div className="w-7 h-7 rounded-full bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 flex items-center justify-center shrink-0 text-xs font-bold font-mono">
+                {user?.name ? user.name.slice(0, 2).toUpperCase() : "CD"}
               </div>
               <div className="hidden md:flex flex-col text-left leading-tight">
-                <span className="text-xs font-bold text-white tracking-wide">C. DEL PIERO</span>
-                <span className="text-[10px] text-slate-400">Lead Commissioner</span>
+                <span className="text-xs font-bold text-white tracking-wide">
+                  {user?.name || "C. DEL PIERO"}
+                </span>
+                <span className="text-[10px] text-slate-400">
+                  {user?.title || "Lead Commissioner"}
+                </span>
               </div>
+              <button
+                onClick={() => {
+                  logout();
+                  navigate("/");
+                }}
+                title="Sign Out to Portal"
+                className="ml-1 p-1 text-slate-400 hover:text-rose-400 transition-colors rounded hover:bg-white/5"
+              >
+                <span className="material-symbols-outlined text-[16px]">logout</span>
+              </button>
             </div>
           </div>
         </header>

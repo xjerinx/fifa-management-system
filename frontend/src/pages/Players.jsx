@@ -655,7 +655,7 @@ export default function Players() {
           ======================================================== */}
       <div className="flex flex-col gap-2.5 pt-1">
         {/* Eyebrow / Telemetry */}
-        <div className="flex items-center gap-2 text-[11px] font-mono tracking-wider text-emerald-400 font-semibold">
+        <div className="flex items-center gap-2 text-[11px] font-mono tracking-wider text-cyan-400 font-semibold">
           <span>FEDERATION CONSOLE // ROSTERS</span>
           <span className="text-slate-600">•</span>
           <span className="text-slate-400">SYNC: LIVE (TMS 2026.4)</span>
@@ -707,7 +707,7 @@ export default function Players() {
 
             <button
               onClick={openCreate}
-              className="flex items-center gap-1.5 px-3.5 py-2 bg-[#00f59b] hover:bg-[#00d685] text-black font-bold text-xs uppercase tracking-wider rounded-lg transition-colors shadow-sm whitespace-nowrap"
+              className="flex items-center gap-1.5 px-3.5 py-2 bg-[#00e5ff] hover:bg-[#00c5de] text-black font-bold text-xs uppercase tracking-wider rounded-lg transition-colors shadow-sm whitespace-nowrap"
             >
               <span className="material-symbols-outlined text-[18px]">add</span>
               <span>Add Player</span>
@@ -730,7 +730,7 @@ export default function Players() {
             <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
               TOTAL ATHLETES
             </span>
-            <span className="material-symbols-outlined text-[18px] text-emerald-400">
+            <span className="material-symbols-outlined text-[18px] text-cyan-400">
               verified_user
             </span>
           </div>
@@ -739,7 +739,7 @@ export default function Players() {
               <span className="text-3xl font-black text-white font-mono leading-none">
                 {items.length}
               </span>
-              <span className="px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 text-[10px] font-mono font-bold uppercase tracking-tight">
+              <span className="px-1.5 py-0.5 rounded bg-cyan-500/15 text-cyan-400 border border-cyan-500/30 text-[10px] font-mono font-bold uppercase tracking-tight">
                 100% Eligible
               </span>
             </div>
@@ -789,7 +789,7 @@ export default function Players() {
               <span className="text-3xl font-black text-white font-mono leading-none">
                 €{avgValuationM}M
               </span>
-              <span className="text-[10px] font-mono font-bold text-emerald-400 uppercase">
+              <span className="text-[10px] font-mono font-bold text-cyan-400 uppercase">
                 +3.4% YoY
               </span>
             </div>
@@ -831,7 +831,7 @@ export default function Players() {
       <div className="bg-[#0c1017] border border-[#192233] rounded-xl p-2 sm:p-2.5 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 shadow-sm">
         <div className="flex flex-1 items-center gap-3 flex-wrap">
           {/* Search Box */}
-          <div className="flex items-center gap-2 bg-[#111622] px-3 py-1.5 rounded-lg border border-[#1f2738] flex-1 min-w-[240px] max-w-md focus-within:border-emerald-500/50 transition-colors">
+          <div className="flex items-center gap-2 bg-[#111622] px-3 py-1.5 rounded-lg border border-[#17233c] flex-1 min-w-[240px] max-w-md focus-within:border-cyan-500/50 transition-colors">
             <span className="material-symbols-outlined text-[16px] text-slate-500">
               search
             </span>
@@ -870,7 +870,7 @@ export default function Players() {
                 onClick={() => setFilterPosition(p.id)}
                 className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-bold uppercase tracking-wider transition-colors ${
                   filterPosition === p.id
-                    ? "bg-[#00f59b] text-black shadow-sm"
+                    ? "bg-[#00e5ff] text-black shadow-sm"
                     : "text-slate-400 hover:text-white hover:bg-white/5"
                 }`}
               >
@@ -887,7 +887,7 @@ export default function Players() {
           </div>
 
           {/* National Team Filter Dropdown */}
-          <div className="flex items-center bg-[#111622] border border-[#1f2738] rounded-lg px-2.5 py-1">
+          <div className="flex items-center bg-[#111622] border border-[#17233c] rounded-lg px-2.5 py-1">
             <select
               value={filterTeam}
               onChange={(e) => setFilterTeam(e.target.value)}
@@ -907,8 +907,8 @@ export default function Players() {
 
         {/* Right Sort & View Controls */}
         <div className="flex items-center gap-2.5 shrink-0 justify-end">
-          <div className="flex items-center gap-1.5 bg-[#111622] border border-[#1f2738] rounded-lg px-2.5 py-1">
-            <span className="material-symbols-outlined text-[15px] text-emerald-400">
+          <div className="flex items-center gap-1.5 bg-[#111622] border border-[#17233c] rounded-lg px-2.5 py-1">
+            <span className="material-symbols-outlined text-[15px] text-cyan-400">
               swap_vert
             </span>
             <select
@@ -935,12 +935,12 @@ export default function Players() {
           </div>
 
           {/* Grid / Table Toggle */}
-          <div className="flex items-center bg-[#111622] rounded-lg border border-[#1f2738] p-0.5">
+          <div className="flex items-center bg-[#111622] rounded-lg border border-[#17233c] p-0.5">
             <button
               onClick={() => setViewMode("grid")}
               className={`p-1.5 rounded transition-colors ${
                 viewMode === "grid"
-                  ? "bg-[#1f2b3e] text-emerald-400"
+                  ? "bg-[#1f2b3e] text-cyan-400"
                   : "text-slate-400 hover:text-white"
               }`}
               title="Grid View"
@@ -951,7 +951,7 @@ export default function Players() {
               onClick={() => setViewMode("table")}
               className={`p-1.5 rounded transition-colors ${
                 viewMode === "table"
-                  ? "bg-[#1f2b3e] text-emerald-400"
+                  ? "bg-[#1f2b3e] text-cyan-400"
                   : "text-slate-400 hover:text-white"
               }`}
               title="Table View"
@@ -967,7 +967,7 @@ export default function Players() {
             className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-colors border cursor-pointer ${
               isSelectionMode
                 ? "bg-rose-500/20 text-rose-300 border-rose-500/40"
-                : "bg-[#111622] hover:bg-[#1f2b3e] text-slate-300 hover:text-white border-[#1f2738]"
+                : "bg-[#111622] hover:bg-[#1f2b3e] text-slate-300 hover:text-white border-[#17233c]"
             }`}
             title="Toggle Multiple Deletion mode"
           >
@@ -999,7 +999,7 @@ export default function Players() {
           ======================================================== */}
       {loading ? (
         <div className="py-24 text-center flex flex-col items-center justify-center gap-3">
-          <span className="w-8 h-8 rounded-full border-2 border-emerald-400 border-t-transparent animate-spin"></span>
+          <span className="w-8 h-8 rounded-full border-2 border-cyan-400 border-t-transparent animate-spin"></span>
           <span className="text-xs font-mono uppercase tracking-wider text-slate-400">
             Synchronizing Athlete Profiles & Scouting Data...
           </span>
@@ -1065,7 +1065,7 @@ export default function Players() {
                           type="checkbox"
                           checked={isSelected(item.player_id)}
                           onChange={(e) => toggleSelect(item.player_id, e)}
-                          className="w-3.5 h-3.5 rounded border-slate-700 bg-slate-900/90 text-emerald-500 focus:ring-emerald-500/30 accent-emerald-500 cursor-pointer shrink-0 animate-in fade-in duration-100"
+                          className="w-3.5 h-3.5 rounded border-slate-700 bg-slate-900/90 text-cyan-400 focus:ring-cyan-500/30 accent-cyan-400 cursor-pointer shrink-0 animate-in fade-in duration-100"
                           title="Select player"
                         />
                       )}
@@ -1099,7 +1099,7 @@ export default function Players() {
                     </div>
 
                     {/* Player Name */}
-                    <h3 className="text-sm font-black text-white uppercase tracking-wider truncate group-hover:text-emerald-400 transition-colors mt-0.5">
+                    <h3 className="text-sm font-black text-white uppercase tracking-wider truncate group-hover:text-cyan-400 transition-colors mt-0.5">
                       {fullName}
                     </h3>
 
@@ -1113,7 +1113,7 @@ export default function Players() {
                       <span className="text-[9px] font-bold text-slate-500 uppercase tracking-wider">
                         MARKET VALUATION
                       </span>
-                      <span className="text-xs font-black text-emerald-400 font-mono tracking-tight">
+                      <span className="text-xs font-black text-cyan-400 font-mono tracking-tight">
                         {item.market_value_m ? `€${item.market_value_m}M` : "€—"}
                       </span>
                     </div>
@@ -1146,7 +1146,7 @@ export default function Players() {
                 <div className="px-3 py-2 border-t border-[#161e2c] flex items-center justify-between gap-1.5 bg-[#0a0f18]/60">
                   {/* Left Status Tag */}
                   <div className="flex items-center gap-1.5 min-w-0">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0" />
                     <span className="text-[9.5px] font-bold text-slate-300 truncate font-mono">
                       {item.team_name || "Active Squad"}
                     </span>
@@ -1200,7 +1200,7 @@ export default function Players() {
                         type="checkbox"
                         checked={isAllSelected}
                         onChange={() => toggleSelectAll(paginatedItems)}
-                        className="w-4 h-4 rounded border-slate-700 bg-slate-900/90 text-emerald-500 focus:ring-emerald-500/30 accent-emerald-500 cursor-pointer"
+                        className="w-4 h-4 rounded border-slate-700 bg-slate-900/90 text-cyan-400 focus:ring-cyan-500/30 accent-cyan-400 cursor-pointer"
                       />
                     </th>
                   )}
@@ -1224,7 +1224,7 @@ export default function Players() {
                     <tr
                       key={item.player_id}
                       className={`hover:bg-white/[0.02] transition-colors ${
-                        isSelectionMode && isSelected(item.player_id) ? "bg-emerald-500/5" : ""
+                        isSelectionMode && isSelected(item.player_id) ? "bg-cyan-500/10" : ""
                       }`}
                     >
                       {isSelectionMode && (
@@ -1233,7 +1233,7 @@ export default function Players() {
                             type="checkbox"
                             checked={isSelected(item.player_id)}
                             onChange={(e) => toggleSelect(item.player_id, e)}
-                            className="w-4 h-4 rounded border-slate-700 bg-slate-900/90 text-emerald-500 focus:ring-emerald-500/30 accent-emerald-500 cursor-pointer"
+                            className="w-4 h-4 rounded border-slate-700 bg-slate-900/90 text-cyan-400 focus:ring-cyan-500/30 accent-cyan-400 cursor-pointer"
                           />
                         </td>
                       )}
@@ -1258,7 +1258,7 @@ export default function Players() {
                       <td className="py-3 px-4 text-slate-400">
                         {item.preferred_foot || "Right"}
                       </td>
-                      <td className="py-3 px-4 font-mono font-bold text-emerald-400">
+                      <td className="py-3 px-4 font-mono font-bold text-cyan-400">
                         {item.market_value_m ? `€${item.market_value_m}M` : "—"}
                       </td>
                       <td className="py-3 px-4 text-right">
@@ -1329,7 +1329,7 @@ export default function Players() {
                 onClick={() => setCurrentPage(pageNum)}
                 className={`w-8 h-8 rounded-lg text-xs font-bold font-mono transition-colors ${
                   currentPage === pageNum
-                    ? "bg-[#00f59b] text-black shadow-sm"
+                    ? "bg-[#00e5ff] text-black shadow-sm"
                     : "bg-[#121722] hover:bg-[#1a2233] text-slate-400 hover:text-white border border-[#1e2738]"
                 }`}
               >
@@ -1372,7 +1372,7 @@ export default function Players() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
             <div>
               <label className="block text-xs font-medium text-slate-300 mb-1.5">
-                First Name <span className="text-emerald-400">*</span>
+                First Name <span className="text-cyan-400">*</span>
               </label>
               <input
                 type="text"
@@ -1380,13 +1380,13 @@ export default function Players() {
                 value={form.first_name}
                 onChange={(e) => setForm({ ...form, first_name: e.target.value })}
                 placeholder="e.g. Kylian"
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
               />
             </div>
 
             <div>
               <label className="block text-xs font-medium text-slate-300 mb-1.5">
-                Last Name <span className="text-emerald-400">*</span>
+                Last Name <span className="text-cyan-400">*</span>
               </label>
               <input
                 type="text"
@@ -1394,7 +1394,7 @@ export default function Players() {
                 value={form.last_name}
                 onChange={(e) => setForm({ ...form, last_name: e.target.value })}
                 placeholder="e.g. Mbappé"
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
               />
             </div>
           </div>
@@ -1402,13 +1402,13 @@ export default function Players() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
             <div>
               <label className="block text-xs font-medium text-slate-300 mb-1.5">
-                Position <span className="text-emerald-400">*</span>
+                Position <span className="text-cyan-400">*</span>
               </label>
               <select
                 required
                 value={form.position}
                 onChange={(e) => setForm({ ...form, position: e.target.value })}
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors cursor-pointer"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors cursor-pointer"
               >
                 {positions.map((p) => (
                   <option key={p} value={p}>
@@ -1429,13 +1429,13 @@ export default function Players() {
                 value={form.jersey_number}
                 onChange={(e) => setForm({ ...form, jersey_number: e.target.value })}
                 placeholder="e.g. 10"
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white font-mono placeholder:text-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white font-mono placeholder:text-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
               />
             </div>
 
             <div>
               <label className="block text-xs font-medium text-slate-300 mb-1.5">
-                Nationality <span className="text-emerald-400">*</span>
+                Nationality <span className="text-cyan-400">*</span>
               </label>
               <input
                 type="text"
@@ -1443,7 +1443,7 @@ export default function Players() {
                 value={form.nationality}
                 onChange={(e) => setForm({ ...form, nationality: e.target.value })}
                 placeholder="e.g. France"
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
               />
             </div>
           </div>
@@ -1451,14 +1451,14 @@ export default function Players() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
             <div>
               <label className="block text-xs font-medium text-slate-300 mb-1.5">
-                Date of Birth <span className="text-emerald-400">*</span>
+                Date of Birth <span className="text-cyan-400">*</span>
               </label>
               <input
                 type="date"
                 required
                 value={form.dob}
                 onChange={(e) => setForm({ ...form, dob: e.target.value })}
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
               />
             </div>
 
@@ -1473,7 +1473,7 @@ export default function Players() {
                 value={form.height_cm}
                 onChange={(e) => setForm({ ...form, height_cm: e.target.value })}
                 placeholder="e.g. 178"
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white font-mono placeholder:text-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white font-mono placeholder:text-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
               />
             </div>
 
@@ -1484,7 +1484,7 @@ export default function Players() {
               <select
                 value={form.preferred_foot}
                 onChange={(e) => setForm({ ...form, preferred_foot: e.target.value })}
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors cursor-pointer"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors cursor-pointer"
               >
                 <option value="Right">Right</option>
                 <option value="Left">Left</option>
@@ -1505,7 +1505,7 @@ export default function Players() {
                 value={form.market_value_m}
                 onChange={(e) => setForm({ ...form, market_value_m: e.target.value })}
                 placeholder="e.g. 180"
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white font-mono placeholder:text-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white font-mono placeholder:text-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
               />
             </div>
 
@@ -1526,7 +1526,7 @@ export default function Players() {
                       setCustomClubText(form.club || "");
                     }
                   }}
-                  className="text-[10.5px] font-medium text-emerald-400 hover:text-emerald-300 transition-colors cursor-pointer"
+                  className="text-[10.5px] font-medium text-cyan-400 hover:text-cyan-300 transition-colors cursor-pointer"
                 >
                   {isCustomClub ? "📋 Pick from list" : "✏️ Custom"}
                 </button>
@@ -1542,7 +1542,7 @@ export default function Players() {
                     setForm({ ...form, club: val });
                   }}
                   placeholder="e.g. Santos FC, Al Nassr..."
-                  className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+                  className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
                   autoFocus
                 />
               ) : (
@@ -1558,7 +1558,7 @@ export default function Players() {
                       setForm({ ...form, club: val });
                     }
                   }}
-                  className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors cursor-pointer"
+                  className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors cursor-pointer"
                 >
                   <option value="">Select Club (or Free Agent / None)</option>
                   {form.club && !ALL_PREDEFINED_CLUBS.includes(form.club) && (
@@ -1568,13 +1568,13 @@ export default function Players() {
                     <optgroup
                       key={cat.league}
                       label={cat.league}
-                      className="bg-[#121722] text-emerald-400 font-semibold"
+                      className="bg-[#121722] text-cyan-400 font-semibold"
                     >
                       {cat.clubs.map((c) => (
                         <option
                           key={c}
                           value={c}
-                          className="bg-[#0a0e16] text-white font-normal"
+                          className="bg-[#070c17] text-white font-normal"
                         >
                           {c}
                         </option>
@@ -1583,7 +1583,7 @@ export default function Players() {
                   ))}
                   <option
                     value="__custom__"
-                    className="bg-[#121722] text-emerald-400 font-semibold"
+                    className="bg-[#121722] text-cyan-400 font-semibold"
                   >
                     + Other / Custom Club...
                   </option>
@@ -1598,7 +1598,7 @@ export default function Players() {
               <select
                 value={form.team_id}
                 onChange={(e) => setForm({ ...form, team_id: e.target.value })}
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors cursor-pointer"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors cursor-pointer"
               >
                 <option value="">Free Agent / No Team</option>
                 {teams.map((t) => (
@@ -1621,7 +1621,7 @@ export default function Players() {
             <button
               type="submit"
               disabled={loadingAction}
-              className="px-4 py-2 bg-[#00f59b] hover:bg-[#00d685] text-black text-xs font-semibold rounded-lg transition-colors shadow-sm disabled:opacity-50"
+              className="px-4 py-2 bg-[#00e5ff] hover:bg-[#00c5de] text-black text-xs font-semibold rounded-lg transition-colors shadow-sm disabled:opacity-50"
             >
               {loadingAction ? "Saving..." : editingId ? "Save Changes" : "Add Player"}
             </button>

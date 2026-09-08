@@ -48,6 +48,27 @@ promisePool.query('SELECT 1')
                 await promisePool.query("ALTER TABLE tournament_sponsor ADD COLUMN contract_value DECIMAL(15,2) DEFAULT 5000000.00 AFTER term_cycle");
             }
 
+            // Ensure ticket_booking table exists for fan ticketing portal
+            await promisePool.query(`
+                CREATE TABLE IF NOT EXISTS ticket_booking (
+                    booking_id INT AUTO_INCREMENT PRIMARY KEY,
+                    booking_ref VARCHAR(50) UNIQUE NOT NULL,
+                    user_email VARCHAR(255) NOT NULL,
+                    user_name VARCHAR(100) DEFAULT 'Fan User',
+                    user_type ENUM('fan', 'organization') DEFAULT 'fan',
+                    match_id INT NOT NULL,
+                    ticket_type VARCHAR(50) NOT NULL DEFAULT 'Standard',
+                    quantity INT NOT NULL DEFAULT 1,
+                    unit_price DECIMAL(10,2) NOT NULL DEFAULT 6500.00,
+                    total_price DECIMAL(10,2) NOT NULL DEFAULT 6500.00,
+                    status ENUM('CONFIRMED', 'CANCELLED') DEFAULT 'CONFIRMED',
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    INDEX idx_booking_user (user_email),
+                    INDEX idx_booking_match (match_id),
+                    CONSTRAINT fk_ticket_match FOREIGN KEY (match_id) REFERENCES \`match\` (match_id) ON DELETE CASCADE ON UPDATE CASCADE
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+            `);
+
             // Clean up any deprecated match_sponsor table
             await promisePool.query("DROP TABLE IF EXISTS match_sponsor");
         } catch (e) {

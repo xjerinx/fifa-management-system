@@ -36,7 +36,7 @@ const ASSOCIATION_META = {
     metric2Val: "0 Flags",
     metaText: "Pres: E. Rodrigues",
     topBar: "bg-emerald-500",
-    tagColor: "text-emerald-400",
+    tagColor: "text-cyan-400",
   },
   CONMEBOL: {
     hq: "Luque, Paraguay",
@@ -348,8 +348,8 @@ export default function Associations() {
         <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-slate-400">
           <span className="font-bold text-sky-400">GOVERNANCE & JURISDICTION HUB</span>
           <span>•</span>
-          <span className="flex items-center gap-1.5 text-emerald-400 font-semibold">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span className="flex items-center gap-1.5 text-cyan-400 font-semibold">
+            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
             TMS Node V4.2 Connected
           </span>
         </div>
@@ -396,7 +396,7 @@ export default function Associations() {
 
             <button
               onClick={openCreate}
-              className="flex items-center gap-1.5 px-3.5 py-2 bg-[#00f59b] hover:bg-[#00d685] text-black text-xs font-bold uppercase tracking-wider rounded transition-all shadow-sm whitespace-nowrap"
+              className="flex items-center gap-1.5 px-3.5 py-2 bg-[#00e5ff] hover:bg-[#00c5de] text-black text-xs font-bold uppercase tracking-wider rounded transition-all shadow-sm whitespace-nowrap"
             >
               <span className="material-symbols-outlined text-[16px]">add</span>
               <span>REGISTER ASSOCIATION</span>
@@ -432,10 +432,10 @@ export default function Associations() {
             ACTIVE FEDERATIONS
           </span>
           <div className="my-1 flex items-baseline gap-2">
-            <span className="text-2xl font-black text-emerald-400 font-mono tracking-tight">
+            <span className="text-2xl font-black text-cyan-400 font-mono tracking-tight">
               {items.length}
             </span>
-            <span className="text-[11px] text-emerald-400 font-mono">+2 pending</span>
+            <span className="text-[11px] text-cyan-400 font-mono">+2 pending</span>
           </div>
           <div className="h-0.5 w-full bg-emerald-500/80 rounded-full mt-1"></div>
         </div>
@@ -460,10 +460,10 @@ export default function Associations() {
             FIFA COMPLIANCE
           </span>
           <div className="my-1 flex items-baseline gap-2">
-            <span className="text-2xl font-black text-emerald-400 font-mono tracking-tight">
+            <span className="text-2xl font-black text-cyan-400 font-mono tracking-tight">
               100%
             </span>
-            <span className="text-[11px] text-emerald-400 font-mono">Certified</span>
+            <span className="text-[11px] text-cyan-400 font-mono">Certified</span>
           </div>
           <div className="h-0.5 w-full bg-emerald-500/80 rounded-full mt-1"></div>
         </div>
@@ -498,7 +498,7 @@ export default function Associations() {
           ======================================================== */}
       <div className="bg-[#111622] p-2.5 rounded-lg border border-[#1b2234] flex flex-col xl:flex-row items-stretch xl:items-center justify-between gap-3 shadow-sm">
         {/* Search Input */}
-        <div className="flex items-center gap-2 bg-[#0c101a] px-3 py-1.5 rounded border border-[#1b2234] flex-1 max-w-md focus-within:border-emerald-500/50 transition-colors">
+        <div className="flex items-center gap-2 bg-[#0c101a] px-3 py-1.5 rounded border border-[#1b2234] flex-1 max-w-md focus-within:border-cyan-500/50 transition-colors">
           <span className="material-symbols-outlined text-[16px] text-slate-400">search</span>
           <input
             value={search}
@@ -559,7 +559,7 @@ export default function Associations() {
               onClick={() => setViewMode("grid")}
               className={`p-1.5 rounded transition-colors ${
                 viewMode === "grid"
-                  ? "text-[#00f59b] bg-[#162030]"
+                  ? "text-[#00e5ff] bg-[#162030]"
                   : "text-slate-400 hover:text-white"
               }`}
               title="Grid View"
@@ -570,7 +570,7 @@ export default function Associations() {
               onClick={() => setViewMode("table")}
               className={`p-1.5 rounded transition-colors ${
                 viewMode === "table"
-                  ? "text-[#00f59b] bg-[#162030]"
+                  ? "text-[#00e5ff] bg-[#162030]"
                   : "text-slate-400 hover:text-white"
               }`}
               title="Table View"
@@ -618,7 +618,7 @@ export default function Associations() {
           ======================================================== */}
       {loading ? (
         <div className="py-20 text-center flex flex-col items-center justify-center gap-3">
-          <span className="w-8 h-8 rounded-full border-2 border-emerald-400 border-t-transparent animate-spin"></span>
+          <span className="w-8 h-8 rounded-full border-2 border-cyan-400 border-t-transparent animate-spin"></span>
           <span className="text-xs font-mono text-slate-400 uppercase tracking-wider">
             Accessing master registry...
           </span>
@@ -645,7 +645,7 @@ export default function Associations() {
               metric2Val: "Active",
               metaText: `Region: ${item.region || "Global"}`,
               topBar: "bg-emerald-500",
-              tagColor: "text-emerald-400",
+              tagColor: "text-cyan-400",
             };
 
             const estYear = item.foundation_date
@@ -657,7 +657,7 @@ export default function Associations() {
                 key={item.association_id}
                 className={`bg-[#111622] rounded-lg border transition-all p-4 flex flex-col justify-between shadow-sm relative group overflow-hidden ${
                   isSelected(item.association_id)
-                    ? "border-emerald-500/80 bg-emerald-950/10"
+                    ? "border-cyan-500/80 bg-cyan-950/10"
                     : "border-[#1b2234] hover:border-slate-600"
                 }`}
               >
@@ -674,7 +674,7 @@ export default function Associations() {
                           checked={isSelected(item.association_id)}
                           onChange={() => toggleSelect(item.association_id)}
                           onClick={(e) => e.stopPropagation()}
-                          className="w-4 h-4 rounded border-white/20 bg-[#0c101a] text-emerald-500 focus:ring-emerald-500/20 focus:ring-offset-0 cursor-pointer shrink-0 mt-2.5"
+                          className="w-4 h-4 rounded border-white/20 bg-[#0c101a] text-cyan-400 focus:ring-cyan-500/20 focus:ring-offset-0 cursor-pointer shrink-0 mt-2.5"
                           aria-label={`Select ${item.name}`}
                         />
                       )}
@@ -691,7 +691,7 @@ export default function Associations() {
                         <span className={`text-[10px] font-mono font-bold uppercase tracking-wider block ${meta.tagColor}`}>
                           {meta.type}
                         </span>
-                        <h2 className="text-sm font-bold text-white leading-snug line-clamp-1 group-hover:text-emerald-400 transition-colors">
+                        <h2 className="text-sm font-bold text-white leading-snug line-clamp-1 group-hover:text-cyan-400 transition-colors">
                           {item.name}
                         </h2>
                         <div className="flex items-center gap-1 text-[11px] text-slate-400 font-mono mt-0.5 truncate">
@@ -707,7 +707,7 @@ export default function Associations() {
 
                     {/* Right Badges */}
                     <div className="flex items-center gap-1 shrink-0">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0"></span>
                       <span className="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-[#162030] text-slate-300 border border-white/10">
                         {meta.tier}
                       </span>
@@ -741,7 +741,7 @@ export default function Associations() {
                       <span className="text-[10px] text-slate-500 font-bold uppercase block tracking-wider">
                         STATUS
                       </span>
-                      <span className="text-xs font-bold text-emerald-400 mt-0.5 block truncate">
+                      <span className="text-xs font-bold text-cyan-400 mt-0.5 block truncate">
                         {meta.status}
                       </span>
                     </div>
@@ -757,7 +757,7 @@ export default function Associations() {
                   <div className="flex items-center gap-2 shrink-0">
                     <Link
                       to="/teams"
-                      className="text-[11px] font-bold text-emerald-400 hover:text-emerald-300 transition-colors uppercase tracking-wider"
+                      className="text-[11px] font-bold text-cyan-400 hover:text-cyan-300 transition-colors uppercase tracking-wider"
                     >
                       VIEW SQUADS
                     </Link>
@@ -796,7 +796,7 @@ export default function Associations() {
                         type="checkbox"
                         checked={isAllSelected}
                         onChange={() => toggleSelectAll(filtered)}
-                        className="w-4 h-4 rounded border-white/20 bg-[#0c101a] text-emerald-500 focus:ring-emerald-500/20 cursor-pointer"
+                        className="w-4 h-4 rounded border-white/20 bg-[#0c101a] text-cyan-400 focus:ring-cyan-500/20 cursor-pointer"
                         aria-label="Select all associations"
                       />
                     </th>
@@ -828,7 +828,7 @@ export default function Associations() {
                     <tr
                       key={item.association_id}
                       className={`hover:bg-[#162030]/50 transition-colors ${
-                        isSelected(item.association_id) ? "bg-emerald-950/15" : ""
+                        isSelected(item.association_id) ? "bg-cyan-950/15" : ""
                       }`}
                     >
                       {isSelectionMode && (
@@ -837,12 +837,12 @@ export default function Associations() {
                             type="checkbox"
                             checked={isSelected(item.association_id)}
                             onChange={() => toggleSelect(item.association_id)}
-                            className="w-4 h-4 rounded border-white/20 bg-[#0c101a] text-emerald-500 focus:ring-emerald-500/20 cursor-pointer"
+                            className="w-4 h-4 rounded border-white/20 bg-[#0c101a] text-cyan-400 focus:ring-cyan-500/20 cursor-pointer"
                             aria-label={`Select ${item.name}`}
                           />
                         </td>
                       )}
-                      <td className="py-3 px-4 font-bold text-emerald-400">
+                      <td className="py-3 px-4 font-bold text-cyan-400">
                         <span className="px-2 py-0.5 rounded bg-[#161c2b] border border-white/10">
                           {code}
                         </span>
@@ -864,9 +864,9 @@ export default function Associations() {
                       <td className="py-3 px-4 font-bold text-white">
                         {item.team_count || 0} Teams
                       </td>
-                      <td className="py-3 px-4 text-emerald-400 font-bold">
+                      <td className="py-3 px-4 text-cyan-400 font-bold">
                         <span className="flex items-center gap-1">
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
                           {meta.status}
                         </span>
                       </td>
@@ -901,7 +901,7 @@ export default function Associations() {
           ======================================================== */}
       <div className="bg-[#111622] p-4 rounded-lg border border-[#1b2234] flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
+          <div className="w-9 h-9 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 shrink-0">
             <span className="material-symbols-outlined text-[20px]">verified</span>
           </div>
           <div>
@@ -941,7 +941,7 @@ export default function Associations() {
 
           <div>
             <label className="block text-xs font-medium text-slate-300 mb-1.5">
-              Association / Confederation Name <span className="text-emerald-400">*</span>
+              Association / Confederation Name <span className="text-cyan-400">*</span>
             </label>
             <input
               type="text"
@@ -949,14 +949,14 @@ export default function Associations() {
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
               placeholder="e.g. Royal Spanish Football Federation"
-              className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+              className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
             />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="block text-xs font-medium text-slate-300 mb-1.5">
-                FIFA / Official Code <span className="text-emerald-400">*</span>
+                FIFA / Official Code <span className="text-cyan-400">*</span>
               </label>
               <input
                 type="text"
@@ -965,19 +965,19 @@ export default function Associations() {
                 value={form.fifa_code}
                 onChange={(e) => setForm({ ...form, fifa_code: e.target.value.toUpperCase() })}
                 placeholder="e.g. RFEF"
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white uppercase font-bold focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white uppercase font-bold focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
               />
             </div>
 
             <div>
               <label className="block text-xs font-medium text-slate-300 mb-1.5">
-                Region / Continental Zone <span className="text-emerald-400">*</span>
+                Region / Continental Zone <span className="text-cyan-400">*</span>
               </label>
               <select
                 required
                 value={form.region}
                 onChange={(e) => setForm({ ...form, region: e.target.value })}
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors cursor-pointer"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors cursor-pointer"
               >
                 <option value="">Select Zone</option>
                 <option value="Europe">Europe (UEFA)</option>
@@ -998,7 +998,7 @@ export default function Associations() {
               type="date"
               value={form.foundation_date}
               onChange={(e) => setForm({ ...form, foundation_date: e.target.value })}
-              className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+              className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
             />
           </div>
 
@@ -1013,7 +1013,7 @@ export default function Associations() {
             <button
               type="submit"
               disabled={loadingAction}
-              className="px-4 py-2 bg-[#00f59b] hover:bg-[#00d685] text-black text-xs font-semibold rounded-lg transition-colors shadow-sm disabled:opacity-50"
+              className="px-4 py-2 bg-[#00e5ff] hover:bg-[#00c5de] text-black text-xs font-semibold rounded-lg transition-colors shadow-sm disabled:opacity-50"
             >
               {loadingAction ? "Saving..." : editingId ? "Update Association" : "Save Association"}
             </button>

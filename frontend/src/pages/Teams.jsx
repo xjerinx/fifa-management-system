@@ -331,7 +331,7 @@ export default function Teams() {
           ======================================================== */}
       <div className="flex flex-col gap-2.5 pt-1">
         {/* Eyebrow / Telemetry */}
-        <div className="flex items-center gap-2 text-[11px] font-mono tracking-wider text-emerald-400 font-semibold">
+        <div className="flex items-center gap-2 text-[11px] font-mono tracking-wider text-cyan-400 font-semibold">
           <span>FEDERATION CONSOLE // REGISTRY</span>
           <span className="text-slate-600">•</span>
           <span className="text-slate-400">SYNC: ACTIVE (TMS 2026.4)</span>
@@ -358,7 +358,7 @@ export default function Teams() {
             <button
               onClick={() => setSortBy(sortBy === "ranking" ? "name" : "ranking")}
               className={`flex items-center gap-1.5 px-3 py-2 bg-[#121722] hover:bg-[#1a2233] text-xs font-semibold uppercase tracking-wider rounded-lg border transition-colors shadow-sm whitespace-nowrap ${sortBy === "ranking"
-                ? "text-emerald-400 border-emerald-500/30"
+                ? "text-cyan-400 border-cyan-500/30"
                 : "text-slate-300 border-[#1e2738]"
                 }`}
             >
@@ -384,7 +384,7 @@ export default function Teams() {
 
             <button
               onClick={openCreate}
-              className="flex items-center gap-1.5 px-3.5 py-2 bg-[#00f59b] hover:bg-[#00d685] text-black font-bold text-xs uppercase tracking-wider rounded-lg transition-colors shadow-sm whitespace-nowrap"
+              className="flex items-center gap-1.5 px-3.5 py-2 bg-[#00e5ff] hover:bg-[#00c5de] text-black font-bold text-xs uppercase tracking-wider rounded-lg transition-colors shadow-sm whitespace-nowrap"
             >
               <span className="material-symbols-outlined text-[18px]">add</span>
               <span>Register Team</span>
@@ -407,7 +407,7 @@ export default function Teams() {
             <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
               ACTIVE TEAMS
             </span>
-            <span className="material-symbols-outlined text-[18px] text-emerald-400">
+            <span className="material-symbols-outlined text-[18px] text-cyan-400">
               flag
             </span>
           </div>
@@ -416,7 +416,7 @@ export default function Teams() {
               <span className="text-3xl font-black text-white font-mono leading-none">
                 {items.length}
               </span>
-              <span className="px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 text-[10px] font-mono font-bold uppercase tracking-tight">
+              <span className="px-1.5 py-0.5 rounded bg-cyan-500/15 text-cyan-400 border border-cyan-500/30 text-[10px] font-mono font-bold uppercase tracking-tight">
                 100% AUDITED
               </span>
             </div>
@@ -508,7 +508,7 @@ export default function Teams() {
       <div className="bg-[#0c1017] border border-[#192233] rounded-xl p-2 sm:p-2.5 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 shadow-sm">
         <div className="flex flex-1 items-center gap-3 flex-wrap">
           {/* Search Box */}
-          <div className="flex items-center gap-2 bg-[#111622] px-3 py-1.5 rounded-lg border border-[#1f2738] flex-1 min-w-[240px] max-w-md focus-within:border-emerald-500/50 transition-colors">
+          <div className="flex items-center gap-2 bg-[#111622] px-3 py-1.5 rounded-lg border border-[#17233c] flex-1 min-w-[240px] max-w-md focus-within:border-cyan-500/50 transition-colors">
             <span className="material-symbols-outlined text-[16px] text-slate-500">
               search
             </span>
@@ -540,7 +540,7 @@ export default function Teams() {
                 key={confed}
                 onClick={() => setConfedFilter(confed)}
                 className={`px-2.5 py-1 rounded-md text-[11px] font-bold uppercase tracking-wider transition-colors ${confedFilter === confed
-                  ? "bg-[#00f59b] text-black shadow-sm"
+                  ? "bg-[#00e5ff] text-black shadow-sm"
                   : "text-slate-400 hover:text-white hover:bg-white/5"
                   }`}
               >
@@ -552,13 +552,13 @@ export default function Teams() {
           <div className="hidden lg:block w-px h-5 bg-[#1f2738]"></div>
 
           {/* Tier Pills */}
-          <div className="flex items-center gap-1 p-0.5 bg-[#111622] rounded-lg border border-[#1f2738]">
+          <div className="flex items-center gap-1 p-0.5 bg-[#111622] rounded-lg border border-[#17233c]">
             {["ALL TIERS", "ELITE", "CONTENDER"].map((tier) => (
               <button
                 key={tier}
                 onClick={() => setTierFilter(tier)}
                 className={`px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider transition-colors ${tierFilter === tier
-                  ? "bg-[#1f2b3e] text-emerald-400 border border-emerald-500/20"
+                  ? "bg-[#1f2b3e] text-cyan-400 border border-cyan-500/20"
                   : "text-slate-400 hover:text-white"
                   }`}
               >
@@ -570,8 +570,8 @@ export default function Teams() {
 
         {/* Right Sort & View Controls */}
         <div className="flex items-center gap-2.5 shrink-0 justify-end">
-          <div className="flex items-center gap-1.5 bg-[#111622] border border-[#1f2738] rounded-lg px-2.5 py-1">
-            <span className="material-symbols-outlined text-[15px] text-emerald-400">
+          <div className="flex items-center gap-1.5 bg-[#111622] border border-[#17233c] rounded-lg px-2.5 py-1">
+            <span className="material-symbols-outlined text-[15px] text-cyan-400">
               arrow_downward
             </span>
             <select
@@ -587,11 +587,11 @@ export default function Teams() {
           </div>
 
           {/* Grid / Table Toggle */}
-          <div className="flex items-center bg-[#111622] rounded-lg border border-[#1f2738] p-0.5">
+          <div className="flex items-center bg-[#111622] rounded-lg border border-[#17233c] p-0.5">
             <button
               onClick={() => setViewMode("grid")}
               className={`p-1.5 rounded transition-colors ${viewMode === "grid"
-                ? "bg-[#1f2b3e] text-emerald-400"
+                ? "bg-[#1f2b3e] text-cyan-400"
                 : "text-slate-400 hover:text-white"
                 }`}
               title="Grid View"
@@ -601,7 +601,7 @@ export default function Teams() {
             <button
               onClick={() => setViewMode("table")}
               className={`p-1.5 rounded transition-colors ${viewMode === "table"
-                ? "bg-[#1f2b3e] text-emerald-400"
+                ? "bg-[#1f2b3e] text-cyan-400"
                 : "text-slate-400 hover:text-white"
                 }`}
               title="Table View"
@@ -617,7 +617,7 @@ export default function Teams() {
             className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-colors border cursor-pointer ${
               isSelectionMode
                 ? "bg-rose-500/20 text-rose-300 border-rose-500/40"
-                : "bg-[#111622] hover:bg-[#1f2b3e] text-slate-300 hover:text-white border-[#1f2738]"
+                : "bg-[#111622] hover:bg-[#1f2b3e] text-slate-300 hover:text-white border-[#17233c]"
             }`}
             title="Toggle Multiple Deletion mode"
           >
@@ -649,7 +649,7 @@ export default function Teams() {
           ======================================================== */}
       {loading ? (
         <div className="py-24 text-center flex flex-col items-center justify-center gap-3">
-          <span className="w-8 h-8 rounded-full border-2 border-emerald-400 border-t-transparent animate-spin"></span>
+          <span className="w-8 h-8 rounded-full border-2 border-cyan-400 border-t-transparent animate-spin"></span>
           <span className="text-xs font-mono uppercase tracking-wider text-slate-400">
             Synchronizing National Teams Registry...
           </span>
@@ -712,7 +712,7 @@ export default function Teams() {
                           type="checkbox"
                           checked={isSelected(item.team_id)}
                           onChange={(e) => toggleSelect(item.team_id, e)}
-                          className="w-4 h-4 rounded border-slate-700 bg-slate-900/90 text-emerald-500 focus:ring-emerald-500/30 accent-emerald-500 cursor-pointer shrink-0 animate-in fade-in duration-100"
+                          className="w-4 h-4 rounded border-slate-700 bg-slate-900/90 text-cyan-400 focus:ring-cyan-500/30 accent-cyan-400 cursor-pointer shrink-0 animate-in fade-in duration-100"
                           title="Select team"
                         />
                       )}
@@ -725,7 +725,7 @@ export default function Teams() {
                     {/* Team Name, Nickname & Badges */}
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-1.5 flex-wrap">
-                        <h3 className="text-sm font-black text-white tracking-wider uppercase truncate group-hover:text-emerald-400 transition-colors">
+                        <h3 className="text-sm font-black text-white tracking-wider uppercase truncate group-hover:text-cyan-400 transition-colors">
                           {item.name}
                         </h3>
 
@@ -783,7 +783,7 @@ export default function Teams() {
                       </span>
                     </div>
 
-                    <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[11px] font-mono font-bold shrink-0">
+                    <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-[11px] font-mono font-bold shrink-0">
                       <span className="material-symbols-outlined text-[13px]">
                         group
                       </span>
@@ -819,7 +819,7 @@ export default function Teams() {
                     </button>
                     <button
                       onClick={() => openEdit(item)}
-                      className="inline-flex items-center gap-0.5 text-[10px] font-bold text-emerald-400 hover:text-emerald-300 tracking-wider uppercase ml-1 transition-colors"
+                      className="inline-flex items-center gap-0.5 text-[10px] font-bold text-cyan-400 hover:text-cyan-300 tracking-wider uppercase ml-1 transition-colors"
                       title="View Squad & Tactics"
                     >
                       <span>SQUAD & TACTICS</span>
@@ -847,7 +847,7 @@ export default function Teams() {
                         type="checkbox"
                         checked={isAllSelected}
                         onChange={() => toggleSelectAll(filtered)}
-                        className="w-4 h-4 rounded border-slate-700 bg-slate-900/90 text-emerald-500 focus:ring-emerald-500/30 accent-emerald-500 cursor-pointer"
+                        className="w-4 h-4 rounded border-slate-700 bg-slate-900/90 text-cyan-400 focus:ring-cyan-500/30 accent-cyan-400 cursor-pointer"
                       />
                     </th>
                   )}
@@ -873,7 +873,7 @@ export default function Teams() {
                     <tr
                       key={item.team_id}
                       className={`hover:bg-white/[0.02] transition-colors ${
-                        isSelectionMode && isSelected(item.team_id) ? "bg-emerald-500/5" : ""
+                        isSelectionMode && isSelected(item.team_id) ? "bg-cyan-500/10" : ""
                       }`}
                     >
                       {isSelectionMode && (
@@ -882,11 +882,11 @@ export default function Teams() {
                             type="checkbox"
                             checked={isSelected(item.team_id)}
                             onChange={(e) => toggleSelect(item.team_id, e)}
-                            className="w-4 h-4 rounded border-slate-700 bg-slate-900/90 text-emerald-500 focus:ring-emerald-500/30 accent-emerald-500 cursor-pointer"
+                            className="w-4 h-4 rounded border-slate-700 bg-slate-900/90 text-cyan-400 focus:ring-cyan-500/30 accent-cyan-400 cursor-pointer"
                           />
                         </td>
                       )}
-                      <td className="py-3 px-4 font-mono font-bold text-emerald-400">
+                      <td className="py-3 px-4 font-mono font-bold text-cyan-400">
                         {item.fifa_ranking ? `#${item.fifa_ranking}` : "—"}
                       </td>
                       <td className="py-3 px-4">
@@ -911,7 +911,7 @@ export default function Teams() {
                       <td className="py-3 px-4 font-medium text-slate-200">
                         {item.coach_name || "Unassigned"}
                       </td>
-                      <td className="py-3 px-4 font-mono font-bold text-emerald-400">
+                      <td className="py-3 px-4 font-mono font-bold text-cyan-400">
                         {item.player_count || 0} PL
                       </td>
                       <td className="py-3 px-4 font-mono text-slate-400">
@@ -967,7 +967,7 @@ export default function Teams() {
 
           <div>
             <label className="block text-xs font-medium text-slate-300 mb-1.5">
-              Team Name <span className="text-emerald-400">*</span>
+              Team Name <span className="text-cyan-400">*</span>
             </label>
             <input
               type="text"
@@ -975,7 +975,7 @@ export default function Teams() {
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
               placeholder="e.g. Spain National Team"
-              className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+              className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
             />
           </div>
 
@@ -986,7 +986,7 @@ export default function Teams() {
             <select
               value={form.coach_id}
               onChange={(e) => setForm({ ...form, coach_id: e.target.value })}
-              className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors cursor-pointer"
+              className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors cursor-pointer"
             >
               <option value="">Unassigned Coach</option>
               {coaches.map((c) => {
@@ -1016,7 +1016,7 @@ export default function Teams() {
                 value={form.nickname}
                 onChange={(e) => setForm({ ...form, nickname: e.target.value })}
                 placeholder="e.g. La Roja"
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
               />
             </div>
 
@@ -1031,7 +1031,7 @@ export default function Teams() {
                 value={form.fifa_ranking}
                 onChange={(e) => setForm({ ...form, fifa_ranking: e.target.value })}
                 placeholder="e.g. 1"
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white font-mono focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white font-mono focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
               />
             </div>
           </div>
@@ -1039,7 +1039,7 @@ export default function Teams() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="block text-xs font-medium text-slate-300 mb-1.5">
-                Foundation Year <span className="text-emerald-400">*</span>
+                Foundation Year <span className="text-cyan-400">*</span>
               </label>
               <input
                 type="number"
@@ -1049,7 +1049,7 @@ export default function Teams() {
                 value={form.foundation_year}
                 onChange={(e) => setForm({ ...form, foundation_year: e.target.value })}
                 placeholder="e.g. 1913"
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white font-mono focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white font-mono focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
               />
             </div>
 
@@ -1062,13 +1062,13 @@ export default function Teams() {
                   type="color"
                   value={form.jersey_color}
                   onChange={(e) => setForm({ ...form, jersey_color: e.target.value })}
-                  className="w-9 h-8 p-0.5 bg-[#0a0e16] border border-[#1f2738] rounded-lg cursor-pointer"
+                  className="w-9 h-8 p-0.5 bg-[#070c17] border border-[#17233c] rounded-lg cursor-pointer"
                 />
                 <input
                   type="text"
                   value={form.jersey_color}
                   onChange={(e) => setForm({ ...form, jersey_color: e.target.value })}
-                  className="flex-1 bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white font-mono focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20"
+                  className="flex-1 bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white font-mono focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20"
                 />
               </div>
             </div>
@@ -1076,13 +1076,13 @@ export default function Teams() {
 
           <div>
             <label className="block text-xs font-medium text-slate-300 mb-1.5">
-              Governing Association <span className="text-emerald-400">*</span>
+              Governing Association <span className="text-cyan-400">*</span>
             </label>
             <select
               required
               value={form.association_id}
               onChange={(e) => setForm({ ...form, association_id: e.target.value })}
-              className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors cursor-pointer"
+              className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors cursor-pointer"
             >
               <option value="">Select Association</option>
               {associations.map((a) => (
@@ -1104,7 +1104,7 @@ export default function Teams() {
             <button
               type="submit"
               disabled={loadingAction}
-              className="px-4 py-2 bg-[#00f59b] hover:bg-[#00d685] text-black text-xs font-semibold rounded-lg transition-colors shadow-sm disabled:opacity-50"
+              className="px-4 py-2 bg-[#00e5ff] hover:bg-[#00c5de] text-black text-xs font-semibold rounded-lg transition-colors shadow-sm disabled:opacity-50"
             >
               {loadingAction ? "Saving..." : editingId ? "Update Team" : "Save Team"}
             </button>

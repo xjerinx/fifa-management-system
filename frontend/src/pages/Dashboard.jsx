@@ -6,14 +6,14 @@ import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 // Position Color Palette matching reference
 const POSITION_COLORS = {
   Forward: "#f87171",    // Coral / Red
-  Midfielder: "#00f59b", // Green
+  Midfielder: "#00e5ff", // Electric Cyan
   Defender: "#38bdf8",   // Sky / Blue
   Goalkeeper: "#fbbf24", // Amber
 };
 
 // Initial badge colors for Top Players
 const PLAYER_BADGE_COLORS = [
-  "bg-emerald-500/20 text-emerald-400 border-emerald-500/30",
+  "bg-cyan-500/20 text-cyan-400 border-cyan-500/30",
   "bg-sky-500/20 text-sky-400 border-sky-500/30",
   "bg-amber-500/20 text-amber-400 border-amber-500/30",
   "bg-rose-500/20 text-rose-400 border-rose-500/30",
@@ -115,8 +115,8 @@ export default function Dashboard() {
       {
         code: "UEFA",
         name: "Union of European Football Associations",
-        dotColor: "bg-[#00f59b]",
-        barColor: "bg-[#00f59b]",
+        dotColor: "bg-cyan-400",
+        barColor: "bg-cyan-400",
       },
       {
         code: "CONMEBOL",
@@ -170,8 +170,8 @@ export default function Dashboard() {
       <div className="flex flex-col gap-2.5 pt-1">
         {/* Micro Status Bar */}
         <div className="flex flex-wrap items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-slate-400">
-          <span className="flex items-center gap-1.5 text-emerald-400 font-semibold">
-            <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+          <span className="flex items-center gap-1.5 text-cyan-400 font-semibold">
+            <span className="w-2 h-2 rounded-full bg-cyan-400"></span>
             FEDERATION OPERATIONS
           </span>
           <span>•</span>
@@ -188,7 +188,7 @@ export default function Dashboard() {
           <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap shrink-0">
             <button
               onClick={exportSummary}
-              className="flex items-center gap-1.5 px-3 py-2 bg-[#111622] hover:bg-[#182133] text-slate-300 hover:text-white text-xs font-semibold rounded border border-[#1b2234] transition-colors shadow-sm whitespace-nowrap"
+              className="flex items-center gap-1.5 px-3 py-2 bg-[#0b1222] hover:bg-[#121c32] text-slate-300 hover:text-white text-xs font-semibold rounded-lg border border-[#17233c] transition-colors shadow-sm whitespace-nowrap"
             >
               <span className="material-symbols-outlined text-[16px]">file_download</span>
               <span>EXPORT REPORT</span>
@@ -196,7 +196,7 @@ export default function Dashboard() {
 
             <Link
               to="/matches"
-              className="flex items-center gap-1.5 px-3 py-2 bg-[#111622] hover:bg-[#182133] text-slate-300 hover:text-white text-xs font-semibold rounded border border-[#1b2234] transition-colors shadow-sm whitespace-nowrap"
+              className="flex items-center gap-1.5 px-3 py-2 bg-[#0b1222] hover:bg-[#121c32] text-slate-300 hover:text-white text-xs font-semibold rounded-lg border border-[#17233c] transition-colors shadow-sm whitespace-nowrap"
             >
               <span className="material-symbols-outlined text-[16px]">add_circle</span>
               <span>NEW FIXTURE</span>
@@ -204,7 +204,7 @@ export default function Dashboard() {
 
             <Link
               to="/teams"
-              className="flex items-center gap-1.5 px-3.5 py-2 bg-[#00f59b] hover:bg-[#00d685] text-black text-xs font-bold uppercase tracking-wider rounded transition-all shadow-sm whitespace-nowrap"
+              className="flex items-center gap-1.5 px-3.5 py-2 bg-gradient-to-r from-cyan-400 to-sky-400 hover:from-cyan-300 hover:to-sky-300 text-black text-xs font-bold uppercase tracking-wider rounded-lg transition-all shadow-[0_0_15px_rgba(56,189,248,0.3)] whitespace-nowrap"
             >
               <span className="material-symbols-outlined text-[16px]">app_registration</span>
               <span>QUICK REGISTER</span>
@@ -226,7 +226,7 @@ export default function Dashboard() {
         {/* Card 1: GOVERNING ASSOCS */}
         <Link
           to="/associations"
-          className="bg-[#111622] p-3.5 rounded-lg border border-[#1b2234] hover:border-sky-500/40 transition-all flex flex-col justify-between shadow-sm relative group min-h-[105px]"
+          className="bg-[#0b1222] p-3.5 rounded-xl border border-[#17233c] hover:border-sky-500/40 transition-all flex flex-col justify-between shadow-sm relative group min-h-[105px]"
         >
           <div className="flex items-center justify-between">
             <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
@@ -251,23 +251,23 @@ export default function Dashboard() {
         {/* Card 2: NATIONAL TEAMS */}
         <Link
           to="/teams"
-          className="bg-[#111622] p-3.5 rounded-lg border border-[#1b2234] hover:border-emerald-500/40 transition-all flex flex-col justify-between shadow-sm relative group min-h-[105px]"
+          className="bg-[#0b1222] p-3.5 rounded-xl border border-[#17233c] hover:border-cyan-500/40 transition-all flex flex-col justify-between shadow-sm relative group min-h-[105px]"
         >
           <div className="flex items-center justify-between">
             <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
               NATIONAL TEAMS
             </span>
-            <span className="material-symbols-outlined text-[18px] text-emerald-400">shield</span>
+            <span className="material-symbols-outlined text-[18px] text-cyan-400">shield</span>
           </div>
           <div className="mt-2 flex items-baseline gap-2">
             <span className="text-2xl font-black text-white font-mono tracking-tight tabular-nums">
               {stats?.total_teams ?? 12}
             </span>
-            <span className="text-[10px] font-mono text-emerald-400 font-semibold">Active</span>
+            <span className="text-[10px] font-mono text-cyan-400 font-semibold">Active</span>
           </div>
           <div className="mt-2 flex items-center justify-between text-[10px] text-slate-500">
             <span className="truncate">Registered Roster</span>
-            <svg className="w-10 h-3 text-emerald-400/70 shrink-0" viewBox="0 0 40 12" fill="none">
+            <svg className="w-10 h-3 text-cyan-400/70 shrink-0" viewBox="0 0 40 12" fill="none">
               <path d="M1 10 Q 12 3, 22 7 T 39 2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
             </svg>
           </div>
@@ -276,7 +276,7 @@ export default function Dashboard() {
         {/* Card 3: SQUAD ATHLETES */}
         <Link
           to="/players"
-          className="bg-[#111622] p-3.5 rounded-lg border border-[#1b2234] hover:border-amber-500/40 transition-all flex flex-col justify-between shadow-sm relative group min-h-[105px]"
+          className="bg-[#0b1222] p-3.5 rounded-xl border border-[#17233c] hover:border-amber-500/40 transition-all flex flex-col justify-between shadow-sm relative group min-h-[105px]"
         >
           <div className="flex items-center justify-between">
             <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
@@ -301,7 +301,7 @@ export default function Dashboard() {
         {/* Card 4: HOST VENUES */}
         <Link
           to="/stadiums"
-          className="bg-[#111622] p-3.5 rounded-lg border border-[#1b2234] hover:border-cyan-500/40 transition-all flex flex-col justify-between shadow-sm relative group min-h-[105px]"
+          className="bg-[#0b1222] p-3.5 rounded-xl border border-[#17233c] hover:border-cyan-500/40 transition-all flex flex-col justify-between shadow-sm relative group min-h-[105px]"
         >
           <div className="flex items-center justify-between">
             <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
@@ -317,30 +317,30 @@ export default function Dashboard() {
           </div>
           <div className="mt-2 flex items-center justify-between text-[10px] text-slate-500">
             <span className="truncate">Host Venues</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0"></span>
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0"></span>
           </div>
         </Link>
 
         {/* Card 5: TOTAL MATCHES */}
         <Link
           to="/matches"
-          className="bg-[#111622] p-3.5 rounded-lg border border-[#1b2234] hover:border-emerald-500/40 transition-all flex flex-col justify-between shadow-sm relative group min-h-[105px]"
+          className="bg-[#0b1222] p-3.5 rounded-xl border border-[#17233c] hover:border-cyan-500/40 transition-all flex flex-col justify-between shadow-sm relative group min-h-[105px]"
         >
           <div className="flex items-center justify-between">
             <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
               TOTAL MATCHES
             </span>
-            <span className="material-symbols-outlined text-[18px] text-emerald-400">calendar_month</span>
+            <span className="material-symbols-outlined text-[18px] text-cyan-400">calendar_month</span>
           </div>
           <div className="mt-2 flex items-baseline gap-2">
             <span className="text-2xl font-black text-white font-mono tracking-tight tabular-nums">
               {stats?.total_matches ?? 22}
             </span>
-            <span className="text-[10px] font-mono text-emerald-400 font-semibold">Fixtures</span>
+            <span className="text-[10px] font-mono text-cyan-400 font-semibold">Fixtures</span>
           </div>
           <div className="mt-2 flex items-center justify-between text-[10px] text-slate-500">
             <span className="truncate">Match Calendar</span>
-            <svg className="w-10 h-3 text-emerald-400/70 shrink-0" viewBox="0 0 40 12" fill="none">
+            <svg className="w-10 h-3 text-cyan-400/70 shrink-0" viewBox="0 0 40 12" fill="none">
               <path d="M1 9 Q 10 2, 20 6 T 39 2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
             </svg>
           </div>
@@ -349,23 +349,23 @@ export default function Dashboard() {
         {/* Card 6: PARTNERS & TIERS */}
         <Link
           to="/sponsors"
-          className="bg-[#111622] p-3.5 rounded-lg border border-[#1b2234] hover:border-teal-500/40 transition-all flex flex-col justify-between shadow-sm relative group min-h-[105px]"
+          className="bg-[#0b1222] p-3.5 rounded-xl border border-[#17233c] hover:border-sky-500/40 transition-all flex flex-col justify-between shadow-sm relative group min-h-[105px]"
         >
           <div className="flex items-center justify-between">
             <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
               PARTNERS & TIERS
             </span>
-            <span className="material-symbols-outlined text-[18px] text-teal-400">handshake</span>
+            <span className="material-symbols-outlined text-[18px] text-sky-400">handshake</span>
           </div>
           <div className="mt-2 flex items-baseline gap-2">
             <span className="text-2xl font-black text-white font-mono tracking-tight tabular-nums">
               {String(stats?.total_sponsors ?? 8).padStart(2, "0")}
             </span>
-            <span className="text-[10px] font-mono text-teal-400 font-semibold">Tier 1 & 2</span>
+            <span className="text-[10px] font-mono text-sky-400 font-semibold">Tier 1 & 2</span>
           </div>
           <div className="mt-2 flex items-center justify-between text-[10px] text-slate-500">
             <span className="truncate">Global Coverage</span>
-            <span className="material-symbols-outlined text-[13px] text-emerald-400">check_circle</span>
+            <span className="material-symbols-outlined text-[13px] text-cyan-400">check_circle</span>
           </div>
         </Link>
       </div>
@@ -381,7 +381,7 @@ export default function Dashboard() {
             ====================================================== */}
         <div className="lg:col-span-7 flex flex-col gap-5">
           {/* Section: Continental Squad Readiness Index */}
-          <div className="bg-[#111622] p-5 rounded-lg border border-[#1b2234] shadow-sm">
+          <div className="bg-[#0b1222] p-5 rounded-xl border border-[#17233c] shadow-sm">
             <div className="flex items-start justify-between gap-4 mb-4">
               <div>
                 <span className="text-[10px] font-mono font-bold text-sky-400 tracking-wider uppercase block">
@@ -391,7 +391,7 @@ export default function Dashboard() {
                   Continental Squad Readiness Index
                 </h2>
               </div>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shrink-0">
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 shrink-0">
                 Live Data
               </span>
             </div>
@@ -411,14 +411,14 @@ export default function Dashboard() {
                       </span>
                     </div>
                     <div className="flex items-center gap-2 shrink-0 pl-2">
-                      <span className="text-emerald-400 font-bold">
+                      <span className="text-cyan-400 font-bold">
                         {item.count} {item.count === 1 ? "Team" : "Teams"} ({item.pct}%)
                       </span>
                     </div>
                   </div>
 
                   {/* Slim Progress Bar */}
-                  <div className="w-full h-1.5 bg-[#090d16] rounded-full overflow-hidden">
+                  <div className="w-full h-1.5 bg-[#060a14] rounded-full overflow-hidden">
                     <div
                       className={`h-full ${item.barColor} rounded-full transition-all duration-500`}
                       style={{ width: `${Math.max(Number(item.pct), 6)}%` }}
@@ -426,23 +426,21 @@ export default function Dashboard() {
                   </div>
                 </div>
               ))}
-
-
             </div>
           </div>
 
           {/* Section: Upcoming World Showcase Fixtures */}
-          <div className="bg-[#111622] p-5 rounded-lg border border-[#1b2234] shadow-sm">
+          <div className="bg-[#0b1222] p-5 rounded-xl border border-[#17233c] shadow-sm">
             <div className="flex items-start justify-between gap-4 mb-4">
               <div>
-                <span className="text-[10px] font-mono font-bold text-emerald-400 tracking-wider uppercase block">
+                <span className="text-[10px] font-mono font-bold text-cyan-400 tracking-wider uppercase block">
                   OPERATIONAL FIXTURES
                 </span>
                 <h2 className="text-base sm:text-lg font-bold text-white tracking-tight mt-0.5">
                   Upcoming World Showcase Fixtures
                 </h2>
               </div>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#161d2d] text-slate-300 border border-[#1b2234] shrink-0">
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#101a2f] text-cyan-300 border border-cyan-500/20 shrink-0">
                 Upcoming Fixtures
               </span>
             </div>
@@ -460,7 +458,7 @@ export default function Dashboard() {
                         : "SCHEDULED";
                   const statusStyle =
                     idx === 0
-                      ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
+                      ? "bg-cyan-500/10 text-cyan-400 border-cyan-500/20"
                       : idx === 1
                         ? "bg-sky-500/10 text-sky-400 border-sky-500/20"
                         : "bg-slate-500/10 text-slate-300 border-slate-500/20";
@@ -470,7 +468,7 @@ export default function Dashboard() {
                   return (
                     <div
                       key={m.match_id}
-                      className="p-3 bg-[#0c101a] rounded-lg border border-[#1b2234] hover:border-emerald-500/30 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3 group"
+                      className="p-3 bg-[#070c17] rounded-xl border border-[#141f36] hover:border-cyan-500/30 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3 group"
                     >
                       {/* Left: 2-Letter Badge + Teams */}
                       <div className="flex items-center gap-3 min-w-0">
@@ -531,7 +529,7 @@ export default function Dashboard() {
             ====================================================== */}
         <div className="lg:col-span-5 flex flex-col gap-5">
           {/* Section: Players by Position */}
-          <div className="bg-[#111622] p-5 rounded-lg border border-[#1b2234] shadow-sm">
+          <div className="bg-[#0b1222] p-5 rounded-xl border border-[#17233c] shadow-sm">
             <div className="flex items-start justify-between gap-4 mb-3">
               <div>
                 <span className="text-[10px] font-mono font-bold text-amber-400 tracking-wider uppercase block">
@@ -565,7 +563,7 @@ export default function Dashboard() {
                         <Cell
                           key={entry.position}
                           fill={POSITION_COLORS[entry.position] || "#94a3b8"}
-                          stroke="#111622"
+                          stroke="#0b1222"
                           strokeWidth={2}
                         />
                       ))}
@@ -586,7 +584,7 @@ export default function Dashboard() {
             </div>
 
             {/* 2x2 Position Breakdown Grid */}
-            <div className="grid grid-cols-2 gap-2 pt-2 border-t border-[#1b2234] text-xs font-mono">
+            <div className="grid grid-cols-2 gap-2 pt-2 border-t border-[#17233c] text-xs font-mono">
               {byPosition.map((item) => {
                 const color = POSITION_COLORS[item.position] || "#94a3b8";
                 const pct = Math.round(((item.count || 0) / totalPlayersCount) * 100);
@@ -602,7 +600,7 @@ export default function Dashboard() {
                 return (
                   <div
                     key={item.position}
-                    className="flex items-center justify-between p-1.5 rounded bg-[#0c101a] border border-[#1b2234]"
+                    className="flex items-center justify-between p-1.5 rounded-lg bg-[#070c17] border border-[#17233c]"
                   >
                     <div className="flex items-center gap-1.5 truncate">
                       <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: color }}></span>
@@ -620,17 +618,17 @@ export default function Dashboard() {
           </div>
 
           {/* Section: Top Players by Market Value */}
-          <div className="bg-[#111622] p-5 rounded-lg border border-[#1b2234] shadow-sm">
+          <div className="bg-[#0b1222] p-5 rounded-xl border border-[#17233c] shadow-sm">
             <div className="flex items-start justify-between gap-4 mb-3">
               <div>
-                <span className="text-[10px] font-mono font-bold text-emerald-400 tracking-wider uppercase block">
+                <span className="text-[10px] font-mono font-bold text-cyan-400 tracking-wider uppercase block">
                   FIFA ELITE SCOUT
                 </span>
                 <h2 className="text-base font-bold text-white tracking-tight mt-0.5">
                   Top Players by Market Value
                 </h2>
               </div>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shrink-0">
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 shrink-0">
                 Live Data
               </span>
             </div>
@@ -640,12 +638,11 @@ export default function Dashboard() {
               {elitePlayers.map((p, idx) => {
                 const badgeColor = PLAYER_BADGE_COLORS[idx % PLAYER_BADGE_COLORS.length];
                 const initials = getPlayerInitials(p.full_name || p.name);
-                const formRating = '';
 
                 return (
                   <div
                     key={p.player_id}
-                    className="flex items-center justify-between p-2 rounded bg-[#0c101a] border border-[#1b2234] hover:border-emerald-500/30 transition-all group"
+                    className="flex items-center justify-between p-2 rounded-lg bg-[#070c17] border border-[#17233c] hover:border-cyan-500/30 transition-all group"
                   >
                     <div className="flex items-center gap-2.5 min-w-0">
                       <div
@@ -654,7 +651,7 @@ export default function Dashboard() {
                         {initials}
                       </div>
                       <div className="min-w-0">
-                        <span className="text-xs font-bold text-white block truncate group-hover:text-emerald-400 transition-colors">
+                        <span className="text-xs font-bold text-white block truncate group-hover:text-cyan-400 transition-colors">
                           {p.full_name || p.name}
                         </span>
                         <span className="text-[10px] text-slate-400 block truncate">
@@ -663,9 +660,9 @@ export default function Dashboard() {
                       </div>
                     </div>
 
-                      <span className="text-xs font-bold text-emerald-400">
-                        €{Number(p.market_value_m || 0).toFixed(2)}M
-                      </span>
+                    <span className="text-xs font-bold text-cyan-400">
+                      €{Number(p.market_value_m || 0).toFixed(2)}M
+                    </span>
                   </div>
                 );
               })}
@@ -673,7 +670,7 @@ export default function Dashboard() {
           </div>
 
           {/* Section: Recent Official Scores */}
-          <div className="bg-[#111622] p-5 rounded-lg border border-[#1b2234] shadow-sm">
+          <div className="bg-[#0b1222] p-5 rounded-xl border border-[#17233c] shadow-sm">
             <div className="flex items-start justify-between gap-4 mb-3">
               <div>
                 <span className="text-[10px] font-mono font-bold text-slate-400 tracking-wider uppercase block">
@@ -692,7 +689,7 @@ export default function Dashboard() {
                 recent.slice(0, 3).map((m, idx) => {
                   const scorePill =
                     idx === 0
-                      ? "bg-[#00f59b] text-black font-black"
+                      ? "bg-cyan-400 text-black font-black"
                       : idx === 1
                         ? "bg-[#38bdf8] text-black font-black"
                         : "bg-[#182334] text-white font-bold border border-white/10";
@@ -707,7 +704,7 @@ export default function Dashboard() {
                   return (
                     <div
                       key={m.match_id}
-                      className="flex items-center justify-between p-2 rounded bg-[#0c101a] border border-[#1b2234] text-xs hover:border-white/10 transition-colors"
+                      className="flex items-center justify-between p-2 rounded-lg bg-[#070c17] border border-[#17233c] text-xs hover:border-cyan-500/30 transition-colors"
                     >
                       <span className="text-white font-semibold truncate flex-1 text-left">
                         {m.home_team}
@@ -727,7 +724,7 @@ export default function Dashboard() {
                   );
                 })
               ) : (
-                <div className="p-4 text-center text-xs text-slate-500 bg-[#0c101a] rounded">
+                <div className="p-4 text-center text-xs text-slate-500 bg-[#070c17] rounded">
                   No completed scores available
                 </div>
               )}

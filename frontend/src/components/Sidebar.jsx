@@ -5,7 +5,7 @@ const navSections = [
   {
     title: "OVERVIEW",
     items: [
-      { to: "/", label: "Dashboard", icon: "grid_view", end: true },
+      { to: "/dashboard", label: "Dashboard", icon: "grid_view", end: true },
     ],
   },
   {
@@ -45,7 +45,7 @@ export default function Sidebar() {
 
   return (
     <aside
-      className={`h-screen sticky top-0 flex flex-col justify-between bg-[#070a12] border-r border-[#151b29] py-3.5 z-40 transition-all duration-200 select-none ${collapsed ? "w-16" : "w-60"
+      className={`h-screen sticky top-0 flex flex-col justify-between bg-[#060a14] border-r border-[#131d30] py-3.5 z-40 transition-all duration-200 select-none ${collapsed ? "w-16" : "w-60"
         }`}
     >
       <div className="flex flex-col gap-3.5 min-h-0 flex-1">
@@ -119,7 +119,7 @@ export default function Sidebar() {
                   title={collapsed ? item.label : undefined}
                   className={({ isActive }) =>
                     `flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs transition-colors ${isActive
-                      ? "bg-[#00f59b] text-black font-bold shadow-sm"
+                      ? "bg-gradient-to-r from-cyan-400 to-sky-400 text-black font-bold shadow-[0_0_15px_rgba(56,189,248,0.35)]"
                       : "text-slate-400 hover:text-white hover:bg-white/[0.04] font-medium"
                     } ${collapsed ? "justify-center px-0" : ""}`
                   }
@@ -135,17 +135,37 @@ export default function Sidebar() {
         </nav>
       </div>
 
+      {/* Portal Quick Links */}
+      <div className="px-2 pt-2 border-t border-[#131d30] flex flex-col gap-1">
+        <NavLink
+          to="/fan"
+          title={collapsed ? "Fan Portal" : undefined}
+          className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-xs font-medium text-cyan-400 hover:bg-cyan-500/10 transition-colors"
+        >
+          <span className="material-symbols-outlined text-[17px] shrink-0">sports_soccer</span>
+          {!collapsed && <span>Fan Portal</span>}
+        </NavLink>
+        <NavLink
+          to="/"
+          title={collapsed ? "Exit to Main Portal" : undefined}
+          className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-xs font-medium text-slate-400 hover:text-white hover:bg-white/[0.04] transition-colors"
+        >
+          <span className="material-symbols-outlined text-[17px] shrink-0">door_open</span>
+          {!collapsed && <span>Exit to Portal</span>}
+        </NavLink>
+      </div>
+
       {/* Footer / Status Indicator */}
-      <div className="px-3.5 pt-2.5 border-t border-[#151b29]">
+      <div className="px-3.5 pt-2.5 border-t border-[#131d30]">
         <div className={`flex items-center justify-between ${collapsed ? "justify-center" : ""}`}>
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 shrink-0 animate-pulse"></span>
+            <span className="w-2 h-2 rounded-full bg-cyan-400 shrink-0 animate-pulse"></span>
             {!collapsed && (
               <span className="text-[11px] font-mono font-medium text-slate-300">TMS SYNCED</span>
             )}
           </div>
           {!collapsed && (
-            <span className="text-[10px] font-mono text-emerald-400 font-semibold">99.98%</span>
+            <span className="text-[10px] font-mono text-cyan-400 font-semibold">99.98%</span>
           )}
         </div>
       </div>

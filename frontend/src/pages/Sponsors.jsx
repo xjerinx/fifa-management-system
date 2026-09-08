@@ -32,7 +32,7 @@ const SPONSOR_META = {
     icon: 'checkroom',
     tier: 'FIFA PARTNER · TIER 1 GLOBAL',
     tierType: 'global',
-    tierBadgeClass: 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30',
+    tierBadgeClass: 'bg-cyan-500/15 text-cyan-400 border border-cyan-500/30',
     cycle: '2023 — 2030',
     value: '$380M',
     deliverables: 'Official Match Ball (Al Rihla / Fussballliebe), Referee Kits, Ball Crew Apparel, Official Footwear Provider',
@@ -50,7 +50,7 @@ const SPONSOR_META = {
     icon: 'local_bar',
     tier: 'FIFA PARTNER · TIER 1 GLOBAL',
     tierType: 'global',
-    tierBadgeClass: 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30',
+    tierBadgeClass: 'bg-cyan-500/15 text-cyan-400 border border-cyan-500/30',
     cycle: '2022 — 2030',
     value: '$320M',
     deliverables: 'Exclusive Concession Pouring Rights, Trophy Tour Title Sponsor, Youth Clinic Program',
@@ -158,7 +158,7 @@ const SPONSOR_META = {
     icon: 'corporate_fare',
     tier: 'FIFA PARTNER · TIER 1 GLOBAL',
     tierType: 'global',
-    tierBadgeClass: 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30',
+    tierBadgeClass: 'bg-cyan-500/15 text-cyan-400 border border-cyan-500/30',
     cycle: '2016 — 2030',
     value: '$310M',
     deliverables: 'FIFA Youth Development Program, Exclusive Chinese Broadcast Virtual Advertising Assets',
@@ -256,7 +256,7 @@ function getSponsorMeta(item) {
     tier: isGlobal ? 'FIFA PARTNER · TIER 1 GLOBAL' : 'OFFICIAL COMMERCIAL SUPPORTER',
     tierType: isGlobal ? 'global' : 'supporter',
     tierBadgeClass: isGlobal
-      ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30'
+      ? 'bg-cyan-500/15 text-cyan-400 border border-cyan-500/30'
       : 'bg-amber-500/15 text-amber-400 border border-amber-500/30',
     cycle: cycleVal,
     value: formattedVal,
@@ -563,11 +563,11 @@ export default function Sponsors() {
       <div className="flex flex-col gap-2.5">
         {/* Eyebrow Protocol Feed */}
         <div className="flex items-center gap-2 flex-wrap">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span className="text-[11px] font-mono tracking-widest text-emerald-400 font-bold uppercase">
+          <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+          <span className="text-[11px] font-mono tracking-widest text-cyan-400 font-bold uppercase">
             COMMERCIAL & ASSET GOVERNANCE // SPONSORSHIP PORTFOLIO // CONTRACT CYCLE 2024-2027
           </span>
-          <span className="px-1.5 py-0.5 rounded bg-[#1e293b] text-emerald-300 text-[9px] font-mono font-bold tracking-wider uppercase border border-emerald-500/30">
+          <span className="px-1.5 py-0.5 rounded bg-[#1e293b] text-cyan-300 text-[9px] font-mono font-bold tracking-wider uppercase border border-cyan-500/30">
             CYCLE TIER 1-3
           </span>
         </div>
@@ -616,7 +616,7 @@ export default function Sponsors() {
 
             <button
               onClick={openCreate}
-              className="flex items-center gap-1.5 px-3.5 py-2 bg-[#00f59b] hover:bg-[#00d685] text-black text-xs font-bold rounded-lg transition-all shadow-md shadow-[#00f59b]/15 active:scale-[0.98] whitespace-nowrap"
+              className="flex items-center gap-1.5 px-3.5 py-2 bg-[#00e5ff] hover:bg-[#00c5de] text-black text-xs font-bold rounded-lg transition-all shadow-md shadow-[#00e5ff]/15 active:scale-[0.98] whitespace-nowrap"
             >
               <Plus size={15} strokeWidth={2.5} />
               <span className="tracking-wide uppercase font-mono text-[11px]">ONBOARD PARTNER</span>
@@ -639,13 +639,13 @@ export default function Sponsors() {
             <span className="text-[10px] font-mono font-bold text-slate-400 tracking-wider uppercase">
               TOTAL PARTNERS
             </span>
-            <CheckCircle2 size={13} className="text-emerald-400" />
+            <CheckCircle2 size={13} className="text-cyan-400" />
           </div>
           <div className="flex items-baseline gap-2 mt-1.5">
             <span className="text-2xl font-black text-white tracking-tight tabular-nums">
               {totalCount}
             </span>
-            <span className="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/20 uppercase">
+            <span className="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-cyan-500/15 text-cyan-400 border border-cyan-500/20 uppercase">
               100% RATIFIED
             </span>
           </div>
@@ -660,13 +660,13 @@ export default function Sponsors() {
             <span className="text-[10px] font-mono font-bold text-slate-400 tracking-wider uppercase">
               AGGREGATE VALUE
             </span>
-            <span className="material-symbols-outlined text-[14px] text-emerald-400">account_balance</span>
+            <span className="material-symbols-outlined text-[14px] text-cyan-400">account_balance</span>
           </div>
           <div className="flex items-baseline gap-2 mt-1.5">
-            <span className="text-2xl font-black text-emerald-400 tracking-tight tabular-nums">
+            <span className="text-2xl font-black text-cyan-400 tracking-tight tabular-nums">
               {totalContractVal > 0 ? formatCurrency(totalContractVal) : '$0'}
             </span>
-            <span className="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 uppercase">
+            <span className="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 uppercase">
               {totalContractVal > 0 ? 'CONTRACTED' : 'NO CONTRACTS'}
             </span>
           </div>
@@ -723,13 +723,13 @@ export default function Sponsors() {
             <span className="text-[10px] font-mono font-bold text-slate-400 tracking-wider uppercase">
               ASSET CLEARANCE
             </span>
-            <span className="material-symbols-outlined text-[14px] text-emerald-400">verified</span>
+            <span className="material-symbols-outlined text-[14px] text-cyan-400">verified</span>
           </div>
           <div className="flex items-baseline gap-2 mt-1.5">
-            <span className="text-2xl font-black text-emerald-400 tracking-tight tabular-nums">
+            <span className="text-2xl font-black text-cyan-400 tracking-tight tabular-nums">
               99.2%
             </span>
-            <span className="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/20 uppercase">
+            <span className="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-cyan-500/15 text-cyan-300 border border-cyan-500/20 uppercase">
               0 AMBUSH
             </span>
           </div>
@@ -766,7 +766,7 @@ export default function Sponsors() {
             <button
               onClick={() => setTierFilter('ALL')}
               className={`px-3 py-1.5 text-xs font-mono font-bold rounded transition-colors ${tierFilter === 'ALL'
-                  ? 'bg-[#00f59b] text-black shadow-sm'
+                  ? 'bg-[#00e5ff] text-black shadow-sm'
                   : 'bg-[#090d16] text-slate-400 hover:text-white border border-[#1c2436]'
                 }`}
             >
@@ -776,7 +776,7 @@ export default function Sponsors() {
             <button
               onClick={() => setTierFilter('FIFA PARTNERS')}
               className={`px-3 py-1.5 text-xs font-mono font-bold rounded transition-colors ${tierFilter === 'FIFA PARTNERS'
-                  ? 'bg-[#00f59b] text-black shadow-sm'
+                  ? 'bg-[#00e5ff] text-black shadow-sm'
                   : 'bg-[#090d16] text-slate-400 hover:text-white border border-[#1c2436]'
                 }`}
             >
@@ -786,7 +786,7 @@ export default function Sponsors() {
             <button
               onClick={() => setTierFilter('REGIONAL SUPPORTERS')}
               className={`px-3 py-1.5 text-xs font-mono font-bold rounded transition-colors ${tierFilter === 'REGIONAL SUPPORTERS'
-                  ? 'bg-[#00f59b] text-black shadow-sm'
+                  ? 'bg-[#00e5ff] text-black shadow-sm'
                   : 'bg-[#090d16] text-slate-400 hover:text-white border border-[#1c2436]'
                 }`}
             >
@@ -796,7 +796,7 @@ export default function Sponsors() {
             <button
               onClick={() => setTierFilter('AUTOMOTIVE & TECH')}
               className={`px-3 py-1.5 text-xs font-mono font-bold rounded transition-colors ${tierFilter === 'AUTOMOTIVE & TECH'
-                  ? 'bg-[#00f59b] text-black shadow-sm'
+                  ? 'bg-[#00e5ff] text-black shadow-sm'
                   : 'bg-[#090d16] text-slate-400 hover:text-white border border-[#1c2436]'
                 }`}
             >
@@ -824,7 +824,7 @@ export default function Sponsors() {
             <div className="flex items-center bg-[#090d16] p-0.5 rounded-lg border border-[#1c2436]">
               <button
                 onClick={() => setViewMode('grid')}
-                className={`p-1.5 rounded-md transition-colors ${viewMode === 'grid' ? 'bg-[#1e293d] text-emerald-400' : 'text-slate-400 hover:text-white'
+                className={`p-1.5 rounded-md transition-colors ${viewMode === 'grid' ? 'bg-[#1e293d] text-cyan-400' : 'text-slate-400 hover:text-white'
                   }`}
                 title="Card Grid View"
               >
@@ -832,7 +832,7 @@ export default function Sponsors() {
               </button>
               <button
                 onClick={() => setViewMode('table')}
-                className={`p-1.5 rounded-md transition-colors ${viewMode === 'table' ? 'bg-[#1e293d] text-emerald-400' : 'text-slate-400 hover:text-white'
+                className={`p-1.5 rounded-md transition-colors ${viewMode === 'table' ? 'bg-[#1e293d] text-cyan-400' : 'text-slate-400 hover:text-white'
                   }`}
                 title="LED Telemetry Table View"
               >
@@ -884,7 +884,7 @@ export default function Sponsors() {
               <div
                 key={item.sponsor_id}
                 className={`bg-[#0e121b] hover:bg-[#121824] rounded-xl border p-4 flex flex-col justify-between transition-all group shadow-md ${isSelected(item.sponsor_id)
-                    ? 'border-emerald-500/80 bg-emerald-950/10'
+                    ? 'border-cyan-500/80 bg-cyan-950/10'
                     : 'border-[#1b2336] hover:border-[#2b3a55]'
                   }`}
               >
@@ -898,7 +898,7 @@ export default function Sponsors() {
                           checked={isSelected(item.sponsor_id)}
                           onChange={() => toggleSelect(item.sponsor_id)}
                           onClick={(e) => e.stopPropagation()}
-                          className="w-4 h-4 rounded border-white/20 bg-[#090d16] text-emerald-500 focus:ring-emerald-500/20 cursor-pointer shrink-0"
+                          className="w-4 h-4 rounded border-white/20 bg-[#090d16] text-cyan-400 focus:ring-cyan-500/20 cursor-pointer shrink-0"
                           aria-label={`Select ${item.name}`}
                         />
                       )}
@@ -906,7 +906,7 @@ export default function Sponsors() {
                         {meta.tier}
                       </span>
                     </div>
-                    <span className="text-xs font-mono font-black text-emerald-400 tabular-nums">
+                    <span className="text-xs font-mono font-black text-cyan-400 tabular-nums">
                       {item.tournaments_sponsored || 0} {item.tournaments_sponsored === 1 ? 'Tournament' : 'Tournaments'}
                     </span>
                   </div>
@@ -914,7 +914,7 @@ export default function Sponsors() {
                   {/* Brand Name, Subtitle & Icon Mark (Includes Industry Icon!) */}
                   <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0 flex-1">
-                      <h3 className="text-base font-black text-white tracking-wider uppercase truncate group-hover:text-emerald-400 transition-colors">
+                      <h3 className="text-base font-black text-white tracking-wider uppercase truncate group-hover:text-cyan-400 transition-colors">
                         {item.name}
                       </h3>
                       <p className="text-[11px] text-slate-400 truncate mt-0.5 font-normal">
@@ -923,8 +923,8 @@ export default function Sponsors() {
                     </div>
 
                     {/* Brand Monogram Mark Box with Industry Icon Accent */}
-                    <div className="w-11 h-11 rounded-lg bg-[#141b28] border border-[#232f44] flex flex-col items-center justify-center font-black text-white text-xs tracking-wider shadow-inner shrink-0 group-hover:border-emerald-500/40 transition-colors relative">
-                      <span className="material-symbols-outlined text-[18px] text-emerald-400">
+                    <div className="w-11 h-11 rounded-lg bg-[#141b28] border border-[#232f44] flex flex-col items-center justify-center font-black text-white text-xs tracking-wider shadow-inner shrink-0 group-hover:border-cyan-500/40 transition-colors relative">
+                      <span className="material-symbols-outlined text-[18px] text-cyan-400">
                         {meta.icon}
                       </span>
                       <span className="text-[8px] font-mono text-slate-400 -mt-0.5">
@@ -948,7 +948,7 @@ export default function Sponsors() {
                       <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">
                         CONTRACT VALUE
                       </span>
-                      <span className={`font-mono text-sm font-black mt-0.5 block ${meta.value !== '—' ? 'text-emerald-400' : 'text-slate-500'}`}>
+                      <span className={`font-mono text-sm font-black mt-0.5 block ${meta.value !== '—' ? 'text-cyan-400' : 'text-slate-500'}`}>
                         {meta.value}
                       </span>
                     </div>
@@ -970,7 +970,7 @@ export default function Sponsors() {
                       <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider block">
                         ACTIVATED TOURNAMENTS
                       </span>
-                      <span className={`text-[10px] font-mono font-bold ${Number(item.tournaments_sponsored || 0) > 0 ? 'text-emerald-400' : 'text-slate-500'}`}>
+                      <span className={`text-[10px] font-mono font-bold ${Number(item.tournaments_sponsored || 0) > 0 ? 'text-cyan-400' : 'text-slate-500'}`}>
                         {item.tournaments_sponsored || 0}
                       </span>
                     </div>
@@ -979,9 +979,9 @@ export default function Sponsors() {
                         {item.tournament_names.split(', ').map(tName => (
                           <span
                             key={tName}
-                            className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#131b29] border border-[#1f2d45] text-[10px] font-mono text-emerald-300 font-medium truncate max-w-full"
+                            className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#131b29] border border-[#1f2d45] text-[10px] font-mono text-cyan-300 font-medium truncate max-w-full"
                           >
-                            <span className="w-1 h-1 rounded-full bg-emerald-400 shrink-0"></span>
+                            <span className="w-1 h-1 rounded-full bg-cyan-400 shrink-0"></span>
                             <span className="truncate">{tName}</span>
                           </span>
                         ))}
@@ -999,7 +999,7 @@ export default function Sponsors() {
                   <div className="flex items-center gap-1.5 flex-1">
                     <button
                       onClick={() => openTournamentsRoster(item)}
-                      className="flex-1 py-1.5 px-2 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 hover:text-emerald-300 text-[11px] font-mono font-bold rounded-lg border border-emerald-500/30 transition-colors flex items-center justify-center gap-1.5 uppercase tracking-wider"
+                      className="flex-1 py-1.5 px-2 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 hover:text-cyan-300 text-[11px] font-mono font-bold rounded-lg border border-cyan-500/30 transition-colors flex items-center justify-center gap-1.5 uppercase tracking-wider"
                       title="Manage tournament partnerships, term cycles & contract values"
                     >
                       <Eye size={12} />
@@ -1037,7 +1037,7 @@ export default function Sponsors() {
               </p>
               <button
                 onClick={openCreate}
-                className="mt-4 px-3.5 py-2 bg-[#00f59b] hover:bg-[#00d685] text-black text-xs font-bold rounded-lg transition-colors font-mono uppercase"
+                className="mt-4 px-3.5 py-2 bg-[#00e5ff] hover:bg-[#00c5de] text-black text-xs font-bold rounded-lg transition-colors font-mono uppercase"
               >
                 + Onboard First Partner
               </button>
@@ -1058,7 +1058,7 @@ export default function Sponsors() {
                         type="checkbox"
                         checked={isAllSelected}
                         onChange={() => toggleSelectAll(filtered)}
-                        className="w-4 h-4 rounded border-white/20 bg-[#090d16] text-emerald-500 focus:ring-emerald-500/20 cursor-pointer"
+                        className="w-4 h-4 rounded border-white/20 bg-[#090d16] text-cyan-400 focus:ring-cyan-500/20 cursor-pointer"
                         aria-label="Select all sponsors"
                       />
                     </th>
@@ -1079,7 +1079,7 @@ export default function Sponsors() {
                   return (
                     <tr
                       key={item.sponsor_id}
-                      className={`hover:bg-[#121824] transition-colors ${isSelected(item.sponsor_id) ? 'bg-emerald-950/15' : ''
+                      className={`hover:bg-[#121824] transition-colors ${isSelected(item.sponsor_id) ? 'bg-cyan-950/15' : ''
                         }`}
                     >
                       {isSelectionMode && (
@@ -1088,7 +1088,7 @@ export default function Sponsors() {
                             type="checkbox"
                             checked={isSelected(item.sponsor_id)}
                             onChange={() => toggleSelect(item.sponsor_id)}
-                            className="w-4 h-4 rounded border-white/20 bg-[#090d16] text-emerald-500 focus:ring-emerald-500/20 cursor-pointer"
+                            className="w-4 h-4 rounded border-white/20 bg-[#090d16] text-cyan-400 focus:ring-cyan-500/20 cursor-pointer"
                             aria-label={`Select ${item.name}`}
                           />
                         </td>
@@ -1096,7 +1096,7 @@ export default function Sponsors() {
                       <td className="py-3 px-4">
                         <div className="flex items-center gap-3">
                           <div className="w-8 h-8 rounded-lg bg-[#141b28] border border-[#232f44] flex items-center justify-center font-black text-white text-xs">
-                            <span className="material-symbols-outlined text-[15px] text-emerald-400">
+                            <span className="material-symbols-outlined text-[15px] text-cyan-400">
                               {meta.icon}
                             </span>
                           </div>
@@ -1117,7 +1117,7 @@ export default function Sponsors() {
                         {meta.headquarters || item.country || 'Global'}
                       </td>
                       <td className="py-3 px-4 font-mono text-xs">
-                        <span className={`font-bold tabular-nums block ${Number(item.tournaments_sponsored || 0) > 0 ? 'text-emerald-400' : 'text-slate-500'}`}>
+                        <span className={`font-bold tabular-nums block ${Number(item.tournaments_sponsored || 0) > 0 ? 'text-cyan-400' : 'text-slate-500'}`}>
                           {item.tournaments_sponsored || 0} {item.tournaments_sponsored === 1 ? 'Tournament' : 'Tournaments'}
                         </span>
                         {item.tournament_names ? (
@@ -1134,7 +1134,7 @@ export default function Sponsors() {
                         </span>
                       </td>
                       <td className="py-3 px-4 font-mono font-black text-xs">
-                        <span className={meta.value !== '—' ? 'text-emerald-400' : 'text-slate-500'}>
+                        <span className={meta.value !== '—' ? 'text-cyan-400' : 'text-slate-500'}>
                           {meta.value}
                         </span>
                       </td>
@@ -1142,7 +1142,7 @@ export default function Sponsors() {
                         <div className="flex items-center justify-end gap-1.5">
                           <button
                             onClick={() => openTournamentsRoster(item)}
-                            className="p-1.5 rounded-lg bg-[#121722] hover:bg-[#1e273a] text-slate-400 hover:text-emerald-400 border border-[#1e273a] transition-colors"
+                            className="p-1.5 rounded-lg bg-[#121722] hover:bg-[#1e273a] text-slate-400 hover:text-cyan-400 border border-[#1e273a] transition-colors"
                             title="Inspect Tournaments & Asset Roster"
                           >
                             <Eye size={13} />
@@ -1196,12 +1196,12 @@ export default function Sponsors() {
           {/* Company / Brand Name */}
           <div>
             <label className="block text-xs font-mono font-bold text-slate-300 mb-1.5 uppercase">
-              Brand / Partner Organization <span className="text-emerald-400">*</span>
+              Brand / Partner Organization <span className="text-cyan-400">*</span>
             </label>
             <input
               required
               placeholder="e.g. Adidas, Coca-Cola, Visa, Qatar Airways"
-              className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+              className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
               value={form.name}
               onChange={e => setForm({ ...form, name: e.target.value })}
             />
@@ -1211,11 +1211,11 @@ export default function Sponsors() {
             {/* Industry Sector */}
             <div>
               <label className="block text-xs font-mono font-bold text-slate-300 mb-1.5 uppercase">
-                Industry Sector <span className="text-emerald-400">*</span>
+                Industry Sector <span className="text-cyan-400">*</span>
               </label>
               <select
                 required
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors cursor-pointer"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors cursor-pointer"
                 value={form.industry}
                 onChange={e => setForm({ ...form, industry: e.target.value })}
               >
@@ -1227,12 +1227,12 @@ export default function Sponsors() {
             {/* Country */}
             <div>
               <label className="block text-xs font-mono font-bold text-slate-300 mb-1.5 uppercase">
-                Country / Jurisdiction <span className="text-emerald-400">*</span>
+                Country / Jurisdiction <span className="text-cyan-400">*</span>
               </label>
               <input
                 required
                 placeholder="e.g. Germany, United States, Qatar"
-                className="w-full bg-[#0a0e16] border border-[#1f2738] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/20 transition-colors"
+                className="w-full bg-[#070c17] border border-[#17233c] rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/20 transition-colors"
                 value={form.country}
                 onChange={e => setForm({ ...form, country: e.target.value })}
               />
@@ -1250,7 +1250,7 @@ export default function Sponsors() {
             </button>
             <button
               type="submit"
-              className="px-4 py-2 bg-[#00f59b] hover:bg-[#00d685] text-black text-xs font-bold rounded-lg transition-all shadow-md shadow-[#00f59b]/20 active:scale-[0.98] uppercase font-mono"
+              className="px-4 py-2 bg-[#00e5ff] hover:bg-[#00c5de] text-black text-xs font-bold rounded-lg transition-all shadow-md shadow-[#00e5ff]/20 active:scale-[0.98] uppercase font-mono"
             >
               {editingId ? 'Save Specifications' : 'Confirm Onboarding'}
             </button>
@@ -1275,7 +1275,7 @@ export default function Sponsors() {
         <div className="p-1 space-y-4">
           {/* Partner Summary Banner */}
           {selectedSponsorForTournaments && (
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 bg-[#0a0e16] border border-[#1b2336] rounded-lg p-3">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 bg-[#070c17] border border-[#1b2336] rounded-lg p-3">
               <div>
                 <span className="text-[9px] font-mono uppercase text-slate-400 font-bold block">PARTNER</span>
                 <span className="text-xs font-bold text-white truncate block">{selectedSponsorForTournaments.name}</span>
@@ -1286,7 +1286,7 @@ export default function Sponsors() {
               </div>
               <div>
                 <span className="text-[9px] font-mono uppercase text-slate-400 font-bold block">ACTIVATED TOURNAMENTS</span>
-                <span className="text-xs font-mono font-bold text-emerald-400 block">{sponsorTournaments.length} Tournaments</span>
+                <span className="text-xs font-mono font-bold text-cyan-400 block">{sponsorTournaments.length} Tournaments</span>
               </div>
               <div>
                 <span className="text-[9px] font-mono uppercase text-slate-400 font-bold block">PORTFOLIO VALUATION</span>
@@ -1301,7 +1301,7 @@ export default function Sponsors() {
           <div className="bg-[#0c101a] border border-[#1e273a] rounded-lg p-3.5">
             <div className="flex items-center justify-between gap-2 mb-3">
               <div className="flex items-center gap-1.5">
-                <span className="material-symbols-outlined text-[16px] text-emerald-400">add_circle</span>
+                <span className="material-symbols-outlined text-[16px] text-cyan-400">add_circle</span>
                 <span className="text-xs font-mono font-bold text-white uppercase tracking-wider">
                   Assign Partner to a Tournament
                 </span>
@@ -1314,13 +1314,13 @@ export default function Sponsors() {
             <form onSubmit={handleAssignTournament} className="grid grid-cols-1 sm:grid-cols-12 gap-3 items-end">
               <div className="sm:col-span-5">
                 <label className="block text-[10px] font-mono uppercase text-slate-400 mb-1">
-                  Tournament <span className="text-emerald-400">*</span>
+                  Tournament <span className="text-cyan-400">*</span>
                 </label>
                 <select
                   required
                   value={assignTournamentForm.tournament_id}
                   onChange={(e) => setAssignTournamentForm({ ...assignTournamentForm, tournament_id: e.target.value })}
-                  className="w-full bg-[#080b11] border border-[#1f2738] rounded px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-emerald-500 font-mono cursor-pointer"
+                  className="w-full bg-[#080b11] border border-[#17233c] rounded px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-cyan-500 font-mono cursor-pointer"
                 >
                   <option value="" className="bg-[#10141e] text-slate-400">Select Tournament...</option>
                   {allTournaments.map((t) => {
@@ -1336,7 +1336,7 @@ export default function Sponsors() {
 
               <div className="sm:col-span-3">
                 <label className="block text-[10px] font-mono uppercase text-slate-400 mb-1">
-                  Term Cycle <span className="text-emerald-400">*</span>
+                  Term Cycle <span className="text-cyan-400">*</span>
                 </label>
                 <input
                   type="text"
@@ -1344,13 +1344,13 @@ export default function Sponsors() {
                   placeholder="e.g. 2024–2026"
                   value={assignTournamentForm.term_cycle}
                   onChange={(e) => setAssignTournamentForm({ ...assignTournamentForm, term_cycle: e.target.value })}
-                  className="w-full bg-[#080b11] border border-[#1f2738] rounded px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-emerald-500 font-mono placeholder:text-slate-600"
+                  className="w-full bg-[#080b11] border border-[#17233c] rounded px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-cyan-500 font-mono placeholder:text-slate-600"
                 />
               </div>
 
               <div className="sm:col-span-2">
                 <label className="block text-[10px] font-mono uppercase text-slate-400 mb-1">
-                  Contract ($ USD) <span className="text-emerald-400">*</span>
+                  Contract ($ USD) <span className="text-cyan-400">*</span>
                 </label>
                 <input
                   type="number"
@@ -1360,7 +1360,7 @@ export default function Sponsors() {
                   placeholder="45000000"
                   value={assignTournamentForm.contract_value}
                   onChange={(e) => setAssignTournamentForm({ ...assignTournamentForm, contract_value: e.target.value })}
-                  className="w-full bg-[#080b11] border border-[#1f2738] rounded px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-emerald-500 font-mono placeholder:text-slate-600"
+                  className="w-full bg-[#080b11] border border-[#17233c] rounded px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-cyan-500 font-mono placeholder:text-slate-600"
                 />
               </div>
 
@@ -1368,7 +1368,7 @@ export default function Sponsors() {
                 <button
                   type="submit"
                   disabled={submittingTournamentContract}
-                  className="w-full py-1.5 px-3 bg-[#00f59b] hover:bg-[#00d685] text-black text-xs font-mono font-bold uppercase rounded transition-colors disabled:opacity-50 flex items-center justify-center gap-1 shadow-sm cursor-pointer"
+                  className="w-full py-1.5 px-3 bg-[#00e5ff] hover:bg-[#00c5de] text-black text-xs font-mono font-bold uppercase rounded transition-colors disabled:opacity-50 flex items-center justify-center gap-1 shadow-sm cursor-pointer"
                 >
                   <Plus size={14} />
                   <span>Assign</span>
@@ -1389,11 +1389,11 @@ export default function Sponsors() {
             </div>
 
             {loadingTournaments ? (
-              <div className="py-10 text-center text-xs text-slate-400 font-mono bg-[#0a0e16] border border-[#182030] rounded-lg">
+              <div className="py-10 text-center text-xs text-slate-400 font-mono bg-[#070c17] border border-[#182030] rounded-lg">
                 Loading activated tournament partnerships...
               </div>
             ) : sponsorTournaments.length === 0 ? (
-              <div className="py-10 text-center text-xs text-slate-400 font-mono bg-[#0a0e16] border border-[#182030] rounded-lg p-4">
+              <div className="py-10 text-center text-xs text-slate-400 font-mono bg-[#070c17] border border-[#182030] rounded-lg p-4">
                 No tournament partnerships linked to this sponsor yet. Select a tournament above to establish the contract terms.
               </div>
             ) : (
@@ -1405,12 +1405,12 @@ export default function Sponsors() {
                   return (
                     <div
                       key={t.tournament_id}
-                      className="bg-[#0a0e16] border border-[#1b2336] hover:border-[#283550] transition-colors rounded-lg p-3.5 flex flex-col gap-2.5"
+                      className="bg-[#070c17] border border-[#1b2336] hover:border-[#283550] transition-colors rounded-lg p-3.5 flex flex-col gap-2.5"
                     >
                       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                         <div>
                           <div className="flex items-center gap-2 mb-1">
-                            <span className="px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400 font-mono text-[9px] font-bold uppercase border border-emerald-500/20">
+                            <span className="px-1.5 py-0.5 rounded bg-cyan-500/10 text-cyan-400 font-mono text-[9px] font-bold uppercase border border-cyan-500/20">
                               {t.type || 'Tournament'}
                             </span>
                             <span className="text-slate-400 text-[10px] font-mono">
@@ -1434,7 +1434,7 @@ export default function Sponsors() {
                                 type="text"
                                 value={editingTournamentContractForm.term_cycle}
                                 onChange={(e) => setEditingTournamentContractForm({ ...editingTournamentContractForm, term_cycle: e.target.value })}
-                                className="w-28 bg-[#080b11] border border-[#2e3d5c] rounded px-2 py-1 text-xs text-white font-mono focus:border-emerald-500"
+                                className="w-28 bg-[#080b11] border border-[#2e3d5c] rounded px-2 py-1 text-xs text-white font-mono focus:border-cyan-500"
                                 placeholder="2024–2026"
                               />
                             </div>
@@ -1444,7 +1444,7 @@ export default function Sponsors() {
                                 type="number"
                                 value={editingTournamentContractForm.contract_value}
                                 onChange={(e) => setEditingTournamentContractForm({ ...editingTournamentContractForm, contract_value: e.target.value })}
-                                className="w-28 bg-[#080b11] border border-[#2e3d5c] rounded px-2 py-1 text-xs text-white font-mono focus:border-emerald-500"
+                                className="w-28 bg-[#080b11] border border-[#2e3d5c] rounded px-2 py-1 text-xs text-white font-mono focus:border-cyan-500"
                                 placeholder="Value"
                               />
                             </div>
@@ -1453,7 +1453,7 @@ export default function Sponsors() {
                                 type="button"
                                 disabled={submittingTournamentContract}
                                 onClick={() => handleSaveEditTournamentContract(t.tournament_id)}
-                                className="px-2.5 py-1 bg-emerald-500 hover:bg-emerald-400 text-black text-[10px] font-mono font-bold uppercase rounded"
+                                className="px-2.5 py-1 bg-emerald-500 hover:bg-cyan-400 text-black text-[10px] font-mono font-bold uppercase rounded"
                               >
                                 Save
                               </button>
@@ -1469,7 +1469,7 @@ export default function Sponsors() {
                         ) : (
                           <div className="flex items-center gap-3 shrink-0">
                             <div className="text-left sm:text-right font-mono text-[11px]">
-                              <span className="px-2 py-0.5 rounded bg-[#162030] text-emerald-400 font-bold border border-white/10 block mb-1">
+                              <span className="px-2 py-0.5 rounded bg-[#162030] text-cyan-400 font-bold border border-white/10 block mb-1">
                                 Term: {t.term_cycle || '2024–2026'}
                               </span>
                               <span className="font-bold text-amber-400 text-xs">
