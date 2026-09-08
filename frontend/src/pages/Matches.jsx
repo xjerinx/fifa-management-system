@@ -48,25 +48,54 @@ function parseScore(result) {
   return { home: m[1], away: m[2], raw: result, isPens, isAet };
 }
 
-function getStatus(dateStr, result) {
-  if (result)
+function getMatchTemporalStatus(item) {
+  if (!item) return { state: "UNKNOWN", label: "—", badgeText: "—", eyebrowText: "—", badgeColor: "", dotColor: "", isPast: false };
+
+  if (item.result && item.result.trim()) {
     return {
+      state: "COMPLETED",
       label: "Final",
+      badgeText: "FINAL",
+      eyebrowText: "CONCLUDED FIXTURE",
       badgeColor: "bg-cyan-950/60 text-cyan-400 border border-cyan-500/30",
       dotColor: "bg-cyan-400",
+      isPast: true,
     };
-  const now = new Date();
-  const d = new Date(dateStr);
-  if (d < now)
+  }
+
+  let matchTimeMs = 0;
+  if (item.match_date) {
+    const datePart = item.match_date.split("T")[0];
+    const timePart = item.match_time ? item.match_time.slice(0, 8) : "23:59:59";
+    matchTimeMs = new Date(`${datePart}T${timePart}`).getTime();
+    if (isNaN(matchTimeMs)) {
+      matchTimeMs = new Date(item.match_date).getTime();
+    }
+  }
+
+  const nowMs = Date.now();
+  const isPast = matchTimeMs > 0 && matchTimeMs < nowMs;
+
+  if (isPast) {
     return {
-      label: "Awaiting Result",
+      state: "PENDING_RESULT",
+      label: "Result Pending (Date Passed)",
+      badgeText: "RESULT PENDING (DATE PASSED)",
+      eyebrowText: "CONCLUDED MATCH · AWAITING SCORE ENTRY",
       badgeColor: "bg-amber-950/60 text-amber-400 border border-amber-500/30",
       dotColor: "bg-amber-400",
+      isPast: true,
     };
+  }
+
   return {
-    label: "Scheduled",
+    state: "UPCOMING",
+    label: "Awaiting Kickoff",
+    badgeText: "AWAITING KICKOFF",
+    eyebrowText: "IMPENDING MARQUEE SHOWDOWN",
     badgeColor: "bg-sky-950/60 text-sky-400 border border-sky-500/30",
     dotColor: "bg-sky-400",
+    isPast: false,
   };
 }
 
@@ -214,8 +243,9 @@ export default function Matches() {
 
   // Real Calculated Metrics
   const totalMatches = items.length;
-  const completedCount = items.filter((i) => i.result).length;
-  const upcomingCount = items.filter((i) => !i.result).length;
+  const completedCount = items.filter((i) => !!i.result).length;
+  const pendingScoreCount = items.filter((i) => !i.result && getMatchTemporalStatus(i).isPast).length;
+  const trueUpcomingCount = items.filter((i) => !i.result && !getMatchTemporalStatus(i).isPast).length;
 
   let totalGoals = 0;
   items.forEach((i) => {
@@ -233,8 +263,10 @@ export default function Matches() {
   const filtered = useMemo(() => {
     let list = items.filter((item) => {
       const isCompleted = !!item.result;
+      const statusInfo = getMatchTemporalStatus(item);
       let matchesStatus = true;
-      if (statusFilter === "UPCOMING") matchesStatus = !isCompleted;
+      if (statusFilter === "UPCOMING") matchesStatus = !isCompleted && !statusInfo.isPast;
+      else if (statusFilter === "PENDING") matchesStatus = !isCompleted && statusInfo.isPast;
       else if (statusFilter === "COMPLETED") matchesStatus = isCompleted;
       else if (statusFilter === "FINALS") matchesStatus = (item.stage || "").toLowerCase().includes("final");
 
@@ -276,15 +308,21 @@ export default function Matches() {
     }
   }, [isIndeterminate]);
 
-  // Next Upcoming Marquee Match
-  const upcomingList = useMemo(() => {
+  // Pending and Upcoming fixtures (sorted so future matches come first, followed by pending ones)
+  const uncompletedList = useMemo(() => {
     return items
       .filter((i) => !i.result)
-      .sort((a, b) => new Date(a.match_date || 0) - new Date(b.match_date || 0));
+      .sort((a, b) => {
+        const aStatus = getMatchTemporalStatus(a);
+        const bStatus = getMatchTemporalStatus(b);
+        if (!aStatus.isPast && bStatus.isPast) return -1;
+        if (aStatus.isPast && !bStatus.isPast) return 1;
+        return new Date(a.match_date || 0) - new Date(b.match_date || 0);
+      });
   }, [items]);
 
-  const marqueeMatch = upcomingList[0] || null;
-  const secondaryUpcoming = upcomingList.slice(1);
+  const marqueeMatch = uncompletedList[0] || null;
+  const secondaryUpcoming = uncompletedList.slice(1);
   const completedList = useMemo(() => {
     return filtered.filter((i) => !!i.result);
   }, [filtered]);
@@ -508,7 +546,8 @@ export default function Matches() {
           <div className="flex items-center gap-1 bg-[#0a0d14] p-1 rounded border border-white/10 text-xs font-mono overflow-x-auto">
             {[
               { id: "ALL", label: `ALL (${totalMatches})` },
-              { id: "UPCOMING", label: `UPCOMING (${upcomingCount})` },
+              { id: "UPCOMING", label: `UPCOMING (${trueUpcomingCount})` },
+              ...(pendingScoreCount > 0 ? [{ id: "PENDING", label: `SCORE PENDING (${pendingScoreCount})` }] : []),
               { id: "COMPLETED", label: `COMPLETED (${completedCount})` },
               { id: "FINALS", label: "FINALS" },
             ].map((st) => (
@@ -777,149 +816,164 @@ export default function Matches() {
       ) : (
         /* Fixture Cards & Scoreboards View (Matching Reference Screenshot) */
         <div className="flex flex-col gap-6">
-          {/* Section 1: Impending Marquee Showdown (If Upcoming Match exists and filter includes Upcoming/All) */}
-          {marqueeMatch && (statusFilter === "ALL" || statusFilter === "UPCOMING") && !search && (
-            <div className="bg-[#10141e] rounded-xl border border-white/10 overflow-hidden shadow-lg relative">
-              {/* Impending Showdown Header Strip */}
-              <div className="bg-[#0b0e17] px-4 py-2 border-b border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 text-[10px] font-mono">
-                <div className="flex items-center gap-2">
-                  {isSelectionMode && (
-                    <input
-                      type="checkbox"
-                      checked={isSelected(marqueeMatch.match_id)}
-                      onChange={() => toggleSelect(marqueeMatch.match_id)}
-                      className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-cyan-400 focus:ring-cyan-500/20 cursor-pointer"
-                      aria-label="Select marquee match"
-                    />
-                  )}
-                  <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-                  <span className="text-amber-400 font-bold uppercase tracking-wider">
-                    IMPENDING MARQUEE SHOWDOWN · MATCH NO. {marqueeMatch.match_id}
-                  </span>
+          {/* Section 1: Impending Marquee Showdown / Pending Match (If uncompleted match exists) */}
+          {marqueeMatch && (statusFilter === "ALL" || statusFilter === "UPCOMING" || statusFilter === "PENDING") && !search && (() => {
+            const marqueeStatus = getMatchTemporalStatus(marqueeMatch);
+            return (
+              <div className="bg-[#10141e] rounded-xl border border-white/10 overflow-hidden shadow-lg relative">
+                {/* Impending Showdown Header Strip */}
+                <div className="bg-[#0b0e17] px-4 py-2 border-b border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 text-[10px] font-mono">
+                  <div className="flex items-center gap-2">
+                    {isSelectionMode && (
+                      <input
+                        type="checkbox"
+                        checked={isSelected(marqueeMatch.match_id)}
+                        onChange={() => toggleSelect(marqueeMatch.match_id)}
+                        className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-cyan-400 focus:ring-cyan-500/20 cursor-pointer"
+                        aria-label="Select marquee match"
+                      />
+                    )}
+                    <span className={`w-2 h-2 rounded-full ${marqueeStatus.dotColor} ${marqueeStatus.isPast ? "animate-pulse" : ""}`}></span>
+                    <span className={`font-bold uppercase tracking-wider ${marqueeStatus.isPast ? "text-amber-400" : "text-cyan-400"}`}>
+                      {marqueeStatus.isPast
+                        ? `MATCH CONCLUDED · AWAITING SCORE ENTRY · MATCH NO. ${marqueeMatch.match_id}`
+                        : `IMPENDING MARQUEE SHOWDOWN · MATCH NO. ${marqueeMatch.match_id}`}
+                    </span>
+                  </div>
+                  <div className="text-slate-400 tracking-wider">
+                    {marqueeMatch.tournament_name || 'INTERNATIONAL FIXTURE'}
+                  </div>
                 </div>
-                <div className="text-slate-400 tracking-wider">
-                  {marqueeMatch.tournament_name || 'INTERNATIONAL FIXTURE'}
+
+                {/* Showdown Main Banner */}
+                <div className="p-5 sm:p-6 flex flex-col gap-5">
+                  {/* Meta details bar */}
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded bg-cyan-950/60 text-cyan-400 border border-cyan-500/30 uppercase tracking-wider">
+                        {marqueeMatch.tournament_name || "FIFA WORLD CUP 2026"}
+                      </span>
+                      <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-[#161d2b] text-slate-300 border border-white/10 uppercase tracking-wider">
+                        {marqueeMatch.stage || "GROUP STAGE"}
+                      </span>
+                      <span className={`text-[10px] font-mono font-bold px-2.5 py-0.5 rounded uppercase tracking-wider ${marqueeStatus.badgeColor}`}>
+                        {marqueeStatus.badgeText}
+                      </span>
+                    </div>
+
+                    <div className="flex items-center gap-4 text-xs font-mono text-slate-400">
+                      <span className="flex items-center gap-1.5">
+                        <span className="material-symbols-outlined text-[15px] text-cyan-400">stadium</span>
+                        <span>{marqueeMatch.stadium_name || "Official Venue"}</span>
+                      </span>
+                      <span className="flex items-center gap-1.5">
+                        <span className="material-symbols-outlined text-[15px] text-sky-400">schedule</span>
+                        <span>{formatMatchDate(marqueeMatch.match_date)} · {marqueeMatch.match_time || "20:00 UTC"}</span>
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Teams VS Grid */}
+                  <div className="grid grid-cols-1 md:grid-cols-11 items-center gap-4 py-2">
+                    {/* Home Team */}
+                    <div className="md:col-span-4 flex items-center justify-between md:justify-end gap-4 p-4 rounded-lg bg-[#0a0d14] border border-white/5">
+                      <div className="flex flex-col text-left md:text-right">
+                        <span className="text-[10px] font-mono text-cyan-400 font-bold uppercase tracking-wider">
+                          FIFA {TEAM_META[marqueeMatch.home_team]?.rank || "#1"} · {TEAM_META[marqueeMatch.home_team]?.confed || "CONMEBOL"}
+                        </span>
+                        <h2 className="text-xl sm:text-2xl font-black text-white uppercase tracking-tight mt-0.5">
+                          {marqueeMatch.home_team}
+                        </h2>
+                        <span className="text-xs text-slate-400 mt-1">
+                          Coach: {TEAM_META[marqueeMatch.home_team]?.coach || "Official Head Coach"}
+                        </span>
+                      </div>
+                      <div className="w-14 h-14 rounded-lg bg-gradient-to-br from-emerald-500/20 to-emerald-900/40 border border-cyan-500/30 flex items-center justify-center text-white font-mono font-black text-xl shrink-0">
+                        {getTeamCode(marqueeMatch.home_team)}
+                      </div>
+                    </div>
+
+                    {/* VS & Match Status Center */}
+                    <div className="md:col-span-3 flex flex-col items-center justify-center text-center gap-1">
+                      <span className="text-xs font-mono font-bold tracking-wider px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 uppercase">
+                        {marqueeStatus.isPast ? "PAST FIXTURE" : "MATCH FIXTURE"}
+                      </span>
+                      <span className="text-3xl font-black text-white font-display tracking-tight my-1">
+                        VS
+                      </span>
+                      <span className="text-[11px] font-mono text-slate-400">
+                        {marqueeMatch.stage} · {marqueeMatch.stadium_city || 'Lusail'}
+                      </span>
+                    </div>
+
+                    {/* Away Team */}
+                    <div className="md:col-span-4 flex items-center justify-between md:justify-start gap-4 p-4 rounded-lg bg-[#0a0d14] border border-white/5">
+                      <div className="w-14 h-14 rounded-lg bg-gradient-to-br from-blue-500/20 to-blue-900/40 border border-cyan-500/30 flex items-center justify-center text-white font-mono font-black text-xl shrink-0 order-2 md:order-1">
+                        {getTeamCode(marqueeMatch.away_team)}
+                      </div>
+                      <div className="flex flex-col text-left order-1 md:order-2">
+                        <span className="text-[10px] font-mono text-sky-400 font-bold uppercase tracking-wider">
+                          FIFA {TEAM_META[marqueeMatch.away_team]?.rank || "#2"} · {TEAM_META[marqueeMatch.away_team]?.confed || "UEFA"}
+                        </span>
+                        <h2 className="text-xl sm:text-2xl font-black text-white uppercase tracking-tight mt-0.5">
+                          {marqueeMatch.away_team}
+                        </h2>
+                        <span className="text-xs text-slate-400 mt-1">
+                          Coach: {TEAM_META[marqueeMatch.away_team]?.coach || "Official Head Coach"}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Marquee Command Footer */}
+                  <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-white/5">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <button
+                        onClick={() => navigate(`/events?matchId=${marqueeMatch.match_id}`)}
+                        className="flex items-center gap-1.5 px-3 py-1.5 bg-[#00e5ff] hover:bg-[#00c5de] text-black font-bold text-xs rounded transition-colors"
+                      >
+                        <span className="material-symbols-outlined text-[16px]">timeline</span>
+                        <span>MATCH TIMELINE & EVENTS</span>
+                      </button>
+
+                      {marqueeStatus.isPast ? (
+                        <button
+                          onClick={() => openEdit(marqueeMatch)}
+                          className="flex items-center gap-1.5 px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs rounded transition-colors shadow-sm"
+                          title="Enter final match score to complete fixture"
+                        >
+                          <span className="material-symbols-outlined text-[16px]">edit_note</span>
+                          <span>RECORD FINAL SCORE</span>
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => openEdit(marqueeMatch)}
+                          className="flex items-center gap-1.5 px-3 py-1.5 bg-[#141b28] hover:bg-[#1f2a3e] text-slate-200 border border-white/10 text-xs font-semibold rounded transition-colors"
+                        >
+                          <span className="material-symbols-outlined text-[15px]">edit</span>
+                          <span>EDIT FIXTURE</span>
+                        </button>
+                      )}
+                    </div>
+
+                    <div className="flex items-center gap-3 text-[10px] font-mono text-slate-400">
+                      <span>VENUE: {marqueeMatch.stadium_name}</span>
+                      <button
+                        onClick={() => handleDelete(marqueeMatch.match_id)}
+                        className="text-slate-500 hover:text-rose-400 transition-colors p-1"
+                        title="Delete Match"
+                      >
+                        <span className="material-symbols-outlined text-[16px] block">delete</span>
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
+            );
+          })()}
 
-              {/* Showdown Main Banner */}
-              <div className="p-5 sm:p-6 flex flex-col gap-5">
-                {/* Meta details bar */}
-                <div className="flex flex-wrap items-center justify-between gap-3">
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded bg-cyan-950/60 text-cyan-400 border border-cyan-500/30 uppercase tracking-wider">
-                      {marqueeMatch.tournament_name || "FIFA WORLD CUP 2026"}
-                    </span>
-                    <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-[#161d2b] text-slate-300 border border-white/10 uppercase tracking-wider">
-                      {marqueeMatch.stage || "GROUP STAGE"}
-                    </span>
-                    <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-amber-950/50 text-amber-400 border border-amber-500/30 uppercase tracking-wider">
-                      AWAITING KICKOFF
-                    </span>
-                  </div>
-
-                  <div className="flex items-center gap-4 text-xs font-mono text-slate-400">
-                    <span className="flex items-center gap-1.5">
-                      <span className="material-symbols-outlined text-[15px] text-cyan-400">stadium</span>
-                      <span>{marqueeMatch.stadium_name || "Official Venue"}</span>
-                    </span>
-                    <span className="flex items-center gap-1.5">
-                      <span className="material-symbols-outlined text-[15px] text-sky-400">schedule</span>
-                      <span>{formatMatchDate(marqueeMatch.match_date)} · {marqueeMatch.match_time || "20:00 UTC"}</span>
-                    </span>
-                  </div>
-                </div>
-
-                {/* Teams VS Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-11 items-center gap-4 py-2">
-                  {/* Home Team */}
-                  <div className="md:col-span-4 flex items-center justify-between md:justify-end gap-4 p-4 rounded-lg bg-[#0a0d14] border border-white/5">
-                    <div className="flex flex-col text-left md:text-right">
-                      <span className="text-[10px] font-mono text-cyan-400 font-bold uppercase tracking-wider">
-                        FIFA {TEAM_META[marqueeMatch.home_team]?.rank || "#1"} · {TEAM_META[marqueeMatch.home_team]?.confed || "CONMEBOL"}
-                      </span>
-                      <h2 className="text-xl sm:text-2xl font-black text-white uppercase tracking-tight mt-0.5">
-                        {marqueeMatch.home_team}
-                      </h2>
-                      <span className="text-xs text-slate-400 mt-1">
-                        Coach: {TEAM_META[marqueeMatch.home_team]?.coach || "Official Head Coach"}
-                      </span>
-
-                    </div>
-                    <div className="w-14 h-14 rounded-lg bg-gradient-to-br from-emerald-500/20 to-emerald-900/40 border border-cyan-500/30 flex items-center justify-center text-white font-mono font-black text-xl shrink-0">
-                      {getTeamCode(marqueeMatch.home_team)}
-                    </div>
-                  </div>
-
-                  {/* VS Indicator */}
-                  <div className="md:col-span-3 flex flex-col items-center justify-center text-center p-2">
-                    <div className="px-3 py-1 rounded bg-[#161d2b] border border-white/10 text-xs font-mono text-amber-400 font-bold tracking-wider uppercase mb-1">
-                      MATCH FIXTURE
-                    </div>
-                    <span className="text-2xl font-black font-mono text-slate-300 my-1">
-                      VS
-                    </span>
-                    <span className="text-[11px] font-mono text-slate-400">
-                      {marqueeMatch.stage} · {marqueeMatch.stadium_city || "Host City"}
-                    </span>
-                  </div>
-
-                  {/* Away Team */}
-                  <div className="md:col-span-4 flex items-center justify-between md:justify-start gap-4 p-4 rounded-lg bg-[#0a0d14] border border-white/5">
-                    <div className="w-14 h-14 rounded-lg bg-gradient-to-br from-sky-500/20 to-sky-900/40 border border-sky-500/30 flex items-center justify-center text-white font-mono font-black text-xl shrink-0">
-                      {getTeamCode(marqueeMatch.away_team)}
-                    </div>
-                    <div className="flex flex-col text-left">
-                      <span className="text-[10px] font-mono text-sky-400 font-bold uppercase tracking-wider">
-                        FIFA {TEAM_META[marqueeMatch.away_team]?.rank || "#2"} · {TEAM_META[marqueeMatch.away_team]?.confed || "UEFA"}
-                      </span>
-                      <h2 className="text-xl sm:text-2xl font-black text-white uppercase tracking-tight mt-0.5">
-                        {marqueeMatch.away_team}
-                      </h2>
-                      <span className="text-xs text-slate-400 mt-1">
-                        Coach: {TEAM_META[marqueeMatch.away_team]?.coach || "Official Head Coach"}
-                      </span>
-
-                    </div>
-                  </div>
-                </div>
-
-                {/* Marquee Command Footer */}
-                <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-white/5">
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <button
-                      onClick={() => navigate(`/events?matchId=${marqueeMatch.match_id}`)}
-                      className="flex items-center gap-1.5 px-3 py-1.5 bg-[#00e5ff] hover:bg-[#00c5de] text-black font-bold text-xs rounded transition-colors"
-                    >
-                      <span className="material-symbols-outlined text-[16px]">timeline</span>
-                      <span>MATCH TIMELINE & EVENTS</span>
-                    </button>
-                    <button
-                      onClick={() => openEdit(marqueeMatch)}
-                      className="flex items-center gap-1.5 px-3 py-1.5 bg-[#141b28] hover:bg-[#1f2a3e] text-slate-200 border border-white/10 text-xs font-semibold rounded transition-colors"
-                    >
-                      <span className="material-symbols-outlined text-[15px]">edit</span>
-                      <span>EDIT FIXTURE</span>
-                    </button>
-                  </div>
-
-                  <div className="flex items-center gap-3 text-[10px] font-mono text-slate-400">
-                    <span>VENUE: {marqueeMatch.stadium_name}</span>
-                    <button
-                      onClick={() => handleDelete(marqueeMatch.match_id)}
-                      className="text-slate-500 hover:text-rose-400 transition-colors p-1"
-                      title="Delete Match"
-                    >
-                      <span className="material-symbols-outlined text-[16px] block">delete</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Section 2: Upcoming World Cup Fixtures Grid */}
-          {(statusFilter === "ALL" || statusFilter === "UPCOMING") && secondaryUpcoming.length > 0 && (
+          {/* Section 2: Secondary Fixtures Grid */}
+          {(statusFilter === "ALL" || statusFilter === "UPCOMING" || statusFilter === "PENDING") && secondaryUpcoming.length > 0 && (
             <div className="flex flex-col gap-3">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
@@ -927,7 +981,9 @@ export default function Matches() {
                     event_upcoming
                   </span>
                   <h2 className="text-sm font-bold text-white uppercase tracking-wider">
-                    UPCOMING FIXTURES ({secondaryUpcoming.length} SCHEDULED)
+                    {secondaryUpcoming.some((m) => !getMatchTemporalStatus(m).isPast)
+                      ? `UPCOMING & UNRESOLVED FIXTURES (${secondaryUpcoming.length})`
+                      : `FIXTURES AWAITING FINAL SCORE (${secondaryUpcoming.length})`}
                   </h2>
                 </div>
                 <span className="text-[10px] font-mono text-slate-400 uppercase">
@@ -936,103 +992,131 @@ export default function Matches() {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {secondaryUpcoming.map((item) => (
-                  <div
-                    key={item.match_id}
-                    className={`bg-[#10141e] rounded-lg p-4 border transition-all flex flex-col justify-between shadow-sm group ${
-                      isSelected(item.match_id)
-                        ? "border-cyan-500/80 bg-cyan-950/10"
-                        : "border-white/10 hover:border-cyan-500/30"
-                    }`}
-                  >
-                    <div>
-                      {/* Top Header of Card */}
-                      <div className="flex items-center justify-between text-[10px] font-mono border-b border-white/5 pb-2">
-                        <div className="flex items-center gap-2 truncate">
-                          {isSelectionMode && (
-                            <input
-                              type="checkbox"
-                              checked={isSelected(item.match_id)}
-                              onChange={() => toggleSelect(item.match_id)}
-                              className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-cyan-400 focus:ring-cyan-500/20 cursor-pointer shrink-0"
-                              aria-label={`Select ${item.home_team} vs ${item.away_team}`}
-                            />
+                {secondaryUpcoming.map((item) => {
+                  const cardStatus = getMatchTemporalStatus(item);
+                  return (
+                    <div
+                      key={item.match_id}
+                      className={`bg-[#10141e] rounded-lg p-4 border transition-all flex flex-col justify-between shadow-sm group ${
+                        isSelected(item.match_id)
+                          ? "border-cyan-500/80 bg-cyan-950/10"
+                          : cardStatus.isPast
+                          ? "border-amber-500/30 hover:border-amber-400/60"
+                          : "border-white/10 hover:border-cyan-500/30"
+                      }`}
+                    >
+                      <div>
+                        {/* Top Header of Card */}
+                        <div className="flex items-center justify-between text-[10px] font-mono border-b border-white/5 pb-2">
+                          <div className="flex items-center gap-2 truncate">
+                            {isSelectionMode && (
+                              <input
+                                type="checkbox"
+                                checked={isSelected(item.match_id)}
+                                onChange={() => toggleSelect(item.match_id)}
+                                className="w-4 h-4 rounded border-white/20 bg-[#0a0d14] text-cyan-400 focus:ring-cyan-500/20 cursor-pointer shrink-0"
+                                aria-label={`Select ${item.home_team} vs ${item.away_team}`}
+                              />
+                            )}
+                            <span className="font-bold text-slate-300 uppercase truncate">
+                              {item.tournament_name}
+                            </span>
+                          </div>
+                          <span
+                            className={`px-1.5 py-0.5 rounded font-bold uppercase shrink-0 text-[10px] font-mono ${
+                              cardStatus.isPast
+                                ? "bg-amber-950/60 text-amber-400 border border-amber-500/30"
+                                : "bg-[#161e2c] text-sky-400 border border-sky-500/20"
+                            }`}
+                          >
+                            {cardStatus.isPast ? "DATE PASSED" : item.stage || "GROUP STAGE"}
+                          </span>
+                        </div>
+
+                        {/* Matchup Banner */}
+                        <div className="my-3.5 flex items-center justify-between gap-2 p-3 bg-[#0a0d14] rounded-lg border border-white/5">
+                          <div className="flex items-center gap-2 min-w-0">
+                            <div className="w-8 h-8 rounded bg-[#161d2b] border border-white/10 flex items-center justify-center font-mono font-bold text-xs text-white shrink-0">
+                              {getTeamCode(item.home_team)}
+                            </div>
+                            <span className="text-xs font-black text-white truncate">
+                              {item.home_team}
+                            </span>
+                          </div>
+
+                          <span className="font-mono text-xs font-bold text-slate-500 px-2 shrink-0">
+                            VS
+                          </span>
+
+                          <div className="flex items-center justify-end gap-2 min-w-0">
+                            <span className="text-xs font-black text-white truncate text-right">
+                              {item.away_team}
+                            </span>
+                            <div className="w-8 h-8 rounded bg-[#161d2b] border border-white/10 flex items-center justify-center font-mono font-bold text-xs text-white shrink-0">
+                              {getTeamCode(item.away_team)}
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Venue & Date Details */}
+                        <div className="space-y-1 text-xs font-mono text-slate-400">
+                          <div className="flex items-center justify-between text-[11px]">
+                            <span className="flex items-center gap-1.5 truncate">
+                              <span className="material-symbols-outlined text-[14px] text-slate-500">calendar_month</span>
+                              <span>{formatMatchDate(item.match_date)}</span>
+                            </span>
+                            <span className="text-cyan-400 font-bold">{item.match_time || "20:00 UTC"}</span>
+                          </div>
+                          <div className="flex items-center gap-1.5 text-[11px] truncate">
+                            <span className="material-symbols-outlined text-[14px] text-slate-500">location_on</span>
+                            <span className="truncate">{item.stadium_name}, {item.stadium_city}</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Footer Actions */}
+                      <div className="flex items-center justify-between pt-3 mt-3 border-t border-white/5 text-xs">
+                        <span
+                          className={`text-[10px] font-mono uppercase font-bold flex items-center gap-1.5 ${
+                            cardStatus.isPast ? "text-amber-400" : "text-sky-400"
+                          }`}
+                        >
+                          <span
+                            className={`w-1.5 h-1.5 rounded-full ${cardStatus.dotColor} ${
+                              cardStatus.isPast ? "animate-pulse" : ""
+                            }`}
+                          ></span>
+                          {cardStatus.isPast ? "RESULT PENDING" : "AWAITING KICKOFF"}
+                        </span>
+
+                        <div className="flex items-center gap-1.5">
+                          {cardStatus.isPast && (
+                            <button
+                              onClick={() => openEdit(item)}
+                              className="px-2 py-1 bg-amber-500 hover:bg-amber-400 text-black rounded text-[10px] font-mono font-bold uppercase transition-colors"
+                              title="Enter final match result"
+                            >
+                              ENTER SCORE
+                            </button>
                           )}
-                          <span className="font-bold text-slate-300 uppercase truncate">
-                            {item.tournament_name}
-                          </span>
-                        </div>
-                        <span className="px-1.5 py-0.5 rounded bg-[#161e2c] text-amber-400 border border-amber-500/20 font-bold uppercase shrink-0">
-                          {item.stage || "GROUP STAGE"}
-                        </span>
-                      </div>
-
-                      {/* Matchup Banner */}
-                      <div className="my-3.5 flex items-center justify-between gap-2 p-3 bg-[#0a0d14] rounded-lg border border-white/5">
-                        <div className="flex items-center gap-2 min-w-0">
-                          <div className="w-8 h-8 rounded bg-[#161d2b] border border-white/10 flex items-center justify-center font-mono font-bold text-xs text-white shrink-0">
-                            {getTeamCode(item.home_team)}
-                          </div>
-                          <span className="text-xs font-black text-white truncate">
-                            {item.home_team}
-                          </span>
-                        </div>
-
-                        <span className="font-mono text-xs font-bold text-slate-500 px-2 shrink-0">
-                          VS
-                        </span>
-
-                        <div className="flex items-center justify-end gap-2 min-w-0">
-                          <span className="text-xs font-black text-white truncate text-right">
-                            {item.away_team}
-                          </span>
-                          <div className="w-8 h-8 rounded bg-[#161d2b] border border-white/10 flex items-center justify-center font-mono font-bold text-xs text-white shrink-0">
-                            {getTeamCode(item.away_team)}
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Venue & Date Details */}
-                      <div className="space-y-1 text-xs font-mono text-slate-400">
-                        <div className="flex items-center justify-between text-[11px]">
-                          <span className="flex items-center gap-1.5 truncate">
-                            <span className="material-symbols-outlined text-[14px] text-slate-500">calendar_month</span>
-                            <span>{formatMatchDate(item.match_date)}</span>
-                          </span>
-                          <span className="text-cyan-400 font-bold">{item.match_time || "20:00 UTC"}</span>
-                        </div>
-                        <div className="flex items-center gap-1.5 text-[11px] truncate">
-                          <span className="material-symbols-outlined text-[14px] text-slate-500">location_on</span>
-                          <span className="truncate">{item.stadium_name}, {item.stadium_city}</span>
+                          <button
+                            onClick={() => openEdit(item)}
+                            className="px-2.5 py-1 bg-[#121824] hover:bg-[#1a2335] text-slate-300 hover:text-white border border-white/10 rounded text-[10px] font-mono font-bold uppercase transition-colors"
+                          >
+                            MANAGE
+                          </button>
+                          <button
+                            onClick={() => handleDelete(item.match_id)}
+                            className="p-1 text-slate-400 hover:text-rose-400 rounded transition-colors"
+                            title="Delete"
+                          >
+                            <span className="material-symbols-outlined text-[15px] block">delete</span>
+                          </button>
                         </div>
                       </div>
                     </div>
-
-                    {/* Footer Actions */}
-                    <div className="flex items-center justify-between pt-3 mt-3 border-t border-white/5 text-xs">
-                      <span className="text-[10px] font-mono text-amber-400 uppercase font-bold flex items-center gap-1">
-                        <span className="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
-                        AWAITING RESULT
-                      </span>
-
-                      <div className="flex items-center gap-1.5">
-                        <button
-                          onClick={() => openEdit(item)}
-                          className="px-2.5 py-1 bg-[#121824] hover:bg-[#1a2335] text-slate-300 hover:text-white border border-white/10 rounded text-[10px] font-mono font-bold uppercase transition-colors"
-                        >
-                          MANAGE FIXTURE
-                        </button>
-                        <button
-                          onClick={() => handleDelete(item.match_id)}
-                          className="p-1 text-slate-400 hover:text-rose-400 rounded transition-colors"
-                          title="Delete"
-                        >
-                          <span className="material-symbols-outlined text-[15px] block">delete</span>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           )}
