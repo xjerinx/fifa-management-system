@@ -7,6 +7,7 @@ router.get('/:id', refereeController.getOne);
 router.post('/', refereeController.create);
 router.put('/:id', refereeController.update);
 router.post('/bulk-delete', refereeController.bulkRemove);
+router.post('/bulk-import', refereeController.bulkImport);
 router.delete('/bulk', refereeController.bulkRemove);
 router.delete('/:id', refereeController.remove);
 

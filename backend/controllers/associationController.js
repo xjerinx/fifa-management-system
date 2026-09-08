@@ -1,5 +1,6 @@
 const db = require('../config/db');
 const { bulkDelete } = require('../utils/bulkDelete');
+const { bulkImport } = require('../utils/bulkImport');
 
 exports.getAll = async (req, res, next) => {
     try {
@@ -102,4 +103,20 @@ exports.getTeams = async (req, res, next) => {
     } catch (err) {
         next(err);
     }
+};
+
+exports.bulkImport = async (req, res, next) => {
+    try {
+        const { rows } = req.body;
+        const result = await bulkImport({
+            tableName: 'association',
+            columns: ['name', 'region', 'fifa_code', 'foundation_date'],
+            rows,
+        });
+        res.json({
+            success: true,
+            message: `Successfully imported ${result.count} association(s)`,
+            count: result.count,
+        });
+    } catch (err) { next(err); }
 };

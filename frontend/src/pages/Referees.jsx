@@ -5,6 +5,7 @@ import Modal from "../components/Modal";
 import { useBulkSelection } from "../hooks/useBulkSelection";
 import BulkActionBar from "../components/BulkActionBar";
 import BulkDeleteConfirmModal from "../components/BulkDeleteConfirmModal";
+import CsvImportModal from "../components/CsvImportModal";
 
 const emptyForm = {
   first_name: "",
@@ -41,6 +42,7 @@ const ROLE_STYLE = {
 
 export default function Referees() {
   const toast = useToast();
+  const [showImportModal, setShowImportModal] = useState(false);
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
@@ -234,6 +236,14 @@ export default function Referees() {
 
           {/* Action Buttons */}
           <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap shrink-0">
+            <button
+              onClick={() => setShowImportModal(true)}
+              className="flex items-center gap-1.5 px-3 py-2 bg-[#121722] hover:bg-[#1b2333] text-slate-200 text-xs font-semibold rounded border border-white/10 transition-colors shadow-sm tracking-wide whitespace-nowrap cursor-pointer"
+            >
+              <span className="material-symbols-outlined text-[16px] text-cyan-400">upload_file</span>
+              <span>Import CSV</span>
+            </button>
+
             <button
               onClick={handleExport}
               className="flex items-center gap-1.5 px-3 py-2 bg-[#121722] hover:bg-[#1b2333] text-slate-200 text-xs font-semibold rounded border border-white/10 transition-colors shadow-sm tracking-wide whitespace-nowrap"
@@ -914,6 +924,14 @@ export default function Referees() {
         count={selectedCount}
         entityName="referee"
         loading={bulkLoading}
+      />
+
+      {/* Universal CSV Import Modal */}
+      <CsvImportModal
+        isOpen={showImportModal}
+        onClose={() => setShowImportModal(false)}
+        entityKey="referees"
+        onSuccess={load}
       />
     </div>
   );

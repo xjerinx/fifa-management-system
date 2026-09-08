@@ -6,6 +6,7 @@ import PositionBadge from "../components/PositionBadge";
 import { useBulkSelection } from "../hooks/useBulkSelection";
 import BulkActionBar from "../components/BulkActionBar";
 import BulkDeleteConfirmModal from "../components/BulkDeleteConfirmModal";
+import CsvImportModal from "../components/CsvImportModal";
 
 const emptyForm = {
   first_name: "",
@@ -350,7 +351,7 @@ const ITEMS_PER_PAGE = 16;
 
 export default function Players() {
   const toast = useToast();
-  const fileInputRef = useRef(null);
+  const [showImportModal, setShowImportModal] = useState(false);
   const [items, setItems] = useState([]);
   const [teams, setTeams] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -549,19 +550,6 @@ export default function Players() {
     toast?.showToast("Scouting sheet CSV exported successfully");
   };
 
-  const handleImportClick = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
-    }
-  };
-
-  const handleFileChange = (e) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      toast?.showToast(`Batch Import: ${file.name} queued for verification`);
-    }
-  };
-
   const filtered = useMemo(() => {
     let list = items.filter((item) => {
       let matchesPosition = true;
@@ -641,15 +629,6 @@ export default function Players() {
 
   return (
     <div className="flex flex-col w-full pb-14 gap-5 text-on-surface">
-      {/* Hidden File Input for Batch Import */}
-      <input
-        type="file"
-        ref={fileInputRef}
-        onChange={handleFileChange}
-        accept=".csv,.xlsx"
-        className="hidden"
-      />
-
       {/* ========================================================
           1. EDITORIAL PAGE HEADER
           ======================================================== */}
@@ -670,10 +649,10 @@ export default function Players() {
           {/* Right Header Actions */}
           <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap shrink-0">
             <button
-              onClick={handleImportClick}
-              className="flex items-center gap-1.5 px-3 py-2 bg-[#121722] hover:bg-[#1a2233] text-slate-300 hover:text-white text-xs font-semibold uppercase tracking-wider rounded-lg border border-[#1e2738] transition-colors shadow-sm whitespace-nowrap"
+              onClick={() => setShowImportModal(true)}
+              className="flex items-center gap-1.5 px-3 py-2 bg-[#121722] hover:bg-[#1a2233] text-slate-300 hover:text-white text-xs font-semibold uppercase tracking-wider rounded-lg border border-[#1e2738] transition-colors shadow-sm whitespace-nowrap cursor-pointer"
             >
-              <span className="material-symbols-outlined text-[16px] text-slate-400">
+              <span className="material-symbols-outlined text-[16px] text-cyan-400">
                 upload_file
               </span>
               <span>Import CSV</span>
@@ -1637,6 +1616,14 @@ export default function Players() {
         count={selectedCount}
         entityName="player"
         loading={bulkLoading}
+      />
+
+      {/* Universal CSV Import Modal */}
+      <CsvImportModal
+        isOpen={showImportModal}
+        onClose={() => setShowImportModal(false)}
+        entityKey="players"
+        onSuccess={load}
       />
     </div>
   );

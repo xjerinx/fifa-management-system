@@ -1,5 +1,6 @@
 const db = require('../config/db');
 const { bulkDelete } = require('../utils/bulkDelete');
+const { bulkImport } = require('../utils/bulkImport');
 
 exports.getAll = async (req, res, next) => {
     try {
@@ -77,6 +78,26 @@ exports.bulkRemove = async (req, res, next) => {
             success: true,
             message: `Successfully deleted ${result.affectedRows} stadium(s)`,
             count: result.affectedRows,
+        });
+    } catch (err) { next(err); }
+};
+
+exports.bulkImport = async (req, res, next) => {
+    try {
+        const { rows } = req.body;
+        const result = await bulkImport({
+            tableName: 'stadium',
+            columns: ['name', 'capacity', 'location', 'city', 'country'],
+            rows,
+            transformRow: (row) => ({
+                ...row,
+                capacity: row.capacity ? parseInt(row.capacity, 10) : 0,
+            }),
+        });
+        res.json({
+            success: true,
+            message: `Successfully imported ${result.count} stadium(s)`,
+            count: result.count,
         });
     } catch (err) { next(err); }
 };

@@ -1,5 +1,6 @@
 const db = require('../config/db');
 const { bulkDelete } = require('../utils/bulkDelete');
+const { bulkImport } = require('../utils/bulkImport');
 
 exports.getAll = async (req, res, next) => {
     try {
@@ -152,6 +153,29 @@ exports.bulkRemove = async (req, res, next) => {
             success: true,
             message: `Successfully deleted ${result.affectedRows} player(s)`,
             count: result.affectedRows,
+        });
+    } catch (err) { next(err); }
+};
+
+exports.bulkImport = async (req, res, next) => {
+    try {
+        const { rows } = req.body;
+        const result = await bulkImport({
+            tableName: 'player',
+            columns: ['first_name', 'last_name', 'dob', 'nationality', 'position', 'height_cm', 'preferred_foot', 'market_value_m', 'jersey_number', 'team_id', 'club'],
+            rows,
+            transformRow: (row) => ({
+                ...row,
+                jersey_number: row.jersey_number ? parseInt(row.jersey_number, 10) : null,
+                height_cm: row.height_cm ? parseInt(row.height_cm, 10) : null,
+                market_value_m: row.market_value_m !== undefined && row.market_value_m !== null && row.market_value_m !== '' ? parseFloat(row.market_value_m) : 0,
+                team_id: row.team_id ? parseInt(row.team_id, 10) : null,
+            }),
+        });
+        res.json({
+            success: true,
+            message: `Successfully imported ${result.count} player(s)`,
+            count: result.count,
         });
     } catch (err) { next(err); }
 };

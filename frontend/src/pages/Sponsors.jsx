@@ -4,13 +4,14 @@ import {
   Plus, Pencil, Trash2, Search, ArrowUpDown, RefreshCw,
   Download, LayoutGrid, List, AlertCircle, Globe2,
   Building2, Layers, Eye, CheckCircle2, Tv, ShieldCheck,
-  CheckSquare, X
+  CheckSquare, X, Upload
 } from 'lucide-react';
 import Modal from '../components/Modal';
 import { useToast } from '../components/Toast';
 import { useBulkSelection } from '../hooks/useBulkSelection';
 import BulkActionBar from '../components/BulkActionBar';
 import BulkDeleteConfirmModal from '../components/BulkDeleteConfirmModal';
+import CsvImportModal from '../components/CsvImportModal';
 
 const emptyForm = { name: '', industry: '', country: '' };
 const industries = [
@@ -274,6 +275,7 @@ function getSponsorMeta(item) {
 
 export default function Sponsors() {
   const toast = useToast();
+  const [showImportModal, setShowImportModal] = useState(false);
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [viewMode, setViewMode] = useState('grid'); // 'grid' | 'table'
@@ -580,6 +582,14 @@ export default function Sponsors() {
 
           {/* Action Buttons */}
           <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap shrink-0">
+            <button
+              onClick={() => setShowImportModal(true)}
+              className="flex items-center gap-1.5 px-3 py-2 bg-[#121722] hover:bg-[#1b2334] text-xs font-semibold text-slate-300 hover:text-white border border-[#1f293d] rounded-lg transition-colors shadow-sm whitespace-nowrap cursor-pointer"
+            >
+              <Upload size={13} className="text-cyan-400" />
+              <span className="font-mono text-[11px] tracking-wider uppercase">Import CSV</span>
+            </button>
+
             <button
               onClick={exportJSON}
               className="flex items-center gap-1.5 px-3 py-2 bg-[#121722] hover:bg-[#1b2334] text-xs font-semibold text-slate-300 hover:text-white border border-[#1f293d] rounded-lg transition-colors shadow-sm whitespace-nowrap"
@@ -1537,6 +1547,14 @@ export default function Sponsors() {
         count={selectedCount}
         entityName="sponsor"
         loading={bulkLoading}
+      />
+
+      {/* Universal CSV Import Modal */}
+      <CsvImportModal
+        isOpen={showImportModal}
+        onClose={() => setShowImportModal(false)}
+        entityKey="sponsors"
+        onSuccess={load}
       />
     </div>
   );

@@ -7,6 +7,7 @@ router.get('/:id', matchController.getOne);
 router.post('/', matchController.create);
 router.put('/:id', matchController.update);
 router.post('/bulk-delete', matchController.bulkRemove);
+router.post('/bulk-import', matchController.bulkImport);
 router.delete('/bulk', matchController.bulkRemove);
 router.delete('/:id', matchController.remove);
 

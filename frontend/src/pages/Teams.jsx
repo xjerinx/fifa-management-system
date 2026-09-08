@@ -5,6 +5,7 @@ import Modal from "../components/Modal";
 import { useBulkSelection } from "../hooks/useBulkSelection";
 import BulkActionBar from "../components/BulkActionBar";
 import BulkDeleteConfirmModal from "../components/BulkDeleteConfirmModal";
+import CsvImportModal from "../components/CsvImportModal";
 
 const emptyForm = {
   name: "",
@@ -105,6 +106,7 @@ const TEAM_CONFIG = {
 
 export default function Teams() {
   const toast = useToast();
+  const [showImportModal, setShowImportModal] = useState(false);
   const [items, setItems] = useState([]);
   const [associations, setAssociations] = useState([]);
   const [coaches, setCoaches] = useState([]);
@@ -342,6 +344,16 @@ export default function Teams() {
 
           {/* Right Header Actions */}
           <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap shrink-0">
+            <button
+              onClick={() => setShowImportModal(true)}
+              className="flex items-center gap-1.5 px-3 py-2 bg-[#121722] hover:bg-[#1a2233] text-slate-300 hover:text-white text-xs font-semibold uppercase tracking-wider rounded-lg border border-[#1e2738] transition-colors shadow-sm whitespace-nowrap cursor-pointer"
+            >
+              <span className="material-symbols-outlined text-[16px] text-cyan-400">
+                upload_file
+              </span>
+              <span>Import CSV</span>
+            </button>
+
             <button
               onClick={handleExport}
               className="flex items-center gap-1.5 px-3 py-2 bg-[#121722] hover:bg-[#1a2233] text-slate-300 hover:text-white text-xs font-semibold uppercase tracking-wider rounded-lg border border-[#1e2738] transition-colors shadow-sm whitespace-nowrap"
@@ -1091,6 +1103,14 @@ export default function Teams() {
         count={selectedCount}
         entityName="team"
         loading={bulkLoading}
+      />
+
+      {/* Universal CSV Import Modal */}
+      <CsvImportModal
+        isOpen={showImportModal}
+        onClose={() => setShowImportModal(false)}
+        entityKey="teams"
+        onSuccess={load}
       />
     </div>
   );

@@ -1,5 +1,6 @@
 const db = require('../config/db');
 const { bulkDelete } = require('../utils/bulkDelete');
+const { bulkImport } = require('../utils/bulkImport');
 
 exports.getAll = async (req, res, next) => {
     try {
@@ -165,5 +166,27 @@ exports.getTournaments = async (req, res, next) => {
             ORDER BY t.start_date DESC
         `, [req.params.id]);
         res.json({ success: true, data: rows });
+    } catch (err) { next(err); }
+};
+
+exports.bulkImport = async (req, res, next) => {
+    try {
+        const { rows } = req.body;
+        const result = await bulkImport({
+            tableName: 'team',
+            columns: ['name', 'nickname', 'foundation_year', 'jersey_color', 'fifa_ranking', 'association_id'],
+            rows,
+            transformRow: (row) => ({
+                ...row,
+                foundation_year: row.foundation_year ? parseInt(row.foundation_year, 10) : null,
+                fifa_ranking: row.fifa_ranking ? parseInt(row.fifa_ranking, 10) : null,
+                association_id: row.association_id ? parseInt(row.association_id, 10) : null,
+            }),
+        });
+        res.json({
+            success: true,
+            message: `Successfully imported ${result.count} team(s)`,
+            count: result.count,
+        });
     } catch (err) { next(err); }
 };

@@ -6,6 +6,7 @@ import Modal from "../components/Modal";
 import { useBulkSelection } from "../hooks/useBulkSelection";
 import BulkActionBar from "../components/BulkActionBar";
 import BulkDeleteConfirmModal from "../components/BulkDeleteConfirmModal";
+import CsvImportModal from "../components/CsvImportModal";
 
 const emptyForm = { name: "", region: "", fifa_code: "", foundation_date: "" };
 
@@ -160,6 +161,7 @@ function getCodeBadgeStyle(code) {
 
 export default function Associations() {
   const toast = useToast();
+  const [showImportModal, setShowImportModal] = useState(false);
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
@@ -363,11 +365,11 @@ export default function Associations() {
           {/* Header Action Buttons */}
           <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap shrink-0">
             <button
-              onClick={exportRegistry}
-              className="flex items-center gap-1.5 px-3 py-2 bg-[#111622] hover:bg-[#182133] text-slate-300 hover:text-white text-xs font-semibold rounded border border-[#1b2234] transition-colors shadow-sm whitespace-nowrap"
+              onClick={() => setShowImportModal(true)}
+              className="flex items-center gap-1.5 px-3 py-2 bg-[#111622] hover:bg-[#182133] text-slate-300 hover:text-white text-xs font-semibold rounded border border-[#1b2234] transition-colors shadow-sm whitespace-nowrap cursor-pointer"
             >
-              <span className="material-symbols-outlined text-[16px]">verified_user</span>
-              <span>AUDIT REPORTS</span>
+              <span className="material-symbols-outlined text-[16px] text-cyan-400">upload_file</span>
+              <span>IMPORT CSV</span>
             </button>
 
             <button
@@ -1029,6 +1031,14 @@ export default function Associations() {
         count={selectedCount}
         entityName="association"
         loading={bulkLoading}
+      />
+
+      {/* Universal CSV Import Modal */}
+      <CsvImportModal
+        isOpen={showImportModal}
+        onClose={() => setShowImportModal(false)}
+        entityKey="associations"
+        onSuccess={load}
       />
     </div>
   );

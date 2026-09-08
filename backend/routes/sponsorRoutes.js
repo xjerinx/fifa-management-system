@@ -7,6 +7,7 @@ router.get('/:id', sponsorController.getOne);
 router.post('/', sponsorController.create);
 router.put('/:id', sponsorController.update);
 router.post('/bulk-delete', sponsorController.bulkRemove);
+router.post('/bulk-import', sponsorController.bulkImport);
 router.delete('/bulk', sponsorController.bulkRemove);
 router.delete('/:id', sponsorController.remove);
 

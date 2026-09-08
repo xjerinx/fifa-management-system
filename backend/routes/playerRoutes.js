@@ -7,6 +7,7 @@ router.get('/:id', playerController.getOne);
 router.post('/', playerController.create);
 router.put('/:id', playerController.update);
 router.post('/bulk-delete', playerController.bulkRemove);
+router.post('/bulk-import', playerController.bulkImport);
 router.delete('/bulk', playerController.bulkRemove);
 router.delete('/:id', playerController.remove);
 

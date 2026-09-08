@@ -1,5 +1,6 @@
 const db = require('../config/db');
 const { bulkDelete } = require('../utils/bulkDelete');
+const { bulkImport } = require('../utils/bulkImport');
 
 exports.getAll = async (req, res, next) => {
     try {
@@ -138,5 +139,28 @@ exports.removeReferee = async (req, res, next) => {
             [req.params.id, req.params.refereeId]
         );
         res.json({ success: true, message: 'Referee removed from match' });
+    } catch (err) { next(err); }
+};
+
+exports.bulkImport = async (req, res, next) => {
+    try {
+        const { rows } = req.body;
+        const result = await bulkImport({
+            tableName: 'match',
+            columns: ['tournament_id', 'stadium_id', 'home_team_id', 'away_team_id', 'match_date', 'match_time', 'stage', 'result'],
+            rows,
+            transformRow: (row) => ({
+                ...row,
+                tournament_id: row.tournament_id ? parseInt(row.tournament_id, 10) : null,
+                stadium_id: row.stadium_id ? parseInt(row.stadium_id, 10) : null,
+                home_team_id: row.home_team_id ? parseInt(row.home_team_id, 10) : null,
+                away_team_id: row.away_team_id ? parseInt(row.away_team_id, 10) : null,
+            }),
+        });
+        res.json({
+            success: true,
+            message: `Successfully imported ${result.count} match(es)`,
+            count: result.count,
+        });
     } catch (err) { next(err); }
 };

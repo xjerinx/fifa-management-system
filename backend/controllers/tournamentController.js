@@ -1,5 +1,6 @@
 const db = require('../config/db');
 const { bulkDelete } = require('../utils/bulkDelete');
+const { bulkImport } = require('../utils/bulkImport');
 
 exports.getAll = async (req, res, next) => {
     try {
@@ -221,5 +222,21 @@ exports.removeSponsor = async (req, res, next) => {
             return res.status(404).json({ success: false, message: 'Tournament sponsorship record not found' });
         }
         res.json({ success: true, message: 'Sponsor removed from tournament successfully' });
+    } catch (err) { next(err); }
+};
+
+exports.bulkImport = async (req, res, next) => {
+    try {
+        const { rows } = req.body;
+        const result = await bulkImport({
+            tableName: 'tournament',
+            columns: ['name', 'type', 'format', 'start_date', 'end_date'],
+            rows,
+        });
+        res.json({
+            success: true,
+            message: `Successfully imported ${result.count} tournament(s)`,
+            count: result.count,
+        });
     } catch (err) { next(err); }
 };
