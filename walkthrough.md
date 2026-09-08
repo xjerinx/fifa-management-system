@@ -4,26 +4,17 @@ We have completely refactored the sponsorship architecture from match-level spon
 
 ---
 
-## 1. Key Updates & Answers to Your Questions
+## 1. Key Updates & Workflow Design
 
-### Where to add a sponsor for a particular tournament?
-You now have **two seamless, bidirectional ways** to add and manage tournament sponsorships:
+### Adding Sponsors & Tournaments (Exclusive to Sponsors Page)
+* **Single Dedicated Management Hub**: The **Global Partners & Sponsors** page (`/sponsors`) is now the **sole place** to assign tournaments to commercial sponsors, manually input Term Cycles, and enter Contract Values via the **`TOURNAMENTS & ROSTER`** button.
+* **Clean Tournament View**: Removed the `+ SPONSORS` button from the Tournament cards and tables. Tournaments no longer have duplicate creation forms.
 
-1. **Directly from the Tournaments Page (`/tournaments`)**:
-   - On any tournament card or table row, click the prominent **`+ SPONSORS (count)`** button (or click the **`COMMERCIAL PARTNERS`** metric).
-   - In the modal, you will find the **"Assign Sponsor to Tournament"** form:
-     - **Sponsor**: Select any registered commercial partner from the dropdown.
-     - **Term Cycle**: Type any custom cycle manually (e.g. `2024–2026`, `2026 Season`, `4-Year Cycle`).
-     - **Contract Value ($ USD)**: Type any contract amount (e.g. `45000000`).
-     - Click **`Add`** to establish the partnership.
-
-2. **Directly from the Sponsors Page (`/sponsors`)**:
-   - On any sponsor card (e.g., McDonald's, Adidas) or table row, click **`TOURNAMENTS & ROSTER (count)`**.
-   - The modal now includes an **"Assign Partner to a Tournament"** section at the top:
-     - **Tournament**: Select the sanctioned tournament from the dropdown.
-     - **Term Cycle**: Type any manual term cycle.
-     - **Contract Value**: Type the contract valuation amount.
-     - Click **`Assign`** to link the sponsor to that tournament.
+### Displaying Added Sponsors (Tournament Commercial Partners Section)
+* **Real Sponsor Names Displayed**: On each tournament card in the **COMMERCIAL PARTNERS** slot (3rd image):
+  - When sponsors are added, their actual brand names (e.g. `Budweiser`, `Adidas, Coca-Cola`) and active count are displayed directly on the card in gold/amber.
+  - Clicking on the Commercial Partners block opens the clean **Sponsors & Asset Roster** modal to inspect the active contracts, term cycles, values, and stadium/broadcast deliverables.
+  - If no sponsors are assigned yet, it clearly displays `0 Sponsors Logged`.
 
 ---
 
