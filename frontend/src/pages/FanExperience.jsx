@@ -49,13 +49,29 @@ export default function FanExperience() {
   const userEmail = user?.email || "fan@fifa.org";
   const userName = user?.name || "Alex Silva";
 
-  // Fetch real matches from database
+  // Fetch real upcoming matches from database
   const loadMatches = async () => {
     setLoadingMatches(true);
     try {
-      const res = await api.get("/matches");
+      const res = await api.get("/matches?upcoming=true");
       if (res.data?.success) {
-        setMatches(res.data.data || []);
+        const now = Date.now();
+        // Ensure only future fixtures without completed results are shown, sorted chronologically
+        const upcomingFixtures = (res.data.data || [])
+          .filter((m) => {
+            if (m.result && m.result.trim()) return false;
+            if (!m.match_date) return true;
+            const dateStr = m.match_date.split("T")[0];
+            const timeStr = m.match_time ? m.match_time.slice(0, 8) : "23:59:59";
+            const matchMs = new Date(`${dateStr}T${timeStr}`).getTime();
+            return isNaN(matchMs) || matchMs >= now - 15 * 60 * 1000;
+          })
+          .sort((a, b) => {
+            const dateA = new Date(`${a.match_date ? a.match_date.split("T")[0] : "" }T${a.match_time || "00:00:00"}`).getTime();
+            const dateB = new Date(`${b.match_date ? b.match_date.split("T")[0] : "" }T${b.match_time || "00:00:00"}`).getTime();
+            return dateA - dateB;
+          });
+        setMatches(upcomingFixtures);
       }
     } catch (err) {
       console.error("Failed to load matches", err);

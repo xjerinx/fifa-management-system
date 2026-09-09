@@ -4,6 +4,15 @@ const { bulkImport } = require('../utils/bulkImport');
 
 exports.getAll = async (req, res, next) => {
     try {
+        const { upcoming } = req.query;
+        let whereClause = '';
+        let orderClause = 'ORDER BY m.match_date DESC, m.match_time DESC';
+
+        if (upcoming === 'true' || upcoming === '1') {
+            whereClause = 'WHERE TIMESTAMP(m.match_date, m.match_time) >= NOW() AND (m.result IS NULL OR TRIM(m.result) = "")';
+            orderClause = 'ORDER BY TIMESTAMP(m.match_date, m.match_time) ASC';
+        }
+
         const [rows] = await db.query(`
             SELECT m.*,
                 ht.name AS home_team, at.name AS away_team,
@@ -14,7 +23,8 @@ exports.getAll = async (req, res, next) => {
             INNER JOIN team at ON at.team_id = m.away_team_id
             INNER JOIN stadium s ON s.stadium_id = m.stadium_id
             INNER JOIN tournament tr ON tr.tournament_id = m.tournament_id
-            ORDER BY m.match_date DESC
+            ${whereClause}
+            ${orderClause}
         `);
         res.json({ success: true, data: rows });
     } catch (err) { next(err); }
