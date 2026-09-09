@@ -898,28 +898,20 @@ export default function Sponsors() {
                     : 'border-[#1b2336] hover:border-[#2b3a55]'
                   }`}
               >
-                {/* Card Top: Tier Pill & Match Count */}
+                {/* Card Top: Checkbox in Selection Mode */}
                 <div>
-                  <div className="flex items-center justify-between gap-2 mb-3">
-                    <div className="flex items-center gap-2">
-                      {isSelectionMode && (
-                        <input
-                          type="checkbox"
-                          checked={isSelected(item.sponsor_id)}
-                          onChange={() => toggleSelect(item.sponsor_id)}
-                          onClick={(e) => e.stopPropagation()}
-                          className="w-4 h-4 rounded border-white/20 bg-[#090d16] text-cyan-400 focus:ring-cyan-500/20 cursor-pointer shrink-0"
-                          aria-label={`Select ${item.name}`}
-                        />
-                      )}
-                      <span className={`text-[9px] font-mono font-bold px-2 py-0.5 rounded uppercase tracking-wider ${meta.tierBadgeClass}`}>
-                        {meta.tier}
-                      </span>
+                  {isSelectionMode && (
+                    <div className="flex items-center mb-2.5">
+                      <input
+                        type="checkbox"
+                        checked={isSelected(item.sponsor_id)}
+                        onChange={() => toggleSelect(item.sponsor_id)}
+                        onClick={(e) => e.stopPropagation()}
+                        className="w-4 h-4 rounded border-white/20 bg-[#090d16] text-cyan-400 focus:ring-cyan-500/20 cursor-pointer shrink-0"
+                        aria-label={`Select ${item.name}`}
+                      />
                     </div>
-                    <span className="text-xs font-mono font-black text-cyan-400 tabular-nums">
-                      {item.tournaments_sponsored || 0} {item.tournaments_sponsored === 1 ? 'Tournament' : 'Tournaments'}
-                    </span>
-                  </div>
+                  )}
 
                   {/* Brand Name, Subtitle & Icon Mark (Includes Industry Icon!) */}
                   <div className="flex items-start justify-between gap-3">
@@ -985,17 +977,35 @@ export default function Sponsors() {
                       </span>
                     </div>
                     {item.tournament_names ? (
-                      <div className="flex flex-wrap gap-1">
-                        {item.tournament_names.split(', ').map(tName => (
-                          <span
-                            key={tName}
-                            className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#131b29] border border-[#1f2d45] text-[10px] font-mono text-cyan-300 font-medium truncate max-w-full"
-                          >
-                            <span className="w-1 h-1 rounded-full bg-cyan-400 shrink-0"></span>
-                            <span className="truncate">{tName}</span>
-                          </span>
-                        ))}
-                      </div>
+                      (() => {
+                        const tList = item.tournament_names.split(', ').filter(Boolean);
+                        const displayed = tList.slice(0, 3);
+                        const hasMore = tList.length > 3;
+                        return (
+                          <div className="flex flex-wrap items-center gap-1">
+                            {displayed.map(tName => (
+                              <span
+                                key={tName}
+                                className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#131b29] border border-[#1f2d45] text-[10px] font-mono text-cyan-300 font-medium truncate max-w-[150px]"
+                                title={tName}
+                              >
+                                <span className="w-1 h-1 rounded-full bg-cyan-400 shrink-0"></span>
+                                <span className="truncate">{tName}</span>
+                              </span>
+                            ))}
+                            {hasMore && (
+                              <button
+                                type="button"
+                                onClick={() => openTournamentsRoster(item)}
+                                className="inline-flex items-center px-1.5 py-0.5 rounded bg-[#131b29] hover:bg-[#1c273c] border border-[#1f2d45] hover:border-cyan-500/40 text-[10px] font-mono text-cyan-400 font-bold transition-colors cursor-pointer"
+                                title={`+${tList.length - 3} more tournaments (click to view roster)`}
+                              >
+                                ...
+                              </button>
+                            )}
+                          </div>
+                        );
+                      })()
                     ) : (
                       <span className="text-[10px] font-mono text-slate-500 italic block">
                         No tournaments assigned
