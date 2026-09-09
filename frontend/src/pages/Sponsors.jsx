@@ -609,20 +609,6 @@ export default function Sponsors() {
               <span className="font-mono text-[11px] tracking-wider uppercase">LED Matrix</span>
             </button>
 
-            <button
-              type="button"
-              onClick={toggleSelectionMode}
-              className={`flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-lg border transition-colors shadow-sm cursor-pointer whitespace-nowrap ${isSelectionMode
-                  ? 'bg-rose-500/20 text-rose-300 border-rose-500/40'
-                  : 'bg-[#121722] hover:bg-[#1b2334] text-slate-300 border-[#1f293d]'
-                }`}
-              title="Select multiple sponsors for deletion"
-            >
-              {isSelectionMode ? <X size={13} /> : <CheckSquare size={13} />}
-              <span className="font-mono text-[11px] tracking-wider uppercase">
-                {isSelectionMode ? 'CANCEL' : 'MULTIPLE DELETION'}
-              </span>
-            </button>
 
             <button
               onClick={openCreate}

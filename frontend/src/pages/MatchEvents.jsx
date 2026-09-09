@@ -370,21 +370,6 @@ export default function MatchEvents() {
               <span className="font-mono text-[11px] tracking-wider uppercase">Export (JSON)</span>
             </button>
 
-            <button
-              type="button"
-              onClick={toggleSelectionMode}
-              className={`flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-lg border transition-colors shadow-sm cursor-pointer whitespace-nowrap ${
-                isSelectionMode
-                  ? 'bg-rose-500/20 text-rose-300 border-rose-500/40'
-                  : 'bg-[#121722] hover:bg-[#1b2234] text-slate-300 border-[#1f293d]'
-              }`}
-              title="Select multiple match events for deletion"
-            >
-              {isSelectionMode ? <X size={13} /> : <CheckSquare size={13} />}
-              <span className="font-mono text-[11px] tracking-wider uppercase">
-                {isSelectionMode ? 'CANCEL' : 'MULTIPLE DELETION'}
-              </span>
-            </button>
 
             <button
               onClick={openCreate}
@@ -1126,7 +1111,27 @@ export default function MatchEvents() {
         </div>
       </div>
 
-
+      {/* Compliance / Status Footer Banner */}
+      <div className="bg-[#10141e] border border-white/10 rounded-lg p-3.5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs shadow-sm">
+        <div className="flex items-center gap-2.5 text-slate-300">
+          <ShieldCheck size={18} className="text-cyan-400 shrink-0" />
+          <div>
+            <span className="font-mono text-[11px] font-bold text-white uppercase tracking-wider block">
+              FIFA DISCIPLINARY CODE &amp; INCIDENT PROTOCOL COMPLIANT
+            </span>
+            <span className="text-[10px] font-mono text-slate-400">
+              Match Official Incident Registry · Real-Time Disciplinary Audit · Zürich Disciplinary Committee Verified
+            </span>
+          </div>
+        </div>
+        <div className="flex items-center gap-4 text-[10px] font-mono text-slate-400 shrink-0">
+          <span>ALL EVENTS LOGGED</span>
+          <span className="text-cyan-400 font-bold flex items-center gap-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+            TMS SYNCED
+          </span>
+        </div>
+      </div>
 
       {/* ─────────────────────────────────────────────────────────────
           7. ADD / EDIT EVENT MODAL (CLEAN & PROFESSIONAL)

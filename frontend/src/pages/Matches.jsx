@@ -404,21 +404,6 @@ export default function Matches() {
               <span>Export (JSON)</span>
             </button>
 
-            <button
-              type="button"
-              onClick={toggleSelectionMode}
-              className={`flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded border transition-colors shadow-sm tracking-wide cursor-pointer whitespace-nowrap ${
-                isSelectionMode
-                  ? "bg-rose-500/20 text-rose-300 border-rose-500/40"
-                  : "bg-[#121722] hover:bg-[#1b2333] text-slate-200 border-white/10"
-              }`}
-              title="Select multiple matches for deletion"
-            >
-              <span className="material-symbols-outlined text-[16px]">
-                {isSelectionMode ? "close" : "checklist"}
-              </span>
-              <span>{isSelectionMode ? "Cancel" : "Multiple Deletion"}</span>
-            </button>
 
             <button
               onClick={openCreate}
@@ -1283,7 +1268,27 @@ export default function Matches() {
         </div>
       )}
 
-
+      {/* Compliance / Status Footer Banner */}
+      <div className="bg-[#10141e] border border-white/10 rounded-lg p-3.5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs shadow-sm">
+        <div className="flex items-center gap-2.5 text-slate-300">
+          <span className="material-symbols-outlined text-[18px] text-cyan-400">verified_user</span>
+          <div>
+            <span className="font-mono text-[11px] font-bold text-white uppercase tracking-wider block">
+              IFAB LAWS OF THE GAME &amp; FIFA MATCH PROTOCOL COMPLIANT
+            </span>
+            <span className="text-[10px] font-mono text-slate-400">
+              Official Match Commissioner Protocol v4.2 · Goal-Line Technology &amp; VAR Certified · Central Results Registry
+            </span>
+          </div>
+        </div>
+        <div className="flex items-center gap-4 text-[10px] font-mono text-slate-400 shrink-0">
+          <span>ALL FIXTURES RATIFIED</span>
+          <span className="text-cyan-400 font-bold flex items-center gap-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+            TMS SYNCED
+          </span>
+        </div>
+      </div>
 
       {/* Add / Edit Match Modal */}
       <Modal

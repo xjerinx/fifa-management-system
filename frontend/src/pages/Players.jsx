@@ -668,21 +668,6 @@ export default function Players() {
               <span>Export Sheet</span>
             </button>
 
-            <button
-              type="button"
-              onClick={toggleSelectionMode}
-              className={`flex items-center gap-1.5 px-3 py-2 text-xs font-semibold uppercase tracking-wider rounded-lg border transition-colors shadow-sm cursor-pointer whitespace-nowrap ${
-                isSelectionMode
-                  ? "bg-rose-500/20 text-rose-300 border-rose-500/40"
-                  : "bg-[#121722] hover:bg-[#1a2233] text-slate-300 hover:text-white border-[#1e2738]"
-              }`}
-              title="Select multiple players for deletion"
-            >
-              <span className="material-symbols-outlined text-[16px]">
-                {isSelectionMode ? "close" : "checklist"}
-              </span>
-              <span>{isSelectionMode ? "Cancel" : "Multiple Deletion"}</span>
-            </button>
 
             <button
               onClick={openCreate}
