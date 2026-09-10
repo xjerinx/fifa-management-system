@@ -69,8 +69,67 @@ promisePool.query('SELECT 1')
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
             `);
 
+            // Ensure match_referees junction table exists for Many-to-Many referee assignments
+            await promisePool.query(`
+                CREATE TABLE IF NOT EXISTS match_referees (
+                    match_id INT NOT NULL,
+                    referee_id INT NOT NULL,
+                    role VARCHAR(100) NOT NULL DEFAULT 'Main Referee',
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    PRIMARY KEY (match_id, referee_id),
+                    KEY fk_mr_referee (referee_id),
+                    CONSTRAINT fk_mr_match FOREIGN KEY (match_id) REFERENCES \`match\` (match_id) ON DELETE CASCADE ON UPDATE CASCADE,
+                    CONSTRAINT fk_mr_referee FOREIGN KEY (referee_id) REFERENCES referee (referee_id) ON DELETE CASCADE ON UPDATE CASCADE
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+            `);
+
+            // Ensure role column exists in match_referees
+            try {
+                const [mrCols] = await promisePool.query("SHOW COLUMNS FROM match_referees LIKE 'role'");
+                if (mrCols.length === 0) {
+                    await promisePool.query("ALTER TABLE match_referees ADD COLUMN role VARCHAR(100) NOT NULL DEFAULT 'Main Referee' AFTER referee_id");
+                    console.log('[DB] Added missing "role" column to match_referees table');
+                }
+            } catch (e) {
+                // table might not exist if DB offline
+            }
+
+            // Migrate data from legacy match_referee table if it existed
+            try {
+                const [legacyExists] = await promisePool.query("SHOW TABLES LIKE 'match_referee'");
+                if (legacyExists.length > 0) {
+                    await promisePool.query(`
+                        INSERT IGNORE INTO match_referees (match_id, referee_id, role)
+                        SELECT mr.match_id, mr.referee_id, COALESCE(r.role, 'Main Referee')
+                        FROM match_referee mr
+                        LEFT JOIN referee r ON r.referee_id = mr.referee_id
+                    `);
+                    console.log('[DB] Migrated legacy match_referee records to match_referees');
+                }
+            } catch (e) {
+                // Ignore if legacy table doesn't exist
+            }
+
             // Clean up any deprecated match_sponsor table
             await promisePool.query("DROP TABLE IF EXISTS match_sponsor");
+
+            // Clean up unutilized league table and foreign key
+            try {
+                const [teamFk] = await promisePool.query(`
+                    SELECT CONSTRAINT_NAME FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS
+                    WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'team' AND CONSTRAINT_NAME = 'fk_team_league'
+                `);
+                if (teamFk.length > 0) {
+                    await promisePool.query('ALTER TABLE `team` DROP FOREIGN KEY `fk_team_league`');
+                }
+                const [teamCols] = await promisePool.query("SHOW COLUMNS FROM `team` LIKE 'league_id'");
+                if (teamCols.length > 0) {
+                    await promisePool.query('ALTER TABLE `team` DROP COLUMN `league_id`');
+                }
+                await promisePool.query("DROP TABLE IF EXISTS `league`");
+            } catch (err) {
+                // Ignore if already dropped or database user lacks permissions
+            }
         } catch (e) {
             console.warn('[DB] Schema check warning:', e.message);
         }

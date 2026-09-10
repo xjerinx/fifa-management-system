@@ -17,6 +17,21 @@ const emptyForm = {
   match_time: "",
   stage: "Group Stage",
   result: "",
+  referees: [],
+};
+
+const REFEREE_ROLES = [
+  "Main Referee",
+  "Assistant Referee",
+  "Fourth Official",
+  "VAR Official",
+];
+
+const ROLE_BADGE = {
+  "Main Referee": "bg-cyan-950/60 text-cyan-400 border border-cyan-500/40",
+  "Assistant Referee": "bg-amber-950/60 text-amber-400 border border-amber-500/40",
+  "Fourth Official": "bg-blue-950/60 text-blue-400 border border-blue-500/40",
+  "VAR Official": "bg-sky-950/60 text-sky-400 border border-sky-500/40",
 };
 
 const TEAM_META = {
@@ -126,6 +141,8 @@ export default function Matches() {
   const [stadiums, setStadiums] = useState([]);
   const [teams, setTeams] = useState([]);
   const [events, setEvents] = useState([]);
+  const [refereesList, setRefereesList] = useState([]);
+  const [viewingMatch, setViewingMatch] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState(null);
@@ -171,16 +188,28 @@ export default function Matches() {
     api.get("/stadiums").then((res) => setStadiums(res.data.data || [])).catch(() => {});
     api.get("/teams").then((res) => setTeams(res.data.data || [])).catch(() => {});
     api.get("/events").then((res) => setEvents(res.data.data || [])).catch(() => {});
+    api.get("/referees").then((res) => setRefereesList(res.data.data || [])).catch(() => {});
   }, []);
 
   const openCreate = () => {
-    setForm(emptyForm);
+    setForm({
+      ...emptyForm,
+      referees: [{ referee_id: "", role: "Main Referee" }],
+    });
     setEditingId(null);
     setError("");
     setShowForm(true);
   };
 
   const openEdit = (item) => {
+    const existingRefs =
+      item.referees && Array.isArray(item.referees) && item.referees.length > 0
+        ? item.referees.map((r) => ({
+            referee_id: String(r.referee_id),
+            role: r.role || r.match_role || "Main Referee",
+          }))
+        : [];
+
     setForm({
       tournament_id: item.tournament_id || "",
       stadium_id: item.stadium_id || "",
@@ -190,10 +219,59 @@ export default function Matches() {
       match_time: item.match_time || "",
       stage: item.stage || "Group Stage",
       result: item.result || "",
+      referees: existingRefs,
     });
     setEditingId(item.match_id);
     setError("");
     setShowForm(true);
+
+    if (!item.referees || item.referees.length === 0) {
+      api
+        .get(`/matches/${item.match_id}/referees`)
+        .then((res) => {
+          if (res.data.data?.length) {
+            setForm((f) => ({
+              ...f,
+              referees: res.data.data.map((r) => ({
+                referee_id: String(r.referee_id),
+                role: r.role || r.match_role || "Main Referee",
+              })),
+            }));
+          }
+        })
+        .catch(() => {});
+    }
+  };
+
+  const handleAddRefereeSlot = () => {
+    setForm((f) => {
+      const hasMain = f.referees.some((r) => r.role === "Main Referee");
+      return {
+        ...f,
+        referees: [
+          ...f.referees,
+          {
+            referee_id: "",
+            role: hasMain ? "Assistant Referee" : "Main Referee",
+          },
+        ],
+      };
+    });
+  };
+
+  const handleRemoveRefereeSlot = (index) => {
+    setForm((f) => ({
+      ...f,
+      referees: f.referees.filter((_, i) => i !== index),
+    }));
+  };
+
+  const handleRefereeChange = (index, field, value) => {
+    setForm((f) => {
+      const updated = [...f.referees];
+      updated[index] = { ...updated[index], [field]: value };
+      return { ...f, referees: updated };
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -202,14 +280,45 @@ export default function Matches() {
       setError("Home and away teams cannot be the same.");
       return;
     }
+
+    // Filter valid referee selections
+    const assignedRefs = form.referees.filter(
+      (r) => r.referee_id && String(r.referee_id).trim() !== ""
+    );
+    const refIds = assignedRefs.map((r) => String(r.referee_id));
+    if (new Set(refIds).size !== refIds.length) {
+      setError("A referee cannot be assigned twice to the same match.");
+      return;
+    }
+
+    const mainRefs = assignedRefs.filter((r) => r.role === "Main Referee");
+    if (mainRefs.length > 1) {
+      setError("A match can only have one Main Referee.");
+      return;
+    }
+
+    const fourthRefs = assignedRefs.filter((r) => r.role === "Fourth Official");
+    if (fourthRefs.length > 1) {
+      setError("A match can only have one Fourth Official.");
+      return;
+    }
+
+    const payload = {
+      ...form,
+      referees: assignedRefs.map((r) => ({
+        referee_id: Number(r.referee_id),
+        role: r.role || "Main Referee",
+      })),
+    };
+
     setError("");
     setLoadingAction(true);
     try {
       if (editingId) {
-        await api.put(`/matches/${editingId}`, form);
+        await api.put(`/matches/${editingId}`, payload);
         toast?.showToast("Match updated successfully");
       } else {
-        await api.post("/matches", form);
+        await api.post("/matches", payload);
         toast?.showToast("Match scheduled successfully");
       }
       setShowForm(false);
@@ -715,6 +824,7 @@ export default function Matches() {
                   <th className="py-3 px-4">Matchup</th>
                   <th className="py-3 px-4">Score / Status</th>
                   <th className="py-3 px-4">Venue</th>
+                  <th className="py-3 px-4">Officials</th>
                   <th className="py-3 px-4 text-right">Actions</th>
                 </tr>
               </thead>
@@ -782,8 +892,34 @@ export default function Matches() {
                         <div className="truncate max-w-[180px]">{item.stadium_name || "—"}</div>
                         <div className="text-[10px] text-slate-500">{item.stadium_city || ""}</div>
                       </td>
+                      <td className="py-3 px-4">
+                        {item.referees && item.referees.length > 0 ? (
+                          <div className="text-[10px] font-mono">
+                            <div className="text-white font-bold truncate">
+                              {item.referees[0].first_name} {item.referees[0].last_name}
+                            </div>
+                            <div className="text-cyan-400 text-[9px] uppercase font-semibold">
+                              {item.referees[0].role || item.referees[0].match_role}
+                            </div>
+                            {item.referees.length > 1 && (
+                              <div className="text-slate-400 text-[9px] mt-0.5">
+                                +{item.referees.length - 1} more official{item.referees.length > 2 ? "s" : ""}
+                              </div>
+                            )}
+                          </div>
+                        ) : (
+                          <span className="text-[10px] font-mono text-slate-500">Unassigned</span>
+                        )}
+                      </td>
                       <td className="py-3 px-4 text-right">
                         <div className="flex items-center justify-end gap-1.5">
+                          <button
+                            onClick={() => setViewingMatch(item)}
+                            className="p-1.5 text-slate-400 hover:text-cyan-400 hover:bg-white/5 rounded transition-colors"
+                            title="View Match Details & Referees"
+                          >
+                            <span className="material-symbols-outlined text-[16px] block">visibility</span>
+                          </button>
                           <button
                             onClick={() => navigate(`/events?matchId=${item.match_id}`)}
                             className="px-2 py-1 bg-[#121824] hover:bg-[#1a2335] text-cyan-400 hover:text-cyan-300 border border-cyan-500/20 rounded text-[10px] font-mono font-bold uppercase transition-colors flex items-center gap-1"
@@ -927,9 +1063,63 @@ export default function Matches() {
                     </div>
                   </div>
 
+                  {/* Officials Delegation Strip */}
+                  <div className="p-3 bg-[#0a0d14] rounded-lg border border-white/5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5">
+                    <div className="flex items-center gap-2">
+                      <span className="material-symbols-outlined text-[16px] text-cyan-400">sports</span>
+                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-300">
+                        Match Officials Delegation:
+                      </span>
+                    </div>
+
+                    {marqueeMatch.referees && marqueeMatch.referees.length > 0 ? (
+                      <div className="flex items-center gap-2 flex-wrap">
+                        {marqueeMatch.referees.map((ref) => (
+                          <div
+                            key={ref.referee_id}
+                            className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#10141e] border border-white/10 text-[10px] font-mono"
+                          >
+                            <span
+                              className={`px-1.5 py-0.5 rounded font-bold uppercase text-[9px] ${
+                                ROLE_BADGE[ref.role || ref.match_role] ||
+                                "bg-cyan-950/60 text-cyan-400 border border-cyan-500/30"
+                              }`}
+                            >
+                              {ref.role || ref.match_role || "Main Referee"}
+                            </span>
+                            <span className="text-white font-bold">
+                              {ref.first_name} {ref.last_name}
+                            </span>
+                            <span className="text-slate-400">
+                              ({ref.nationality || "FIFA"})
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="flex items-center gap-2 text-[10px] font-mono text-slate-500">
+                        <span>No officials assigned yet</span>
+                        <button
+                          onClick={() => openEdit(marqueeMatch)}
+                          className="text-cyan-400 hover:underline font-bold ml-1"
+                        >
+                          + Assign Referees
+                        </button>
+                      </div>
+                    )}
+                  </div>
+
                   {/* Marquee Command Footer */}
                   <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-white/5">
                     <div className="flex items-center gap-2 flex-wrap">
+                      <button
+                        onClick={() => setViewingMatch(marqueeMatch)}
+                        className="flex items-center gap-1.5 px-3 py-1.5 bg-[#141b28] hover:bg-[#1f2a3e] text-cyan-400 border border-cyan-500/20 text-xs font-semibold rounded transition-colors"
+                      >
+                        <span className="material-symbols-outlined text-[15px]">info</span>
+                        <span>DETAILS & CREW</span>
+                      </button>
+
                       <button
                         onClick={() => navigate(`/events?matchId=${marqueeMatch.match_id}`)}
                         className="flex items-center gap-1.5 px-3 py-1.5 bg-[#00e5ff] hover:bg-[#00c5de] text-black font-bold text-xs rounded transition-colors"
@@ -1074,6 +1264,28 @@ export default function Matches() {
                             <span className="truncate">{item.stadium_name}, {item.stadium_city}</span>
                           </div>
                         </div>
+
+                        {/* Officials summary line */}
+                        {item.referees && item.referees.length > 0 ? (
+                          <div className="mt-2.5 pt-2 border-t border-white/5 flex items-center justify-between text-[10px] font-mono">
+                            <span className="text-slate-400 truncate flex items-center gap-1">
+                              <span className="material-symbols-outlined text-[13px] text-cyan-400">sports</span>
+                              <span className="text-slate-300 font-bold truncate">
+                                {item.referees[0].role || item.referees[0].match_role}: {item.referees[0].first_name} {item.referees[0].last_name}
+                              </span>
+                            </span>
+                            {item.referees.length > 1 && (
+                              <span className="text-cyan-400 font-bold shrink-0 ml-1">
+                                +{item.referees.length - 1}
+                              </span>
+                            )}
+                          </div>
+                        ) : (
+                          <div className="mt-2.5 pt-2 border-t border-white/5 text-[10px] font-mono text-slate-500 flex items-center gap-1">
+                            <span className="material-symbols-outlined text-[13px] text-slate-600">sports</span>
+                            <span>Referees unassigned</span>
+                          </div>
+                        )}
                       </div>
 
                       {/* Footer Actions */}
@@ -1092,6 +1304,13 @@ export default function Matches() {
                         </span>
 
                         <div className="flex items-center gap-1.5">
+                          <button
+                            onClick={() => setViewingMatch(item)}
+                            className="p-1.5 text-slate-400 hover:text-cyan-400 hover:bg-white/5 rounded transition-colors"
+                            title="View Match Details & Referees"
+                          >
+                            <span className="material-symbols-outlined text-[16px] block">visibility</span>
+                          </button>
                           {cardStatus.isPast && (
                             <button
                               onClick={() => openEdit(item)}
@@ -1231,10 +1450,33 @@ export default function Matches() {
                             </span>
                           </div>
                         )}
+
+                        {/* Match Officials Line */}
+                        {item.referees && item.referees.length > 0 && (
+                          <div className="text-[10px] font-mono text-slate-400 mt-1.5 flex items-center gap-2 flex-wrap justify-center text-center">
+                            <span className="text-slate-500 flex items-center gap-1">
+                              <span className="material-symbols-outlined text-[12px] text-cyan-400">sports</span>
+                              Officials:
+                            </span>
+                            {item.referees.map((r) => (
+                              <span key={r.referee_id} className="text-slate-300">
+                                <strong className="text-white">{r.role || r.match_role}:</strong> {r.first_name} {r.last_name}
+                              </span>
+                            ))}
+                          </div>
+                        )}
                       </div>
 
                       {/* Right: Actions */}
                       <div className="md:w-56 shrink-0 flex items-center justify-end gap-2 border-t md:border-t-0 border-white/5 pt-2.5 md:pt-0">
+                        <button
+                          onClick={() => setViewingMatch(item)}
+                          className="p-1.5 text-slate-400 hover:text-cyan-400 hover:bg-white/5 rounded transition-colors"
+                          title="View Match Details & Referees"
+                        >
+                          <span className="material-symbols-outlined text-[16px] block">visibility</span>
+                        </button>
+
                         <button
                           onClick={() => navigate(`/events?matchId=${item.match_id}`)}
                           className="px-2.5 py-1.5 bg-[#121824] hover:bg-[#1a2335] text-cyan-400 hover:text-cyan-300 border border-cyan-500/20 rounded text-[10px] font-mono font-bold uppercase transition-colors flex items-center gap-1"
@@ -1431,7 +1673,123 @@ export default function Matches() {
             </div>
           </div>
 
-          {/* Section 4: Result (Optional) */}
+          {/* Section 4: Match Officials Delegation */}
+          <div className="pt-2 border-t border-white/5 space-y-3">
+            <div className="flex items-center justify-between">
+              <div>
+                <label className="block text-xs font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
+                  <span className="material-symbols-outlined text-[15px] text-cyan-400">sports</span>
+                  <span>Match Officials Delegation</span>
+                </label>
+                <span className="text-[10px] text-slate-400">
+                  Assign 1 Main Referee and optional Assistant, Fourth, or VAR Officials.
+                </span>
+              </div>
+              <button
+                type="button"
+                onClick={handleAddRefereeSlot}
+                className="px-2.5 py-1 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 rounded text-[11px] font-mono font-bold uppercase transition-colors flex items-center gap-1 shrink-0"
+              >
+                <span className="material-symbols-outlined text-[14px]">add</span>
+                <span>Add Official</span>
+              </button>
+            </div>
+
+            {form.referees.length === 0 ? (
+              <div className="p-3 bg-[#070c17] rounded-lg border border-dashed border-[#1e2a3e] text-center text-xs text-slate-400">
+                <span>No referees assigned yet. Click "Add Official" to assign referees to this match.</span>
+              </div>
+            ) : (
+              <div className="space-y-2.5 max-h-56 overflow-y-auto pr-1">
+                {form.referees.map((refSlot, idx) => {
+                  const isDuplicate =
+                    refSlot.referee_id &&
+                    form.referees.filter((r) => r.referee_id && String(r.referee_id) === String(refSlot.referee_id)).length > 1;
+                  const isMainDuplicate =
+                    refSlot.role === "Main Referee" &&
+                    form.referees.filter((r) => r.role === "Main Referee").length > 1;
+                  const isFourthDuplicate =
+                    refSlot.role === "Fourth Official" &&
+                    form.referees.filter((r) => r.role === "Fourth Official").length > 1;
+
+                  return (
+                    <div
+                      key={idx}
+                      className={`p-2.5 rounded-lg bg-[#070c17] border transition-colors flex flex-col sm:flex-row items-stretch sm:items-center gap-2 ${
+                        isDuplicate || isMainDuplicate || isFourthDuplicate
+                          ? "border-rose-500/50 bg-rose-950/10"
+                          : "border-[#17233c]"
+                      }`}
+                    >
+                      {/* Referee Select */}
+                      <div className="flex-1">
+                        <select
+                          value={refSlot.referee_id}
+                          onChange={(e) => handleRefereeChange(idx, "referee_id", e.target.value)}
+                          className="w-full bg-[#0d1322] border border-[#1f2c44] rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-cyan-500 transition-colors cursor-pointer"
+                        >
+                          <option value="">-- Select Referee --</option>
+                          {refereesList.map((r) => {
+                            const alreadyUsed = form.referees.some(
+                              (other, oIdx) => oIdx !== idx && String(other.referee_id) === String(r.referee_id)
+                            );
+                            return (
+                              <option
+                                key={r.referee_id}
+                                value={r.referee_id}
+                                disabled={alreadyUsed}
+                                className="bg-[#10141e] text-white"
+                              >
+                                {r.first_name} {r.last_name} ({r.nationality || "FIFA"} · {r.badge_no || "Badge"}) {alreadyUsed ? "— Assigned" : ""}
+                              </option>
+                            );
+                          })}
+                        </select>
+                      </div>
+
+                      {/* Role Select */}
+                      <div className="w-full sm:w-44">
+                        <select
+                          value={refSlot.role}
+                          onChange={(e) => handleRefereeChange(idx, "role", e.target.value)}
+                          className="w-full bg-[#0d1322] border border-[#1f2c44] rounded-lg px-2.5 py-1.5 text-xs text-white font-mono focus:outline-none focus:border-cyan-500 transition-colors cursor-pointer"
+                        >
+                          {REFEREE_ROLES.map((role) => (
+                            <option key={role} value={role} className="bg-[#10141e] text-white">
+                              {role}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+
+                      {/* Remove Button */}
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveRefereeSlot(idx)}
+                        className="p-1.5 text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 rounded transition-colors self-end sm:self-center shrink-0"
+                        title="Remove Official"
+                      >
+                        <span className="material-symbols-outlined text-[16px] block">delete</span>
+                      </button>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+
+            {form.referees.filter((r) => r.role === "Main Referee").length > 1 && (
+              <div className="text-[11px] font-mono text-rose-400 bg-rose-500/10 border border-rose-500/20 px-2.5 py-1.5 rounded">
+                ⚠️ A match can only have one Main Referee. Please adjust duplicate roles.
+              </div>
+            )}
+            {form.referees.filter((r) => r.role === "Fourth Official").length > 1 && (
+              <div className="text-[11px] font-mono text-rose-400 bg-rose-500/10 border border-rose-500/20 px-2.5 py-1.5 rounded">
+                ⚠️ A match can only have one Fourth Official.
+              </div>
+            )}
+          </div>
+
+          {/* Section 5: Result (Optional) */}
           <div>
             <label className="block text-xs font-medium text-slate-300 mb-1.5">
               Result / Score (leave empty if pending kickoff)
@@ -1462,6 +1820,189 @@ export default function Matches() {
             </button>
           </div>
         </form>
+      </Modal>
+
+      {/* Match Details & Officials View Modal */}
+      <Modal
+        isOpen={!!viewingMatch}
+        onClose={() => setViewingMatch(null)}
+        title="Official Match Details & Arbitration Protocol"
+        subtitle="Comprehensive fixture data, venue allocation, and assigned match officials"
+        icon="verified"
+        maxWidth="max-w-2xl"
+      >
+        {viewingMatch && (() => {
+          const mStatus = getMatchTemporalStatus(viewingMatch);
+          const mScore = parseScore(viewingMatch.result);
+
+          return (
+            <div className="space-y-5">
+              {/* Competition & Status Bar */}
+              <div className="p-3 bg-[#0a0d14] rounded-lg border border-white/5 flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+                <div className="flex items-center gap-2">
+                  <span className="font-bold text-cyan-400 uppercase">
+                    {viewingMatch.tournament_name || "International Tournament"}
+                  </span>
+                  <span className="text-slate-500">·</span>
+                  <span className="text-slate-300">{viewingMatch.stage || "Group Stage"}</span>
+                </div>
+                <span className={`text-[10px] font-mono px-2 py-0.5 rounded font-bold uppercase tracking-wider ${mStatus.badgeColor}`}>
+                  {mStatus.badgeText}
+                </span>
+              </div>
+
+              {/* Matchup Header Banner */}
+              <div className="p-4 rounded-xl bg-[#0a0d14] border border-white/10 flex items-center justify-between gap-4">
+                {/* Home */}
+                <div className="flex-1 flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-lg bg-[#161d2b] border border-white/10 flex items-center justify-center font-mono font-black text-white text-base shrink-0">
+                    {getTeamCode(viewingMatch.home_team)}
+                  </div>
+                  <div>
+                    <h3 className="text-base font-black text-white">{viewingMatch.home_team}</h3>
+                    <span className="text-[10px] font-mono text-cyan-400">
+                      FIFA {TEAM_META[viewingMatch.home_team]?.rank || "#1"}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Score / VS Center */}
+                <div className="flex flex-col items-center justify-center px-4">
+                  {mScore ? (
+                    <div className="font-mono text-2xl font-black text-white bg-[#10141e] px-4 py-1 rounded-lg border border-white/10">
+                      {mScore.home} - {mScore.away}
+                    </div>
+                  ) : (
+                    <span className="text-2xl font-black text-white font-display">VS</span>
+                  )}
+                  <span className="text-[10px] font-mono text-slate-400 mt-1">
+                    {formatMatchDate(viewingMatch.match_date)} · {viewingMatch.match_time || "20:00 UTC"}
+                  </span>
+                </div>
+
+                {/* Away */}
+                <div className="flex-1 flex items-center justify-end gap-3 text-right">
+                  <div>
+                    <h3 className="text-base font-black text-white">{viewingMatch.away_team}</h3>
+                    <span className="text-[10px] font-mono text-sky-400">
+                      FIFA {TEAM_META[viewingMatch.away_team]?.rank || "#2"}
+                    </span>
+                  </div>
+                  <div className="w-12 h-12 rounded-lg bg-[#161d2b] border border-white/10 flex items-center justify-center font-mono font-black text-white text-base shrink-0">
+                    {getTeamCode(viewingMatch.away_team)}
+                  </div>
+                </div>
+              </div>
+
+              {/* Venue & Logistics */}
+              <div className="grid grid-cols-2 gap-3 text-xs font-mono">
+                <div className="p-3 rounded-lg bg-[#0a0d14] border border-white/5 flex items-center gap-2.5">
+                  <span className="material-symbols-outlined text-[18px] text-cyan-400">stadium</span>
+                  <div>
+                    <div className="text-[10px] text-slate-500 uppercase font-bold">Venue</div>
+                    <div className="text-white font-bold">{viewingMatch.stadium_name || "Official Venue"}</div>
+                    <div className="text-[10px] text-slate-400">{viewingMatch.stadium_city || ""}</div>
+                  </div>
+                </div>
+                <div className="p-3 rounded-lg bg-[#0a0d14] border border-white/5 flex items-center gap-2.5">
+                  <span className="material-symbols-outlined text-[18px] text-sky-400">calendar_month</span>
+                  <div>
+                    <div className="text-[10px] text-slate-500 uppercase font-bold">Scheduled Kickoff</div>
+                    <div className="text-white font-bold">{formatMatchDate(viewingMatch.match_date)}</div>
+                    <div className="text-[10px] text-slate-400">{viewingMatch.match_time || "TBD"}</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Match Officials Delegation Section */}
+              <div className="p-4 rounded-xl bg-[#0a0d14] border border-white/10 space-y-3">
+                <div className="flex items-center justify-between border-b border-white/5 pb-2">
+                  <div className="flex items-center gap-2">
+                    <span className="material-symbols-outlined text-[18px] text-cyan-400">sports</span>
+                    <span className="text-xs font-bold font-mono text-white uppercase tracking-wider">
+                      Assigned Match Officials & Referees
+                    </span>
+                  </div>
+                  <span className="text-[10px] font-mono text-slate-400">
+                    {viewingMatch.referees?.length || 0} CERTIFIED OFFICIAL(S)
+                  </span>
+                </div>
+
+                {viewingMatch.referees && viewingMatch.referees.length > 0 ? (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    {viewingMatch.referees.map((ref) => (
+                      <div
+                        key={ref.referee_id}
+                        className="p-3 rounded-lg bg-[#10141e] border border-white/5 flex items-center justify-between gap-3"
+                      >
+                        <div className="flex items-center gap-2.5 min-w-0">
+                          <div className="w-8 h-8 rounded bg-[#162030] border border-white/10 flex items-center justify-center text-[11px] font-mono font-bold text-cyan-400 shrink-0">
+                            {(ref.first_name?.[0] || "") + (ref.last_name?.[0] || "")}
+                          </div>
+                          <div className="min-w-0">
+                            <div className="text-xs font-bold text-white truncate">
+                              {ref.first_name} {ref.last_name}
+                            </div>
+                            <div className="text-[10px] font-mono text-slate-400 truncate">
+                              {ref.nationality || "International"} · {ref.badge_no || "FIFA"}
+                            </div>
+                          </div>
+                        </div>
+                        <span
+                          className={`text-[9px] font-mono font-bold px-2 py-0.5 rounded shrink-0 uppercase tracking-wider ${
+                            ROLE_BADGE[ref.role || ref.match_role] ||
+                            "bg-cyan-950/60 text-cyan-400 border border-cyan-500/30"
+                          }`}
+                        >
+                          {ref.role || ref.match_role || "Main Referee"}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="py-6 text-center text-xs font-mono text-slate-500 flex flex-col items-center justify-center gap-2">
+                    <span className="material-symbols-outlined text-[28px] text-slate-600">sports</span>
+                    <span>No match officials have been assigned to this fixture yet.</span>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const m = viewingMatch;
+                        setViewingMatch(null);
+                        openEdit(m);
+                      }}
+                      className="mt-1 px-3 py-1 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 rounded text-xs font-mono font-bold uppercase transition-colors"
+                    >
+                      Assign Referees Now
+                    </button>
+                  </div>
+                )}
+              </div>
+
+              {/* Modal Actions */}
+              <div className="flex items-center justify-end gap-2 pt-2 border-t border-white/5">
+                <button
+                  type="button"
+                  onClick={() => {
+                    const m = viewingMatch;
+                    setViewingMatch(null);
+                    openEdit(m);
+                  }}
+                  className="px-3.5 py-2 bg-[#141b28] hover:bg-[#1f2a3e] text-cyan-400 border border-cyan-500/30 text-xs font-semibold rounded-lg transition-colors flex items-center gap-1.5"
+                >
+                  <span className="material-symbols-outlined text-[15px]">edit</span>
+                  <span>Edit Fixture & Referees</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setViewingMatch(null)}
+                  className="px-4 py-2 bg-[#00e5ff] hover:bg-[#00c5de] text-black text-xs font-bold rounded-lg transition-colors"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          );
+        })()}
       </Modal>
 
       {/* Bulk Delete Confirmation Modal */}

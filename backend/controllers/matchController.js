@@ -2,6 +2,63 @@ const db = require('../config/db');
 const { bulkDelete } = require('../utils/bulkDelete');
 const { bulkImport } = require('../utils/bulkImport');
 
+async function validateAndNormalizeReferees(referees) {
+    if (!referees || !Array.isArray(referees) || referees.length === 0) {
+        return [];
+    }
+    const cleanList = [];
+    const seenIds = new Set();
+    let mainRefereeCount = 0;
+    let fourthOfficialCount = 0;
+
+    for (const item of referees) {
+        const refId = parseInt(item.referee_id || item.id, 10);
+        if (isNaN(refId)) continue;
+        if (seenIds.has(refId)) {
+            const err = new Error('A referee cannot be assigned twice to the same match.');
+            err.statusCode = 400;
+            throw err;
+        }
+        seenIds.add(refId);
+
+        const role = (item.role || item.match_role || 'Main Referee').trim();
+        if (role === 'Main Referee') {
+            mainRefereeCount++;
+            if (mainRefereeCount > 1) {
+                const err = new Error('A match can only have one Main Referee.');
+                err.statusCode = 400;
+                throw err;
+            }
+        }
+        if (role === 'Fourth Official') {
+            fourthOfficialCount++;
+            if (fourthOfficialCount > 1) {
+                const err = new Error('A match can only have one Fourth Official.');
+                err.statusCode = 400;
+                throw err;
+            }
+        }
+
+        cleanList.push({ referee_id: refId, role });
+    }
+
+    if (cleanList.length > 0) {
+        // Verify all referees actually exist in the database
+        const refIds = cleanList.map(c => c.referee_id);
+        const [existing] = await db.query(
+            `SELECT referee_id FROM referee WHERE referee_id IN (?)`,
+            [refIds]
+        );
+        if (existing.length !== refIds.length) {
+            const err = new Error('One or more selected referees do not exist in the database.');
+            err.statusCode = 400;
+            throw err;
+        }
+    }
+
+    return cleanList;
+}
+
 exports.getAll = async (req, res, next) => {
     try {
         const { upcoming } = req.query;
@@ -26,6 +83,33 @@ exports.getAll = async (req, res, next) => {
             ${whereClause}
             ${orderClause}
         `);
+
+        if (rows.length > 0) {
+            const matchIds = rows.map(r => r.match_id);
+            const [refRows] = await db.query(`
+                SELECT mr.match_id, mr.role AS match_role, mr.role,
+                       r.referee_id, r.first_name, r.last_name, r.nationality, r.badge_no
+                FROM match_referees mr
+                INNER JOIN referee r ON r.referee_id = mr.referee_id
+                WHERE mr.match_id IN (?)
+                ORDER BY CASE mr.role
+                    WHEN 'Main Referee' THEN 1
+                    WHEN 'Assistant Referee' THEN 2
+                    WHEN 'Fourth Official' THEN 3
+                    WHEN 'VAR Official' THEN 4
+                    ELSE 5 END, r.last_name ASC
+            `, [matchIds]);
+
+            const refsByMatch = {};
+            for (const ref of refRows) {
+                if (!refsByMatch[ref.match_id]) refsByMatch[ref.match_id] = [];
+                refsByMatch[ref.match_id].push(ref);
+            }
+            for (const row of rows) {
+                row.referees = refsByMatch[row.match_id] || [];
+            }
+        }
+
         res.json({ success: true, data: rows });
     } catch (err) { next(err); }
 };
@@ -45,41 +129,101 @@ exports.getOne = async (req, res, next) => {
             WHERE m.match_id = ?
         `, [req.params.id]);
         if (!rows.length) return res.status(404).json({ success: false, message: 'Match not found' });
-        res.json({ success: true, data: rows[0] });
+
+        const [refRows] = await db.query(`
+            SELECT mr.match_id, mr.role AS match_role, mr.role,
+                   r.referee_id, r.first_name, r.last_name, r.nationality, r.badge_no
+            FROM match_referees mr
+            INNER JOIN referee r ON r.referee_id = mr.referee_id
+            WHERE mr.match_id = ?
+            ORDER BY CASE mr.role
+                WHEN 'Main Referee' THEN 1
+                WHEN 'Assistant Referee' THEN 2
+                WHEN 'Fourth Official' THEN 3
+                WHEN 'VAR Official' THEN 4
+                ELSE 5 END, r.last_name ASC
+        `, [req.params.id]);
+
+        const match = rows[0];
+        match.referees = refRows;
+        res.json({ success: true, data: match });
     } catch (err) { next(err); }
 };
 
 exports.create = async (req, res, next) => {
     try {
-        const { tournament_id, stadium_id, home_team_id, away_team_id, match_date, match_time, stage, result } = req.body;
+        const { tournament_id, stadium_id, home_team_id, away_team_id, match_date, match_time, stage, result, referees } = req.body;
         if (!tournament_id || !stadium_id || !home_team_id || !away_team_id || !match_date || !match_time || !stage)
             return res.status(400).json({ success: false, message: 'Required fields missing' });
         if (Number(home_team_id) === Number(away_team_id))
             return res.status(400).json({ success: false, message: 'Home and away teams must be different' });
+
+        const validatedRefs = await validateAndNormalizeReferees(referees);
+
         const resVal = result && result.trim() ? result.trim() : null;
         const [r] = await db.query(
             'INSERT INTO `match` (tournament_id, stadium_id, home_team_id, away_team_id, match_date, match_time, stage, result) VALUES (?,?,?,?,?,?,?,?)',
             [parseInt(tournament_id, 10), parseInt(stadium_id, 10), parseInt(home_team_id, 10), parseInt(away_team_id, 10), match_date, match_time, stage.trim(), resVal]
         );
-        res.status(201).json({ success: true, data: { match_id: r.insertId, ...req.body } });
-    } catch (err) { next(err); }
+        const matchId = r.insertId;
+
+        if (validatedRefs.length > 0) {
+            const insertValues = validatedRefs.map(v => [matchId, v.referee_id, v.role]);
+            await db.query(
+                'INSERT INTO match_referees (match_id, referee_id, role) VALUES ?',
+                [insertValues]
+            );
+        }
+
+        res.status(201).json({
+            success: true,
+            data: { match_id: matchId, ...req.body, referees: validatedRefs }
+        });
+    } catch (err) {
+        if (err.statusCode) {
+            return res.status(err.statusCode).json({ success: false, message: err.message });
+        }
+        next(err);
+    }
 };
 
 exports.update = async (req, res, next) => {
     try {
-        const { tournament_id, stadium_id, home_team_id, away_team_id, match_date, match_time, stage, result } = req.body;
+        const { tournament_id, stadium_id, home_team_id, away_team_id, match_date, match_time, stage, result, referees } = req.body;
         if (!tournament_id || !stadium_id || !home_team_id || !away_team_id || !match_date || !match_time || !stage)
             return res.status(400).json({ success: false, message: 'Required fields missing' });
         if (Number(home_team_id) === Number(away_team_id))
             return res.status(400).json({ success: false, message: 'Home and away teams must be different' });
+
         const resVal = result && result.trim() ? result.trim() : null;
         const [r] = await db.query(
             'UPDATE `match` SET tournament_id=?, stadium_id=?, home_team_id=?, away_team_id=?, match_date=?, match_time=?, stage=?, result=? WHERE match_id=?',
             [parseInt(tournament_id, 10), parseInt(stadium_id, 10), parseInt(home_team_id, 10), parseInt(away_team_id, 10), match_date, match_time, stage.trim(), resVal, req.params.id]
         );
         if (!r.affectedRows) return res.status(404).json({ success: false, message: 'Match not found' });
+
+        // If referees field is provided in the update payload, synchronize match_referees
+        if (referees !== undefined && Array.isArray(referees)) {
+            const validatedRefs = await validateAndNormalizeReferees(referees);
+            // Remove previous assignments for this match (only junction records, referee records remain untouched)
+            await db.query('DELETE FROM match_referees WHERE match_id = ?', [req.params.id]);
+
+            if (validatedRefs.length > 0) {
+                const insertValues = validatedRefs.map(v => [req.params.id, v.referee_id, v.role]);
+                await db.query(
+                    'INSERT INTO match_referees (match_id, referee_id, role) VALUES ?',
+                    [insertValues]
+                );
+            }
+        }
+
         res.json({ success: true, message: 'Match updated successfully' });
-    } catch (err) { next(err); }
+    } catch (err) {
+        if (err.statusCode) {
+            return res.status(err.statusCode).json({ success: false, message: err.message });
+        }
+        next(err);
+    }
 };
 
 exports.remove = async (req, res, next) => {
@@ -123,9 +267,16 @@ exports.getEvents = async (req, res, next) => {
 exports.getReferees = async (req, res, next) => {
     try {
         const [rows] = await db.query(`
-            SELECT r.* FROM referee r
-            INNER JOIN match_referee mr ON mr.referee_id = r.referee_id
+            SELECT r.*, mr.role AS match_role, mr.role
+            FROM referee r
+            INNER JOIN match_referees mr ON mr.referee_id = r.referee_id
             WHERE mr.match_id = ?
+            ORDER BY CASE mr.role
+                WHEN 'Main Referee' THEN 1
+                WHEN 'Assistant Referee' THEN 2
+                WHEN 'Fourth Official' THEN 3
+                WHEN 'VAR Official' THEN 4
+                ELSE 5 END, r.last_name ASC
         `, [req.params.id]);
         res.json({ success: true, data: rows });
     } catch (err) { next(err); }
@@ -133,10 +284,25 @@ exports.getReferees = async (req, res, next) => {
 
 exports.addReferee = async (req, res, next) => {
     try {
-        const { referee_id } = req.body;
+        const { referee_id, role } = req.body;
+        if (!referee_id) return res.status(400).json({ success: false, message: 'referee_id is required' });
+
+        const [existingRef] = await db.query('SELECT referee_id FROM referee WHERE referee_id = ?', [referee_id]);
+        if (!existingRef.length) return res.status(404).json({ success: false, message: 'Referee not found' });
+
+        const refRole = (role || 'Main Referee').trim();
+        if (refRole === 'Main Referee') {
+            const [mainRef] = await db.query('SELECT referee_id FROM match_referees WHERE match_id = ? AND role = "Main Referee" AND referee_id != ?', [req.params.id, referee_id]);
+            if (mainRef.length) return res.status(400).json({ success: false, message: 'A match can only have one Main Referee' });
+        }
+        if (refRole === 'Fourth Official') {
+            const [fourthRef] = await db.query('SELECT referee_id FROM match_referees WHERE match_id = ? AND role = "Fourth Official" AND referee_id != ?', [req.params.id, referee_id]);
+            if (fourthRef.length) return res.status(400).json({ success: false, message: 'A match can only have one Fourth Official' });
+        }
+
         await db.query(
-            'INSERT IGNORE INTO match_referee (match_id, referee_id) VALUES (?,?)',
-            [req.params.id, referee_id]
+            'INSERT INTO match_referees (match_id, referee_id, role) VALUES (?,?,?) ON DUPLICATE KEY UPDATE role = VALUES(role)',
+            [req.params.id, referee_id, refRole]
         );
         res.json({ success: true, message: 'Referee assigned to match' });
     } catch (err) { next(err); }
@@ -145,7 +311,7 @@ exports.addReferee = async (req, res, next) => {
 exports.removeReferee = async (req, res, next) => {
     try {
         await db.query(
-            'DELETE FROM match_referee WHERE match_id=? AND referee_id=?',
+            'DELETE FROM match_referees WHERE match_id=? AND referee_id=?',
             [req.params.id, req.params.refereeId]
         );
         res.json({ success: true, message: 'Referee removed from match' });

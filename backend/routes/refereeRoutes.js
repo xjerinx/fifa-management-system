@@ -4,6 +4,7 @@ const refereeController = require('../controllers/refereeController');
 
 router.get('/', refereeController.getAll);
 router.get('/:id', refereeController.getOne);
+router.get('/:id/matches', refereeController.getMatches);
 router.post('/', refereeController.create);
 router.put('/:id', refereeController.update);
 router.post('/bulk-delete', refereeController.bulkRemove);

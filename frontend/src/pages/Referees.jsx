@@ -54,6 +54,23 @@ export default function Referees() {
   const [roleFilter, setRoleFilter] = useState("ALL");
   const [sortBy, setSortBy] = useState("matches");
   const [viewMode, setViewMode] = useState("grid"); // 'grid' | 'table'
+  const [selectedRefereeForMatches, setSelectedRefereeForMatches] = useState(null);
+  const [refereeMatches, setRefereeMatches] = useState([]);
+  const [loadingRefereeMatches, setLoadingRefereeMatches] = useState(false);
+
+  const handleViewMatches = async (referee) => {
+    setSelectedRefereeForMatches(referee);
+    setLoadingRefereeMatches(true);
+    setRefereeMatches([]);
+    try {
+      const res = await api.get(`/referees/${referee.referee_id}/matches`);
+      setRefereeMatches(res.data.data?.matches || []);
+    } catch (err) {
+      toast?.showToast(err.response?.data?.message || "Failed to load referee matches", "error");
+    } finally {
+      setLoadingRefereeMatches(false);
+    }
+  };
 
   const {
     isSelectionMode,
@@ -659,9 +676,14 @@ export default function Referees() {
                         <span className="text-[9px] font-mono uppercase text-slate-500 tracking-wider font-semibold block">
                           ASSIGNMENTS
                         </span>
-                        <span className="font-mono text-xs font-bold text-cyan-400 mt-0.5 block">
-                          {item.matches_officiated || 0} Matches
-                        </span>
+                        <button
+                          onClick={() => handleViewMatches(item)}
+                          className="font-mono text-xs font-bold text-cyan-400 hover:text-cyan-300 hover:underline mt-0.5 flex items-center gap-1 group/btn"
+                          title="View Assigned Match Fixtures"
+                        >
+                          <span>{item.matches_officiated || 0} Matches</span>
+                          <span className="material-symbols-outlined text-[13px] opacity-70 group-hover/btn:opacity-100">open_in_new</span>
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -673,6 +695,13 @@ export default function Referees() {
                     FIFA ARBITRATION
                   </span>
                   <div className="flex items-center gap-1">
+                    <button
+                      onClick={() => handleViewMatches(item)}
+                      className="p-1.5 text-slate-400 hover:text-cyan-400 hover:bg-white/5 rounded transition-colors"
+                      title="View Assigned Fixtures"
+                    >
+                      <span className="material-symbols-outlined text-[16px] block">sports_soccer</span>
+                    </button>
                     <button
                       onClick={() => openEdit(item)}
                       className="p-1.5 text-slate-400 hover:text-white hover:bg-white/5 rounded transition-colors"
@@ -759,10 +788,24 @@ export default function Referees() {
                         {item.nationality}
                       </td>
                       <td className="py-3 px-4 font-mono font-bold text-white">
-                        {item.matches_officiated || 0} Matches
+                        <button
+                          onClick={() => handleViewMatches(item)}
+                          className="text-cyan-400 hover:underline flex items-center gap-1 font-mono font-bold"
+                          title="View Assigned Matches"
+                        >
+                          <span>{item.matches_officiated || 0} Matches</span>
+                          <span className="material-symbols-outlined text-[13px]">open_in_new</span>
+                        </button>
                       </td>
                       <td className="py-3 px-4 text-right">
                         <div className="flex items-center justify-end gap-1">
+                          <button
+                            onClick={() => handleViewMatches(item)}
+                            className="p-1.5 text-slate-400 hover:text-cyan-400 hover:bg-white/5 rounded transition-colors"
+                            title="View Assigned Fixtures"
+                          >
+                            <span className="material-symbols-outlined text-[16px] block">sports_soccer</span>
+                          </button>
                           <button
                             onClick={() => openEdit(item)}
                             className="p-1.5 text-slate-400 hover:text-white hover:bg-white/5 rounded transition-colors"
@@ -918,6 +961,120 @@ export default function Referees() {
         entityKey="referees"
         onSuccess={load}
       />
+
+      {/* Assigned Matches & Fixtures Modal */}
+      <Modal
+        isOpen={!!selectedRefereeForMatches}
+        onClose={() => setSelectedRefereeForMatches(null)}
+        title={
+          selectedRefereeForMatches
+            ? `${selectedRefereeForMatches.first_name} ${selectedRefereeForMatches.last_name} · Assigned Fixtures`
+            : "Assigned Match Fixtures"
+        }
+        subtitle="All competitive tournament matches officiated by this FIFA referee"
+        icon="sports"
+        maxWidth="max-w-2xl"
+      >
+        {selectedRefereeForMatches && (
+          <div className="space-y-4">
+            {/* Profile Overview Strip */}
+            <div className="p-3 bg-[#0a0d14] rounded-lg border border-white/5 flex items-center justify-between gap-3 text-xs font-mono">
+              <div className="flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded bg-[#162030] border border-white/10 flex items-center justify-center font-bold text-cyan-400 font-mono">
+                  {(selectedRefereeForMatches.first_name?.[0] || "") +
+                    (selectedRefereeForMatches.last_name?.[0] || "")}
+                </div>
+                <div>
+                  <div className="text-white font-bold text-sm">
+                    {selectedRefereeForMatches.first_name} {selectedRefereeForMatches.last_name}
+                  </div>
+                  <div className="text-[10px] text-slate-400">
+                    {selectedRefereeForMatches.nationality} · Badge: {selectedRefereeForMatches.badge_no || "FIFA"}
+                  </div>
+                </div>
+              </div>
+              <span
+                className={`text-[9px] font-mono px-2 py-0.5 rounded font-bold uppercase ${
+                  ROLE_STYLE[selectedRefereeForMatches.role]?.color || "bg-cyan-950/40 text-cyan-400"
+                }`}
+              >
+                {selectedRefereeForMatches.role}
+              </span>
+            </div>
+
+            {/* Fixtures List */}
+            {loadingRefereeMatches ? (
+              <div className="py-12 text-center flex flex-col items-center justify-center gap-2">
+                <span className="w-6 h-6 rounded-full border-2 border-cyan-400 border-t-transparent animate-spin"></span>
+                <span className="text-xs font-mono text-slate-400">
+                  Retrieving official match assignments...
+                </span>
+              </div>
+            ) : refereeMatches.length === 0 ? (
+              <div className="py-10 text-center bg-[#070c17] rounded-lg border border-dashed border-[#1e2a3e] flex flex-col items-center justify-center gap-2">
+                <span className="material-symbols-outlined text-[32px] text-slate-600">sports_soccer</span>
+                <span className="text-xs font-mono text-slate-300 font-bold uppercase tracking-wider">
+                  No Fixtures Assigned Yet
+                </span>
+                <span className="text-[11px] text-slate-500 max-w-sm px-4">
+                  This referee has not been assigned to any match fixtures yet. Head over to the Matches page to assign officials when creating or editing fixtures.
+                </span>
+              </div>
+            ) : (
+              <div className="space-y-2.5 max-h-80 overflow-y-auto pr-1">
+                {refereeMatches.map((m) => (
+                  <div
+                    key={m.match_id}
+                    className="p-3 bg-[#0a0d14] rounded-lg border border-white/5 hover:border-cyan-500/30 transition-colors flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs"
+                  >
+                    <div className="flex flex-col gap-1 min-w-0">
+                      <div className="flex items-center gap-2 text-[10px] font-mono flex-wrap">
+                        <span className="text-cyan-400 font-bold uppercase">{m.tournament_name}</span>
+                        <span className="text-slate-600">•</span>
+                        <span className="text-slate-300">{m.stage || "Group Stage"}</span>
+                        <span className="text-slate-600">•</span>
+                        <span className="text-slate-400">
+                          {m.match_date ? m.match_date.split("T")[0] : ""} {m.match_time ? `· ${m.match_time}` : ""}
+                        </span>
+                      </div>
+                      <div className="text-sm font-bold text-white flex items-center gap-2">
+                        <span>{m.home_team}</span>
+                        <span className="text-xs text-slate-500 font-normal">vs</span>
+                        <span>{m.away_team}</span>
+                        {m.result && (
+                          <span className="font-mono text-xs text-cyan-400 bg-[#162030] px-2 py-0.5 rounded border border-white/10 ml-1">
+                            {m.result}
+                          </span>
+                        )}
+                      </div>
+                      <div className="text-[10px] font-mono text-slate-500 flex items-center gap-1">
+                        <span className="material-symbols-outlined text-[13px]">location_on</span>
+                        <span>{m.stadium_name}, {m.stadium_city}</span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2 self-end sm:self-center shrink-0">
+                      <span className="px-2.5 py-1 bg-[#10141e] border border-cyan-500/30 text-cyan-400 rounded text-[10px] font-mono font-bold uppercase tracking-wider">
+                        {m.match_role || "Main Referee"}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            <div className="flex justify-end pt-2 border-t border-white/5">
+              <button
+                type="button"
+                onClick={() => setSelectedRefereeForMatches(null)}
+                className="px-4 py-2 bg-[#162030] hover:bg-[#1e2c42] text-white text-xs font-bold rounded-lg transition-colors border border-white/5"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        )}
+      </Modal>
     </div>
   );
 }

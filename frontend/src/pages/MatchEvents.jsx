@@ -648,6 +648,28 @@ export default function MatchEvents() {
                 </span>
                 <span>Second Half Stoppage: +4:15</span>
               </div>
+
+              {/* Match Officials Delegation */}
+              {activeFocusMatch.referees && activeFocusMatch.referees.length > 0 && (
+                <div className="mt-3 pt-3 border-t border-[#1b2336] flex flex-wrap items-center justify-between gap-2 text-[10px] font-mono">
+                  <div className="flex items-center gap-1.5 text-slate-400">
+                    <span className="material-symbols-outlined text-[14px] text-cyan-400">sports</span>
+                    <span className="font-bold text-slate-300 uppercase">Match Officials:</span>
+                  </div>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    {activeFocusMatch.referees.map((ref) => (
+                      <span
+                        key={ref.referee_id}
+                        className="px-2 py-0.5 rounded bg-[#090d16] border border-white/10 text-slate-300 flex items-center gap-1.5"
+                      >
+                        <span className="text-cyan-400 font-bold uppercase">{ref.role || ref.match_role}:</span>
+                        <span className="text-white">{ref.first_name} {ref.last_name}</span>
+                        <span className="text-slate-500">({ref.nationality || 'FIFA'})</span>
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
