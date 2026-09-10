@@ -89,18 +89,7 @@ export default function Sidebar() {
           </button>
         </div>
 
-        {/* Season Selector */}
-        {!collapsed && (
-          <div className="px-3">
-            <div className="flex items-center justify-between bg-[#111622] px-2.5 py-1.5 rounded border border-[#1b2234] text-xs text-slate-300 font-mono">
-              <div className="flex items-center gap-1.5">
-                <span className="material-symbols-outlined text-[15px] text-sky-400">event_note</span>
-                <span className="text-[11px] font-semibold tracking-wider">SEASON 2026/27</span>
-              </div>
-              <span className="material-symbols-outlined text-[15px] text-slate-500">unfold_more</span>
-            </div>
-          </div>
-        )}
+
 
         {/* Navigation Sections */}
         <nav className="flex-1 flex flex-col gap-3 px-2.5 overflow-y-auto pr-1">
