@@ -27,6 +27,25 @@ promisePool.query('SELECT 1')
             console.warn('[DB] Player club check:', e.message);
         }
 
+        // Ensure player.position can safely accept any standard position string without truncation error
+        try {
+            await promisePool.query("ALTER TABLE player MODIFY COLUMN position VARCHAR(50) NOT NULL DEFAULT 'Forward'");
+        } catch (e) {
+            console.warn('[DB] Player position check:', e.message);
+        }
+
+        // Ensure player.team_id is nullable for club/unaffiliated players
+        try {
+            await promisePool.query("ALTER TABLE player MODIFY COLUMN team_id INT NULL DEFAULT NULL");
+        } catch (e) {
+            console.warn('[DB] Player team_id nullability check:', e.message);
+        }
+
+        // Ensure player.preferred_foot is flexible VARCHAR
+        try {
+            await promisePool.query("ALTER TABLE player MODIFY COLUMN preferred_foot VARCHAR(20) DEFAULT 'Right'");
+        } catch (e) {}
+
         // Ensure match_referees junction table exists for Many-to-Many referee assignments (RUN FIRST)
         try {
             await promisePool.query(`

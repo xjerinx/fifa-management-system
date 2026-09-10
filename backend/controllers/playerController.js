@@ -2,6 +2,28 @@ const db = require('../config/db');
 const { bulkDelete } = require('../utils/bulkDelete');
 const { bulkImport } = require('../utils/bulkImport');
 
+function normalizePlayerPosition(pos) {
+    if (!pos) return 'Forward';
+    const p = String(pos).trim().toUpperCase();
+    if (['GK', 'GOALKEEPER', 'GOALIE', 'KEEPER'].includes(p)) return 'Goalkeeper';
+    if (['DF', 'DEFENDER', 'DEF', 'CB', 'LB', 'RB', 'LWB', 'RWB', 'FULLBACK', 'CENTRE-BACK', 'SWEEPER'].includes(p)) return 'Defender';
+    if (['MF', 'MIDFIELDER', 'MID', 'CM', 'CDM', 'CAM', 'LM', 'RM', 'AM', 'DM', 'CENTRAL MIDFIELDER'].includes(p)) return 'Midfielder';
+    if (['FW', 'FORWARD', 'ATTACKER', 'ST', 'CF', 'LW', 'RW', 'STRIKER', 'WINGER', 'LEFT WING', 'RIGHT WING', 'CENTRE FORWARD'].includes(p)) return 'Forward';
+    if (/^(GK|GOAL)/i.test(p)) return 'Goalkeeper';
+    if (/^(DEF|BACK|CB|LB|RB)/i.test(p)) return 'Defender';
+    if (/^(MID|CM|CAM|CDM|MF)/i.test(p)) return 'Midfielder';
+    if (/^(FOR|ATT|ST|CF|RW|LW|WING)/i.test(p)) return 'Forward';
+    return pos.charAt(0).toUpperCase() + pos.slice(1).toLowerCase();
+}
+
+function normalizePreferredFoot(foot) {
+    if (!foot) return 'Right';
+    const f = String(foot).trim().toLowerCase();
+    if (f.startsWith('l')) return 'Left';
+    if (f.startsWith('b')) return 'Both';
+    return 'Right';
+}
+
 exports.getAll = async (req, res, next) => {
     try {
         const { team_id, nationality, position, foot } = req.query;
@@ -47,6 +69,8 @@ exports.create = async (req, res, next) => {
         const marketVal = (market_value_m !== undefined && market_value_m !== '') ? parseFloat(market_value_m) : 0;
         const teamId = parseInt(team_id, 10);
         const playerClub = (club !== undefined && club !== null && String(club).trim() !== '') ? String(club).trim() : null;
+        const normPos = normalizePlayerPosition(position);
+        const normFoot = normalizePreferredFoot(preferred_foot);
 
         if (isNaN(jerseyNum) || jerseyNum < 1 || jerseyNum > 99)
             return res.status(400).json({ success: false, message: 'Jersey number must be between 1 and 99' });
@@ -59,7 +83,7 @@ exports.create = async (req, res, next) => {
         try {
             [result] = await db.query(
                 'INSERT INTO player (first_name, last_name, dob, nationality, position, height_cm, preferred_foot, market_value_m, jersey_number, team_id, club) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
-                [first_name.trim(), last_name.trim(), dob, nationality.trim(), position.trim(), height, preferred_foot || 'Right', marketVal, jerseyNum, teamId, playerClub]
+                [first_name.trim(), last_name.trim(), dob, nationality.trim(), normPos, height, normFoot, marketVal, jerseyNum, teamId, playerClub]
             );
         } catch (dbErr) {
             if (dbErr.code === 'ER_BAD_FIELD_ERROR' && (dbErr.sqlMessage?.includes('club') || dbErr.message?.includes('club'))) {
@@ -67,20 +91,20 @@ exports.create = async (req, res, next) => {
                     await db.query('ALTER TABLE player ADD COLUMN club VARCHAR(100) DEFAULT NULL AFTER team_id');
                     [result] = await db.query(
                         'INSERT INTO player (first_name, last_name, dob, nationality, position, height_cm, preferred_foot, market_value_m, jersey_number, team_id, club) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
-                        [first_name.trim(), last_name.trim(), dob, nationality.trim(), position.trim(), height, preferred_foot || 'Right', marketVal, jerseyNum, teamId, playerClub]
+                        [first_name.trim(), last_name.trim(), dob, nationality.trim(), normPos, height, normFoot, marketVal, jerseyNum, teamId, playerClub]
                     );
                 } catch (retryErr) {
                     // Fallback to insertion without club column if alter table fails
                     [result] = await db.query(
                         'INSERT INTO player (first_name, last_name, dob, nationality, position, height_cm, preferred_foot, market_value_m, jersey_number, team_id) VALUES (?,?,?,?,?,?,?,?,?,?)',
-                        [first_name.trim(), last_name.trim(), dob, nationality.trim(), position.trim(), height, preferred_foot || 'Right', marketVal, jerseyNum, teamId]
+                        [first_name.trim(), last_name.trim(), dob, nationality.trim(), normPos, height, normFoot, marketVal, jerseyNum, teamId]
                     );
                 }
             } else {
                 throw dbErr;
             }
         }
-        res.status(201).json({ success: true, data: { player_id: result.insertId, ...req.body, club: playerClub } });
+        res.status(201).json({ success: true, data: { player_id: result.insertId, ...req.body, position: normPos, preferred_foot: normFoot, club: playerClub } });
     } catch (err) { next(err); }
 };
 
@@ -103,11 +127,14 @@ exports.update = async (req, res, next) => {
         if (isNaN(marketVal) || marketVal < 0)
             return res.status(400).json({ success: false, message: 'Market value cannot be negative' });
 
+        const normPos = normalizePlayerPosition(position);
+        const normFoot = normalizePreferredFoot(preferred_foot);
+
         let result;
         try {
             [result] = await db.query(
                 'UPDATE player SET first_name=?, last_name=?, dob=?, nationality=?, position=?, height_cm=?, preferred_foot=?, market_value_m=?, jersey_number=?, team_id=?, club=? WHERE player_id=?',
-                [first_name.trim(), last_name.trim(), dob, nationality.trim(), position.trim(), height, preferred_foot || 'Right', marketVal, jerseyNum, teamId, playerClub, req.params.id]
+                [first_name.trim(), last_name.trim(), dob, nationality.trim(), normPos, height, normFoot, marketVal, jerseyNum, teamId, playerClub, req.params.id]
             );
         } catch (dbErr) {
             if (dbErr.code === 'ER_BAD_FIELD_ERROR' && (dbErr.sqlMessage?.includes('club') || dbErr.message?.includes('club'))) {
@@ -115,12 +142,12 @@ exports.update = async (req, res, next) => {
                     await db.query('ALTER TABLE player ADD COLUMN club VARCHAR(100) DEFAULT NULL AFTER team_id');
                     [result] = await db.query(
                         'UPDATE player SET first_name=?, last_name=?, dob=?, nationality=?, position=?, height_cm=?, preferred_foot=?, market_value_m=?, jersey_number=?, team_id=?, club=? WHERE player_id=?',
-                        [first_name.trim(), last_name.trim(), dob, nationality.trim(), position.trim(), height, preferred_foot || 'Right', marketVal, jerseyNum, teamId, playerClub, req.params.id]
+                        [first_name.trim(), last_name.trim(), dob, nationality.trim(), normPos, height, normFoot, marketVal, jerseyNum, teamId, playerClub, req.params.id]
                     );
                 } catch (retryErr) {
                     [result] = await db.query(
                         'UPDATE player SET first_name=?, last_name=?, dob=?, nationality=?, position=?, height_cm=?, preferred_foot=?, market_value_m=?, jersey_number=?, team_id=? WHERE player_id=?',
-                        [first_name.trim(), last_name.trim(), dob, nationality.trim(), position.trim(), height, preferred_foot || 'Right', marketVal, jerseyNum, teamId, req.params.id]
+                        [first_name.trim(), last_name.trim(), dob, nationality.trim(), normPos, height, normFoot, marketVal, jerseyNum, teamId, req.params.id]
                     );
                 }
             } else {
@@ -160,17 +187,56 @@ exports.bulkRemove = async (req, res, next) => {
 exports.bulkImport = async (req, res, next) => {
     try {
         const { rows } = req.body;
+
+        // Preload teams to resolve team names or nicknames if team_id is a string or name
+        let teamLookup = {};
+        try {
+            const [teams] = await db.query('SELECT team_id, name, nickname FROM team');
+            for (const t of teams) {
+                if (t.name) teamLookup[t.name.trim().toLowerCase()] = t.team_id;
+                if (t.nickname) teamLookup[t.nickname.trim().toLowerCase()] = t.team_id;
+            }
+        } catch (e) {
+            console.warn('[playerController.bulkImport] Failed to fetch teams for lookup:', e.message);
+        }
+
+        const resolveTeamId = (row) => {
+            if (row.team_id !== undefined && row.team_id !== null && row.team_id !== '') {
+                const parsed = parseInt(row.team_id, 10);
+                if (!isNaN(parsed) && parsed > 0) return parsed;
+                const str = String(row.team_id).trim().toLowerCase();
+                if (teamLookup[str]) return teamLookup[str];
+            }
+            const candidate = row.assigned_team || row.team || row.national_team || row.nationality;
+            if (candidate) {
+                const str = String(candidate).trim().toLowerCase();
+                if (teamLookup[str]) return teamLookup[str];
+            }
+            return null;
+        };
+
         const result = await bulkImport({
             tableName: 'player',
             columns: ['first_name', 'last_name', 'dob', 'nationality', 'position', 'height_cm', 'preferred_foot', 'market_value_m', 'jersey_number', 'team_id', 'club'],
             rows,
-            transformRow: (row) => ({
-                ...row,
-                jersey_number: row.jersey_number ? parseInt(row.jersey_number, 10) : null,
-                height_cm: row.height_cm ? parseInt(row.height_cm, 10) : null,
-                market_value_m: row.market_value_m !== undefined && row.market_value_m !== null && row.market_value_m !== '' ? parseFloat(row.market_value_m) : 0,
-                team_id: row.team_id ? parseInt(row.team_id, 10) : null,
-            }),
+            transformRow: (row) => {
+                const teamId = resolveTeamId(row);
+                const rawVal = row.market_value_m !== undefined && row.market_value_m !== null && row.market_value_m !== ''
+                    ? row.market_value_m
+                    : (row.market_value_eur_millions !== undefined ? row.market_value_eur_millions : 0);
+                const marketVal = typeof rawVal === 'number' ? rawVal : parseFloat(String(rawVal).replace(/[^0-9.-]/g, '')) || 0;
+
+                return {
+                    ...row,
+                    position: normalizePlayerPosition(row.position),
+                    preferred_foot: normalizePreferredFoot(row.preferred_foot),
+                    jersey_number: row.jersey_number ? parseInt(String(row.jersey_number).replace(/[^0-9]/g, ''), 10) : null,
+                    height_cm: row.height_cm ? parseInt(String(row.height_cm).replace(/[^0-9]/g, ''), 10) : 180,
+                    market_value_m: marketVal,
+                    team_id: teamId,
+                    club: row.club && String(row.club).trim() !== '' ? String(row.club).trim() : null,
+                };
+            },
         });
         res.json({
             success: true,

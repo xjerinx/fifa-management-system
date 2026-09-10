@@ -103,6 +103,35 @@ export function normalizeColumnKey(str) {
 }
 
 /**
+ * Normalizes football position abbreviations to canonical FIFA categories:
+ * 'Forward', 'Midfielder', 'Defender', 'Goalkeeper'
+ */
+export function normalizePositionValue(pos) {
+  if (!pos) return 'Forward';
+  const p = String(pos).trim().toUpperCase();
+  if (['GK', 'GOALKEEPER', 'GOALIE', 'KEEPER'].includes(p)) return 'Goalkeeper';
+  if (['DF', 'DEFENDER', 'DEF', 'CB', 'LB', 'RB', 'LWB', 'RWB', 'FULLBACK', 'CENTRE-BACK', 'SWEEPER'].includes(p)) return 'Defender';
+  if (['MF', 'MIDFIELDER', 'MID', 'CM', 'CDM', 'CAM', 'LM', 'RM', 'AM', 'DM', 'CENTRAL MIDFIELDER'].includes(p)) return 'Midfielder';
+  if (['FW', 'FORWARD', 'ATTACKER', 'ST', 'CF', 'LW', 'RW', 'STRIKER', 'WINGER', 'LEFT WING', 'RIGHT WING'].includes(p)) return 'Forward';
+  if (/^(GK|GOAL)/i.test(p)) return 'Goalkeeper';
+  if (/^(DEF|BACK|CB|LB|RB)/i.test(p)) return 'Defender';
+  if (/^(MID|CM|CAM|CDM|MF)/i.test(p)) return 'Midfielder';
+  if (/^(FOR|ATT|ST|CF|RW|LW|WING)/i.test(p)) return 'Forward';
+  return pos.charAt(0).toUpperCase() + pos.slice(1).toLowerCase();
+}
+
+/**
+ * Normalizes preferred foot (Left, Right, Both)
+ */
+export function normalizeFootValue(foot) {
+  if (!foot) return 'Right';
+  const f = String(foot).trim().toLowerCase();
+  if (f.startsWith('l')) return 'Left';
+  if (f.startsWith('b')) return 'Both';
+  return 'Right';
+}
+
+/**
  * Maps parsed CSV rows to an entity schema.
  * - Matches column headers via aliases.
  * - Missing columns are populated as null.
@@ -172,7 +201,11 @@ export function mapCSVToSchema(csvMatrix, entitySchema) {
           rowObj[field.key] = field.default !== undefined ? field.default : null;
         } else {
           val = val.trim();
-          if (field.type === 'number' || field.type === 'integer') {
+          if (field.key === 'position') {
+            rowObj[field.key] = normalizePositionValue(val);
+          } else if (field.key === 'preferred_foot') {
+            rowObj[field.key] = normalizeFootValue(val);
+          } else if (field.type === 'number' || field.type === 'integer') {
             const num = parseInt(val.replace(/[^0-9.-]/g, ''), 10);
             rowObj[field.key] = isNaN(num) ? (field.default !== undefined ? field.default : null) : num;
           } else if (field.type === 'float') {
