@@ -1,6 +1,7 @@
 const db = require('../config/db');
 const { bulkDelete } = require('../utils/bulkDelete');
 const { bulkImport } = require('../utils/bulkImport');
+const { ensureMatchRefereesTable } = require('../utils/matchRefereesHelper');
 
 async function validateAndNormalizeReferees(referees) {
     if (!referees || !Array.isArray(referees) || referees.length === 0) {
@@ -61,6 +62,7 @@ async function validateAndNormalizeReferees(referees) {
 
 exports.getAll = async (req, res, next) => {
     try {
+        await ensureMatchRefereesTable(db);
         const { upcoming } = req.query;
         let whereClause = '';
         let orderClause = 'ORDER BY m.match_date DESC, m.match_time DESC';
@@ -85,28 +87,35 @@ exports.getAll = async (req, res, next) => {
         `);
 
         if (rows.length > 0) {
-            const matchIds = rows.map(r => r.match_id);
-            const [refRows] = await db.query(`
-                SELECT mr.match_id, mr.role AS match_role, mr.role,
-                       r.referee_id, r.first_name, r.last_name, r.nationality, r.badge_no
-                FROM match_referees mr
-                INNER JOIN referee r ON r.referee_id = mr.referee_id
-                WHERE mr.match_id IN (?)
-                ORDER BY CASE mr.role
-                    WHEN 'Main Referee' THEN 1
-                    WHEN 'Assistant Referee' THEN 2
-                    WHEN 'Fourth Official' THEN 3
-                    WHEN 'VAR Official' THEN 4
-                    ELSE 5 END, r.last_name ASC
-            `, [matchIds]);
+            try {
+                const matchIds = rows.map(r => r.match_id);
+                const [refRows] = await db.query(`
+                    SELECT mr.match_id, mr.role AS match_role, mr.role,
+                           r.referee_id, r.first_name, r.last_name, r.nationality, r.badge_no
+                    FROM match_referees mr
+                    INNER JOIN referee r ON r.referee_id = mr.referee_id
+                    WHERE mr.match_id IN (?)
+                    ORDER BY CASE mr.role
+                        WHEN 'Main Referee' THEN 1
+                        WHEN 'Assistant Referee' THEN 2
+                        WHEN 'Fourth Official' THEN 3
+                        WHEN 'VAR Official' THEN 4
+                        ELSE 5 END, r.last_name ASC
+                `, [matchIds]);
 
-            const refsByMatch = {};
-            for (const ref of refRows) {
-                if (!refsByMatch[ref.match_id]) refsByMatch[ref.match_id] = [];
-                refsByMatch[ref.match_id].push(ref);
-            }
-            for (const row of rows) {
-                row.referees = refsByMatch[row.match_id] || [];
+                const refsByMatch = {};
+                for (const ref of refRows) {
+                    if (!refsByMatch[ref.match_id]) refsByMatch[ref.match_id] = [];
+                    refsByMatch[ref.match_id].push(ref);
+                }
+                for (const row of rows) {
+                    row.referees = refsByMatch[row.match_id] || [];
+                }
+            } catch (refErr) {
+                console.warn('[matchController.getAll] Warning loading match referees:', refErr.message);
+                for (const row of rows) {
+                    row.referees = [];
+                }
             }
         }
 
@@ -116,6 +125,7 @@ exports.getAll = async (req, res, next) => {
 
 exports.getOne = async (req, res, next) => {
     try {
+        await ensureMatchRefereesTable(db);
         const [rows] = await db.query(`
             SELECT m.*,
                 ht.name AS home_team, at.name AS away_team,
@@ -130,19 +140,25 @@ exports.getOne = async (req, res, next) => {
         `, [req.params.id]);
         if (!rows.length) return res.status(404).json({ success: false, message: 'Match not found' });
 
-        const [refRows] = await db.query(`
-            SELECT mr.match_id, mr.role AS match_role, mr.role,
-                   r.referee_id, r.first_name, r.last_name, r.nationality, r.badge_no
-            FROM match_referees mr
-            INNER JOIN referee r ON r.referee_id = mr.referee_id
-            WHERE mr.match_id = ?
-            ORDER BY CASE mr.role
-                WHEN 'Main Referee' THEN 1
-                WHEN 'Assistant Referee' THEN 2
-                WHEN 'Fourth Official' THEN 3
-                WHEN 'VAR Official' THEN 4
-                ELSE 5 END, r.last_name ASC
-        `, [req.params.id]);
+        let refRows = [];
+        try {
+            const [data] = await db.query(`
+                SELECT mr.match_id, mr.role AS match_role, mr.role,
+                       r.referee_id, r.first_name, r.last_name, r.nationality, r.badge_no
+                FROM match_referees mr
+                INNER JOIN referee r ON r.referee_id = mr.referee_id
+                WHERE mr.match_id = ?
+                ORDER BY CASE mr.role
+                    WHEN 'Main Referee' THEN 1
+                    WHEN 'Assistant Referee' THEN 2
+                    WHEN 'Fourth Official' THEN 3
+                    WHEN 'VAR Official' THEN 4
+                    ELSE 5 END, r.last_name ASC
+            `, [req.params.id]);
+            refRows = data;
+        } catch (refErr) {
+            console.warn('[matchController.getOne] Warning loading match referees:', refErr.message);
+        }
 
         const match = rows[0];
         match.referees = refRows;
@@ -152,6 +168,7 @@ exports.getOne = async (req, res, next) => {
 
 exports.create = async (req, res, next) => {
     try {
+        await ensureMatchRefereesTable(db);
         const { tournament_id, stadium_id, home_team_id, away_team_id, match_date, match_time, stage, result, referees } = req.body;
         if (!tournament_id || !stadium_id || !home_team_id || !away_team_id || !match_date || !match_time || !stage)
             return res.status(400).json({ success: false, message: 'Required fields missing' });
@@ -189,6 +206,7 @@ exports.create = async (req, res, next) => {
 
 exports.update = async (req, res, next) => {
     try {
+        await ensureMatchRefereesTable(db);
         const { tournament_id, stadium_id, home_team_id, away_team_id, match_date, match_time, stage, result, referees } = req.body;
         if (!tournament_id || !stadium_id || !home_team_id || !away_team_id || !match_date || !match_time || !stage)
             return res.status(400).json({ success: false, message: 'Required fields missing' });
@@ -266,24 +284,33 @@ exports.getEvents = async (req, res, next) => {
 
 exports.getReferees = async (req, res, next) => {
     try {
-        const [rows] = await db.query(`
-            SELECT r.*, mr.role AS match_role, mr.role
-            FROM referee r
-            INNER JOIN match_referees mr ON mr.referee_id = r.referee_id
-            WHERE mr.match_id = ?
-            ORDER BY CASE mr.role
-                WHEN 'Main Referee' THEN 1
-                WHEN 'Assistant Referee' THEN 2
-                WHEN 'Fourth Official' THEN 3
-                WHEN 'VAR Official' THEN 4
-                ELSE 5 END, r.last_name ASC
-        `, [req.params.id]);
+        await ensureMatchRefereesTable(db);
+        let rows = [];
+        try {
+            const [data] = await db.query(`
+                SELECT r.*, mr.role AS match_role, mr.role
+                FROM referee r
+                INNER JOIN match_referees mr ON mr.referee_id = r.referee_id
+                WHERE mr.match_id = ?
+                ORDER BY CASE mr.role
+                    WHEN 'Main Referee' THEN 1
+                    WHEN 'Assistant Referee' THEN 2
+                    WHEN 'Fourth Official' THEN 3
+                    WHEN 'VAR Official' THEN 4
+                    ELSE 5 END, r.last_name ASC
+            `, [req.params.id]);
+            rows = data;
+        } catch (refErr) {
+            console.warn('[matchController.getReferees] Warning loading match referees:', refErr.message);
+            rows = [];
+        }
         res.json({ success: true, data: rows });
     } catch (err) { next(err); }
 };
 
 exports.addReferee = async (req, res, next) => {
     try {
+        await ensureMatchRefereesTable(db);
         const { referee_id, role } = req.body;
         if (!referee_id) return res.status(400).json({ success: false, message: 'referee_id is required' });
 
@@ -310,6 +337,7 @@ exports.addReferee = async (req, res, next) => {
 
 exports.removeReferee = async (req, res, next) => {
     try {
+        await ensureMatchRefereesTable(db);
         await db.query(
             'DELETE FROM match_referees WHERE match_id=? AND referee_id=?',
             [req.params.id, req.params.refereeId]
