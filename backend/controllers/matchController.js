@@ -367,4 +367,161 @@ exports.bulkImport = async (req, res, next) => {
             count: result.count,
         });
     } catch (err) { next(err); }
-};
+};
+
+function isNationalityConflict(teamName, refNationality) {
+    if (!teamName || !refNationality) return false;
+    const t = teamName.toLowerCase();
+    const n = refNationality.toLowerCase();
+    if (t.includes('france') && n.includes('french')) return true;
+    if (t.includes('england') && (n.includes('english') || n.includes('british'))) return true;
+    if (t.includes('spain') && n.includes('spanish')) return true;
+    if (t.includes('brazil') && n.includes('brazil')) return true;
+    if (t.includes('germany') && n.includes('german')) return true;
+    if (t.includes('italy') && n.includes('italian')) return true;
+    if (t.includes('argentina') && n.includes('argentin')) return true;
+    if (t.includes('portugal') && n.includes('portuguese')) return true;
+    if (t.includes('uruguay') && n.includes('uruguayan')) return true;
+    if (t.includes('netherlands') && (n.includes('dutch') || n.includes('netherland'))) return true;
+    return false;
+}
+
+function shuffle(array) {
+    const copy = [...array];
+    for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy;
+}
+
+exports.autoAssignReferees = async (req, res, next) => {
+    try {
+        await ensureMatchRefereesTable(db);
+        const [referees] = await db.query('SELECT * FROM referee');
+        if (!referees.length) {
+            return res.status(400).json({ success: false, message: 'No referees available in the database to assign.' });
+        }
+
+        const { match_ids, reassign_all } = req.body || {};
+        let matches = [];
+
+        if (Array.isArray(match_ids) && match_ids.length > 0) {
+            const [rows] = await db.query(`
+                SELECT m.match_id, m.match_date, m.match_time, m.stage, m.result,
+                       ht.name AS home_team, at.name AS away_team
+                FROM \`match\` m
+                INNER JOIN team ht ON ht.team_id = m.home_team_id
+                INNER JOIN team at ON at.team_id = m.away_team_id
+                WHERE m.match_id IN (?)
+            `, [match_ids]);
+            matches = rows;
+        } else if (reassign_all) {
+            const [rows] = await db.query(`
+                SELECT m.match_id, m.match_date, m.match_time, m.stage, m.result,
+                       ht.name AS home_team, at.name AS away_team
+                FROM \`match\` m
+                INNER JOIN team ht ON ht.team_id = m.home_team_id
+                INNER JOIN team at ON at.team_id = m.away_team_id
+            `);
+            matches = rows;
+        } else {
+            // Default: All matches awaiting kickoff / result pending (result IS NULL OR empty)
+            const [rows] = await db.query(`
+                SELECT m.match_id, m.match_date, m.match_time, m.stage, m.result,
+                       ht.name AS home_team, at.name AS away_team
+                FROM \`match\` m
+                INNER JOIN team ht ON ht.team_id = m.home_team_id
+                INNER JOIN team at ON at.team_id = m.away_team_id
+                WHERE m.result IS NULL OR TRIM(m.result) = ''
+            `);
+            matches = rows;
+        }
+
+        let assignedCount = 0;
+        for (const match of matches) {
+            await db.query('DELETE FROM match_referees WHERE match_id = ?', [match.match_id]);
+            try {
+                await db.query('DELETE FROM match_referee WHERE match_id = ?', [match.match_id]);
+            } catch (e) {}
+
+            const availableRefs = shuffle(referees);
+
+            let mainRef = availableRefs.find(r => 
+                r.role === 'Main Referee' && 
+                !isNationalityConflict(match.home_team, r.nationality) && 
+                !isNationalityConflict(match.away_team, r.nationality)
+            );
+            if (!mainRef) {
+                mainRef = availableRefs.find(r => r.role === 'Main Referee') || availableRefs[0];
+            }
+
+            const chosenReferees = [
+                { referee_id: mainRef.referee_id, role: 'Main Referee' }
+            ];
+
+            const remainingAfterMain = availableRefs.filter(r => r.referee_id !== mainRef.referee_id);
+            let assistantRef = remainingAfterMain.find(r => 
+                r.role === 'Assistant Referee' &&
+                !isNationalityConflict(match.home_team, r.nationality) &&
+                !isNationalityConflict(match.away_team, r.nationality)
+            );
+            if (!assistantRef) {
+                assistantRef = remainingAfterMain.find(r => 
+                    !isNationalityConflict(match.home_team, r.nationality) &&
+                    !isNationalityConflict(match.away_team, r.nationality)
+                ) || remainingAfterMain[0];
+            }
+
+            if (assistantRef) {
+                chosenReferees.push({
+                    referee_id: assistantRef.referee_id,
+                    role: 'Assistant Referee'
+                });
+            }
+
+            const remainingFor3rd = remainingAfterMain.filter(r => r.referee_id !== assistantRef.referee_id);
+            if (remainingFor3rd.length > 0) {
+                let varRef = remainingFor3rd.find(r => r.role === 'VAR Official');
+                let thirdRole = 'VAR Official';
+                let thirdRef = varRef;
+
+                if (!thirdRef || Math.random() > 0.5) {
+                    thirdRef = remainingFor3rd.find(r => 
+                        !isNationalityConflict(match.home_team, r.nationality) &&
+                        !isNationalityConflict(match.away_team, r.nationality)
+                    ) || remainingFor3rd[0];
+                    thirdRole = (thirdRef.role === 'VAR Official') ? 'VAR Official' : 'Fourth Official';
+                }
+
+                if (thirdRef) {
+                    chosenReferees.push({
+                        referee_id: thirdRef.referee_id,
+                        role: thirdRole
+                    });
+                }
+            }
+
+            for (const item of chosenReferees) {
+                await db.query(
+                    'INSERT INTO match_referees (match_id, referee_id, role) VALUES (?, ?, ?)',
+                    [match.match_id, item.referee_id, item.role]
+                );
+                try {
+                    await db.query(
+                        'INSERT IGNORE INTO match_referee (match_id, referee_id) VALUES (?, ?)',
+                        [match.match_id, item.referee_id]
+                    );
+                } catch (e) {}
+            }
+            assignedCount++;
+        }
+
+        res.json({
+            success: true,
+            message: `Successfully assigned referees to ${assignedCount} match(es)`,
+            count: assignedCount
+        });
+    } catch (err) { next(err); }
+};
+

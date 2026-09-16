@@ -44,7 +44,7 @@ promisePool.query('SELECT 1')
         // Ensure player.preferred_foot is flexible VARCHAR
         try {
             await promisePool.query("ALTER TABLE player MODIFY COLUMN preferred_foot VARCHAR(20) DEFAULT 'Right'");
-        } catch (e) {}
+        } catch (e) { }
 
         // Ensure match_referees junction table exists for Many-to-Many referee assignments (RUN FIRST)
         try {
@@ -66,13 +66,13 @@ promisePool.query('SELECT 1')
                     ALTER TABLE match_referees
                     ADD CONSTRAINT fk_mr_match FOREIGN KEY (match_id) REFERENCES \`match\` (match_id) ON DELETE CASCADE ON UPDATE CASCADE
                 `);
-            } catch (fkErr) {}
+            } catch (fkErr) { }
             try {
                 await promisePool.query(`
                     ALTER TABLE match_referees
                     ADD CONSTRAINT fk_mr_referee FOREIGN KEY (referee_id) REFERENCES referee (referee_id) ON DELETE CASCADE ON UPDATE CASCADE
                 `);
-            } catch (fkErr) {}
+            } catch (fkErr) { }
 
             // Ensure role column exists in match_referees
             try {
@@ -81,7 +81,7 @@ promisePool.query('SELECT 1')
                     await promisePool.query("ALTER TABLE match_referees ADD COLUMN role VARCHAR(100) NOT NULL DEFAULT 'Main Referee' AFTER referee_id");
                     console.log('[DB] Added missing "role" column to match_referees table');
                 }
-            } catch (e) {}
+            } catch (e) { }
 
             // Migrate data from legacy match_referee table if it existed
             try {
@@ -95,7 +95,7 @@ promisePool.query('SELECT 1')
                     `);
                     console.log('[DB] Migrated legacy match_referee records to match_referees');
                 }
-            } catch (e) {}
+            } catch (e) { }
         } catch (e) {
             console.warn('[DB] match_referees check:', e.message);
         }
@@ -153,7 +153,7 @@ promisePool.query('SELECT 1')
         // Clean up any deprecated match_sponsor table
         try {
             await promisePool.query("DROP TABLE IF EXISTS match_sponsor");
-        } catch (e) {}
+        } catch (e) { }
 
         // Clean up unutilized league table and foreign key
         try {
@@ -169,7 +169,7 @@ promisePool.query('SELECT 1')
                 await promisePool.query('ALTER TABLE `team` DROP COLUMN `league_id`');
             }
             await promisePool.query("DROP TABLE IF EXISTS `league`");
-        } catch (err) {}
+        } catch (err) { }
     })
     .catch((err) => {
         console.error(`[DB] Connection failed: ${err.message}`);

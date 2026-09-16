@@ -8,6 +8,7 @@ router.post('/', matchController.create);
 router.put('/:id', matchController.update);
 router.post('/bulk-delete', matchController.bulkRemove);
 router.post('/bulk-import', matchController.bulkImport);
+router.post('/auto-assign-referees', matchController.autoAssignReferees);
 router.delete('/bulk', matchController.bulkRemove);
 router.delete('/:id', matchController.remove);
 

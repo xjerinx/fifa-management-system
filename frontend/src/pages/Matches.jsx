@@ -169,6 +169,7 @@ export default function Matches() {
   } = useBulkSelection("match_id");
   const [showBulkModal, setShowBulkModal] = useState(false);
   const [bulkLoading, setBulkLoading] = useState(false);
+  const [autoAssigning, setAutoAssigning] = useState(false);
   const tableCheckRef = useRef(null);
 
   const load = () => {
@@ -180,6 +181,19 @@ export default function Matches() {
         toast?.showToast(err.response?.data?.message || "Failed to load matches", "error")
       )
       .finally(() => setLoading(false));
+  };
+
+  const handleAutoAssignReferees = async () => {
+    try {
+      setAutoAssigning(true);
+      const res = await api.post("/matches/auto-assign-referees", {});
+      toast?.showToast(res.data.message || "Referees assigned successfully!", "success");
+      load();
+    } catch (err) {
+      toast?.showToast(err.response?.data?.message || "Failed to auto-assign referees", "error");
+    } finally {
+      setAutoAssigning(false);
+    }
   };
 
   useEffect(() => {
@@ -513,6 +527,17 @@ export default function Matches() {
               <span>Export (JSON)</span>
             </button>
 
+            <button
+              onClick={handleAutoAssignReferees}
+              disabled={autoAssigning}
+              className="flex items-center gap-1.5 px-3 py-2 bg-[#121722] hover:bg-[#1b2333] text-cyan-400 hover:text-cyan-300 text-xs font-semibold rounded border border-cyan-500/30 transition-colors shadow-sm tracking-wide whitespace-nowrap cursor-pointer disabled:opacity-50"
+              title="Automatically assign referee crews to all matches awaiting kickoff or pending results"
+            >
+              <span className={`material-symbols-outlined text-[16px] text-cyan-400 ${autoAssigning ? 'animate-spin' : ''}`}>
+                {autoAssigning ? 'sync' : 'sports'}
+              </span>
+              <span>{autoAssigning ? 'Assigning...' : 'Auto-Assign Referees'}</span>
+            </button>
 
             <button
               onClick={openCreate}
