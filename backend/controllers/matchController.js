@@ -441,9 +441,6 @@ exports.autoAssignReferees = async (req, res, next) => {
         let assignedCount = 0;
         for (const match of matches) {
             await db.query('DELETE FROM match_referees WHERE match_id = ?', [match.match_id]);
-            try {
-                await db.query('DELETE FROM match_referee WHERE match_id = ?', [match.match_id]);
-            } catch (e) {}
 
             const availableRefs = shuffle(referees);
 
@@ -507,12 +504,6 @@ exports.autoAssignReferees = async (req, res, next) => {
                     'INSERT INTO match_referees (match_id, referee_id, role) VALUES (?, ?, ?)',
                     [match.match_id, item.referee_id, item.role]
                 );
-                try {
-                    await db.query(
-                        'INSERT IGNORE INTO match_referee (match_id, referee_id) VALUES (?, ?)',
-                        [match.match_id, item.referee_id]
-                    );
-                } catch (e) {}
             }
             assignedCount++;
         }

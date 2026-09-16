@@ -25,17 +25,9 @@ async function ensureMatchRefereesTable(db) {
                 }
             } catch (e) {}
 
-            // Migrate legacy match_referee records if table existed
+            // Clean up legacy match_referee table if it still exists
             try {
-                const [legacy] = await db.query("SHOW TABLES LIKE 'match_referee'");
-                if (legacy.length > 0) {
-                    await db.query(`
-                        INSERT IGNORE INTO match_referees (match_id, referee_id, role)
-                        SELECT mr.match_id, mr.referee_id, COALESCE(r.role, 'Main Referee')
-                        FROM match_referee mr
-                        LEFT JOIN referee r ON r.referee_id = mr.referee_id
-                    `);
-                }
+                await db.query("DROP TABLE IF EXISTS match_referee");
             } catch (e) {}
         } catch (err) {
             console.error('[DB] Auto-creating match_referees table failed:', err.message);

@@ -83,18 +83,10 @@ promisePool.query('SELECT 1')
                 }
             } catch (e) { }
 
-            // Migrate data from legacy match_referee table if it existed
+            // Clean up deprecated legacy match_referee table
             try {
-                const [legacyExists] = await promisePool.query("SHOW TABLES LIKE 'match_referee'");
-                if (legacyExists.length > 0) {
-                    await promisePool.query(`
-                        INSERT IGNORE INTO match_referees (match_id, referee_id, role)
-                        SELECT mr.match_id, mr.referee_id, COALESCE(r.role, 'Main Referee')
-                        FROM match_referee mr
-                        LEFT JOIN referee r ON r.referee_id = mr.referee_id
-                    `);
-                    console.log('[DB] Migrated legacy match_referee records to match_referees');
-                }
+                await promisePool.query("DROP TABLE IF EXISTS match_referee");
+                console.log('[DB] Dropped legacy match_referee table');
             } catch (e) { }
         } catch (e) {
             console.warn('[DB] match_referees check:', e.message);
